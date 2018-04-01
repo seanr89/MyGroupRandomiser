@@ -14,9 +14,10 @@ data class Group constructor(var ID: Int, var Name: String)
 //    var Name : String? = null
     var CreationDate : Date = Calendar.getInstance().getTime();
 
-//    constructor(id: Int, name: String)
-//    {
-//        this.ID = id
-//        this.Name = name
-//    }
+    constructor(id: Int, name: String, creationDate: Date) : this(id, name)
+    {
+        this.ID = id
+        this.Name = name
+        this.CreationDate = creationDate
+    }
 }

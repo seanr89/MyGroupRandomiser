@@ -20,7 +20,6 @@ class DatabaseHandler : SQLiteOpenHelper
         val groupName = "Name"
     }
 
-
     var context: Context? = null
     var sqlObj: SQLiteDatabase
 
@@ -43,12 +42,13 @@ class DatabaseHandler : SQLiteOpenHelper
         db!!.execSQL(sqlCreateGroup);
     }
 
+    /**
+     * Overridden function from SQLOpenHelper to upgrade the function
+     */
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
         db!!.execSQL("Drop table IF EXISTS " + groupTableName)
         onCreate(db)
-
-
     }
 
 
@@ -56,6 +56,7 @@ class DatabaseHandler : SQLiteOpenHelper
     /**
      * GROUP CRUD EVENTS
      */
+    ////////////////////////////////////////////////////////////////////////////////
 
     /**
      *
