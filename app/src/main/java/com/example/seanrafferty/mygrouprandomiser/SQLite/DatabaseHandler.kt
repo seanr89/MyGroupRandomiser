@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import java.security.acl.Group
+import com.example.seanrafferty.mygrouprandomiser.Models.Group
 
 class DatabaseHandler : SQLiteOpenHelper
 {
@@ -62,7 +62,24 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     fun ReadAllGroups() : ArrayList<Group>
     {
-        var arrayList = ArrayList<Group>();
+        var arrayList = ArrayList<Group>()
+
+        // Select All Query
+        var selectQuery: String = "SELECT * FROM " + groupTableName;
+
+        var cursor = sqlObj!!.rawQuery(selectQuery, null)
+
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                val id = cursor.getInt(cursor.getColumnIndex("Id"))
+                val name = cursor.getString(cursor.getColumnIndex("Name"))
+
+                arrayList.add(Group(id, name))
+            }
+            while (cursor.moveToNext())
+        }
 
         return arrayList;
     }
@@ -76,7 +93,7 @@ class DatabaseHandler : SQLiteOpenHelper
         var result : Int = 0;
 
         var values = ContentValues()
-        values.put("Name", group.name)
+        values.put("Name", group.Name)
 
         result = sqlObj!!.insert(groupTableName, "", values).toInt()
 
