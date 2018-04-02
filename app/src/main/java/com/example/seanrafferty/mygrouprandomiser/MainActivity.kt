@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,18 +19,25 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Test operation, unknown if these is really needed anymore
         InitialiseScreen()
 
         _GroupListView = findViewById(R.id.GroupListView) as ListView
 
         //Instantiate the and create listening for request groups button click event
         var btn_request_groups = findViewById(R.id.btnRequestGroups) as Button
-        btn_request_groups.setOnClickListener {
+        btn_request_groups.setOnClickListener() {
 
-            // Handler code here.
+            // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
             var groupList = RequestGroups();
             var groupAdapter = GroupAdapter(this, groupList);
             _GroupListView.adapter = groupAdapter;
+        }
+
+        var btn_add_group = findViewById(R.id.btnAddGroup) as Button
+        btn_add_group.setOnClickListener()
+        {
+            AccessEditGroupActivity()
         }
     }
 
@@ -46,23 +54,37 @@ class MainActivity : AppCompatActivity()
 
     /**
      * Request all stored groups available
+     * returns @param grouplist - An arraylist of MyGroup objects
      */
     fun RequestGroups() : ArrayList<MyGroup>
     {
         println("Method: " + object{}.javaClass.enclosingMethod.name)
 
+        //initialise an ArrayList and a DatabaseHandler object
         var groupList = ArrayList<MyGroup>();
-        var dbHandler = DatabaseHandler(this);
+        var dbHandler = DatabaseHandler(this)
 
-        groupList = dbHandler.ReadAllGroups();
-
+        //Request all groups from the database and return the data
+        groupList = dbHandler.ReadAllGroups()
         return groupList
     }
 
+    /**
+     * Base operation to initialise the database and create/update the database
+     */
     fun InitialiseDB()
     {
         println("Method: " + object{}.javaClass.enclosingMethod.name)
         var DB:DatabaseHandler = DatabaseHandler(this)
+    }
+
+    /**
+     * Operation to start and display the EditGroup Activity
+     */
+    fun AccessEditGroupActivity()
+    {
+        var intent= Intent(this,EditGroup::class.java)
+        startActivity(intent)
     }
 }
 

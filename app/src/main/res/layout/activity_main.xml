@@ -16,6 +16,7 @@
         android:onClick="none"
         android:text="Request Groups"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,5 +26,13 @@
         android:layout_height="408dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="80dp" />
+
+    <Button
+        android:id="@+id/btnAddGroup"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+        android:text="Add Group"
+        tools:layout_editor_absoluteX="209dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </android.support.constraint.ConstraintLayout>
