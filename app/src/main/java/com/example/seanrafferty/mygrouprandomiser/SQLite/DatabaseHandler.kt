@@ -4,50 +4,57 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.seanrafferty.mygrouprandomiser.Models.Group
+import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 
 class DatabaseHandler : SQLiteOpenHelper
 {
 
     companion object {
         //val Tag = "DatabaseHandler"
-        val DBName = "GroupDB"
-        val DBVersion = 1
+        val DBName = "GroupDB.db"
+        val DBVersion = 6
 
-        val groupTableName = "Group"
+        val groupTableName = "mygroup"
         val grouppkID = "ID"
         val groupName = "Name"
     }
 
     var context: Context? = null
-    var sqlObj: SQLiteDatabase
 
     constructor(context: Context) : super(context, DBName, null, DBVersion) {
         this.context = context
-        sqlObj = this.writableDatabase;
     }
 
     /**
      * Handle on DB creation - this is called each time the DB handler is instantiated
      */
-    override fun onCreate(db: SQLiteDatabase?)
+    override fun onCreate(db: SQLiteDatabase)
     {
-        //db!!.execSQL(CREATE_TABLE_SQL)
-        //Create the Group Table if it doesn't already exist
-        var sqlCreateGroup: String =  "CREATE TABLE IF NOT EXISTS " + groupTableName + " " +
-            "(" + grouppkID + " INTEGER PRIMARY KEY," +
-            groupName + " TEXT, " + ");"
+        println("Method: " + object{}.javaClass.enclosingMethod.name)
 
-        db!!.execSQL(sqlCreateGroup);
+        //Create the Group Table if it doesn't already exist
+        var sqlCreateGroup: String =  "CREATE TABLE IF NOT EXISTS ${groupTableName} " +
+            "(${grouppkID} INTEGER PRIMARY KEY AUTOINCREMENT, ${groupName} TEXT" + ");"
+
+        if(db != null)
+        {
+            db.execSQL(sqlCreateGroup)
+        }
+        else{
+            println("database is null")
+        }
     }
 
     /**
      * Overridden function from SQLOpenHelper to upgrade the function
      */
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
-        db!!.execSQL("Drop table IF EXISTS " + groupTableName)
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int)
+    {
+        println("Method: " + object{}.javaClass.enclosingMethod.name)
+        var sqlDeleteGroup: String = "DROP TABLE IF EXISTS '$groupTableName'"
+        db.execSQL(sqlDeleteGroup)
         onCreate(db)
     }
 
@@ -61,27 +68,32 @@ class DatabaseHandler : SQLiteOpenHelper
     /**
      *
      */
-    fun ReadAllGroups() : ArrayList<Group>
-    {
-        var arrayList = ArrayList<Group>()
+    fun ReadAllGroups() : ArrayList<MyGroup> {
+        println("Method: " + object {}.javaClass.enclosingMethod.name)
+
+        var arrayList = ArrayList<MyGroup>()
 
         // Select All Query
-        var selectQuery: String = "SELECT * FROM " + groupTableName;
+        var selectQuery: String = "SELECT * FROM '$groupTableName'"
+        val db = this.readableDatabase;
 
-        var cursor = sqlObj!!.rawQuery(selectQuery, null)
+        var cursor = db!!.rawQuery(selectQuery, null)
 
-        if(cursor.moveToFirst())
+        if (cursor == null)
         {
-            do
-            {
-                val id = cursor.getInt(cursor.getColumnIndex("Id"))
-                val name = cursor.getString(cursor.getColumnIndex("Name"))
-
-                arrayList.add(Group(id, name))
-            }
-            while (cursor.moveToNext())
+            println("cursor is null")
         }
+        else
+        {
+            if (cursor.moveToFirst()) {
+                do {
+                    val id = cursor.getInt(cursor.getColumnIndex("Id"))
+                    val name = cursor.getString(cursor.getColumnIndex("Name"))
 
+                    arrayList.add(MyGroup(id, name))
+                } while (cursor.moveToNext())
+            }
+        }
         return arrayList;
     }
 
@@ -89,14 +101,16 @@ class DatabaseHandler : SQLiteOpenHelper
      *
      */
     @Throws(SQLiteConstraintException::class)
-    fun CreateGroup(group: Group) : Int
+    fun CreateGroup(group: MyGroup) : Int
     {
         var result : Int = 0;
 
         var values = ContentValues()
         values.put("Name", group.Name)
 
-        result = sqlObj!!.insert(groupTableName, "", values).toInt()
+        val db = this.writableDatabase
+
+        result = db!!.insert(groupTableName, "", values).toInt()
 
         return result;
     }

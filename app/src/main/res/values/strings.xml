@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MyGroupRandomiser</string>
+    <string name="app_name">My Group Randomiser</string>
+
+    <!-- Group List View -->
+    <string name="group_leftTextView">Group Name</string>
+
 </resources>

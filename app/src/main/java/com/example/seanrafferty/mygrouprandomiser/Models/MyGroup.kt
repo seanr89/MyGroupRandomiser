@@ -8,7 +8,7 @@ import java.util.*
  * @param Name: A method to name and define a group (mutable[var] means liable to change)
  * @param CreationDate: Date Created for the group (defaults to current date and time)  ([var])
  */
-data class Group constructor(var ID: Int, var Name: String)
+data class MyGroup constructor(var ID: Int, var Name: String)
 {
 //    var ID : Int = 0
 //    var Name : String? = null
