@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         //Test operation, unknown if these is really needed anymore
-        InitialiseScreen()
+        //InitialiseScreen()
+
 
         _GroupListView = findViewById(R.id.GroupListView) as ListView
 
@@ -28,17 +29,19 @@ class MainActivity : AppCompatActivity()
         var btn_request_groups = findViewById(R.id.btnRequestGroups) as Button
         btn_request_groups.setOnClickListener() {
 
+            println("button click")
             // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
-            var groupList = RequestGroups();
-            var groupAdapter = GroupAdapter(this, groupList);
+            var groupList = RequestGroups()
+            var groupAdapter = GroupAdapter(this, groupList)
+            println("added")
             _GroupListView.adapter = groupAdapter;
         }
 
-        var btn_add_group = findViewById(R.id.btnAddGroup) as Button
-        btn_add_group.setOnClickListener()
-        {
-            AccessEditGroupActivity()
-        }
+//        var btn_add_group = findViewById(R.id.btnAddGroup) as Button
+//        btn_add_group.setOnClickListener()
+//        {
+//            AccessEditGroupActivity()
+//        }
     }
 
     /**

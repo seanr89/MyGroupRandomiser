@@ -15,16 +15,16 @@ class GroupAdapter : BaseAdapter
     var context: Context? = null
     var myInflater: LayoutInflater? = null
 
-    constructor(con: Context, arrList:ArrayList<MyGroup>) : super()
+    constructor(con: Context, arrList: ArrayList<MyGroup>) : super()
     {
+        println("GroupAdapter: Constructor")
         this.context = con;
         this.arrayList = arrList
         this.myInflater = LayoutInflater.from(context)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
+        println("GroupAdapter: getView called")
         val view: View
 
         if(convertView == null)

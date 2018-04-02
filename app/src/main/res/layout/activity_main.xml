@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <Button
         android:id="@+id/btnRequestGroups"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="16dp"
-        android:onClick="none"
-        android:text="Request Groups"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Request Groups" />
 
-    <ListView
-        android:id="@+id/GroupListView"
-        android:layout_width="368dp"
-        android:layout_height="408dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="80dp" />
 
     <Button
         android:id="@+id/btnAddGroup"
-        android:layout_width="138dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:text="Add Group"
-        tools:layout_editor_absoluteX="209dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_toRightOf="@id/btnRequestGroups"
+        android:text="Add Group" />
 
-</android.support.constraint.ConstraintLayout>
+    <ListView
+        android:id="@+id/GroupListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRequestGroups" />
+
+
+</RelativeLayout>

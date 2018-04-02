@@ -86,14 +86,16 @@ class DatabaseHandler : SQLiteOpenHelper
         else
         {
             if (cursor.moveToFirst()) {
-                do {
-                    val id = cursor.getInt(cursor.getColumnIndex("Id"))
-                    val name = cursor.getString(cursor.getColumnIndex("Name"))
+                do
+                {
+                    val id = cursor.getInt(cursor.getColumnIndex(grouppkID))
+                    val name = cursor.getString(cursor.getColumnIndex(groupName))
 
                     arrayList.add(MyGroup(id, name))
                 } while (cursor.moveToNext())
             }
         }
+        cursor.close()
         return arrayList;
     }
 
