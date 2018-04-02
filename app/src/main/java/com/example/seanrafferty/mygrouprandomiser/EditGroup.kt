@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -42,5 +43,14 @@ class EditGroup : AppCompatActivity() {
         result = DB.CreateGroup(MyGroup(0, name))
 
         return result
+    }
+
+    /**
+     * Operation to navigate to the MainActivity Screen/Activity
+     */
+    fun AccessMainActivity()
+    {
+        var intent= Intent(this,MainActivity::class.java)
+        startActivity(intent)
     }
 }
