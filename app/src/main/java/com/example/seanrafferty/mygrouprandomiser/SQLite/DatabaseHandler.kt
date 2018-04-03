@@ -19,6 +19,7 @@ class DatabaseHandler : SQLiteOpenHelper
         val groupTableName = "mygroup"
         val grouppkID = "ID"
         val groupName = "Name"
+        val groupDate = "CreationDate"
     }
 
     var context: Context? = null
@@ -36,7 +37,9 @@ class DatabaseHandler : SQLiteOpenHelper
 
         //Create the Group Table if it doesn't already exist
         var sqlCreateGroup: String =  "CREATE TABLE IF NOT EXISTS ${groupTableName} " +
-            "(${grouppkID} INTEGER PRIMARY KEY AUTOINCREMENT, ${groupName} TEXT" + ");"
+            "(${grouppkID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
+            "${groupName} TEXT, " +
+            "${groupDate} TEXT);"
 
         if(db != null)
         {

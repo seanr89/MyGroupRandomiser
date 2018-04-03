@@ -3,6 +3,7 @@ package com.example.seanrafferty.mygrouprandomiser
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -19,29 +20,28 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Test operation, unknown if these is really needed anymore
-        //InitialiseScreen()
-
-
         _GroupListView = findViewById(R.id.GroupListView) as ListView
 
         //Instantiate the and create listening for request groups button click event
-        var btn_request_groups = findViewById(R.id.btnRequestGroups) as Button
-        btn_request_groups.setOnClickListener() {
+        var btn_request_groups = findViewById<Button>(R.id.btnRequestGroups)
+        btn_request_groups.setOnClickListener {
 
             println("button click")
             // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
             var groupList = RequestGroups()
             var groupAdapter = GroupAdapter(this, groupList)
-            println("added")
             _GroupListView.adapter = groupAdapter;
         }
+        var btn_add_group = findViewById<Button>(R.id.btnAddGroup)
+        btn_add_group.setOnClickListener()
+        {
+            AccessEditGroupActivity()
+        }
+    }
 
-//        var btn_add_group = findViewById(R.id.btnAddGroup) as Button
-//        btn_add_group.setOnClickListener()
-//        {
-//            AccessEditGroupActivity()
-//        }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.navigation_bar, menu)
+        return true
     }
 
     /**
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity()
      */
     fun AccessEditGroupActivity()
     {
-        var intent= Intent(this,EditGroup::class.java)
+        var intent= Intent(this,AddGroup::class.java)
         startActivity(intent)
     }
 }

@@ -10,7 +10,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import java.security.acl.Group
 
-class EditGroup : AppCompatActivity() {
+class AddGroup : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
