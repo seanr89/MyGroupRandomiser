@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -39,8 +40,30 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * handle creation of option action overflow on view
+     * with xml menu option file targetted
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.navigation_bar, menu)
+        menuInflater.inflate(R.menu.action_overflow, menu)
+        return true
+    }
+
+    /**
+     * overridden handle action overflow item selection events
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+            when(item.itemId)
+            {
+                R.id.action_players -> {
+                    NavigateToPlayersActivity()
+                    return true
+                }
+                R.id.action_settings -> {
+
+                }
+            }
         return true
     }
 
@@ -87,6 +110,15 @@ class MainActivity : AppCompatActivity()
     fun AccessEditGroupActivity()
     {
         var intent= Intent(this,AddGroup::class.java)
+        startActivity(intent)
+    }
+
+    /**
+     * create and start the player activity
+     */
+    fun NavigateToPlayersActivity()
+    {
+        var intent= Intent(this,PlayerActivity::class.java)
         startActivity(intent)
     }
 }

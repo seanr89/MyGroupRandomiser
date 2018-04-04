@@ -4,6 +4,10 @@
     <!-- Group List View -->
     <string name="group_leftTextView">Group Name</string>
 
+    <!-- Action Overflow Items -->
+    <string name="overflow_players">Players</string>
+    <string name="overflow_settings">Settings</string>
+
     <!-- Navigation Draw Content -->
     <string name="title_activity_navigation_bar">Nav Drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -12,6 +16,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_player">PlayerActivity</string>
 
     <!-- Navigation Drawer menu labels -->
 

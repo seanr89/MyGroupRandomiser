@@ -20,6 +20,10 @@
         <activity
             android:name=".NavigationBarActivity"
             android:label="@string/title_activity_navigation_bar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlayerActivity"
+            android:label="@string/title_activity_player"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
