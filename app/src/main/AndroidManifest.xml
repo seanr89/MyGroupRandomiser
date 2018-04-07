@@ -24,7 +24,8 @@
         <activity
             android:name=".PlayerActivity"
             android:label="@string/title_activity_player"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddPlayerActivity"></activity>
     </application>
 
 </manifest>

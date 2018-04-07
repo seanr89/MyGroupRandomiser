@@ -10,8 +10,6 @@ import java.util.*
  */
 data class MyGroup constructor(var ID: Int, var Name: String)
 {
-//    var ID : Int = 0
-//    var Name : String? = null
     var CreationDate : Date = Calendar.getInstance().getTime();
 
     constructor(id: Int, name: String, creationDate: Date) : this(id, name)

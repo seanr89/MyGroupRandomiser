@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity()
     fun InitialiseDB()
     {
         println("Method: " + object{}.javaClass.enclosingMethod.name)
-        var DB:DatabaseHandler = DatabaseHandler(this)
+        var DB:DatabaseHandler = DatabaseHandler(this);
     }
 
     /**
