@@ -17,4 +17,59 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/GroupInfoTextHeader">
+
+        <TextView
+            android:id="@+id/groupIDViewHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:text="Group ID" />
+
+            <!-- Field to display the ID for the group-->
+            <TextView
+                android:id="@+id/groupIDView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="43dp"
+                android:layout_toRightOf="@+id/groupIDViewHeader"
+                android:text="ID" />
+
+        <TextView
+            android:id="@+id/groupNameViewHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_below="@+id/groupIDViewHeader"
+            android:text="Group Name" />
+
+            <!-- Field to display the Name for the group-->
+            <TextView
+                android:id="@+id/groupNameView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/groupIDView"
+                android:layout_toRightOf="@+id/groupNameViewHeader"
+                android:text="NAME" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_assign_players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assign Players"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="446dp" />
+
+
 </android.support.constraint.ConstraintLayout>

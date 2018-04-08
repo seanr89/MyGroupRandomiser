@@ -109,7 +109,7 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {
-        println("Method: " + object {}.javaClass.enclosingMethod.name)
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
         var arrayList = ArrayList<MyGroup>()
 
@@ -200,7 +200,7 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     fun ReadAllPlayers() : ArrayList<Player>
     {
-        println("Method: " + object {}.javaClass.enclosingMethod.name)
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
         var arrayList = ArrayList<Player>()
 
@@ -234,6 +234,8 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     fun InsertPlayer(player: Player) : Int
     {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
         var values = ContentValues()
         values.put(PlayerName, player.Name)
         values.put(PlayerRating, player.Rating)
