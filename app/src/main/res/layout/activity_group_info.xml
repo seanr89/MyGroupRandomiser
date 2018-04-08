@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".GroupInfoActivity">
 
+    <TextView
+        android:id="@+id/GroupInfoTextHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Group Info"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 </android.support.constraint.ConstraintLayout>

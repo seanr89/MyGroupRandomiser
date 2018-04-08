@@ -18,4 +18,6 @@ data class MyGroup constructor(var ID: Int, var Name: String)
         this.Name = name
         this.CreationDate = creationDate
     }
+
+    constructor() : this(-1, "")
 }

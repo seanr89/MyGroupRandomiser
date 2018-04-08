@@ -2,8 +2,10 @@ package com.example.seanrafferty.mygrouprandomiser.SQLite
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -138,6 +140,37 @@ class DatabaseHandler : SQLiteOpenHelper
     }
 
     /**
+     * Read the information for an individual MyGroup object
+     * @param id - a unique object for a MyGroup object
+     */
+    fun ReadMyGroupByID(id:Int) : MyGroup
+    {
+        var selectQuery: String = "SELECT * FROM $groupTableName WHERE $grouppkID = $id"
+        val db = this.readableDatabase;
+
+        var group : MyGroup
+
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db!!.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            // if table not yet present, create it
+            //db.execSQL(SQL_CREATE_ENTRIES)
+            //return ArrayList()
+            return null!!
+        }
+
+        group = MyGroup()
+        if (cursor!!.moveToFirst()) {
+            group.ID = cursor.getInt(cursor.getColumnIndex(grouppkID))
+            group.Name = cursor.getString(cursor.getColumnIndex(groupName))
+        }
+        cursor.close()
+        return group
+    }
+
+    /**
      * INSERT a new Group to the database
      */
     @Throws(SQLiteConstraintException::class)
@@ -190,6 +223,7 @@ class DatabaseHandler : SQLiteOpenHelper
                 while (cursor.moveToNext())
             }
         }
+        cursor.close()
         return arrayList
     }
 

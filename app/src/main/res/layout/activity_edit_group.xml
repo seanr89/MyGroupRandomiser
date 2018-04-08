@@ -8,14 +8,14 @@
     tools:context=".AddGroup">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Group Details"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="Group Details"
+    android:textColor="@color/colorPrimary"
+    android:textSize="20sp"
+    android:textStyle="bold" />
 
     <EditText
         android:id="@+id/nameText"
