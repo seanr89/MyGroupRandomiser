@@ -17,6 +17,9 @@ class PlayerAdapter : BaseAdapter
     var context: Context? = null
     var myInflater: LayoutInflater? = null
 
+    /**
+     * object constructor
+     */
     constructor(con: Context, arrList: ArrayList<Player>) : super()
     {
         //println("PlayerAdapter: Constructor")
@@ -25,10 +28,12 @@ class PlayerAdapter : BaseAdapter
         this.myInflater = LayoutInflater.from(context)
     }
 
+    /**
+     * overridden method to get the current list item view
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         val view: View
-
         if(convertView == null)
         {
             view = myInflater!!.inflate(R.layout.player_listview_item, null)
@@ -40,6 +45,7 @@ class PlayerAdapter : BaseAdapter
 
         var playerObj = arrayList[position]
 
+        //Add single player content to the available text views
         view.playerNameView.text = playerObj.Name
         view.playerRatingView.text = playerObj.Rating.toString()
 
@@ -47,6 +53,9 @@ class PlayerAdapter : BaseAdapter
         return view
     }
 
+    /**
+     * Return the player object at the provided position
+     */
     override fun getItem(position: Int): Any
     {
         return arrayList[position]

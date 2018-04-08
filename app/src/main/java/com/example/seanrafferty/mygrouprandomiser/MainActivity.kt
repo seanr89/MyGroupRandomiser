@@ -3,6 +3,7 @@ package com.example.seanrafferty.mygrouprandomiser
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity()
         var btn_request_groups = findViewById<Button>(R.id.btnRequestGroups)
         btn_request_groups.setOnClickListener {
 
-            println("button click")
             // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
             var groupList = RequestGroups()
             var groupAdapter = GroupAdapter(this, groupList)
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity()
                     return true
                 }
                 R.id.action_settings -> {
-
+                    Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
                 }
             }
         return true

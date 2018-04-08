@@ -15,6 +15,9 @@ class GroupAdapter : BaseAdapter
     var context: Context? = null
     var myInflater: LayoutInflater? = null
 
+    /**
+     * Constructor
+     */
     constructor(con: Context, arrList: ArrayList<MyGroup>) : super()
     {
         println("GroupAdapter: Constructor")
@@ -23,8 +26,9 @@ class GroupAdapter : BaseAdapter
         this.myInflater = LayoutInflater.from(context)
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        println("GroupAdapter: getView called")
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View
+    {
+        //println("PlayerAdapter: getView called")
         val view: View
 
         if(convertView == null)
