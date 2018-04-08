@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditGroup" />
+        <activity android:name=".AddGroup" />
         <activity
             android:name=".NavigationBarActivity"
             android:label="@string/title_activity_navigation_bar"
@@ -25,7 +25,8 @@
             android:name=".PlayerActivity"
             android:label="@string/title_activity_player"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddPlayerActivity"></activity>
+        <activity android:name=".AddPlayerActivity" />
+        <activity android:name=".GroupInfoActivity"></activity>
     </application>
 
 </manifest>

@@ -47,7 +47,7 @@ class GroupAdapter : BaseAdapter
         return view
     }
 
-    override fun getItem(position: Int): Any {
+    override fun getItem(position: Int): MyGroup {
         return arrayList[position]
     }
 

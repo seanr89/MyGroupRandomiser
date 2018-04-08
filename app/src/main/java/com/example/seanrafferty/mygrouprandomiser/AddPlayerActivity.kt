@@ -4,12 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.*
-import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
-import kotlinx.android.synthetic.main.activity_add_player.*
 
 
 class AddPlayerActivity : AppCompatActivity() {

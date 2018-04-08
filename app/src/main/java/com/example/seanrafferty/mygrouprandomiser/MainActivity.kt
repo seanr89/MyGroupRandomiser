@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -37,6 +38,15 @@ class MainActivity : AppCompatActivity()
         btn_add_group.setOnClickListener()
         {
             AccessEditGroupActivity()
+        }
+
+        //Handle listview item selection
+        _GroupListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
+            // Handle group item selection and ensure object casting
+            var selectedGroup = _GroupListView.adapter.getItem(position) as MyGroup
+            Log.d("ListView Selected","${selectedGroup.toString()} selected")
+
+            NavigateToGroupInfoActivity(selectedGroup)
         }
     }
 
@@ -119,6 +129,18 @@ class MainActivity : AppCompatActivity()
     fun NavigateToPlayersActivity()
     {
         var intent= Intent(this,PlayerActivity::class.java)
+        startActivity(intent)
+    }
+
+    /**
+     * Instantiate and navigate to the GroupInfo activity
+     */
+    fun NavigateToGroupInfoActivity(group : MyGroup)
+    {
+        Log.d("MainActivity",object{}.javaClass.enclosingMethod.name)
+
+        var intent= Intent(this,GroupInfoActivity::class.java)
+        intent.putExtra("GroupID", group.ID)
         startActivity(intent)
     }
 }
