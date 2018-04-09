@@ -8,7 +8,11 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
+/**
+ * Activity to display and handle GroupInfo details
+ */
 class GroupInfoActivity : AppCompatActivity() {
 
     lateinit var SelectedGroup : MyGroup
@@ -29,7 +33,7 @@ class GroupInfoActivity : AppCompatActivity() {
         var btn_assign_players = findViewById<Button>(R.id.btn_assign_players)
         btn_assign_players.setOnClickListener()
         {
-            NavigateToMyGroupPlayerAssigmentActivity()
+            NavigationControls.Companion.NavigateToPlayerAssignment(this, ID)
         }
     }
 
@@ -41,12 +45,12 @@ class GroupInfoActivity : AppCompatActivity() {
     private fun GetGroupFromDB(id: Int) : MyGroup
     {
         var db = DatabaseHandler(this)
-
         return db.ReadMyGroupByID(id)
     }
 
     /**
      * Refresh the screen details for the group provided
+     * @param group - the MyGroup object
      */
     private fun RefreshMyGroupInfo(group : MyGroup)
     {
@@ -54,17 +58,20 @@ class GroupInfoActivity : AppCompatActivity() {
 
         val groupIDTextView = findViewById<TextView>(R.id.groupIDView)
         val groupNameTextView = findViewById<TextView>(R.id.groupNameView)
-    }
 
+        groupIDTextView.text = group.ID.toString()
+        groupNameTextView.text = group.Name
+
+    }
 
     /**
-     * Navigate to the Player Assingment Screen
+     * Navigate to the Player Assignment Screen
      */
-    private fun NavigateToMyGroupPlayerAssigmentActivity()
-    {
-        Log.d("Method", object{}.javaClass.enclosingMethod.name)
-        //var intent= Intent(this,GroupInfoActivity::class.java)
-        //intent.putExtra("GroupID", group.ID)
-        //startActivity(intent)
-    }
+//    private fun NavigateToMyGroupPlayerAssigmentActivity()
+//    {
+//        Log.d("Method", object{}.javaClass.enclosingMethod.name)
+//        //var intent= Intent(this,GroupInfoActivity::class.java)
+//        //intent.putExtra("GroupID", group.ID)
+//        //startActivity(intent)
+//    }
 }

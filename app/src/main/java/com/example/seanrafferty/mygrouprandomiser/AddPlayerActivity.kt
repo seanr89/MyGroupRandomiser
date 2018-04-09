@@ -45,7 +45,7 @@ class AddPlayerActivity : AppCompatActivity() {
         var result : Int
         val nameTextView = findViewById(R.id.playerNameEditView) as TextView
         val name : String = nameTextView.text.toString()
-        val rating = _RatingSpinner.getSelectedItem()
+        val rating = _RatingSpinner.selectedItem
 
         var DB = DatabaseHandler(this)
 

@@ -33,12 +33,12 @@ class AddGroup : AppCompatActivity() {
      */
     fun CreateGroup() : Int
     {
-        var result : Int = 0
+        var result: Int
 
         val nameTextView = findViewById(R.id.nameText) as TextView
         val name : String = nameTextView.text.toString()
 
-        var DB:DatabaseHandler = DatabaseHandler(this)
+        var DB = DatabaseHandler(this)
 
         result = DB.CreateGroup(MyGroup(0, name))
 

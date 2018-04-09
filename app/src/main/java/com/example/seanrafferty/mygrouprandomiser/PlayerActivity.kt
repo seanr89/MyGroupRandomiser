@@ -21,7 +21,7 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
 
         /**
          * Create listener on + item click event
@@ -50,7 +50,7 @@ class PlayerActivity : AppCompatActivity() {
         Log.d("PlayerActivity", object{}.javaClass.enclosingMethod.name)
 
         //initialise an ArrayList and a DatabaseHandler object
-        var playerList = ArrayList<Player>();
+        var playerList: ArrayList<Player>;
         var DB = DatabaseHandler(this)
 
         //query DB for all players and return
@@ -64,7 +64,7 @@ class PlayerActivity : AppCompatActivity() {
      */
     fun AddPlayerActivity()
     {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
+        Log.d("PlayerActivity", object{}.javaClass.enclosingMethod.name)
 
         var intent= Intent(this,AddPlayerActivity::class.java)
         startActivity(intent)

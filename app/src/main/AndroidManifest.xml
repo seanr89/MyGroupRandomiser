@@ -23,10 +23,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlayerActivity"
-            android:label="@string/title_activity_player"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Player Info" />
         <activity android:name=".AddPlayerActivity" />
-        <activity android:name=".GroupInfoActivity"></activity>
+        <activity android:name=".GroupInfoActivity" />
+        <activity android:name=".PlayerAssigmentActivity"></activity>
     </application>
 
 </manifest>

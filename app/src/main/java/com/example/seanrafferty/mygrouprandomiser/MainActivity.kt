@@ -16,7 +16,7 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 
 class MainActivity : AppCompatActivity()
 {
-    lateinit var _GroupListView : ListView;
+    lateinit var _GroupListView : ListView
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -25,15 +25,11 @@ class MainActivity : AppCompatActivity()
 
         _GroupListView = findViewById(R.id.GroupListView) as ListView
 
-        //Instantiate the and create listening for request groups button click event
-        var btn_request_groups = findViewById<Button>(R.id.btnRequestGroups)
-        btn_request_groups.setOnClickListener {
+        // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
+        var groupList = RequestGroups()
+        var groupAdapter = GroupAdapter(this, groupList)
+        _GroupListView.adapter = groupAdapter;
 
-            // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
-            var groupList = RequestGroups()
-            var groupAdapter = GroupAdapter(this, groupList)
-            _GroupListView.adapter = groupAdapter;
-        }
         var btn_add_group = findViewById<Button>(R.id.btnAddGroup)
         btn_add_group.setOnClickListener()
         {
@@ -80,13 +76,13 @@ class MainActivity : AppCompatActivity()
     /**
      * Initialise Screen Contents
      */
-    fun InitialiseScreen()
-    {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
-
-        InitialiseDB()
-        Toast.makeText(this, "Database Initialised", Toast.LENGTH_LONG).show()
-    }
+//    fun InitialiseScreen()
+//    {
+//        println("Method: " + object{}.javaClass.enclosingMethod.name)
+//
+//        InitialiseDB()
+//        Toast.makeText(this, "Database Initialised", Toast.LENGTH_LONG).show()
+//    }
 
     /**
      * Request all stored groups available
@@ -97,7 +93,7 @@ class MainActivity : AppCompatActivity()
         println("Method: " + object{}.javaClass.enclosingMethod.name)
 
         //initialise an ArrayList and a DatabaseHandler object
-        var groupList = ArrayList<MyGroup>();
+        var groupList: ArrayList<MyGroup>
         var dbHandler = DatabaseHandler(this)
 
         //Request all groups from the database and return the data
@@ -108,11 +104,18 @@ class MainActivity : AppCompatActivity()
     /**
      * Base operation to initialise the database and create/update the database
      */
-    fun InitialiseDB()
-    {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
-        var DB:DatabaseHandler = DatabaseHandler(this);
-    }
+//    fun InitialiseDB()
+//    {
+//        println("Method: " + object{}.javaClass.enclosingMethod.name)
+//        var DB:DatabaseHandler = DatabaseHandler(this)
+//    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Navigation Controls
+     */
+    ////////////////////////////////////////////////////////////////////////////////
+
 
     /**
      * Operation to start and display the EditGroup Activity
@@ -140,7 +143,7 @@ class MainActivity : AppCompatActivity()
         Log.d("MainActivity",object{}.javaClass.enclosingMethod.name)
 
         var intent= Intent(this,GroupInfoActivity::class.java)
-        intent.putExtra("GroupID", group.ID)
+        intent.putExtra("GroupID", group.ID.toString())
         startActivity(intent)
     }
 }

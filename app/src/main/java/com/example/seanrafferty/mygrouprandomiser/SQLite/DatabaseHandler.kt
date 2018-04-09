@@ -33,6 +33,7 @@ class DatabaseHandler : SQLiteOpenHelper
         const val GroupID = "mygroupID"
     }
 
+    //The current context that created the db object
     var context: Context? = null
 
     constructor(context: Context) : super(context, DBName, null, DBVersion) {
@@ -114,16 +115,12 @@ class DatabaseHandler : SQLiteOpenHelper
         var arrayList = ArrayList<MyGroup>()
 
         // Select All Query
-        var selectQuery: String = "SELECT * FROM ${groupTableName}"
+        var selectQuery = "SELECT * FROM ${groupTableName}"
         val db = this.readableDatabase;
 
         var cursor = db!!.rawQuery(selectQuery, null)
 
-        if (cursor == null)
-        {
-            println("cursor is null")
-        }
-        else
+        if(cursor != null)
         {
             if (cursor.moveToFirst()) {
                 do
@@ -244,4 +241,16 @@ class DatabaseHandler : SQLiteOpenHelper
 
         return db!!.insert(PlayerTable, "", values).toInt()
     }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    /**
+     * MyGroup Player Mapping Create and Read
+     */
+    ////////////////////////////////////////////////////////////////////////////////
+
+    fun ReadAllGroupPlayerMappings()
+    {
+
+    }
+
 }
