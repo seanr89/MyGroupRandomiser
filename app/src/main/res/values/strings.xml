@@ -20,4 +20,8 @@
 
     <!-- Navigation Drawer menu labels -->
 
+    <!-- Group Info Act -->
+    <string name="GroupIDString">Group ID</string>
+    <string name="GroupNameString">Group Name</string>
+
 </resources>

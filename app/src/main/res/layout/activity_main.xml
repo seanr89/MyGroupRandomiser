@@ -7,25 +7,24 @@
     tools:context=".MainActivity">
 
 
-    <Button
-        android:id="@+id/btnRequestGroups"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:text="Request Groups" />
+    <!--<Button-->
+        <!--android:id="@+id/btnRequestGroups"-->
+        <!--android:layout_width="125dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Request Groups" />-->
 
 
     <Button
         android:id="@+id/btnAddGroup"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/btnRequestGroups"
         android:text="Add Group" />
 
     <ListView
         android:id="@+id/GroupListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnRequestGroups" />
+        android:layout_below="@+id/btnAddGroup" />
 
     <!--<android.support.design.widget.NavigationView-->
         <!--android:id="@+id/nav_view"-->

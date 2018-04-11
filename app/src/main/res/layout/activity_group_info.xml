@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:layout_marginLeft="14dp"
-            android:text="Group ID" />
+            android:text="@string/GroupIDString"
+            android:textStyle="bold"/>
 
             <!-- Field to display the ID for the group-->
             <TextView
@@ -48,7 +49,8 @@
             android:layout_marginTop="14dp"
             android:layout_marginLeft="14dp"
             android:layout_below="@+id/groupIDViewHeader"
-            android:text="Group Name" />
+            android:text="@string/GroupNameString"
+            android:textStyle="bold"/>
 
             <!-- Field to display the Name for the group-->
             <TextView

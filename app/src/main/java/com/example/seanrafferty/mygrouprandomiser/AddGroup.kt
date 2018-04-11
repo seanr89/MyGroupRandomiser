@@ -19,23 +19,24 @@ class AddGroup : AppCompatActivity() {
         val btn_save_group = findViewById(R.id.btn_save_group) as Button
         btn_save_group.setOnClickListener()
         {
-            val result = CreateGroup()
+            val result = CreateAndSaveGroup()
 
             if(result >= 1)
             {
-                Toast.makeText(this, "Group Added", Toast.LENGTH_LONG).show()
+                AccessMainActivity()
+                //Toast.makeText(this, "Group Added", Toast.LENGTH_LONG).show()
             }
         }
     }
 
     /**
-     * Operation to create a group
+     * Create and Save a group
      */
-    fun CreateGroup() : Int
+    fun CreateAndSaveGroup() : Int
     {
         var result: Int
 
-        val nameTextView = findViewById(R.id.nameText) as TextView
+        val nameTextView = findViewById<TextView>(R.id.nameText)
         val name : String = nameTextView.text.toString()
 
         var DB = DatabaseHandler(this)

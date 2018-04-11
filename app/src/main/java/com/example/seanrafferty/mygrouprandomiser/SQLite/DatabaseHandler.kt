@@ -250,7 +250,87 @@ class DatabaseHandler : SQLiteOpenHelper
 
     fun ReadAllGroupPlayerMappings()
     {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
+
+    }
+
+    /**
+     * Read all assigned group IDs for a single player
+     * @param player : the player to query all group IDs mapped
+     */
+    fun ReadAllGroupIDsForPlayer(player:Player) : ArrayList<Int>
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var arrayList = ArrayList<Int>()
+
+        // Select query with where statement on playerID
+        var selectQuery = "SELECT * FROM $GroupPlayerTable WHERE $PlayerID = ${player.ID}"
+        val db = this.readableDatabase
+
+        //initialise nullable cursor
+        var cursor: Cursor?
+        try
+        {
+            //execute the select query
+            cursor = db!!.rawQuery(selectQuery, null)
+            //check the cursor is notnull and can move to the first item (could be risky)
+            if (cursor != null && cursor.moveToFirst())
+            {
+                do
+                {
+                    val id = cursor.getInt(cursor.getColumnIndex(GroupID))
+                    arrayList.add(id)
+                }
+                while (cursor.moveToNext())
+            }
+        }
+        catch (e: SQLiteException)
+        {
+            // if cursor has a sql exception
+            Log.e(object{}.javaClass.enclosingMethod.name, e.message)
+            return null!!
+        }
+
+        return arrayList
+    }
+
+    /**
+     * Read all assigned player ids for a group
+     * @param myGroup : the group to query for players assigned
+     */
+    fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : ArrayList<Int>
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var arrayList = ArrayList<Int>()
+        // Select query with where in the clause
+        var selectQuery: String = "SELECT * FROM $GroupPlayerTable WHERE $GroupID = ${myGroup.ID}"
+        val db = this.readableDatabase
+
+        var cursor: Cursor?
+        try
+        {
+            cursor = db!!.rawQuery(selectQuery, null)
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do
+                {
+                    val id = cursor.getInt(cursor.getColumnIndex(PlayerID))
+                    arrayList.add(id)
+                }
+                while (cursor.moveToNext())
+            }
+        }
+        catch (e: SQLiteException)
+        {
+            // if cursor has a sql exception
+            Log.e(object{}.javaClass.enclosingMethod.name, e.message)
+            return null!!
+        }
+
+        return arrayList
     }
 
 }

@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="14dp"
+        android:layout_marginBottom="14dp"
         android:layout_below="@+id/playerNameView"
         android:text="Player Rating" />
 </RelativeLayout>
