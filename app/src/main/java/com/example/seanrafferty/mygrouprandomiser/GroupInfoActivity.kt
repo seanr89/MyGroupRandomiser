@@ -61,17 +61,5 @@ class GroupInfoActivity : AppCompatActivity() {
 
         groupIDTextView.text = group.ID.toString()
         groupNameTextView.text = group.Name
-
     }
-
-    /**
-     * Navigate to the Player Assignment Screen
-     */
-//    private fun NavigateToMyGroupPlayerAssigmentActivity()
-//    {
-//        Log.d("Method", object{}.javaClass.enclosingMethod.name)
-//        //var intent= Intent(this,GroupInfoActivity::class.java)
-//        //intent.putExtra("GroupID", group.ID)
-//        //startActivity(intent)
-//    }
 }

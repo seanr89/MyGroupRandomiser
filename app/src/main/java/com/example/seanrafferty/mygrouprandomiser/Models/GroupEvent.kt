@@ -5,4 +5,4 @@ import java.util.*
 /**
  * data object to handle the controlling of details for a single event
  */
-class GroupEvent constructor(ID: Int, TeamOne: Team, TeamTwo : Team, Group:MyGroup, Date: Date)
+data class GroupEvent constructor(var ID:Int, var Teams:MutableList<Team>, var Group:MyGroup, var Date:Date)

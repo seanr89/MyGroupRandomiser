@@ -41,6 +41,22 @@ class DatabaseHandler : SQLiteOpenHelper
     }
 
     /**
+     * TODO
+     */
+    fun GetWritableDataBaseObject() : SQLiteDatabase
+    {
+        return this.writableDatabase
+    }
+
+    /**
+     * TODO
+     */
+    fun GetReadableDataBaseObject() : SQLiteDatabase
+    {
+        return this.readableDatabase
+    }
+
+    /**
      * Handle on DB creation - this is called each time the DB handler is instantiated
      */
     override fun onCreate(db: SQLiteDatabase)
@@ -245,25 +261,43 @@ class DatabaseHandler : SQLiteOpenHelper
     ////////////////////////////////////////////////////////////////////////////////
     /**
      * MyGroup Player Mapping Create and Read
+     * @param group - the group to find players
+     * @return MutableList<Player>
      */
     ////////////////////////////////////////////////////////////////////////////////
 
-    fun ReadAllGroupPlayerMappings()
+    fun ReadAllPlayersForAGroup(group:MyGroup) : MutableList<Player>
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
+        var modelList: MutableList<Player> = mutableListOf()
 
+        //Get all of the player IDs
+        var playerIDs = ReadAllPlayerIDsForGroup(group)
+
+        //Get all Players
+        var players = ReadAllPlayers()
+
+        for(item: Int in playerIDs)
+        {
+            var player = players.filter { it.ID == item } as Player
+            if(player != null)
+            {
+                modelList.add(player)
+            }
+        }
+        return modelList
     }
 
     /**
      * Read all assigned group IDs for a single player
      * @param player : the player to query all group IDs mapped
      */
-    fun ReadAllGroupIDsForPlayer(player:Player) : ArrayList<Int>
+    fun ReadAllGroupIDsForPlayer(player:Player) : MutableList<Int>
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
-        var arrayList = ArrayList<Int>()
+        var arrayList: MutableList<Int> = mutableListOf<Int>()
 
         // Select query with where statement on playerID
         var selectQuery = "SELECT * FROM $GroupPlayerTable WHERE $PlayerID = ${player.ID}"
@@ -300,11 +334,11 @@ class DatabaseHandler : SQLiteOpenHelper
      * Read all assigned player ids for a group
      * @param myGroup : the group to query for players assigned
      */
-    fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : ArrayList<Int>
+    fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : MutableList<Int>
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
-        var arrayList = ArrayList<Int>()
+        var arrayList: MutableList<Int> = mutableListOf<Int>()
         // Select query with where in the clause
         var selectQuery: String = "SELECT * FROM $GroupPlayerTable WHERE $GroupID = ${myGroup.ID}"
         val db = this.readableDatabase

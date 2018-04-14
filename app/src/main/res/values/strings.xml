@@ -24,4 +24,8 @@
     <string name="GroupIDString">Group ID</string>
     <string name="GroupNameString">Group Name</string>
 
+    <!-- Team Details -->
+    <string name="TeamIDString">Team ID</string>
+    <string name="TeamNameString">Team Name</string>
+
 </resources>

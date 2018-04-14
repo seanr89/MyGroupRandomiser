@@ -1,10 +1,10 @@
 package com.example.seanrafferty.mygrouprandomiser.Models
 
 /**
- * Object to detail the players of a team
+ * Data object to detail the players of a team
  * @param ID - Unique ID of the Team
  * @param Players - A collection of the Player objects
  */
-class Team constructor(ID:Int, Players:ArrayList<Player>)
+data class Team constructor(var ID:Int, var Name:String, var Players:ArrayList<Player>)
 {
 }
