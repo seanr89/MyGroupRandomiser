@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import org.w3c.dom.Text
 
 class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
 {
+    var SelectedPlayer : ArrayList<Player> = arrayListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.player_listview_item, parent, false)
@@ -25,6 +28,22 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.txtName?.text = playerList[position].Name
         holder?.txtRating?.text = playerList[position].Rating.toString()
+
+        holder.itemView.setOnClickListener()
+        {
+            SetItemSelected(position, holder.itemView)
+        }
+    }
+
+    private fun SetItemSelected(position: Int, view:View)
+    {
+        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name)
+
+        var selectedItem = playerList[position]
+
+        view.setBackgroundColor(Color.RED)
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////

@@ -122,6 +122,9 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sqlDeleteEventTable)
         db.execSQL(sqlDeleteTeam)
         onCreate(db)
+
+        var dbInitData = InitialiseDataDBHandler(this)
+        dbInitData.RunDataInitialisation()
     }
 
     /**

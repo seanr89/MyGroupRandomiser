@@ -7,17 +7,15 @@ import kotlin.collections.ArrayList
 /**
  * data object to handle the controlling of details for a single event
  */
-data class GroupEvent constructor(var ID:Int, var Date: LocalDateTime)
+data class GroupEvent constructor(var ID:Int, var Date: LocalDateTime, var GroupID: Int)
 {
-    var EventGroup : MyGroup = MyGroup()
     var EventTeams : ArrayList<Team> = arrayListOf()
 
     /**
-     *
+     * Secondary Constructor
      */
-    constructor(ID:Int, Date: LocalDateTime, Group:MyGroup, Teams:ArrayList<Team>) : this(ID, Date)
+    constructor(ID:Int, Date: LocalDateTime, GroupID:Int, Teams:ArrayList<Team>) : this(ID, Date, GroupID)
     {
-        EventGroup = Group
         EventTeams = Teams
     }
 }

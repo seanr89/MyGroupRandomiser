@@ -93,11 +93,11 @@ class MainActivity : AppCompatActivity()
     /**
      * Base operation to initialise the database and create/update the database
      */
-//    fun InitialiseDB()
-//    {
-//        println("Method: " + object{}.javaClass.enclosingMethod.name)
-//        var DB:DatabaseHandler = DatabaseHandler(this)
-//    }
+    fun InitialiseDB()
+    {
+        println("Method: " + object{}.javaClass.enclosingMethod.name)
+        //var DB:DatabaseHandler = DatabaseHandler(this)
+    }
 
     ////////////////////////////////////////////////////////////////////////////////
     /**

@@ -23,7 +23,8 @@ class EventDBHandler
     }
 
     /**
-     *
+     * Read all stored Events without there respective team list
+     * @return : a list of GroupEvents
      */
     fun GetAllEvents() : ArrayList<GroupEvent>
     {
@@ -47,14 +48,20 @@ class EventDBHandler
             {
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventpkID))
                 val date = UtilityMethods.Companion.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
+                val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
 
-                arrayList.add(GroupEvent(id, date))
+                arrayList.add(GroupEvent(id, date, groupID))
             } while (cursor.moveToNext())
         }
 
         return arrayList
     }
 
+    /**
+     * Query all the events for a group - Note without Teams list
+     * @param group : the MyGroup object to query
+     * @return : A collection of events for a group
+     */
     fun GetAllGroupEvents(group:MyGroup)
     {
         Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)

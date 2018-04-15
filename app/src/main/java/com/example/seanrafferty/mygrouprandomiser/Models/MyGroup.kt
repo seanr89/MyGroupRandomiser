@@ -12,7 +12,7 @@ data class MyGroup constructor(var ID: Int, var Name: String)
 {
     var CreationDate : Date = Calendar.getInstance().getTime();
 
-    constructor(id: Int, name: String, teamCount: Int, creationDate: Date) : this(id, name)
+    constructor(id: Int, name: String, creationDate: Date) : this(id, name)
     {
         this.ID = id
         this.Name = name
