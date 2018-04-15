@@ -24,7 +24,14 @@ class NavigationControls {
         fun NavigateToPlayerAssignment(context: Context, groupID : Int)
         {
             val intent= Intent(context, PlayerAssigmentActivity::class.java)
-            intent.putExtra("GroupID", groupID)
+            intent.putExtra("GroupID", groupID.toString())
+            startActivity(context, intent, null)
+        }
+
+        fun NavigateToGroupInfoActivity(context: Context, groupID : Int)
+        {
+            val intent= Intent(context, GroupInfoActivity::class.java)
+            intent.putExtra("GroupID", groupID.toString())
             startActivity(context, intent, null)
         }
 

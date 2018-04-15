@@ -62,9 +62,9 @@ class PlayerDBHandler
         for(item : Player in AllPlayers)
         {
             //now to filter - check if the current player is already assigned to the group!!
-            var mappedPlayer = groupPlayers.filter { it.ID == item.ID } as Player
+            var mappedPlayer = groupPlayers.filter { it.ID == item.ID }
             //if not append to the list
-            if(mappedPlayer == null)
+            if(mappedPlayer == null || mappedPlayer.isEmpty())
             {
                 resultList.add(item)
             }

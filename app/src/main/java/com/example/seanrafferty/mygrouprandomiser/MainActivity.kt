@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.GroupAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 class MainActivity : AppCompatActivity()
@@ -42,8 +43,12 @@ class MainActivity : AppCompatActivity()
             // Handle group item selection and ensure object casting
             var selectedGroup = _GroupListView.adapter.getItem(position) as MyGroup
             Log.d("ListView Selected","${selectedGroup.toString()} selected")
-            NavigateToGroupInfoActivity(selectedGroup)
+            NavigationControls.Companion.NavigateToGroupInfoActivity(this, selectedGroup.ID)
+            //NavigateToGroupInfoActivity(selectedGroup)
         }
+
+       // var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
+       // dbInitData.RunDataInitialisation()
     }
 
     /**

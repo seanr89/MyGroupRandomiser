@@ -2,6 +2,7 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Button
@@ -20,6 +21,9 @@ class PlayerAssigmentActivity : AppCompatActivity()
 {
     lateinit var _PlayerDBHandler : PlayerDBHandler
 
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_assigment)
@@ -34,12 +38,21 @@ class PlayerAssigmentActivity : AppCompatActivity()
         }
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
-
-        val playerRecycler = findViewById<RecyclerView>(R.id.PlayerRecycler)
         val UnassignedPlayers = _PlayerDBHandler.GetAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
         var playerAdapter = PlayerRecyclerAdapter(UnassignedPlayers as ArrayList<Player>)
 
-        playerRecycler.adapter = playerAdapter
+        viewManager = LinearLayoutManager(this)
+        recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = playerAdapter
+        }
     }
 
 

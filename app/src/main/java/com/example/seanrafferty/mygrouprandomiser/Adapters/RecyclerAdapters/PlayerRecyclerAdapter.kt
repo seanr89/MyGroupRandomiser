@@ -25,7 +25,8 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
         return playerList.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int)
+    {
         holder?.txtName?.text = playerList[position].Name
         holder?.txtRating?.text = playerList[position].Rating.toString()
 
@@ -63,8 +64,8 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
         lateinit var txtRating : TextView
         constructor(itemView: View) : super(itemView)
         {
-            val txtName = itemView.findViewById<TextView>(R.id.playerNameView)
-            val txtRating = itemView.findViewById<TextView>(R.id.playerRatingView)
+            txtName = itemView.findViewById<TextView>(R.id.playerNameView)
+            txtRating = itemView.findViewById<TextView>(R.id.playerRatingView)
         }
     }
 }

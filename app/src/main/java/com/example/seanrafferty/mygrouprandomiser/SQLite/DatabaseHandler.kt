@@ -122,9 +122,6 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sqlDeleteEventTable)
         db.execSQL(sqlDeleteTeam)
         onCreate(db)
-
-        var dbInitData = InitialiseDataDBHandler(this)
-        dbInitData.RunDataInitialisation()
     }
 
     /**
@@ -242,6 +239,8 @@ class DatabaseHandler : SQLiteOpenHelper
     @Throws(SQLiteConstraintException::class)
     fun CreateGroup(group: MyGroup) : Int
     {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
         var result : Int = 0
 
         var values = ContentValues()
