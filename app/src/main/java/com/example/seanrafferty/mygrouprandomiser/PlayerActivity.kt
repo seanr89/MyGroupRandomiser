@@ -11,6 +11,7 @@ import com.example.seanrafferty.mygrouprandomiser.Adapters.PlayerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 import kotlinx.android.synthetic.main.activity_player.*
 
@@ -27,7 +28,7 @@ class PlayerActivity : AppCompatActivity() {
          * Create listener on + item click event
          */
         fab.setOnClickListener { view ->
-                AddPlayerActivity()
+            NavigationControls.Companion.NavigateToAddPlayerActivity(this)
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
         }
@@ -57,17 +58,5 @@ class PlayerActivity : AppCompatActivity() {
         playerList = DB.ReadAllPlayers()
 
         return playerList
-    }
-
-    /**
-     * Start and Navigate to the Add Player activity
-     */
-    fun AddPlayerActivity()
-    {
-        Log.d("PlayerActivity", object{}.javaClass.enclosingMethod.name)
-
-        var intent= Intent(this,AddPlayerActivity::class.java)
-        startActivity(intent)
-
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.GroupAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 class MainActivity : AppCompatActivity()
 {
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity()
         var btn_add_group = findViewById<Button>(R.id.btnAddGroup)
         btn_add_group.setOnClickListener()
         {
-            AccessEditGroupActivity()
+            NavigationControls.Companion.NavigateToEditGroupActivity(this)
         }
 
         //Handle listview item selection
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity()
             // Handle group item selection and ensure object casting
             var selectedGroup = _GroupListView.adapter.getItem(position) as MyGroup
             Log.d("ListView Selected","${selectedGroup.toString()} selected")
-
             NavigateToGroupInfoActivity(selectedGroup)
         }
     }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity()
             when(item.itemId)
             {
                 R.id.action_players -> {
-                    NavigateToPlayersActivity()
+                    NavigationControls.Companion.NavigateToPlayerActivity(this)
                     return true
                 }
                 R.id.action_settings -> {
@@ -72,17 +72,6 @@ class MainActivity : AppCompatActivity()
             }
         return true
     }
-
-    /**
-     * Initialise Screen Contents
-     */
-//    fun InitialiseScreen()
-//    {
-//        println("Method: " + object{}.javaClass.enclosingMethod.name)
-//
-//        InitialiseDB()
-//        Toast.makeText(this, "Database Initialised", Toast.LENGTH_LONG).show()
-//    }
 
     /**
      * Request all stored groups available
@@ -115,25 +104,6 @@ class MainActivity : AppCompatActivity()
      * Navigation Controls
      */
     ////////////////////////////////////////////////////////////////////////////////
-
-
-    /**
-     * Operation to start and display the EditGroup Activity
-     */
-    fun AccessEditGroupActivity()
-    {
-        var intent= Intent(this,AddGroup::class.java)
-        startActivity(intent)
-    }
-
-    /**
-     * create and start the player activity
-     */
-    fun NavigateToPlayersActivity()
-    {
-        var intent= Intent(this,PlayerActivity::class.java)
-        startActivity(intent)
-    }
 
     /**
      * Instantiate and navigate to the GroupInfo activity

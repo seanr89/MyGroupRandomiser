@@ -3,8 +3,7 @@ package com.example.seanrafferty.mygrouprandomiser.Utilities
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
-import com.example.seanrafferty.mygrouprandomiser.MainActivity
-import com.example.seanrafferty.mygrouprandomiser.PlayerAssigmentActivity
+import com.example.seanrafferty.mygrouprandomiser.*
 
 
 /**
@@ -26,6 +25,42 @@ class NavigationControls {
         {
             val intent= Intent(context, PlayerAssigmentActivity::class.java)
             intent.putExtra("GroupID", groupID)
+            startActivity(context, intent, null)
+        }
+
+        /**
+         *  Navigate and start the Main Activity
+         */
+        fun NavigateToMainActivity(context: Context)
+        {
+            val intent= Intent(context, MainActivity::class.java)
+            startActivity(context, intent, null)
+        }
+
+        /**
+         * Navigate to the player activity
+         */
+        fun NavigateToPlayerActivity(context: Context)
+        {
+            var intent= Intent(context, PlayerActivity::class.java)
+            startActivity(context, intent, null)
+        }
+
+        /**
+         * Navigate to the Edit/Add group Activity
+         */
+        fun NavigateToEditGroupActivity(context: Context)
+        {
+            var intent= Intent(context, AddGroup::class.java)
+            startActivity(context, intent, null)
+        }
+
+        /**
+         * Navigate to the Add Player Activity
+         */
+        fun NavigateToAddPlayerActivity(context: Context)
+        {
+            var intent= Intent(context, AddPlayerActivity::class.java)
             startActivity(context, intent, null)
         }
     }

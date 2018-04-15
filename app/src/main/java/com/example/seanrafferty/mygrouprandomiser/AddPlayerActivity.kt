@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.*
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 
 class AddPlayerActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class AddPlayerActivity : AppCompatActivity() {
         _SavePlayerBtn.setOnClickListener()
         {
             SaveNewPlayer()
-            NavigateToPlayerActivity()
+            NavigationControls.Companion.NavigateToPlayerActivity(this)
         }
     }
 
@@ -52,15 +53,5 @@ class AddPlayerActivity : AppCompatActivity() {
         result = DB.InsertPlayer(Player(0, name, rating.toString().toInt()))
 
         return result
-    }
-
-    /**
-     * Navigate the Player Activity screen
-     */
-    private fun NavigateToPlayerActivity()
-    {
-        Log.d("AddPlayerActivity", object{}.javaClass.enclosingMethod.name)
-        var intent= Intent(this,PlayerActivity::class.java)
-        startActivity(intent)
     }
 }

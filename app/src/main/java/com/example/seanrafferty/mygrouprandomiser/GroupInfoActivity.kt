@@ -1,9 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -54,8 +52,6 @@ class GroupInfoActivity : AppCompatActivity() {
      */
     private fun RefreshMyGroupInfo(group : MyGroup)
     {
-        Log.d("Method", object{}.javaClass.enclosingMethod.name)
-
         val groupIDTextView = findViewById<TextView>(R.id.groupIDView)
         val groupNameTextView = findViewById<TextView>(R.id.groupNameView)
 

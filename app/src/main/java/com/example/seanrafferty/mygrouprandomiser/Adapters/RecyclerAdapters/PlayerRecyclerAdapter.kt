@@ -27,15 +27,6 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
         holder?.txtRating?.text = playerList[position].Rating.toString()
     }
 
-    /**
-     * fun to handle the business logic for onClick
-     */
-//    private fun onClick(v:View)
-//    {
-//        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name)
-//    }
-
-
     ////////////////////////////////////////////////////////////////////////////////
     /**
      * Custom class for handling a singe recycler view item

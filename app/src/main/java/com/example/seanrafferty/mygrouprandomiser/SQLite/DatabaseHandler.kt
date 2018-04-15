@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 
@@ -16,7 +17,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 8
+        val DBVersion = 9
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -31,6 +32,18 @@ class DatabaseHandler : SQLiteOpenHelper
         const val GroupPlayerTable = "groupplayer"
         const val PlayerID = "playerID"
         const val GroupID = "mygroupID"
+
+        //Event
+        const val EventTable = "event"
+        const val EventpkID = "ID"
+        const val EventDate = "Date"
+        const val EventGroupID = "mygroupID"
+
+        const val TeamTable = "team"
+        const val TeamID = "ID"
+        const val TeamName = "Name"
+        const val TeamEventID = "eventID"
+
     }
 
     //The current context that created the db object
@@ -41,7 +54,8 @@ class DatabaseHandler : SQLiteOpenHelper
     }
 
     /**
-     * TODO
+     * provide a writable database handler object
+     * @return : writable SQLiteDatabase
      */
     fun GetWritableDataBaseObject() : SQLiteDatabase
     {
@@ -49,7 +63,8 @@ class DatabaseHandler : SQLiteOpenHelper
     }
 
     /**
-     * TODO
+     * provide a readable database handler object
+     * @return : readable SQLiteDatabase
      */
     fun GetReadableDataBaseObject() : SQLiteDatabase
     {
@@ -61,7 +76,7 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     override fun onCreate(db: SQLiteDatabase)
     {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name + " For Version " + DBVersion)
 
         //Create the Group Table if it doesn't already exist
         var sqlCreateGroup: String =  "CREATE TABLE IF NOT EXISTS ${groupTableName} " +
@@ -79,6 +94,10 @@ class DatabaseHandler : SQLiteOpenHelper
             db.execSQL(sqlCreateGroup)
             db.execSQL(sqlCreatePlayer)
             CreateGroupPlayersTable(db)
+            CreateEventTable(db)
+            CreateTeamTable(db)
+
+            Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
         }
         else{
             println("database is null")
@@ -90,13 +109,18 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int)
     {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
-        var sqlDeleteGroup: String = "DROP TABLE IF EXISTS '$groupTableName'"
-        var sqlDeletePlayer: String = "DROP TABLE IF EXISTS ${PlayerTable}"
-        var sqlDeleteGroupPlayerMapping : String = "DROP TABLE IF EXISTS $GroupPlayerTable"
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var sqlDeleteGroup = "DROP TABLE IF EXISTS '$groupTableName'"
+        var sqlDeletePlayer = "DROP TABLE IF EXISTS ${PlayerTable}"
+        var sqlDeleteGroupPlayerMapping = "DROP TABLE IF EXISTS $GroupPlayerTable"
+        var sqlDeleteEventTable = "DROP TABLE IF EXISTS $EventTable"
+        var sqlDeleteTeam = "DROP TABLE IF EXISTS $TeamTable"
         db.execSQL(sqlDeleteGroup)
         db.execSQL(sqlDeletePlayer)
         db.execSQL(sqlDeleteGroupPlayerMapping)
+        db.execSQL(sqlDeleteEventTable)
+        db.execSQL(sqlDeleteTeam)
         onCreate(db)
     }
 
@@ -104,13 +128,41 @@ class DatabaseHandler : SQLiteOpenHelper
      * Run query on database to create the group-players db
      * @param db - database SQLiteHelper object
      */
-    fun CreateGroupPlayersTable(db: SQLiteDatabase)
+    private fun CreateGroupPlayersTable(db: SQLiteDatabase)
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
         var sql: String = "CREATE TABLE IF NOT EXISTS $GroupPlayerTable " +
                 "($GroupID INTEGER, "+
                 "$PlayerID INTEGER);"
+        db.execSQL(sql)
+    }
+
+    /**
+     * Create and execute script to create the team table
+     */
+    private fun CreateTeamTable(db: SQLiteDatabase)
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var sql : String = "CREATE TABLE IF NOT EXISTS $TeamTable " +
+                "($TeamID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "$TeamName TEXT, " +
+                "$TeamEventID INTEGER);"
+        db.execSQL(sql)
+    }
+
+    /**
+     * Create and execute script to create an group event
+     */
+    private fun CreateEventTable(db: SQLiteDatabase)
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var sql : String = "CREATE TABLE IF NOT EXISTS $EventTable " +
+                "($EventpkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "$EventDate TEXT, " +
+                "$EventGroupID INTEGER);"
         db.execSQL(sql)
     }
 
@@ -169,8 +221,6 @@ class DatabaseHandler : SQLiteOpenHelper
             cursor = db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
             // if table not yet present, create it
-            //db.execSQL(SQL_CREATE_ENTRIES)
-            //return ArrayList()
             return null!!
         }
 
@@ -266,6 +316,9 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     ////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Read all the players for a provided group
+     */
     fun ReadAllPlayersForAGroup(group:MyGroup) : MutableList<Player>
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
