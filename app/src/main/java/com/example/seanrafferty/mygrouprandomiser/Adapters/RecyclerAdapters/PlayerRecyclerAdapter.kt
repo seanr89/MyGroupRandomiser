@@ -13,7 +13,7 @@ import org.w3c.dom.Text
 
 class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
 {
-    var SelectedPlayer : ArrayList<Player> = arrayListOf()
+    var SelectedItems : ArrayList<Player> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
@@ -30,21 +30,45 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
         holder?.txtName?.text = playerList[position].Name
         holder?.txtRating?.text = playerList[position].Rating.toString()
 
+        //Append on click listener to handle item selection
         holder.itemView.setOnClickListener()
         {
             SetItemSelected(position, holder.itemView)
         }
     }
 
+    /**
+     * Set the selected recycler view item as selected
+     */
     private fun SetItemSelected(position: Int, view:View)
     {
         Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name)
+        if(isItemSelected(position))
+        {
+            SelectedItems.remove(playerList[position])
+            view.setBackgroundColor(Color.WHITE)
+        }
+        else
+        {
+            SelectedItems.add(playerList[position])
+            view.setBackgroundColor(Color.RED)
+        }
+    }
 
-        var selectedItem = playerList[position]
+    /**
+     * check if the selected item has been selected or not
+     * @param position : the position of the item on the click event
+     * @return boolean : true if the item is in the selected list
+     */
+    private fun isItemSelected(position: Int) : Boolean
+    {
+        var result = false
 
-        view.setBackgroundColor(Color.RED)
-
-
+        if(!SelectedItems.filter { it.ID == playerList[position].ID }.isEmpty())
+        {
+            result = true
+        }
+        return result
     }
 
     ////////////////////////////////////////////////////////////////////////////////

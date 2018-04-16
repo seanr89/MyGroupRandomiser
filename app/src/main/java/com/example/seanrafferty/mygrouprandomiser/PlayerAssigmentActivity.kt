@@ -13,6 +13,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 /**
  * New activity to handle the assignment of new players to a group!
@@ -23,18 +24,20 @@ class PlayerAssigmentActivity : AppCompatActivity()
 
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var recyclerView: RecyclerView
+    var groupID : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_assigment)
 
-        var groupID = intent.getStringExtra("GroupID").toInt()
+        groupID = intent.getStringExtra("GroupID").toInt()
 
         var btn_save_selected = findViewById<Button>(R.id.btn_save_selected)
         btn_save_selected.setOnClickListener()
         {
             //Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
             SaveSelectedAssignments()
+            NavigationControls.Companion.NavigateToGroupInfoActivity(this, groupID)
         }
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
@@ -57,10 +60,18 @@ class PlayerAssigmentActivity : AppCompatActivity()
 
 
     /**
-     * Operation to handle the saving of details
+     * Operation to handle the saving of selected players
      */
     fun SaveSelectedAssignments()
     {
         Log.d("Method",object{}.javaClass.enclosingMethod.name)
+
+        var adapter = recyclerView.adapter as PlayerRecyclerAdapter
+        var players = adapter.SelectedItems
+
+        if(!players.isEmpty())
+        {
+            _PlayerDBHandler.AssignPlayersToGroup(players, MyGroup(groupID, ""))
+        }
     }
 }

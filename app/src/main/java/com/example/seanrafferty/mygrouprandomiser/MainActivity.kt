@@ -46,9 +46,6 @@ class MainActivity : AppCompatActivity()
             NavigationControls.Companion.NavigateToGroupInfoActivity(this, selectedGroup.ID)
             //NavigateToGroupInfoActivity(selectedGroup)
         }
-
-       // var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
-       // dbInitData.RunDataInitialisation()
     }
 
     /**
@@ -73,6 +70,8 @@ class MainActivity : AppCompatActivity()
                 }
                 R.id.action_settings -> {
                     Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
+                    var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
+                    dbInitData.RunDataInitialisation()
                 }
             }
         return true
