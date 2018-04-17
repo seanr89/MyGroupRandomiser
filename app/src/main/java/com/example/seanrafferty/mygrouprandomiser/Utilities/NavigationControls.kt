@@ -70,5 +70,16 @@ class NavigationControls {
             var intent= Intent(context, AddPlayerActivity::class.java)
             startActivity(context, intent, null)
         }
+
+        /**
+         * Navigate to the MyGroup Create Event Activity
+         * @param groupID : unique id for a group
+         */
+        fun NavigateToGroupCreateEventActivity(context: Context, groupID: Int)
+        {
+            var intent= Intent(context, GroupEventGeneratorActivity::class.java)
+            intent.putExtra("GroupID", groupID.toString())
+            startActivity(context, intent, null)
+        }
     }
 }

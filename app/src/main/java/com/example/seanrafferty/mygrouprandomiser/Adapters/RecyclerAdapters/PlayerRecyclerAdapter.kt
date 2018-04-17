@@ -46,7 +46,7 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
         if(isItemSelected(position))
         {
             SelectedItems.remove(playerList[position])
-            view.setBackgroundColor(Color.WHITE)
+            view.setBackgroundColor(Color.GRAY)
         }
         else
         {

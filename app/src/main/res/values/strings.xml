@@ -27,5 +27,7 @@
     <!-- Team Details -->
     <string name="TeamIDString">Team ID</string>
     <string name="TeamNameString">Team Name</string>
+    <string name="title_activity_group_event_generator">GroupEventGeneratorActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

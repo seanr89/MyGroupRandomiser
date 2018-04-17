@@ -33,6 +33,12 @@ class GroupInfoActivity : AppCompatActivity() {
         {
             NavigationControls.Companion.NavigateToPlayerAssignment(this, ID)
         }
+
+        var btn_create_event = findViewById<Button>(R.id.btn_create_event)
+        btn_create_event.setOnClickListener()
+        {
+            NavigationControls.Companion.NavigateToGroupCreateEventActivity(this, ID)
+        }
     }
 
     /**

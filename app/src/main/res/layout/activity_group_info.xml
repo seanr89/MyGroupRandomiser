@@ -75,5 +75,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btn_create_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/btn_assign_players"
+        android:text="Create Event"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_assign_players"
+        app:layout_constraintStart_toEndOf="@+id/btn_assign_players" />
+
 
 </android.support.constraint.ConstraintLayout>

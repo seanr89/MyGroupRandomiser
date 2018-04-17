@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Button
-import android.widget.Toast
-import com.example.seanrafferty.mygrouprandomiser.Adapters.PlayerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
@@ -62,7 +60,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
     /**
      * Operation to handle the saving of selected players
      */
-    fun SaveSelectedAssignments()
+    private fun SaveSelectedAssignments()
     {
         Log.d("Method",object{}.javaClass.enclosingMethod.name)
 
