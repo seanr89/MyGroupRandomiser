@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -32,8 +33,8 @@ class GroupEventGeneratorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_event_generator)
-
         setSupportActionBar(toolbar)
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -41,11 +42,22 @@ class GroupEventGeneratorActivity : AppCompatActivity() {
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
+        tabLayout.setupWithViewPager(container)
+        
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
 
+        configureTabLayoutTitles(tabLayout)
+    }
+
+    private fun configureTabLayoutTitles(layout : TabLayout)
+    {
+        layout.getTabAt(0)!!.text = "Event Setup"
+        layout.getTabAt(1)!!.text = "Team One"
+        layout.getTabAt(2)!!.text = "Team Two"
     }
 
 

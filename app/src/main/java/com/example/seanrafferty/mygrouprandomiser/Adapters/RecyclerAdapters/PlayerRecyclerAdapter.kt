@@ -84,8 +84,8 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
     // Each data item is just a string in this case that is shown in a TextView.
     class ViewHolder : RecyclerView.ViewHolder
     {
-        lateinit var txtName : TextView
-        lateinit var txtRating : TextView
+        var txtName : TextView
+        var txtRating : TextView
         constructor(itemView: View) : super(itemView)
         {
             txtName = itemView.findViewById<TextView>(R.id.playerNameView)

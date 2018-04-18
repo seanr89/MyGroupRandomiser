@@ -29,6 +29,10 @@ class InitialiseDataDBHandler
         _DB.CreateGroup(MyGroup(-1, "Randox IT"))
         _DB.CreateGroup(MyGroup(-1, "Randox Eng"))
         _DB.CreateGroup(MyGroup(-1, "Group 3"))
+        _DB.CreateGroup(MyGroup(-1, "Group 4"))
+        _DB.CreateGroup(MyGroup(-1, "Group 5"))
+        _DB.CreateGroup(MyGroup(-1, "Group 6"))
+
     }
 
     private fun InitialiseDemoPlayers()
@@ -40,5 +44,12 @@ class InitialiseDataDBHandler
         _DB.InsertPlayer(Player(0, "Steven Kennedy", 8))
         _DB.InsertPlayer(Player(0, "Francy Donald", 10))
         _DB.InsertPlayer(Player(0, "Stephen Kelso", 9))
+        _DB.InsertPlayer(Player(0, "Conor J Murphy", 9))
+        _DB.InsertPlayer(Player(0, "Chris McShane", 7))
+        _DB.InsertPlayer(Player(0, "Michael Hayes", 8))
+        _DB.InsertPlayer(Player(0, "Sergei", 9))
+        _DB.InsertPlayer(Player(0, "James Davidson", 7))
+        _DB.InsertPlayer(Player(0, "Ryan Bevin", 8))
+        _DB.InsertPlayer(Player(0, "Sean Mills", 3))
     }
 }
