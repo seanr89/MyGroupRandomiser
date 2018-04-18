@@ -20,8 +20,7 @@ class GroupInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_info)
 
         val ID = intent.getStringExtra("GroupID").toInt()
-
-        //now we need to request data from the DB
+        //now we need to request data from the DB for the passed in ID
         SelectedGroup = GetGroupFromDB(ID)
 
         //now refresh the data

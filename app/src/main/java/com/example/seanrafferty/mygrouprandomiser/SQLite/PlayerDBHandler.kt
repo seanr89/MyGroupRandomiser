@@ -10,7 +10,7 @@ Database Handler relating solely to Player info
  */
 class PlayerDBHandler
 {
-    lateinit var _DB : DatabaseHandler
+    var _DB : DatabaseHandler
     /**
      * constructor for player DB handler
      */

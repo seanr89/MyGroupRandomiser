@@ -66,4 +66,11 @@ class EventDBHandler
     {
         Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
     }
+
+    fun CreateGroupEvent(event:GroupEvent) :Int
+    {
+        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
+
+        return 0
+    }
 }
