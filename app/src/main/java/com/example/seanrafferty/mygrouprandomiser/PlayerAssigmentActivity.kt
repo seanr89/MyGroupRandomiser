@@ -40,7 +40,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
         val UnassignedPlayers = _PlayerDBHandler.GetAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
-        var playerAdapter = PlayerRecyclerAdapter(UnassignedPlayers as ArrayList<Player>)
+        var playerAdapter = PlayerRecyclerAdapter(UnassignedPlayers as ArrayList<Player>, true)
 
         viewManager = LinearLayoutManager(this)
         recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{

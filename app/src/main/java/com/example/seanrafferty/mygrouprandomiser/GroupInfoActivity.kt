@@ -63,4 +63,12 @@ class GroupInfoActivity : AppCompatActivity() {
         groupIDTextView.text = group.ID.toString()
         groupNameTextView.text = group.Name
     }
+
+    /**
+     *
+     */
+    private fun GetGroupPlayerandEventStats(id: Int)
+    {
+
+    }
 }

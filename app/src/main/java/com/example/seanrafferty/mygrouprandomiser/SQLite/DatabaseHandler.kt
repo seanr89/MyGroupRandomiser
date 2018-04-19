@@ -40,9 +40,13 @@ class DatabaseHandler : SQLiteOpenHelper
         const val EventGroupID = "mygroupID"
 
         const val TeamTable = "team"
-        const val TeamID = "ID"
+        const val TeampkID = "ID"
         const val TeamName = "Name"
         const val TeamEventID = "eventID"
+
+        const val EventTeamMappingTable = "eventTeams"
+        const val EventID = "eventID"
+        const val TeamID = "teamID"
 
     }
 
@@ -96,6 +100,7 @@ class DatabaseHandler : SQLiteOpenHelper
             CreateGroupPlayersTable(db)
             CreateEventTable(db)
             CreateTeamTable(db)
+            CreateEventTeamMappingTable(db)
 
             Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
         }
@@ -116,11 +121,13 @@ class DatabaseHandler : SQLiteOpenHelper
         var sqlDeleteGroupPlayerMapping = "DROP TABLE IF EXISTS $GroupPlayerTable"
         var sqlDeleteEventTable = "DROP TABLE IF EXISTS $EventTable"
         var sqlDeleteTeam = "DROP TABLE IF EXISTS $TeamTable"
+        var sqlDeleteEventTeamMapping = "DROP TABLE IF EXISTS $EventTeamMappingTable"
         db.execSQL(sqlDeleteGroup)
         db.execSQL(sqlDeletePlayer)
         db.execSQL(sqlDeleteGroupPlayerMapping)
         db.execSQL(sqlDeleteEventTable)
         db.execSQL(sqlDeleteTeam)
+        db.execSQL(sqlDeleteEventTeamMapping)
         onCreate(db)
     }
 
@@ -146,7 +153,7 @@ class DatabaseHandler : SQLiteOpenHelper
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
         var sql : String = "CREATE TABLE IF NOT EXISTS $TeamTable " +
-                "($TeamID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "($TeampkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "$TeamName TEXT, " +
                 "$TeamEventID INTEGER);"
         db.execSQL(sql)
@@ -163,6 +170,19 @@ class DatabaseHandler : SQLiteOpenHelper
                 "($EventpkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "$EventDate TEXT, " +
                 "$EventGroupID INTEGER);"
+        db.execSQL(sql)
+    }
+
+    /**
+     * Create mapping table for event and team
+     */
+    private fun CreateEventTeamMappingTable(db: SQLiteDatabase)
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var sql : String = "CREATE TABLE IF NOT EXISTS $EventTeamMappingTable " +
+                "($EventID INTEGER "+
+                "$TeamID INTEGER);"
         db.execSQL(sql)
     }
 

@@ -11,7 +11,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.R
 import org.w3c.dom.Text
 
-class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
+class PlayerRecyclerAdapter(val playerList: ArrayList<Player>, val selectable : Boolean = false) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
 {
     var SelectedItems : ArrayList<Player> = arrayListOf()
 
@@ -30,10 +30,14 @@ class PlayerRecyclerAdapter(val playerList: ArrayList<Player>) : RecyclerView.Ad
         holder?.txtName?.text = playerList[position].Name
         holder?.txtRating?.text = playerList[position].Rating.toString()
 
-        //Append on click listener to handle item selection
-        holder.itemView.setOnClickListener()
+        //if each item is selectable
+        if(selectable)
         {
-            SetItemSelected(position, holder.itemView)
+            //Append on click listener to handle item selection
+            holder.itemView.setOnClickListener()
+            {
+                SetItemSelected(position, holder.itemView)
+            }
         }
     }
 

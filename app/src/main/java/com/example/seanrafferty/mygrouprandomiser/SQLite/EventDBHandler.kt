@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 
 /**
@@ -60,11 +61,41 @@ class EventDBHandler
     /**
      * Query all the events for a group - Note without Teams list
      * @param group : the MyGroup object to query
-     * @return : A collection of events for a group
+     * @return : A collection of events for a group filtered by ID
      */
-    fun GetAllGroupEvents(group:MyGroup)
+    fun GetAllGroupEventsForGroup(group:MyGroup) : ArrayList<GroupEvent>
     {
         Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
+
+        var allGroupEvents = GetAllEvents()
+        var resultList = ArrayList<GroupEvent>()
+
+        //if any group events where found
+        if(!allGroupEvents.isEmpty())
+        {
+            //now to filter - check if the current player is already assigned to the group!!
+            var mappedGroups = allGroupEvents.filter { it.GroupID == group.ID }
+            if (mappedGroups == null || mappedGroups.isEmpty())
+            {
+                resultList = mappedGroups as ArrayList<GroupEvent>
+            }
+        }
+        return resultList
+    }
+
+    /**
+     * Query and return the count of events for a group
+     */
+    fun GetCountOfEventsForGrouo(group : MyGroup) : Int
+    {
+        var resultList = GetAllGroupEventsForGroup(group)
+        var result = 0
+
+        if(!resultList.isEmpty())
+        {
+            result = resultList.size
+        }
+        return result
     }
 
     fun CreateGroupEvent(event:GroupEvent) :Int
