@@ -2,10 +2,16 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.widget.Button
 import android.widget.TextView
+import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 /**
@@ -13,6 +19,8 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
  */
 class GroupInfoActivity : AppCompatActivity() {
 
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var recyclerView: RecyclerView
     lateinit var SelectedGroup : MyGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +45,22 @@ class GroupInfoActivity : AppCompatActivity() {
         btn_create_event.setOnClickListener()
         {
             NavigationControls.Companion.NavigateToGroupCreateEventActivity(this, ID)
+        }
+
+        var _MyGroupDBHandler = MyGroupDBHandler(DatabaseHandler(this))
+        val assignedPlayers = _MyGroupDBHandler.ReadAllPlayersForAGroup(MyGroup(ID, ""))
+        var playerAdapter = PlayerRecyclerAdapter(assignedPlayers as ArrayList<Player>, false)
+        viewManager = LinearLayoutManager(this)
+        recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = playerAdapter
         }
     }
 
