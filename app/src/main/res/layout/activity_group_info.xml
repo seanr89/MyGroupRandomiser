@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:layout_marginLeft="14dp"
-            android:layout_below="@+id/groupIDViewHeader"
+            android:layout_below="@+id/groupIDView"
             android:text="@string/GroupNameString"
             android:textStyle="bold"/>
 
@@ -63,10 +63,30 @@
                 android:layout_toRightOf="@+id/groupNameViewHeader"
                 android:text="NAME" />
 
+        <TextView
+            android:id="@+id/groupEventCountHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_below="@+id/groupNameViewHeader"
+            android:text="Event Count"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/groupPlayerCountHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_below="@+id/groupEventCountHeader"
+            android:text="Player Count"
+            android:textStyle="bold"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/PlayerRecycler"
             android:layout_width="368dp"
-            android:layout_height="340dp"
+            android:layout_height="270dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="71dp"
             tools:layout_editor_absoluteX="8dp" />

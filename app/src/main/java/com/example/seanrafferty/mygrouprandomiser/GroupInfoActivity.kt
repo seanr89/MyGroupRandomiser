@@ -47,8 +47,9 @@ class GroupInfoActivity : AppCompatActivity() {
             NavigationControls.Companion.NavigateToGroupCreateEventActivity(this, ID)
         }
 
-        var _MyGroupDBHandler = MyGroupDBHandler(DatabaseHandler(this))
-        val assignedPlayers = _MyGroupDBHandler.ReadAllPlayersForAGroup(MyGroup(ID, ""))
+        //Setup Recycler View to view all players
+        var MyGroupDBHandler = MyGroupDBHandler(DatabaseHandler(this))
+        val assignedPlayers = MyGroupDBHandler.ReadAllPlayersForAGroup(MyGroup(ID, ""))
         var playerAdapter = PlayerRecyclerAdapter(assignedPlayers as ArrayList<Player>, false)
         viewManager = LinearLayoutManager(this)
         recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{

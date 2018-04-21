@@ -9,16 +9,26 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
+import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
+import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 import kotlinx.android.synthetic.main.activity_group_event_generator.*
 import kotlinx.android.synthetic.main.fragment_group_event_generator.view.*
 
-class GroupEventGeneratorActivity : AppCompatActivity() {
+class GroupEventGeneratorActivity : AppCompatActivity()
+{
+    lateinit var _EventSetupFrag : EventSetupFragment
+    lateinit var _TeamOneFrag : TeamFragment
+    lateinit var _TeamTwoFrag : TeamFragment
+
+    var _GroupID : Int = 0
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -35,6 +45,8 @@ class GroupEventGeneratorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_event_generator)
         setSupportActionBar(toolbar)
 
+        _GroupID = intent.getStringExtra("GroupID").toInt()
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -49,12 +61,29 @@ class GroupEventGeneratorActivity : AppCompatActivity() {
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
 //        }
-
+        InitialiseAndConfigureFragments()
         configureTabLayoutTitles(tabLayout)
     }
 
+    /**
+     * Initialise each of the fragments to be displayed
+     */
+    private fun InitialiseAndConfigureFragments()
+    {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+
+        _EventSetupFrag = EventSetupFragment()
+        _TeamOneFrag = TeamFragment()
+        _TeamTwoFrag = TeamFragment()
+    }
+
+    /**
+     * Configure the titles to be displayed for each fragment in the tab layout
+     */
     private fun configureTabLayoutTitles(layout : TabLayout)
     {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+
         layout.getTabAt(0)!!.text = "Event Setup"
         layout.getTabAt(1)!!.text = "Team One"
         layout.getTabAt(2)!!.text = "Team Two"
@@ -87,10 +116,16 @@ class GroupEventGeneratorActivity : AppCompatActivity() {
      */
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment {
+        override fun getItem(position: Int): Fragment
+        {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1)
+
+//            when(position)
+//            {
+//                1 -> return EventSetupFragment()
+//            }
         }
 
         override fun getCount(): Int {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.EventSetupFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/hello_blank_fragment" />-->
+
+        <TextView
+            android:id="@+id/EventDateHeader"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="10dp"
+            android:text="Select Date"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- Field Select the Date-->
+        <TextView
+            android:id="@+id/EventDateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:padding="10dp"
+            android:layout_toRightOf="@+id/EventDateHeader"
+            android:text="Set Date" />
+
+    <TextView
+        android:id="@+id/EventTimeHeader"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="Select Time"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/EventDateHeader"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Field Select the Date-->
+    <TextView
+        android:id="@+id/EventTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:layout_below="@+id/EventDateView"
+        android:layout_toRightOf="@+id/EventTimeHeader"
+        android:text="Set Time" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/PlayerEventRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_below="@+id/EventTimeHeader"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="71dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+</RelativeLayout>
