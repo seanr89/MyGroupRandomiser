@@ -79,6 +79,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFr
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
 
         _EventSetupFrag = EventSetupFragment()
+        _EventSetupFrag.GroupID = _GroupID
         _TeamOneFrag = TeamFragment()
         _TeamTwoFrag = TeamFragment()
     }

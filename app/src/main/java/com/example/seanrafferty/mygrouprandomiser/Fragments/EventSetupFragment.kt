@@ -44,7 +44,7 @@ class EventSetupFragment : Fragment()
     private lateinit var _PlayerRecycler : RecyclerView
     private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
 
-    private var _GroupID : Int = 0;
+    var GroupID : Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -62,8 +62,8 @@ class EventSetupFragment : Fragment()
         val viewDate: TextView = view.findViewById(R.id.EventDateView)
         val viewTime: TextView = view.findViewById(R.id.EventTimeView)
 
-        var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(_GroupID, ""))
-        _PlayerAdapter = PlayerRecyclerAdapter(playerList, false)
+        var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(GroupID, ""))
+        _PlayerAdapter = PlayerRecyclerAdapter(playerList, true)
         viewManager = LinearLayoutManager(activity)
         _PlayerRecycler = view.findViewById<RecyclerView>(R.id.PlayerEventRecycler).apply{
             // use this setting to improve performance if you know that changes
@@ -75,6 +75,12 @@ class EventSetupFragment : Fragment()
 
             // specify an viewAdapter (see also next example)
             adapter = _PlayerAdapter
+        }
+
+        var btn_randomise = view.findViewById<Button>(R.id.btn_randomise_players)
+        btn_randomise.setOnClickListener()
+        {
+            CreateRandomTeams()
         }
 
         viewDate.setOnClickListener()
@@ -143,6 +149,11 @@ class EventSetupFragment : Fragment()
         val dialog = TimePickerDialog(activity, timePickerDialogListener, hour, minute, true)
         dialog.show()
         textView.text = SimpleDateFormat("HH:mm").format(cal.time)
+    }
+
+    private fun CreateRandomTeams()
+    {
+        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
     }
 
     /**
