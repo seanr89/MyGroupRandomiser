@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity()
                 }
                 R.id.action_settings -> {
                     Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
+                    var DBReset = DatabaseHandler(this)
+                    DBReset.onUpgrade(DBReset.writableDatabase, 9 , 9)
                     var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
                     dbInitData.RunDataInitialisation()
                 }

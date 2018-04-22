@@ -21,12 +21,11 @@ class MyGroupDBHandler
     /**
      * Read all the players for a provided group
      */
-    fun ReadAllPlayersForAGroup(group:MyGroup) : MutableList<Player>
+    fun ReadAllPlayersForAGroup(group:MyGroup) : ArrayList<Player>
     {
         Log.d("MyGroupDBHandler", object{}.javaClass.enclosingMethod.name)
 
         var modelList: MutableList<Player> = mutableListOf()
-
 
         //Get all of the player IDs
         var playerIDs = ReadAllPlayerIDsForGroup(group)
@@ -37,13 +36,13 @@ class MyGroupDBHandler
 
         for(item: Int in playerIDs)
         {
-            var player = players.filter { it.ID == item } as Player
+            var player = players.filter { it.ID == item }
             if(player != null)
             {
-                modelList.add(player)
+                modelList.add(player[0])
             }
         }
-        return modelList
+        return modelList as ArrayList<Player>
     }
 
     /**
@@ -57,6 +56,7 @@ class MyGroupDBHandler
         var arrayList: MutableList<Int> = mutableListOf<Int>()
         // Select query with where in the clause
         var selectQuery: String = "SELECT * FROM ${DatabaseHandler.GroupPlayerTable} WHERE ${DatabaseHandler.GroupID} = ${myGroup.ID}"
+        Log.d("MyGroupDBHandler", "query $selectQuery")
         val db = _DB.GetReadableDataBaseObject()
 
         var cursor: Cursor?
@@ -68,10 +68,12 @@ class MyGroupDBHandler
                 do
                 {
                     val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerID))
+                    Log.d("MyGroupDBHandler", "id is $id")
                     arrayList.add(id)
                 }
                 while (cursor.moveToNext())
             }
+            cursor.close()
         }
         catch (e: SQLiteException)
         {

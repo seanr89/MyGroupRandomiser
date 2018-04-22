@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
@@ -50,7 +51,9 @@ class GroupInfoActivity : AppCompatActivity() {
         //Setup Recycler View to view all players
         var MyGroupDBHandler = MyGroupDBHandler(DatabaseHandler(this))
         val assignedPlayers = MyGroupDBHandler.ReadAllPlayersForAGroup(MyGroup(ID, ""))
-        var playerAdapter = PlayerRecyclerAdapter(assignedPlayers as ArrayList<Player>, false)
+        Log.d("GroupInfoActivity", "assignedPlayers count: ${assignedPlayers.size}")
+        var playerAdapter = PlayerRecyclerAdapter(assignedPlayers, false)
+        Log.d("GroupInfoActivity", "assignedPlayers added to adapter")
         viewManager = LinearLayoutManager(this)
         recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
             // use this setting to improve performance if you know that changes

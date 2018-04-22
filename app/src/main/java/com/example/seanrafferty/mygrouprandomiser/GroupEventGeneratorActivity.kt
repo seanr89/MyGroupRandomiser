@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
@@ -66,13 +67,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFr
         val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(container)
 
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
-
-        var groupPlayers = MyGroupDBHandler(DatabaseHandler(this)).ReadAllPlayersForAGroup(MyGroup(_GroupID, ""))
-
         InitialiseAndConfigureFragments()
         configureTabLayoutTitles(tabLayout)
     }
@@ -99,6 +93,16 @@ class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFr
         layout.getTabAt(0)!!.text = "Event Setup"
         layout.getTabAt(1)!!.text = "Team One"
         layout.getTabAt(2)!!.text = "Team Two"
+    }
+
+    /**
+     * Refresh the events setup grid with player data
+     * @param players : player list to display
+     */
+    private fun TryInitialiseEventSetupWithPlayerList(players:ArrayList<Player>)
+    {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        _EventSetupFrag.UpdatePlayerAdapterWithList(players)
     }
 
 

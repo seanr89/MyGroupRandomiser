@@ -53,7 +53,7 @@ class DatabaseHandler : SQLiteOpenHelper
     //The current context that created the db object
     var context: Context? = null
 
-    constructor(context: Context) : super(context, DBName, null, DBVersion) {
+    constructor(context: Context?) : super(context, DBName, null, DBVersion) {
         this.context = context
     }
 
@@ -341,7 +341,7 @@ class DatabaseHandler : SQLiteOpenHelper
     /**
      * Read all the players for a provided group
      */
-    fun ReadAllPlayersForAGroup(group:MyGroup) : MutableList<Player>
+   /* fun ReadAllPlayersForAGroup(group:MyGroup) : MutableList<Player>
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
@@ -349,20 +349,24 @@ class DatabaseHandler : SQLiteOpenHelper
 
         //Get all of the player IDs
         var playerIDs = ReadAllPlayerIDsForGroup(group)
+        Log.d("DatabaseHandler", "playerIDs size: ${playerIDs.size}")
 
         //Get all Players
         var players = ReadAllPlayers()
 
+        Log.d("DatabaseHandler", "step1")
         for(item: Int in playerIDs)
         {
-            var player = players.filter { it.ID == item } as Player
-            if(player != null)
+
+            var players = players.filter { it.ID == item }
+            if(players != null)
             {
-                modelList.add(player)
+                modelList.add(players[0])
             }
         }
         return modelList
     }
+    */
 
     /**
      * Read all assigned group IDs for a single player
@@ -409,13 +413,14 @@ class DatabaseHandler : SQLiteOpenHelper
      * Read all assigned player ids for a group
      * @param myGroup : the group to query for players assigned
      */
-    fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : MutableList<Int>
+   /* fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : MutableList<Int>
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
-        var arrayList: MutableList<Int> = mutableListOf<Int>()
+        var arrayList: MutableList<Int> = mutableListOf()
         // Select query with where in the clause
         var selectQuery: String = "SELECT * FROM $GroupPlayerTable WHERE $GroupID = ${myGroup.ID}"
+        Log.d("DatabaseHandler", "query is $selectQuery")
         val db = this.readableDatabase
 
         var cursor: Cursor?
@@ -427,10 +432,12 @@ class DatabaseHandler : SQLiteOpenHelper
                 do
                 {
                     val id = cursor.getInt(cursor.getColumnIndex(PlayerID))
+                    Log.d("DatabaseHandler", "id is : $id")
                     arrayList.add(id)
                 }
                 while (cursor.moveToNext())
             }
+            cursor.close()
         }
         catch (e: SQLiteException)
         {
@@ -441,5 +448,6 @@ class DatabaseHandler : SQLiteOpenHelper
 
         return arrayList
     }
+    */
 
 }

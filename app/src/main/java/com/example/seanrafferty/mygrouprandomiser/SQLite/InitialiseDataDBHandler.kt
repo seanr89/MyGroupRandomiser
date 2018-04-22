@@ -20,6 +20,7 @@ class InitialiseDataDBHandler
         Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
         InitialiseDemoGroups()
         InitialiseDemoPlayers()
+        InitialiseGroupPlayerAssignment()
     }
 
     private fun InitialiseDemoGroups()
@@ -51,5 +52,20 @@ class InitialiseDataDBHandler
         _DB.InsertPlayer(Player(0, "James Davidson", 7))
         _DB.InsertPlayer(Player(0, "Ryan Bevin", 8))
         _DB.InsertPlayer(Player(0, "Sean Mills", 3))
+    }
+
+    private fun InitialiseGroupPlayerAssignment()
+    {
+        Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
+        var PlayerDBHandler = PlayerDBHandler(_DB)
+
+        var players = ArrayList<Player>()
+        players.add(Player(1, "", 0))
+        players.add(Player(2, "", 0))
+        players.add(Player(3, "", 0))
+        players.add(Player(4, "", 0))
+        var group = MyGroup(1, "")
+
+        PlayerDBHandler.AssignPlayersToGroup(players, group)
     }
 }

@@ -11,7 +11,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.R
 import org.w3c.dom.Text
 
-class PlayerRecyclerAdapter(val playerList: ArrayList<Player>, val selectable : Boolean = false) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
+class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : Boolean = false) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
 {
     var SelectedItems : ArrayList<Player> = arrayListOf()
 

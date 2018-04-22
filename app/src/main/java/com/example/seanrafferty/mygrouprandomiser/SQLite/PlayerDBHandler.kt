@@ -88,20 +88,25 @@ class PlayerDBHandler
         var resultList : MutableList<Player> = arrayListOf()
 
         //request all players and all players for the current group
-        var AllPlayers = _DB.ReadAllPlayers() as List<Player>
-        var groupPlayers = _DB.ReadAllPlayersForAGroup(group)
+        var AllPlayers = _DB.ReadAllPlayers()
+        Log.d("PlayerDBHandler", "AllPlayers list: ${AllPlayers.size}")
+
+        /*var groupPlayers = _DB.ReadAllPlayersForAGroup(group)
+        Log.d("PlayerDBHandler", "groupPlayers list: ${groupPlayers.size}")
 
         //read through the list of all players
         for(item : Player in AllPlayers)
         {
             //now to filter - check if the current player is already assigned to the group!!
+            //if current player(item) is in list of group players
             var mappedPlayer = groupPlayers.filter { it.ID == item.ID }
             //if not append to the list
             if(mappedPlayer == null || mappedPlayer.isEmpty())
             {
-                resultList.add(item)
+                Log.d(object{}.javaClass.enclosingMethod.name, "Adding player ${mappedPlayer[0].Name}")
+                resultList.add(mappedPlayer[0])
             }
-        }
+        }*/
         return resultList
     }
 }

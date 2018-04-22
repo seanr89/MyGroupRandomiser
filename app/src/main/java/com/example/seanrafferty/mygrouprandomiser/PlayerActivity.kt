@@ -29,8 +29,6 @@ class PlayerActivity : AppCompatActivity() {
          */
         fab.setOnClickListener { view ->
             NavigationControls.Companion.NavigateToAddPlayerActivity(this)
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
         }
 
         /**

@@ -6,6 +6,8 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +15,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
+import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -31,6 +39,11 @@ import java.util.*
 class EventSetupFragment : Fragment()
 {
     private var listener: OnFragmentInteractionListener? = null
+
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var _PlayerRecycler : RecyclerView
+    private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
+
     private var _GroupID : Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -49,6 +62,21 @@ class EventSetupFragment : Fragment()
         val viewDate: TextView = view.findViewById(R.id.EventDateView)
         val viewTime: TextView = view.findViewById(R.id.EventTimeView)
 
+        var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(_GroupID, ""))
+        _PlayerAdapter = PlayerRecyclerAdapter(playerList, false)
+        viewManager = LinearLayoutManager(activity)
+        _PlayerRecycler = view.findViewById<RecyclerView>(R.id.PlayerEventRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = _PlayerAdapter
+        }
+
         viewDate.setOnClickListener()
         {
             SetDate(viewDate)
@@ -65,6 +93,14 @@ class EventSetupFragment : Fragment()
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    fun UpdatePlayerAdapterWithList(players:ArrayList<Player>)
+    {
+        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+        _PlayerAdapter.playerList = players
+        _PlayerAdapter.notifyDataSetChanged()
+        _PlayerAdapter.SelectedItems.clear()
     }
 
     /**
