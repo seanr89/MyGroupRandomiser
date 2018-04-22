@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser
 
+import android.net.Uri
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
@@ -17,13 +18,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
+import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
+import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 
 import kotlinx.android.synthetic.main.activity_group_event_generator.*
 import kotlinx.android.synthetic.main.fragment_group_event_generator.view.*
 
-class GroupEventGeneratorActivity : AppCompatActivity()
+class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFragmentInteractionListener,
+        TeamFragment.OnFragmentInteractionListener
 {
+    override fun onFragmentInteraction(uri: Uri) {
+
+    }
+
     lateinit var _EventSetupFrag : EventSetupFragment
     lateinit var _TeamOneFrag : TeamFragment
     lateinit var _TeamTwoFrag : TeamFragment
@@ -61,6 +70,9 @@ class GroupEventGeneratorActivity : AppCompatActivity()
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
 //        }
+
+        var groupPlayers = MyGroupDBHandler(DatabaseHandler(this)).ReadAllPlayersForAGroup(MyGroup(_GroupID, ""))
+
         InitialiseAndConfigureFragments()
         configureTabLayoutTitles(tabLayout)
     }
@@ -68,7 +80,7 @@ class GroupEventGeneratorActivity : AppCompatActivity()
     /**
      * Initialise each of the fragments to be displayed
      */
-    private fun InitialiseAndConfigureFragments()
+    private fun InitialiseAndConfigureFragments(groupID : Int = 0)
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
 
@@ -120,12 +132,19 @@ class GroupEventGeneratorActivity : AppCompatActivity()
         {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            //return PlaceholderFragment.newInstance(position + 1)
 
-//            when(position)
-//            {
-//                1 -> return EventSetupFragment()
-//            }
+            when(position)
+            {
+                0 -> return _EventSetupFrag
+                1 -> return _TeamOneFrag
+                2 -> return _TeamTwoFrag
+                else -> { // Note the block
+                    print("x is neither 1 nor 2")
+                }
+            }
+
+            return PlaceholderFragment.newInstance(position + 1)
         }
 
         override fun getCount(): Int {

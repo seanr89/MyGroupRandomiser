@@ -12,15 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.TimePicker
 
 import com.example.seanrafferty.mygrouprandomiser.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -34,13 +31,12 @@ private const val ARG_PARAM2 = "param2"
 class EventSetupFragment : Fragment()
 {
     private var listener: OnFragmentInteractionListener? = null
+    private var _GroupID : Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            //param1 = it.getString(ARG_PARAM1)
-            //param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -60,58 +56,73 @@ class EventSetupFragment : Fragment()
 
         viewTime.setOnClickListener()
         {
-            SetTime(viewTime)
+            SetTime(viewTime, view)
         }
 
         return view
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    fun onButtonPressed(uri: Uri) {
-//        listener?.onFragmentInteraction(uri)
-//    }
-
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is TeamFragment.OnFragmentInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
 
-    fun SetDate(textView: TextView)
+    /**
+     *
+     */
+    private fun SetDate(textView: TextView)
     {
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         val cal = Calendar.getInstance()
 
+        val datePickerDialog : DatePickerDialog = DatePickerDialog(activity)
+        datePickerDialog.show()
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         }
+        datePickerDialog.setOnDateSetListener(dateSetListener)
 
         textView.text = SimpleDateFormat("dd.MM.yyyy").format(cal.time)
     }
 
-    fun SetTime(textView: TextView)
+    /**
+     *
+     */
+    private fun SetTime(textView: TextView, view : View)
     {
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         val cal = Calendar.getInstance()
+        val hour = cal.get(Calendar.HOUR_OF_DAY)
+        val minute = cal.get(Calendar.MINUTE)
 
-        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-            cal.set(Calendar.HOUR_OF_DAY, hour)
+        val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+            cal.set(Calendar.HOUR, hourOfDay)
             cal.set(Calendar.MINUTE, minute)
         }
 
+        val dialog = TimePickerDialog(activity, timePickerDialogListener, hour, minute, true)
+        dialog.show()
         textView.text = SimpleDateFormat("HH:mm").format(cal.time)
+    }
+
+    /**
+     *
+     */
+    fun GetSelectedPlayers()
+    {
+
+    }
+
+    /**
+     *
+     */
+    fun ResetFragmentContent()
+    {
+
     }
 
     /**
@@ -144,8 +155,6 @@ class EventSetupFragment : Fragment()
         fun newInstance(param1: String, param2: String) =
                 EventSetupFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
                     }
                 }
     }
