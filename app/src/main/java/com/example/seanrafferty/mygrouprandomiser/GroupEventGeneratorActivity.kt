@@ -27,7 +27,7 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import kotlinx.android.synthetic.main.activity_group_event_generator.*
 import kotlinx.android.synthetic.main.fragment_group_event_generator.view.*
 
-class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFragmentInteractionListener,
+class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
         TeamFragment.OnFragmentInteractionListener
 {

@@ -12,8 +12,9 @@ class TeamRandomiser
      * Shuffle the players provided and append to two teams (one and two) and return the teams as a collection
      * @param players : a collection of players
      */
-    fun RandoimisePlayerListIntoTeams(players:ArrayList<Player>) : ArrayList<Team>
+    fun RandomizePlayerListIntoTeams(players:ArrayList<Player>) : ArrayList<Team>
     {
+        //Check if the players list is empty first
         if(players.isEmpty())
             return null!!
 

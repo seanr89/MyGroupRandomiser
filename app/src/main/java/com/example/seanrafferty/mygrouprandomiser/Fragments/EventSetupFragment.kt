@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.TeamRandomiser
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -40,8 +41,7 @@ import kotlin.collections.ArrayList
  */
 class EventSetupFragment : Fragment()
 {
-    var mCallback: OnRandomTeamsGenerated? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private var mCallback: OnRandomTeamsGenerated? = null
 
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var _PlayerRecycler : RecyclerView
@@ -101,7 +101,7 @@ class EventSetupFragment : Fragment()
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
+        mCallback = null
     }
 
     fun UpdatePlayerAdapterWithList(players:ArrayList<Player>)
@@ -113,7 +113,7 @@ class EventSetupFragment : Fragment()
     }
 
     /**
-     *
+     * Open a date dialog and handle the on set listener to update a textview
      */
     private fun SetDate(textView: TextView)
     {
@@ -134,7 +134,7 @@ class EventSetupFragment : Fragment()
     }
 
     /**
-     *
+     * Open a time dialog and handle the on set listender to update text view
      */
     private fun SetTime(textView: TextView, view : View)
     {
@@ -162,13 +162,15 @@ class EventSetupFragment : Fragment()
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         var players = GetSelectedPlayers()
+        if(!players.isEmpty())
+        {
+            var randomiser = TeamRandomiser()
+            var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
 
-        var randomiser = TeamRandomiser()
-
-        var teamArray = randomiser.RandoimisePlayerListIntoTeams(players)
-
-        //then return back to where it needs to go - ie the fragment activity
-        mCallback!!.onTeamsRandomized(teamArray)
+            //then return back to where it needs to go - ie the fragment activity
+            mCallback!!.onTeamsRandomized(teamArray)
+        }
+        Toast.makeText(context, "No Players Selected!", Toast.LENGTH_LONG).show()
     }
 
     // Container Activity must implement this interface
@@ -195,26 +197,26 @@ class EventSetupFragment : Fragment()
      * (http://developer.android.com/training/basics/fragments/communicating.html)
      * for more information.
      */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
+//    interface OnFragmentInteractionListener {
+//        // TODO: Update argument type and name
+//        fun onFragmentInteraction(uri: Uri)
+//    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EventSetupFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                EventSetupFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                }
-    }
+//    companion object {
+//        /**
+//         * Use this factory method to create a new instance of
+//         * this fragment using the provided parameters.
+//         *
+//         * @param param1 Parameter 1.
+//         * @param param2 Parameter 2.
+//         * @return A new instance of fragment EventSetupFragment.
+//         */
+//        // TODO: Rename and change types and number of parameters
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//                EventSetupFragment().apply {
+//                    arguments = Bundle().apply {
+//                    }
+//                }
+//    }
 }
