@@ -43,11 +43,12 @@ class EventSetupFragment : Fragment()
 {
     private var mCallback: OnRandomTeamsGenerated? = null
 
+    //Recycler manager details
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var _PlayerRecycler : RecyclerView
     private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
 
-    var GroupID : Int = 0;
+    var GroupID : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -95,8 +96,19 @@ class EventSetupFragment : Fragment()
         {
             SetTime(viewTime, view)
         }
-
         return view
+    }
+
+    /**
+     * Ah this could be the to handle any and all calls
+     */
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is EventSetupFragment.OnRandomTeamsGenerated) {
+            mCallback = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement OnRandomTeamsGenerated")
+        }
     }
 
     override fun onDetach() {
@@ -164,8 +176,11 @@ class EventSetupFragment : Fragment()
         var players = GetSelectedPlayers()
         if(!players.isEmpty())
         {
+            //Log.d(object{}.javaClass.enclosingMethod.name, "Player count : ${players.size}")
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
+
+            Log.d(object{}.javaClass.enclosingMethod.name, "teamArray size: ${teamArray.size}")
 
             //then return back to where it needs to go - ie the fragment activity
             mCallback!!.onTeamsRandomized(teamArray)
@@ -183,40 +198,8 @@ class EventSetupFragment : Fragment()
      */
     fun GetSelectedPlayers() : ArrayList<Player>
     {
+        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+
         return _PlayerAdapter.SelectedItems
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-//    interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        fun onFragmentInteraction(uri: Uri)
-//    }
-
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment EventSetupFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//                EventSetupFragment().apply {
-//                    arguments = Bundle().apply {
-//                    }
-//                }
-//    }
 }

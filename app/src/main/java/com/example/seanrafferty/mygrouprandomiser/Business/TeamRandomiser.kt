@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.Business
 
+import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
@@ -14,15 +15,24 @@ class TeamRandomiser
      */
     fun RandomizePlayerListIntoTeams(players:ArrayList<Player>) : ArrayList<Team>
     {
+        Log.d("TeamRandomiser", object{}.javaClass.enclosingMethod.name)
         //Check if the players list is empty first
         if(players.isEmpty())
             return null!!
 
-        var shuffledList = players.toMutableList().shuffle() as ArrayList<Player>
+//        var mutList = players.toMutableList()
+//        //Log.d(object{}.javaClass.enclosingMethod.name, "${mutList.size}")
+//        var shuffledMut = mutList.shuffle()
+//        var list : List<Player> = mutList.shuffled()
+
+        var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
         var teamOne = Team(0, "Team One")
         var teamTwo = Team(0, "Team Two")
 
-        var teamOneAdd : Boolean  = false
+//        Log.d(object{}.javaClass.enclosingMethod.name, "arrayList shuffled")
+
+        var teamOneAdd = false
+
         for(item : Player in shuffledList)
         {
             if(!teamOneAdd)

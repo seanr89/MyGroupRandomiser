@@ -37,6 +37,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
@@ -166,10 +168,21 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        UpdateSelectedPlayersForTeamOne(teams[0])
+        UpdateSelectedPlayersForTeamTwo(teams[1])
     }
 
+    private fun UpdateSelectedPlayersForTeamOne(team : Team)
+    {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        _TeamOneFrag.RefreshTeam(team)
+    }
 
-
+    private fun UpdateSelectedPlayersForTeamTwo(team : Team)
+    {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        _TeamTwoFrag.RefreshTeam(team)
+    }
 
 
 
