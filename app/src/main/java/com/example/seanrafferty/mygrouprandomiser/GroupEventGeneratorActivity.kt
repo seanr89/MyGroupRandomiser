@@ -28,10 +28,16 @@ import kotlinx.android.synthetic.main.activity_group_event_generator.*
 import kotlinx.android.synthetic.main.fragment_group_event_generator.view.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFragmentInteractionListener,
+        EventSetupFragment.OnRandomTeamsGenerated,
         TeamFragment.OnFragmentInteractionListener
 {
     override fun onFragmentInteraction(uri: Uri) {
 
+    }
+
+    override fun onTeamsRandomized(teams: ArrayList<Team>)
+    {
+        UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
     lateinit var _EventSetupFrag : EventSetupFragment
@@ -122,7 +128,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFr
         if (id == R.id.action_settings) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -157,6 +162,27 @@ class GroupEventGeneratorActivity : AppCompatActivity(), EventSetupFragment.OnFr
             return 3
         }
     }
+
+    fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
+    {
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+    }
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+                                /** REMOVE THE BELOW CONTENT */
+    ////////////////////////////////////////////////////////////////////////////////////////
+                                /** REMOVE THE BELOW CONTENT */
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
     /**
      * A placeholder fragment containing a simple view.

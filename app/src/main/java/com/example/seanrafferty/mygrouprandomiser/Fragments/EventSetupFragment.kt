@@ -16,8 +16,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.TeamRandomiser
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
@@ -38,6 +40,7 @@ import kotlin.collections.ArrayList
  */
 class EventSetupFragment : Fragment()
 {
+    var mCallback: OnRandomTeamsGenerated? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -151,25 +154,34 @@ class EventSetupFragment : Fragment()
         textView.text = SimpleDateFormat("HH:mm").format(cal.time)
     }
 
+    /**
+     * Operation to trigger the generation of two teams with random player assignment
+     */
     private fun CreateRandomTeams()
     {
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+
+        var players = GetSelectedPlayers()
+
+        var randomiser = TeamRandomiser()
+
+        var teamArray = randomiser.RandoimisePlayerListIntoTeams(players)
+
+        //then return back to where it needs to go - ie the fragment activity
+        mCallback!!.onTeamsRandomized(teamArray)
+    }
+
+    // Container Activity must implement this interface
+    interface OnRandomTeamsGenerated {
+        fun onTeamsRandomized(teams : ArrayList<Team>)
     }
 
     /**
      *
      */
-    fun GetSelectedPlayers()
+    fun GetSelectedPlayers() : ArrayList<Player>
     {
-
-    }
-
-    /**
-     *
-     */
-    fun ResetFragmentContent()
-    {
-
+        return _PlayerAdapter.SelectedItems
     }
 
     /**

@@ -7,4 +7,5 @@ package com.example.seanrafferty.mygrouprandomiser.Models
  */
 data class Team constructor(var ID:Int, var Name:String, var Players:ArrayList<Player>)
 {
+    constructor(ID: Int, Name:String) : this(ID, Name, ArrayList())
 }
