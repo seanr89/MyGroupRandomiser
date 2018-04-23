@@ -180,10 +180,11 @@ class EventSetupFragment : Fragment()
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
 
-            Log.d(object{}.javaClass.enclosingMethod.name, "teamArray size: ${teamArray.size}")
+            //Log.d(object{}.javaClass.enclosingMethod.name, "teamArray size: ${teamArray.size}")
 
             //then return back to where it needs to go - ie the fragment activity
             mCallback!!.onTeamsRandomized(teamArray)
+            return
         }
         Toast.makeText(context, "No Players Selected!", Toast.LENGTH_LONG).show()
     }

@@ -27,6 +27,7 @@ import com.example.seanrafferty.mygrouprandomiser.R
 class TeamFragment : Fragment()
 {
     private var listener: OnFragmentInteractionListener? = null
+    var ID : Int = 0
 
     //Recycler manager details
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -72,7 +73,7 @@ class TeamFragment : Fragment()
      */
     override fun onAttach(context: Context)
     {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " number: " + ID)
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
@@ -92,15 +93,10 @@ class TeamFragment : Fragment()
      */
     fun UpdateRecyclerAdapter(team: Team)
     {
-        if(_PlayerAdapter == null)
-        {
-            _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
-        }
-        else
-        {
-            _PlayerAdapter.playerList = team.Players
-            _PlayerAdapter.notifyDataSetChanged()
-        }
+        //Log.d("Method", object{}.javaClass.enclosingMethod.name + " for id: $ID")
+        _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
+        _PlayerAdapter.playerList = team.Players
+        _PlayerAdapter.notifyDataSetChanged()
     }
 
     /**
@@ -131,6 +127,11 @@ class TeamFragment : Fragment()
 
 //    companion object {
 //        /**
+//         * The fragment argument representing the section number for this
+//         * fragment.
+//         */
+//        private val ARG_TEAM_NUMBER = "section_number"
+//        /**
 //         * Use this factory method to create a new instance of
 //         * this fragment using the provided parameters.
 //         *
@@ -140,11 +141,10 @@ class TeamFragment : Fragment()
 //         */
 //        // TODO: Rename and change types and number of parameters
 //        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
+//        fun newInstance(teamNumber: Int) =
 //                TeamFragment().apply {
 //                    arguments = Bundle().apply {
-//                        putString(ARG_PARAM1, param1)
-//                        putString(ARG_PARAM2, param2)
+//                        putInt(ARG_TEAM_NUMBER, teamNumber)
 //                    }
 //                }
 //    }

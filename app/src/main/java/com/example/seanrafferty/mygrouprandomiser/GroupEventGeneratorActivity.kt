@@ -37,8 +37,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-
+        //Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
@@ -89,7 +88,9 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         _EventSetupFrag = EventSetupFragment()
         _EventSetupFrag.GroupID = _GroupID
         _TeamOneFrag = TeamFragment()
+        _TeamOneFrag.ID = 1
         _TeamTwoFrag = TeamFragment()
+        _TeamTwoFrag.ID = 2
     }
 
     /**
@@ -108,11 +109,11 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      * Refresh the events setup grid with player data
      * @param players : player list to display
      */
-    private fun TryInitialiseEventSetupWithPlayerList(players:ArrayList<Player>)
-    {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        _EventSetupFrag.UpdatePlayerAdapterWithList(players)
-    }
+//    private fun TryInitialiseEventSetupWithPlayerList(players:ArrayList<Player>)
+//    {
+//        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+//        _EventSetupFrag.UpdatePlayerAdapterWithList(players)
+//    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -142,6 +143,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
         override fun getItem(position: Int): Fragment
         {
+            Log.d(object{}.javaClass.enclosingMethod.name, "position : $position")
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1)
@@ -152,7 +154,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
                 1 -> return _TeamOneFrag
                 2 -> return _TeamTwoFrag
                 else -> { // Note the block
-                    print("x is neither 1 nor 2")
+                    print("x is neither 0, 1 nor 2")
                 }
             }
 
@@ -185,18 +187,11 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     }
 
 
-
-
-
     ////////////////////////////////////////////////////////////////////////////////////////
                                 /** REMOVE THE BELOW CONTENT */
     ////////////////////////////////////////////////////////////////////////////////////////
                                 /** REMOVE THE BELOW CONTENT */
     ////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
     /**
      * A placeholder fragment containing a simple view.
      */
