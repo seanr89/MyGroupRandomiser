@@ -398,6 +398,7 @@ class DatabaseHandler : SQLiteOpenHelper
                 }
                 while (cursor.moveToNext())
             }
+            cursor.close()
         }
         catch (e: SQLiteException)
         {

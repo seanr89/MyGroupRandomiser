@@ -56,7 +56,7 @@ class MyGroupDBHandler
         var arrayList: MutableList<Int> = mutableListOf<Int>()
         // Select query with where in the clause
         var selectQuery: String = "SELECT * FROM ${DatabaseHandler.GroupPlayerTable} WHERE ${DatabaseHandler.GroupID} = ${myGroup.ID}"
-        Log.d("MyGroupDBHandler", "query $selectQuery")
+        //Log.d("MyGroupDBHandler", "query $selectQuery")
         val db = _DB.GetReadableDataBaseObject()
 
         var cursor: Cursor?
@@ -68,7 +68,6 @@ class MyGroupDBHandler
                 do
                 {
                     val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerID))
-                    Log.d("MyGroupDBHandler", "id is $id")
                     arrayList.add(id)
                 }
                 while (cursor.moveToNext())

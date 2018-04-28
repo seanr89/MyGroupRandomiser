@@ -37,13 +37,13 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
-        //Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
-    lateinit var _EventSetupFrag : EventSetupFragment
-    lateinit var _TeamOneFrag : TeamFragment
-    lateinit var _TeamTwoFrag : TeamFragment
+  //  lateinit var _EventSetupFrag : EventSetupFragment
+  //  lateinit var _TeamOneFrag : TeamFragment
+  //  lateinit var _TeamTwoFrag : TeamFragment
 
     var _GroupID : Int = 0
 
@@ -85,12 +85,12 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
 
-        _EventSetupFrag = EventSetupFragment()
-        _EventSetupFrag.GroupID = _GroupID
-        _TeamOneFrag = TeamFragment()
-        _TeamOneFrag.ID = 1
-        _TeamTwoFrag = TeamFragment()
-        _TeamTwoFrag.ID = 2
+       // _EventSetupFrag = EventSetupFragment()
+       // _EventSetupFrag.GroupID = _GroupID
+        //_TeamOneFrag = TeamFragment()
+        //_TeamOneFrag.ID = 1
+        //_TeamTwoFrag = TeamFragment()
+        //_TeamTwoFrag.ID = 2
     }
 
     /**
@@ -148,17 +148,22 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1)
 
+            var fragment : Fragment = PlaceholderFragment.newInstance(position + 1)
+
             when(position)
             {
-                0 -> return _EventSetupFrag
-                1 -> return _TeamOneFrag
-                2 -> return _TeamTwoFrag
+                0 ->
+                {
+                    fragment = EventSetupFragment.newInstance(_GroupID)
+                }
+                1 -> fragment = TeamFragment()
+                2 -> fragment = TeamFragment()
                 else -> { // Note the block
                     print("x is neither 0, 1 nor 2")
                 }
             }
-
-            return PlaceholderFragment.newInstance(position + 1)
+            return fragment
+            //return PlaceholderFragment.newInstance(position + 1)
         }
 
         override fun getCount(): Int {
@@ -177,13 +182,17 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     private fun UpdateSelectedPlayersForTeamOne(team : Team)
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        _TeamOneFrag.RefreshTeam(team)
+        var item  = mSectionsPagerAdapter!!.getItem(1) as TeamFragment
+        item.RefreshTeam(team)
+        //_TeamOneFrag.RefreshTeam(team)
     }
 
     private fun UpdateSelectedPlayersForTeamTwo(team : Team)
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        _TeamTwoFrag.RefreshTeam(team)
+        var item  = mSectionsPagerAdapter!!.getItem(2) as TeamFragment
+        item.RefreshTeam(team)
+        //_TeamTwoFrag.RefreshTeam(team)
     }
 
 

@@ -93,9 +93,8 @@ class TeamFragment : Fragment()
      */
     fun UpdateRecyclerAdapter(team: Team)
     {
-        //Log.d("Method", object{}.javaClass.enclosingMethod.name + " for id: $ID")
+        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " for id: $ID with player count : ${team.Players.size}")
         _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
-        _PlayerAdapter.playerList = team.Players
         _PlayerAdapter.notifyDataSetChanged()
     }
 
@@ -105,7 +104,7 @@ class TeamFragment : Fragment()
      */
     fun RefreshTeam(team : Team)
     {
-        Log.d("Method", object{}.javaClass.enclosingMethod.name)
+        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
         UpdateRecyclerAdapter(team)
     }
 

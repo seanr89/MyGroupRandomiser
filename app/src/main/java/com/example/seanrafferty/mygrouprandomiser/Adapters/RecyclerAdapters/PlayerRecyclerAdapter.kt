@@ -18,7 +18,18 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.player_listview_item, parent, false)
-        return ViewHolder(v);
+        var viewHolder = ViewHolder(v, selectable)
+//        if(selectable)
+//        {
+//            v.setOnClickListener()
+//            {
+//                Log.d(object{}.javaClass.enclosingMethod.name, "Item clicked")
+//                var position = viewHolder.adapterPosition
+//                SetItemSelected(position, v)
+//            }
+//        }
+
+        return viewHolder
     }
 
     override fun getItemCount(): Int {
@@ -27,12 +38,21 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
+        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name + " with position $position and name : ${playerList[position].Name}")
         holder?.txtName?.text = playerList[position].Name
         holder?.txtRating?.text = playerList[position].Rating.toString()
 
         //if each item is selectable
         if(selectable)
         {
+            if(isItemSelected(position))
+            {
+                ColourItemSelected(holder.itemView)
+            }
+            else
+            {
+                ColourItemDeSelected(holder.itemView)
+            }
             //Append on click listener to handle item selection
             holder.itemView.setOnClickListener()
             {
@@ -42,15 +62,35 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
     }
 
     /**
+     *
+     */
+    private fun ColourItemSelected(view:View)
+    {
+        view.setBackgroundColor(Color.RED)
+    }
+
+    /**
+     *
+     */
+    private fun ColourItemDeSelected(view:View)
+    {
+        view.setBackgroundColor(Color.WHITE)
+    }
+
+    /**
      * Set the selected recycler view item as selected
+     * @param position :
+     * @param view :
      */
     private fun SetItemSelected(position: Int, view:View)
     {
-        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name)
+        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name + " with position $position")
+        //Log.d("SetItemSelected", view.toString())
         if(isItemSelected(position))
         {
             SelectedItems.remove(playerList[position])
-            view.setBackgroundColor(Color.GRAY)
+            //var test = view.itemView
+            view.setBackgroundColor(Color.BLUE)
         }
         else
         {
@@ -90,8 +130,11 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
     {
         var txtName : TextView
         var txtRating : TextView
-        constructor(itemView: View) : super(itemView)
+        var itemSelectable : Boolean = false
+
+        constructor(itemView: View, selectable: Boolean) : super(itemView)
         {
+            itemSelectable = selectable
             txtName = itemView.findViewById<TextView>(R.id.playerNameView)
             txtRating = itemView.findViewById<TextView>(R.id.playerRatingView)
         }

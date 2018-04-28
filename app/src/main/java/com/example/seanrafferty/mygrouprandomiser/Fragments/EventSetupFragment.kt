@@ -47,8 +47,7 @@ class EventSetupFragment : Fragment()
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var _PlayerRecycler : RecyclerView
     private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
-
-    var GroupID : Int = 0
+    //var GroupID : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -66,7 +65,7 @@ class EventSetupFragment : Fragment()
         val viewDate: TextView = view.findViewById(R.id.EventDateView)
         val viewTime: TextView = view.findViewById(R.id.EventTimeView)
 
-        var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(GroupID, ""))
+        var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(arguments!!.getInt(ARG_GROUP_NUMBER), ""))
         _PlayerAdapter = PlayerRecyclerAdapter(playerList, true)
         viewManager = LinearLayoutManager(activity)
         _PlayerRecycler = view.findViewById<RecyclerView>(R.id.PlayerEventRecycler).apply{
@@ -116,13 +115,13 @@ class EventSetupFragment : Fragment()
         mCallback = null
     }
 
-    fun UpdatePlayerAdapterWithList(players:ArrayList<Player>)
-    {
-        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
-        _PlayerAdapter.playerList = players
-        _PlayerAdapter.notifyDataSetChanged()
-        _PlayerAdapter.SelectedItems.clear()
-    }
+//    fun UpdatePlayerAdapterWithList(players:ArrayList<Player>)
+//    {
+//        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+//        _PlayerAdapter.playerList = players
+//        _PlayerAdapter.notifyDataSetChanged()
+//        _PlayerAdapter.SelectedItems.clear()
+//    }
 
     /**
      * Open a date dialog and handle the on set listener to update a textview
@@ -174,13 +173,15 @@ class EventSetupFragment : Fragment()
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         var players = GetSelectedPlayers()
+        Log.d("Method", object{}.javaClass.enclosingMethod.name + " player count: ${players.size}")
         if(!players.isEmpty())
         {
             //Log.d(object{}.javaClass.enclosingMethod.name, "Player count : ${players.size}")
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
 
-            //Log.d(object{}.javaClass.enclosingMethod.name, "teamArray size: ${teamArray.size}")
+            Log.d(object{}.javaClass.enclosingMethod.name, "team1 size: ${teamArray[0].Players.size}")
+            Log.d(object{}.javaClass.enclosingMethod.name, "team2 size: ${teamArray[1].Players.size}")
 
             //then return back to where it needs to go - ie the fragment activity
             mCallback!!.onTeamsRandomized(teamArray)
@@ -200,7 +201,33 @@ class EventSetupFragment : Fragment()
     fun GetSelectedPlayers() : ArrayList<Player>
     {
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
-
         return _PlayerAdapter.SelectedItems
+    }
+
+
+    companion object {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private val ARG_GROUP_NUMBER = "section_number"
+
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment TeamFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(groupID: Int): EventSetupFragment {
+            val fragment = EventSetupFragment()
+            val args = Bundle()
+            args.putInt(ARG_GROUP_NUMBER, groupID)
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
