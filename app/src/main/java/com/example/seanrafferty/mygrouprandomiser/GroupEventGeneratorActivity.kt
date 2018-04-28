@@ -41,11 +41,9 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
-  //  lateinit var _EventSetupFrag : EventSetupFragment
-  //  lateinit var _TeamOneFrag : TeamFragment
-  //  lateinit var _TeamTwoFrag : TeamFragment
-
     var _GroupID : Int = 0
+    lateinit var Team1 : Team
+    lateinit var Team2 : Team
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -74,7 +72,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(container)
 
-        InitialiseAndConfigureFragments()
+        //InitialiseAndConfigureFragments()
         configureTabLayoutTitles(tabLayout)
     }
 
@@ -156,8 +154,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
                 {
                     fragment = EventSetupFragment.newInstance(_GroupID)
                 }
-                1 -> fragment = TeamFragment()
-                2 -> fragment = TeamFragment()
+                1 -> fragment = TeamFragment.newInstance(Team1)
+                2 -> fragment = TeamFragment.newInstance(Team2)
                 else -> { // Note the block
                     print("x is neither 0, 1 nor 2")
                 }
@@ -175,8 +173,10 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        UpdateSelectedPlayersForTeamOne(teams[0])
-        UpdateSelectedPlayersForTeamTwo(teams[1])
+        Team1 = teams[0]
+        Team2 = teams[1]
+        UpdateSelectedPlayersForTeamOne(Team1)
+        UpdateSelectedPlayersForTeamTwo(Team2)
     }
 
     private fun UpdateSelectedPlayersForTeamOne(team : Team)

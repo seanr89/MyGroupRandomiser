@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 import com.example.seanrafferty.mygrouprandomiser.R
@@ -47,7 +48,10 @@ class TeamFragment : Fragment()
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_team, container, false)
 
+        val bundle = arguments
         viewManager = LinearLayoutManager(activity)
+        var team = bundle!!.getSerializable("team") as Team
+        _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
         _PlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamPlayerRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -80,7 +84,7 @@ class TeamFragment : Fragment()
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
-        _PlayerAdapter = PlayerRecyclerAdapter(arrayListOf(), true)
+//        _PlayerAdapter = PlayerRecyclerAdapter(arrayListOf(), true)
     }
 
     override fun onDetach() {
@@ -124,27 +128,28 @@ class TeamFragment : Fragment()
         fun onFragmentInteraction(uri: Uri)
     }
 
-//    companion object {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private val ARG_TEAM_NUMBER = "section_number"
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment TeamFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(teamNumber: Int) =
-//                TeamFragment().apply {
-//                    arguments = Bundle().apply {
-//                        putInt(ARG_TEAM_NUMBER, teamNumber)
-//                    }
-//                }
-//    }
+    companion object {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        //private val ARG_TEAM_NUMBER = "section_number"
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment TeamFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(team: Team): TeamFragment {
+            val fragment = TeamFragment()
+            val args = Bundle()
+            args.putSerializable("team", team)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }
