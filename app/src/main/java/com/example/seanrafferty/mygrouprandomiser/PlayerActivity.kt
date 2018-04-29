@@ -11,6 +11,7 @@ import com.example.seanrafferty.mygrouprandomiser.Adapters.PlayerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 import kotlinx.android.synthetic.main.activity_player.*
@@ -49,11 +50,10 @@ class PlayerActivity : AppCompatActivity() {
         Log.d("PlayerActivity", object{}.javaClass.enclosingMethod.name)
 
         //initialise an ArrayList and a DatabaseHandler object
-        var playerList: ArrayList<Player>;
-        var DB = DatabaseHandler(this)
-
+        var playerList: ArrayList<Player>
+        var playerDB = PlayerDBHandler(DatabaseHandler(this))
         //query DB for all players and return
-        playerList = DB.ReadAllPlayers()
+        playerList = playerDB.ReadAllPlayers()
 
         return playerList
     }

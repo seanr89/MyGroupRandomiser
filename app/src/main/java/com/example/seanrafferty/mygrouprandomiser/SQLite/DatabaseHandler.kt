@@ -193,36 +193,36 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     ////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * Read and parse and Groups stored in the database
-     */
-    fun ReadAllGroups() : ArrayList<MyGroup>
-    {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
-
-        var arrayList = ArrayList<MyGroup>()
-
-        // Select All Query
-        var selectQuery = "SELECT * FROM ${groupTableName}"
-        val db = this.readableDatabase;
-
-        var cursor = db!!.rawQuery(selectQuery, null)
-
-        if(cursor != null)
-        {
-            if (cursor.moveToFirst()) {
-                do
-                {
-                    val id = cursor.getInt(cursor.getColumnIndex(grouppkID))
-                    val name = cursor.getString(cursor.getColumnIndex(groupName))
-
-                    arrayList.add(MyGroup(id, name))
-                } while (cursor.moveToNext())
-            }
-        }
-        cursor.close()
-        return arrayList;
-    }
+//    /**
+//     * Read and parse and Groups stored in the database
+//     */
+//    fun ReadAllGroups() : ArrayList<MyGroup>
+//    {
+//        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+//
+//        var arrayList = ArrayList<MyGroup>()
+//
+//        // Select All Query
+//        var selectQuery = "SELECT * FROM ${groupTableName}"
+//        val db = this.readableDatabase;
+//
+//        var cursor = db!!.rawQuery(selectQuery, null)
+//
+//        if(cursor != null)
+//        {
+//            if (cursor.moveToFirst()) {
+//                do
+//                {
+//                    val id = cursor.getInt(cursor.getColumnIndex(grouppkID))
+//                    val name = cursor.getString(cursor.getColumnIndex(groupName))
+//
+//                    arrayList.add(MyGroup(id, name))
+//                } while (cursor.moveToNext())
+//            }
+//        }
+//        cursor.close()
+//        return arrayList;
+//    }
 
     /**
      * Read the information for an individual MyGroup object
@@ -283,52 +283,52 @@ class DatabaseHandler : SQLiteOpenHelper
      * Read all stored players and return
      * @return ArrayList of players
      */
-    fun ReadAllPlayers() : ArrayList<Player>
-    {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+//    fun ReadAllPlayers() : ArrayList<Player>
+//    {
+//        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+//
+//        var arrayList = ArrayList<Player>()
+//
+//        // Select All Query
+//        var selectQuery: String = "SELECT * FROM $PlayerTable"
+//        val db = this.readableDatabase
+//
+//        var cursor = db!!.rawQuery(selectQuery, null)
+//        if (cursor != null)
+//        {
+//            if (cursor.moveToFirst()) {
+//                do
+//                {
+//                    val id = cursor.getInt(cursor.getColumnIndex(PlayerpkID))
+//                    val name =cursor.getString(cursor.getColumnIndex(PlayerName))
+//                    val rating = cursor.getInt(cursor.getColumnIndex(PlayerRating))
+//
+//                    arrayList.add(Player(id, name, rating))
+//                }
+//                while (cursor.moveToNext())
+//            }
+//        }
+//        cursor.close()
+//        return arrayList
+//    }
 
-        var arrayList = ArrayList<Player>()
-
-        // Select All Query
-        var selectQuery: String = "SELECT * FROM $PlayerTable"
-        val db = this.readableDatabase
-
-        var cursor = db!!.rawQuery(selectQuery, null)
-        if (cursor != null)
-        {
-            if (cursor.moveToFirst()) {
-                do
-                {
-                    val id = cursor.getInt(cursor.getColumnIndex(PlayerpkID))
-                    val name =cursor.getString(cursor.getColumnIndex(PlayerName))
-                    val rating = cursor.getInt(cursor.getColumnIndex(PlayerRating))
-
-                    arrayList.add(Player(id, name, rating))
-                }
-                while (cursor.moveToNext())
-            }
-        }
-        cursor.close()
-        return arrayList
-    }
-
-    /**
-     * Insert a new player
-     * @param player - Player object to be inserted
-     * @return int
-     */
-    fun InsertPlayer(player: Player) : Int
-    {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
-
-        var values = ContentValues()
-        values.put(PlayerName, player.Name)
-        values.put(PlayerRating, player.Rating)
-
-        val db = this.writableDatabase
-
-        return db!!.insert(PlayerTable, "", values).toInt()
-    }
+//    /**
+//     * Insert a new player
+//     * @param player - Player object to be inserted
+//     * @return int
+//     */
+//    fun InsertPlayer(player: Player) : Int
+//    {
+//        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+//
+//        var values = ContentValues()
+//        values.put(PlayerName, player.Name)
+//        values.put(PlayerRating, player.Rating)
+//
+//        val db = this.writableDatabase
+//
+//        return db!!.insert(PlayerTable, "", values).toInt()
+//    }
 
     ////////////////////////////////////////////////////////////////////////////////
     /**

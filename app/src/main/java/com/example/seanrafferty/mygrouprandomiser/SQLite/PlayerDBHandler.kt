@@ -88,7 +88,7 @@ class PlayerDBHandler
         var resultList : MutableList<Player> = arrayListOf()
 
         //request all players and all players for the current group
-        var AllPlayers = _DB.ReadAllPlayers()
+        var AllPlayers = ReadAllPlayers()
         Log.d("PlayerDBHandler", "AllPlayers list: ${AllPlayers.size}")
 
         /*var groupPlayers = _DB.ReadAllPlayersForAGroup(group)
@@ -108,5 +108,23 @@ class PlayerDBHandler
             }
         }*/
         return resultList
+    }
+
+    /**
+     * Insert a new player
+     * @param player - Player object to be inserted
+     * @return int
+     */
+    fun InsertPlayer(player: Player) : Int
+    {
+        Log.d("PlayerDBHandler", object{}.javaClass.enclosingMethod.name)
+
+        var values = ContentValues()
+        values.put(DatabaseHandler.PlayerName, player.Name)
+        values.put(DatabaseHandler.PlayerRating, player.Rating)
+
+        val db = _DB.GetWritableDataBaseObject()
+
+        return db!!.insert(DatabaseHandler.PlayerTable, "", values).toInt()
     }
 }

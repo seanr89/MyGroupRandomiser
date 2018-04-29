@@ -14,6 +14,7 @@ import com.example.seanrafferty.mygrouprandomiser.Adapters.GroupAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 
 class MainActivity : AppCompatActivity()
@@ -89,10 +90,10 @@ class MainActivity : AppCompatActivity()
 
         //initialise an ArrayList and a DatabaseHandler object
         var groupList: ArrayList<MyGroup>
-        var dbHandler = DatabaseHandler(this)
+        var groupDB = MyGroupDBHandler(DatabaseHandler(this))
 
         //Request all groups from the database and return the data
-        groupList = dbHandler.ReadAllGroups()
+        groupList = groupDB.ReadAllGroups()
         return groupList
     }
 

@@ -97,4 +97,35 @@ class MyGroupDBHandler
         }
         return result
     }
+
+    /**
+     * Read and parse and Groups stored in the database
+     */
+    fun ReadAllGroups() : ArrayList<MyGroup>
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var arrayList = ArrayList<MyGroup>()
+
+        // Select All Query
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.groupTableName}"
+        val db = _DB.GetReadableDataBaseObject()
+
+        var cursor = db!!.rawQuery(selectQuery, null)
+
+        if(cursor != null)
+        {
+            if (cursor.moveToFirst()) {
+                do
+                {
+                    val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.grouppkID))
+                    val name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.groupName))
+
+                    arrayList.add(MyGroup(id, name))
+                } while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        return arrayList;
+    }
 }
