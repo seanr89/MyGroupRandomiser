@@ -64,8 +64,8 @@ class TeamFragment : Fragment()
         }
         else
         {
-            InitialiseTeamOneRecycler(Team(0, "Team1"), view)
-            InitialiseTeamTwoRecycler(Team(0, "Team2"), view)
+            InitialiseTeamOneRecycler(Team(0, "Team One"), view)
+            InitialiseTeamTwoRecycler(Team(0, "Team Two"), view)
         }
 
         var btn_save_event = view.findViewById<Button>(R.id.btn_save_event)
@@ -81,7 +81,7 @@ class TeamFragment : Fragment()
     {
         Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
         teamOneviewManager = LinearLayoutManager(activity)
-        teamOnePlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
+        teamOnePlayerAdapter = PlayerRecyclerAdapter(team.Players, false)
         teamOnePlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamOnePlayerRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -99,7 +99,7 @@ class TeamFragment : Fragment()
     {
         Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
         teamTwoviewManager = LinearLayoutManager(activity)
-        teamTwoPlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
+        teamTwoPlayerAdapter = PlayerRecyclerAdapter(team.Players, false)
         teamTwoPlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamTwoPlayerRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -125,7 +125,6 @@ class TeamFragment : Fragment()
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
-//        _PlayerAdapter = PlayerRecyclerAdapter(arrayListOf(), true)
     }
 
     override fun onDetach() {
@@ -134,7 +133,8 @@ class TeamFragment : Fragment()
     }
 
     /**
-     *
+     * Handle the updating of the currently selected teams and refresh the two recycler adapters
+     * @param teams : list of two team objects
      */
     fun UpdateRecyclerAdapter(teams: ArrayList<Team>)
     {
@@ -159,7 +159,6 @@ class TeamFragment : Fragment()
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(teams : ArrayList<Team>)
     }
 
@@ -175,11 +174,10 @@ class TeamFragment : Fragment()
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param teams Parameter 1.
+         * @param number Parameter 2.
          * @return A new instance of fragment TeamFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(teams : ArrayList<Team>, number: Int, tag:String): TeamFragment {
             val fragment = TeamFragment()

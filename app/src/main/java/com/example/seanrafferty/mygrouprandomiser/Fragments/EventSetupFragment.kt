@@ -165,15 +165,10 @@ class EventSetupFragment : Fragment()
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         var players = GetSelectedPlayers()
-        //Log.d("Method", object{}.javaClass.enclosingMethod.name + " player count: ${players.size}")
         if(!players.isEmpty())
         {
-            //Log.d(object{}.javaClass.enclosingMethod.name, "Player count : ${players.size}")
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
-
-           // Log.d(object{}.javaClass.enclosingMethod.name, "team1 size: ${teamArray[0].Players.size}")
-           // Log.d(object{}.javaClass.enclosingMethod.name, "team2 size: ${teamArray[1].Players.size}")
 
             //then return back to where it needs to go - ie the fragment activity
             mCallback!!.onTeamsRandomized(teamArray)
@@ -188,7 +183,7 @@ class EventSetupFragment : Fragment()
     }
 
     /**
-     *
+     * Request and return all selected players
      */
     fun GetSelectedPlayers() : ArrayList<Player>
     {
@@ -212,7 +207,6 @@ class EventSetupFragment : Fragment()
          * @param param2 Parameter 2.
          * @return A new instance of fragment TeamFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(groupID: Int): EventSetupFragment {
             val fragment = EventSetupFragment()

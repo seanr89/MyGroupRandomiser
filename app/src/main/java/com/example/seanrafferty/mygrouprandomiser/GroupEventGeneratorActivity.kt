@@ -16,11 +16,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
+import com.example.seanrafferty.mygrouprandomiser.R.id.toolbar
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 
@@ -32,12 +34,12 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         TeamFragment.OnFragmentInteractionListener
 {
     override fun onFragmentInteraction(teams : ArrayList<Team>) {
-
+        Toast.makeText(this, "Feature Not Available!", Toast.LENGTH_LONG).show()
     }
 
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
@@ -81,22 +83,10 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     private fun configureTabLayoutTitles(layout : TabLayout)
     {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-
+        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         layout.getTabAt(0)!!.text = "Event Setup"
         layout.getTabAt(1)!!.text = "Teams"
     }
-
-    /**
-     * Refresh the events setup grid with player data
-     * @param players : player list to display
-     */
-//    private fun TryInitialiseEventSetupWithPlayerList(players:ArrayList<Player>)
-//    {
-//        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-//        _EventSetupFrag.UpdatePlayerAdapterWithList(players)
-//    }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -157,7 +147,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         var fragment = supportFragmentManager.fragments[1] as TeamFragment
         fragment.UpdateRecyclerAdapter(Teams)
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////
                                 /** REMOVE THE BELOW CONTENT */
