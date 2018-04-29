@@ -38,7 +38,7 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name + " with position $position and name : ${playerList[position].Name}")
+        //Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name + " with position $position and name : ${playerList[position].Name}")
         holder?.txtName?.text = playerList[position].Name
         holder?.txtRating?.text = playerList[position].Rating.toString()
 
@@ -66,7 +66,7 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
      */
     private fun ColourItemSelected(view:View)
     {
-        view.setBackgroundColor(Color.RED)
+        view.setBackgroundColor(Color.LTGRAY)
     }
 
     /**
@@ -84,18 +84,18 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
      */
     private fun SetItemSelected(position: Int, view:View)
     {
-        Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name + " with position $position")
+        //Log.d("PlayerRecyclerAdapter", object{}.javaClass.enclosingMethod.name + " with position $position")
         //Log.d("SetItemSelected", view.toString())
         if(isItemSelected(position))
         {
             SelectedItems.remove(playerList[position])
             //var test = view.itemView
-            view.setBackgroundColor(Color.BLUE)
+            ColourItemDeSelected(view)
         }
         else
         {
             SelectedItems.add(playerList[position])
-            view.setBackgroundColor(Color.RED)
+            ColourItemSelected(view)
         }
     }
 

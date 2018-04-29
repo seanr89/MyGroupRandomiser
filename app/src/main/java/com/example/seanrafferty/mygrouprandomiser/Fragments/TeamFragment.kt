@@ -31,9 +31,13 @@ class TeamFragment : Fragment()
     var ID : Int = 0
 
     //Recycler manager details
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var _PlayerRecycler : RecyclerView
-    private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
+    private lateinit var teamOneviewManager: RecyclerView.LayoutManager
+    private lateinit var teamOnePlayerRecycler : RecyclerView
+    private lateinit var teamOnePlayerAdapter : PlayerRecyclerAdapter
+
+    private lateinit var teamTwoviewManager: RecyclerView.LayoutManager
+    private lateinit var teamTwoPlayerRecycler : RecyclerView
+    private lateinit var teamTwoPlayerAdapter : PlayerRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,35 +53,65 @@ class TeamFragment : Fragment()
         val view: View = inflater.inflate(R.layout.fragment_team, container, false)
 
         val bundle = arguments
-        viewManager = LinearLayoutManager(activity)
-        var team = bundle!!.getSerializable("team") as Team
-        _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
-        _PlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamPlayerRecycler).apply{
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
 
-            // use a linear layout manager
-            layoutManager = viewManager
+        var teams = bundle!!.getSerializable(ARG_TEAMS) as ArrayList<Team>
 
-            // specify an viewAdapter (see also next example)
-            adapter = _PlayerAdapter
+        if(!teams.isEmpty())
+        {
+            InitialiseTeamOneRecycler(teams[0], view)
+            InitialiseTeamnTwoRecycler(teams[1], view)
+        }
+        else
+        {
+            InitialiseTeamOneRecycler(Team(0, "Team1"), view)
+            InitialiseTeamnTwoRecycler(Team(0, "Team2"), view)
         }
 
         return view
     }
 
-//    // TODO: Rename method, update argument and hook method into UI event
-//    fun onButtonPressed(uri: Uri) {
-//        listener?.onFragmentInteraction(uri)
-//    }
+    private fun InitialiseTeamOneRecycler(team: Team, view:View)
+    {
+        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        teamOneviewManager = LinearLayoutManager(activity)
+        teamOnePlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
+        teamOnePlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamOnePlayerRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = teamOneviewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = teamOnePlayerAdapter
+        }
+    }
+
+    private fun InitialiseTeamnTwoRecycler(team: Team, view:View)
+    {
+        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        teamTwoviewManager = LinearLayoutManager(activity)
+        teamTwoPlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
+        teamTwoPlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamTwoPlayerRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = teamTwoviewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = teamTwoPlayerAdapter
+        }
+    }
 
     /**
      * Ah this could be the to handle any and all calls
      */
     override fun onAttach(context: Context)
     {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " number: " + ID)
+        //Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " number: " + ID)
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
@@ -92,25 +126,25 @@ class TeamFragment : Fragment()
         listener = null
     }
 
-    /**
-     *
-     */
-    fun UpdateRecyclerAdapter(team: Team)
-    {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " for id: $ID with player count : ${team.Players.size}")
-        _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
-        _PlayerAdapter.notifyDataSetChanged()
-    }
+//    /**
+//     *
+//     */
+//    fun UpdateRecyclerAdapter(team: Team)
+//    {
+//        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " for id: $ID with player count : ${team.Players.size}")
+//        _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
+//        _PlayerAdapter.notifyDataSetChanged()
+//    }
 
-    /**
-     * Handle the refreshing of team player content
-     * @param team : the currently generated team
-     */
-    fun RefreshTeam(team : Team)
-    {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
-        UpdateRecyclerAdapter(team)
-    }
+//    /**
+//     * Handle the refreshing of team player content
+//     * @param team : the currently generated team
+//     */
+//    fun RefreshTeam(team : Team)
+//    {
+//        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+//        UpdateRecyclerAdapter(team)
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -133,7 +167,9 @@ class TeamFragment : Fragment()
          * The fragment argument representing the section number for this
          * fragment.
          */
-        //private val ARG_TEAM_NUMBER = "section_number"
+        private val ARG_TEAM_NUMBER = "section_number"
+        private val ARG_TAG = "tag_name"
+        private val ARG_TEAMS = "teams"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -144,10 +180,12 @@ class TeamFragment : Fragment()
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(team: Team): TeamFragment {
+        fun newInstance(teams : ArrayList<Team>, number: Int, tag:String): TeamFragment {
             val fragment = TeamFragment()
             val args = Bundle()
-            args.putSerializable("team", team)
+            args.putSerializable(ARG_TEAMS, teams)
+            args.putInt(ARG_TEAM_NUMBER, number)
+            args.putString(ARG_TAG, tag)
             fragment.arguments = args
             return fragment
         }

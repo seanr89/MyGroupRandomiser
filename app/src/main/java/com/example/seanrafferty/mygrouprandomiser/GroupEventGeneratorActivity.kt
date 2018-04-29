@@ -42,8 +42,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     }
 
     var _GroupID : Int = 0
-    lateinit var Team1 : Team
-    lateinit var Team2 : Team
+    lateinit var Teams : ArrayList<Team>
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -60,11 +59,13 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         setContentView(R.layout.activity_group_event_generator)
         setSupportActionBar(toolbar)
 
+        Teams = arrayListOf()
         _GroupID = intent.getStringExtra("GroupID").toInt()
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        mSectionsPagerAdapter!!.getItem(2)
 
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
@@ -72,23 +73,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(container)
 
-        //InitialiseAndConfigureFragments()
         configureTabLayoutTitles(tabLayout)
-    }
-
-    /**
-     * Initialise each of the fragments to be displayed
-     */
-    private fun InitialiseAndConfigureFragments(groupID : Int = 0)
-    {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-
-       // _EventSetupFrag = EventSetupFragment()
-       // _EventSetupFrag.GroupID = _GroupID
-        //_TeamOneFrag = TeamFragment()
-        //_TeamOneFrag.ID = 1
-        //_TeamTwoFrag = TeamFragment()
-        //_TeamTwoFrag.ID = 2
     }
 
     /**
@@ -99,8 +84,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
 
         layout.getTabAt(0)!!.text = "Event Setup"
-        layout.getTabAt(1)!!.text = "Team One"
-        layout.getTabAt(2)!!.text = "Team Two"
+        layout.getTabAt(1)!!.text = "Teams"
     }
 
     /**
@@ -141,21 +125,17 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
         override fun getItem(position: Int): Fragment
         {
-            Log.d(object{}.javaClass.enclosingMethod.name, "position : $position")
+            Log.d(object{}.javaClass.enclosingMethod.name, " fragment position : $position")
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1)
 
-            var fragment : Fragment = PlaceholderFragment.newInstance(position + 1)
+            var fragment = Fragment()
 
             when(position)
             {
-                0 ->
-                {
-                    fragment = EventSetupFragment.newInstance(_GroupID)
-                }
-                1 -> fragment = TeamFragment.newInstance(Team1)
-                2 -> fragment = TeamFragment.newInstance(Team2)
+                0 -> fragment = EventSetupFragment.newInstance(_GroupID)
+                1 -> fragment = TeamFragment.newInstance(Teams, 1, "Team1")
                 else -> { // Note the block
                     print("x is neither 0, 1 nor 2")
                 }
@@ -166,33 +146,14 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
         override fun getCount(): Int {
             // Show 3 total pages.
-            return 3
+            return 2
         }
     }
 
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        Team1 = teams[0]
-        Team2 = teams[1]
-        UpdateSelectedPlayersForTeamOne(Team1)
-        UpdateSelectedPlayersForTeamTwo(Team2)
-    }
-
-    private fun UpdateSelectedPlayersForTeamOne(team : Team)
-    {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        var item  = mSectionsPagerAdapter!!.getItem(1) as TeamFragment
-        item.RefreshTeam(team)
-        //_TeamOneFrag.RefreshTeam(team)
-    }
-
-    private fun UpdateSelectedPlayersForTeamTwo(team : Team)
-    {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
-        var item  = mSectionsPagerAdapter!!.getItem(2) as TeamFragment
-        item.RefreshTeam(team)
-        //_TeamTwoFrag.RefreshTeam(team)
+        Teams = teams
     }
 
 
@@ -204,33 +165,33 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     /**
      * A placeholder fragment containing a simple view.
      */
-    class PlaceholderFragment : Fragment() {
-
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.fragment_group_event_generator, container, false)
-            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
-            return rootView
-        }
-
-        companion object {
-            /**
-             * The fragment argument representing the section number for this
-             * fragment.
-             */
-            private val ARG_SECTION_NUMBER = "section_number"
-
-            /**
-             * Returns a new instance of this fragment for the given section
-             * number.
-             */
-            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-                val fragment = PlaceholderFragment()
-                val args = Bundle()
-                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                fragment.arguments = args
-                return fragment
-            }
-        }
-    }
+//    class PlaceholderFragment : Fragment() {
+//
+//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+//                                  savedInstanceState: Bundle?): View? {
+//            val rootView = inflater.inflate(R.layout.fragment_group_event_generator, container, false)
+//            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
+//            return rootView
+//        }
+//
+//        companion object {
+//            /**
+//             * The fragment argument representing the section number for this
+//             * fragment.
+//             */
+//            private val ARG_SECTION_NUMBER = "section_number"
+//
+//            /**
+//             * Returns a new instance of this fragment for the given section
+//             * number.
+//             */
+//            fun newInstance(sectionNumber: Int): PlaceholderFragment {
+//                val fragment = PlaceholderFragment()
+//                val args = Bundle()
+//                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+//                fragment.arguments = args
+//                return fragment
+//            }
+//        }
+//    }
 }

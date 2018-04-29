@@ -115,14 +115,6 @@ class EventSetupFragment : Fragment()
         mCallback = null
     }
 
-//    fun UpdatePlayerAdapterWithList(players:ArrayList<Player>)
-//    {
-//        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
-//        _PlayerAdapter.playerList = players
-//        _PlayerAdapter.notifyDataSetChanged()
-//        _PlayerAdapter.SelectedItems.clear()
-//    }
-
     /**
      * Open a date dialog and handle the on set listener to update a textview
      */
@@ -173,15 +165,15 @@ class EventSetupFragment : Fragment()
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         var players = GetSelectedPlayers()
-        Log.d("Method", object{}.javaClass.enclosingMethod.name + " player count: ${players.size}")
+        //Log.d("Method", object{}.javaClass.enclosingMethod.name + " player count: ${players.size}")
         if(!players.isEmpty())
         {
             //Log.d(object{}.javaClass.enclosingMethod.name, "Player count : ${players.size}")
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
 
-            Log.d(object{}.javaClass.enclosingMethod.name, "team1 size: ${teamArray[0].Players.size}")
-            Log.d(object{}.javaClass.enclosingMethod.name, "team2 size: ${teamArray[1].Players.size}")
+           // Log.d(object{}.javaClass.enclosingMethod.name, "team1 size: ${teamArray[0].Players.size}")
+           // Log.d(object{}.javaClass.enclosingMethod.name, "team2 size: ${teamArray[1].Players.size}")
 
             //then return back to where it needs to go - ie the fragment activity
             mCallback!!.onTeamsRandomized(teamArray)
