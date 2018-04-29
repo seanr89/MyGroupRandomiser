@@ -11,8 +11,9 @@ import com.example.seanrafferty.mygrouprandomiser.*
  */
 class NavigationControls {
 
-    companion object {
-        fun NavigateHome(context : Context)
+    companion object
+    {
+        fun NavaigateToMainActivity(context : Context)
         {
             val intent= Intent(context, MainActivity::class.java)
             startActivity(context, intent, null)

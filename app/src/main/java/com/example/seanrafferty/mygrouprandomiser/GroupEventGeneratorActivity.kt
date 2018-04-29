@@ -142,7 +142,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
-        Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
+        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         Teams = teams
         var fragment = supportFragmentManager.fragments[1] as TeamFragment
         fragment.UpdateRecyclerAdapter(Teams)

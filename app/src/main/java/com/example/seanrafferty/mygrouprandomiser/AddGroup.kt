@@ -8,6 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import java.security.acl.Group
 
 class AddGroup : AppCompatActivity() {
@@ -23,14 +25,14 @@ class AddGroup : AppCompatActivity() {
 
             if(result >= 1)
             {
-                AccessMainActivity()
-                //Toast.makeText(this, "Group Added", Toast.LENGTH_LONG).show()
+                NavigationControls.NavaigateToMainActivity(this)
             }
         }
     }
 
     /**
-     * Create and Save a group
+     * Create and Save a group the DB
+     * @returns : integer to denote the status
      */
     fun CreateAndSaveGroup() : Int
     {
@@ -39,19 +41,10 @@ class AddGroup : AppCompatActivity() {
         val nameTextView = findViewById<TextView>(R.id.nameText)
         val name : String = nameTextView.text.toString()
 
-        var DB = DatabaseHandler(this)
+        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(this))
 
-        result = DB.CreateGroup(MyGroup(0, name))
+        result = MyGroupDB.CreateGroup(MyGroup(0, name))
 
         return result
-    }
-
-    /**
-     * Operation to navigate to the MainActivity Screen/Activity
-     */
-    fun AccessMainActivity()
-    {
-        var intent= Intent(this,MainActivity::class.java)
-        startActivity(intent)
     }
 }

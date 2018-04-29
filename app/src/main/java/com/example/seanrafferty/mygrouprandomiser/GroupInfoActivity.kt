@@ -75,8 +75,8 @@ class GroupInfoActivity : AppCompatActivity() {
      */
     private fun GetGroupFromDB(id: Int) : MyGroup
     {
-        var db = DatabaseHandler(this)
-        return db.ReadMyGroupByID(id)
+        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(this))
+        return MyGroupDB.ReadMyGroupByID(id)
     }
 
     /**

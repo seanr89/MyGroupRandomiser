@@ -36,16 +36,15 @@ class MainActivity : AppCompatActivity()
         var btn_add_group = findViewById<Button>(R.id.btnAddGroup)
         btn_add_group.setOnClickListener()
         {
-            NavigationControls.Companion.NavigateToEditGroupActivity(this)
+            NavigationControls.NavigateToEditGroupActivity(this)
         }
 
         //Handle listview item selection
         _GroupListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             // Handle group item selection and ensure object casting
             var selectedGroup = _GroupListView.adapter.getItem(position) as MyGroup
-            Log.d("ListView Selected","${selectedGroup.toString()} selected")
-            NavigationControls.Companion.NavigateToGroupInfoActivity(this, selectedGroup.ID)
-            //NavigateToGroupInfoActivity(selectedGroup)
+            //Log.d("ListView Selected","${selectedGroup.toString()} selected")
+            NavigationControls.NavigateToGroupInfoActivity(this, selectedGroup.ID)
         }
     }
 
@@ -82,12 +81,11 @@ class MainActivity : AppCompatActivity()
 
     /**
      * Request all stored groups available
-     * returns @param grouplist - An arraylist of MyGroup objects
+     * @returns An arraylist of MyGroup objects
      */
     fun RequestGroups() : ArrayList<MyGroup>
     {
         println("Method: " + object{}.javaClass.enclosingMethod.name)
-
         //initialise an ArrayList and a DatabaseHandler object
         var groupList: ArrayList<MyGroup>
         var groupDB = MyGroupDBHandler(DatabaseHandler(this))
@@ -97,32 +95,11 @@ class MainActivity : AppCompatActivity()
         return groupList
     }
 
-    /**
-     * Base operation to initialise the database and create/update the database
-     */
-    fun InitialiseDB()
-    {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
-        //var DB:DatabaseHandler = DatabaseHandler(this)
-    }
-
     ////////////////////////////////////////////////////////////////////////////////
     /**
      * Navigation Controls
      */
     ////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Instantiate and navigate to the GroupInfo activity
-     */
-    fun NavigateToGroupInfoActivity(group : MyGroup)
-    {
-        Log.d("MainActivity",object{}.javaClass.enclosingMethod.name)
-
-        var intent= Intent(this,GroupInfoActivity::class.java)
-        intent.putExtra("GroupID", group.ID.toString())
-        startActivity(intent)
-    }
 }
 
 

@@ -27,12 +27,14 @@ class InitialiseDataDBHandler
     {
         Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
 
-        _DB.CreateGroup(MyGroup(-1, "R Science Park"))
-        _DB.CreateGroup(MyGroup(-1, "Group 1"))
-        _DB.CreateGroup(MyGroup(-1, "Group 3"))
-        _DB.CreateGroup(MyGroup(-1, "Group 4"))
-        _DB.CreateGroup(MyGroup(-1, "Group 5"))
-        _DB.CreateGroup(MyGroup(-1, "Group 6"))
+        val myGroupDB = MyGroupDBHandler(_DB)
+
+        myGroupDB.CreateGroup(MyGroup(-1, "R Science Park"))
+        myGroupDB.CreateGroup(MyGroup(-1, "Group 1"))
+        myGroupDB.CreateGroup(MyGroup(-1, "Group 3"))
+        myGroupDB.CreateGroup(MyGroup(-1, "Group 4"))
+        myGroupDB.CreateGroup(MyGroup(-1, "Group 5"))
+        myGroupDB.CreateGroup(MyGroup(-1, "Group 6"))
 
     }
 

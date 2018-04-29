@@ -33,7 +33,7 @@ class AddPlayerActivity : AppCompatActivity() {
         _SavePlayerBtn.setOnClickListener()
         {
             SaveNewPlayer()
-            NavigationControls.Companion.NavigateToPlayerActivity(this)
+            NavigationControls.NavigateToPlayerActivity(this)
         }
     }
 
@@ -43,7 +43,6 @@ class AddPlayerActivity : AppCompatActivity() {
     private fun SaveNewPlayer() : Int
     {
         Log.d("AddPlayerActivity", object{}.javaClass.enclosingMethod.name)
-
         var result : Int
         val nameTextView = findViewById(R.id.playerNameEditView) as TextView
         val name : String = nameTextView.text.toString()

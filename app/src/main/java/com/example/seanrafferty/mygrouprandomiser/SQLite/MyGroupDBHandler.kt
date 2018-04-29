@@ -1,6 +1,8 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
+import android.content.ContentValues
 import android.database.Cursor
+import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -16,6 +18,55 @@ class MyGroupDBHandler
     constructor(db:DatabaseHandler)
     {
         _DB = db
+    }
+
+    /**
+     * INSERT a new Group to the database
+     */
+    @Throws(SQLiteConstraintException::class)
+    fun CreateGroup(group: MyGroup) : Int
+    {
+        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+
+        var result : Int = 0
+
+        var values = ContentValues()
+        values.put("Name", group.Name)
+
+        val db = _DB.GetWritableDataBaseObject()
+
+        result = db!!.insert(DatabaseHandler.groupTableName, "", values).toInt()
+
+        return result;
+    }
+
+    /**
+     * Read the information for an individual MyGroup object
+     * @param id - a unique object for a MyGroup object
+     */
+    fun ReadMyGroupByID(id:Int) : MyGroup
+    {
+        var selectQuery: String = "SELECT * FROM ${DatabaseHandler.groupTableName} WHERE ${DatabaseHandler.grouppkID} = $id"
+        val db = _DB.GetReadableDataBaseObject()
+
+        var group : MyGroup
+
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db!!.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            // if table not yet present, create it
+            return null!!
+        }
+
+        group = MyGroup()
+        if (cursor!!.moveToFirst()) {
+            group.ID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.grouppkID))
+            group.Name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.groupName))
+        }
+        cursor.close()
+        return group
     }
 
     /**
