@@ -59,12 +59,12 @@ class TeamFragment : Fragment()
         if(!teams.isEmpty())
         {
             InitialiseTeamOneRecycler(teams[0], view)
-            InitialiseTeamnTwoRecycler(teams[1], view)
+            InitialiseTeamTwoRecycler(teams[1], view)
         }
         else
         {
             InitialiseTeamOneRecycler(Team(0, "Team1"), view)
-            InitialiseTeamnTwoRecycler(Team(0, "Team2"), view)
+            InitialiseTeamTwoRecycler(Team(0, "Team2"), view)
         }
 
         return view
@@ -88,7 +88,7 @@ class TeamFragment : Fragment()
         }
     }
 
-    private fun InitialiseTeamnTwoRecycler(team: Team, view:View)
+    private fun InitialiseTeamTwoRecycler(team: Team, view:View)
     {
         Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
         teamTwoviewManager = LinearLayoutManager(activity)
@@ -126,25 +126,18 @@ class TeamFragment : Fragment()
         listener = null
     }
 
-//    /**
-//     *
-//     */
-//    fun UpdateRecyclerAdapter(team: Team)
-//    {
-//        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " for id: $ID with player count : ${team.Players.size}")
-//        _PlayerAdapter = PlayerRecyclerAdapter(team.Players, true)
-//        _PlayerAdapter.notifyDataSetChanged()
-//    }
+    /**
+     *
+     */
+    fun UpdateRecyclerAdapter(teams: ArrayList<Team>)
+    {
+        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        teamOnePlayerAdapter.playerList = teams[0].Players
+        teamOnePlayerAdapter.notifyDataSetChanged()
 
-//    /**
-//     * Handle the refreshing of team player content
-//     * @param team : the currently generated team
-//     */
-//    fun RefreshTeam(team : Team)
-//    {
-//        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
-//        UpdateRecyclerAdapter(team)
-//    }
+        teamTwoPlayerAdapter.playerList = teams[1].Players
+        teamTwoPlayerAdapter.notifyDataSetChanged()
+    }
 
     /**
      * This interface must be implemented by activities that contain this

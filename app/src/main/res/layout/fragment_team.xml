@@ -15,7 +15,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TeamOnePlayerRecycler"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="225dp"
         android:layout_below="@+id/TeamHeader"
         android:layout_marginTop="5dp"
         tools:layout_editor_absoluteX="8dp" />
@@ -23,11 +23,21 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TeamTwoPlayerRecycler"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="225dp"
         android:layout_below="@+id/TeamOnePlayerRecycler"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="71dp"
+        android:layout_marginBottom="60dp"
         android:layout_marginTop="5dp"
         tools:layout_editor_absoluteX="8dp" />
+
+    <Button
+        android:id="@+id/btn_save_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="15dp"
+        android:text="Save Event" />
 
 </RelativeLayout>

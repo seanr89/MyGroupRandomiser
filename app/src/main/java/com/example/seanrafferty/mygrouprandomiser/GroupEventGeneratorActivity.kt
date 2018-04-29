@@ -154,6 +154,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("GroupEventGeneratorActivity", object{}.javaClass.enclosingMethod.name)
         Teams = teams
+        var fragment = supportFragmentManager.fragments[1] as TeamFragment
+        fragment.UpdateRecyclerAdapter(Teams)
     }
 
 
