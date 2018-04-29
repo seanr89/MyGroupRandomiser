@@ -31,7 +31,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
         TeamFragment.OnFragmentInteractionListener
 {
-    override fun onFragmentInteraction(uri: Uri) {
+    override fun onFragmentInteraction(teams : ArrayList<Team>) {
 
     }
 

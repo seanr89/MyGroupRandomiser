@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
@@ -28,7 +29,7 @@ import com.example.seanrafferty.mygrouprandomiser.R
 class TeamFragment : Fragment()
 {
     private var listener: OnFragmentInteractionListener? = null
-    var ID : Int = 0
+    var _Teams : ArrayList<Team> = arrayListOf()
 
     //Recycler manager details
     private lateinit var teamOneviewManager: RecyclerView.LayoutManager
@@ -54,17 +55,23 @@ class TeamFragment : Fragment()
 
         val bundle = arguments
 
-        var teams = bundle!!.getSerializable(ARG_TEAMS) as ArrayList<Team>
+        _Teams = bundle!!.getSerializable(ARG_TEAMS) as ArrayList<Team>
 
-        if(!teams.isEmpty())
+        if(!_Teams.isEmpty())
         {
-            InitialiseTeamOneRecycler(teams[0], view)
-            InitialiseTeamTwoRecycler(teams[1], view)
+            InitialiseTeamOneRecycler(_Teams[0], view)
+            InitialiseTeamTwoRecycler(_Teams[1], view)
         }
         else
         {
             InitialiseTeamOneRecycler(Team(0, "Team1"), view)
             InitialiseTeamTwoRecycler(Team(0, "Team2"), view)
+        }
+
+        var btn_save_event = view.findViewById<Button>(R.id.btn_save_event)
+        btn_save_event.setOnClickListener()
+        {
+            listener!!.onFragmentInteraction(_Teams)
         }
 
         return view
@@ -132,6 +139,7 @@ class TeamFragment : Fragment()
     fun UpdateRecyclerAdapter(teams: ArrayList<Team>)
     {
         Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        _Teams = teams
         teamOnePlayerAdapter.playerList = teams[0].Players
         teamOnePlayerAdapter.notifyDataSetChanged()
 
@@ -152,7 +160,7 @@ class TeamFragment : Fragment()
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentInteraction(teams : ArrayList<Team>)
     }
 
     companion object {
