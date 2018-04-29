@@ -59,7 +59,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_event_generator)
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
 
         Teams = arrayListOf()
         _GroupID = intent.getStringExtra("GroupID").toInt()
