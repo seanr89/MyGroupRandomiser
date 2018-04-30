@@ -6,24 +6,31 @@
     tools:context=".Fragments.TeamFragment">
 
     <TextView
-        android:id="@+id/TeamHeader"
+        android:id="@+id/TeamOneHeader"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:text="Team X" />
+        android:layout_height="20dp"
+        android:text="Team Orange" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TeamOnePlayerRecycler"
         android:layout_width="match_parent"
         android:layout_height="225dp"
-        android:layout_below="@+id/TeamHeader"
+        android:layout_below="@+id/TeamOneHeader"
         android:layout_marginTop="5dp"
         tools:layout_editor_absoluteX="8dp" />
+
+    <TextView
+        android:id="@+id/TeamTwoHeader"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/TeamOnePlayerRecycler"
+        android:text="Team Blue" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TeamTwoPlayerRecycler"
         android:layout_width="match_parent"
         android:layout_height="225dp"
-        android:layout_below="@+id/TeamOnePlayerRecycler"
+        android:layout_below="@+id/TeamTwoHeader"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="60dp"
         android:layout_marginTop="5dp"
