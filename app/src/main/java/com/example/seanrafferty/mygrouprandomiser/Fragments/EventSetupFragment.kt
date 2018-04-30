@@ -25,7 +25,10 @@ import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
+import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -47,7 +50,9 @@ class EventSetupFragment : Fragment()
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var _PlayerRecycler : RecyclerView
     private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
-    //var GroupID : Int = 0
+
+    private lateinit var viewDate : TextView
+    private lateinit var viewTime : TextView
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -62,8 +67,8 @@ class EventSetupFragment : Fragment()
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_event_setup, container, false)
 
-        val viewDate: TextView = view.findViewById(R.id.EventDateView)
-        val viewTime: TextView = view.findViewById(R.id.EventTimeView)
+        viewDate = view.findViewById(R.id.EventDateView)
+        viewTime = view.findViewById(R.id.EventTimeView)
 
         var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(arguments!!.getInt(ARG_GROUP_NUMBER), ""))
         _PlayerAdapter = PlayerRecyclerAdapter(playerList, true)
@@ -133,7 +138,7 @@ class EventSetupFragment : Fragment()
         }
         datePickerDialog.setOnDateSetListener(dateSetListener)
 
-        textView.text = SimpleDateFormat("dd.MM.yyyy").format(cal.time)
+        textView.text = SimpleDateFormat("dd/MM/yyyy").format(cal.time)
     }
 
     /**
@@ -178,7 +183,8 @@ class EventSetupFragment : Fragment()
     }
 
     // Container Activity must implement this interface
-    interface OnRandomTeamsGenerated {
+    interface OnRandomTeamsGenerated
+    {
         fun onTeamsRandomized(teams : ArrayList<Team>)
     }
 
@@ -189,6 +195,20 @@ class EventSetupFragment : Fragment()
     {
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
         return _PlayerAdapter.SelectedItems
+    }
+
+    fun GetSelectedDateAndTime() : LocalDateTime
+    {
+        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+        var Date = viewDate.text
+        var Time = viewTime.text
+
+        var dateTimeString = "${Date.toString()} ${Time.toString()}"
+        Log.d("Method", "Formatted time : $dateTimeString")
+
+        var dateTime : LocalDateTime
+        dateTime = UtilityMethods.ConvertStringToDateTime("${Date.toString()} ${Time.toString()}")
+        return dateTime
     }
 
 

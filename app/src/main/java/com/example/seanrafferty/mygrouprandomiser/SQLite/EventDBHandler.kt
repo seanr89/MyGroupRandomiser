@@ -54,7 +54,7 @@ class EventDBHandler
                 arrayList.add(GroupEvent(id, date, groupID))
             } while (cursor.moveToNext())
         }
-
+        cursor.close()
         return arrayList
     }
 

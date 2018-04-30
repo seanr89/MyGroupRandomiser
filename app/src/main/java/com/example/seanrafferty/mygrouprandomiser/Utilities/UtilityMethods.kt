@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.Utilities
 
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -11,7 +12,7 @@ class UtilityMethods
          *
          */
         fun ConvertStringToDateTime(dateString: String): LocalDateTime {
-            var localDateTime = LocalDateTime.parse(dateString)
+            var localDateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
             return localDateTime
         }
 

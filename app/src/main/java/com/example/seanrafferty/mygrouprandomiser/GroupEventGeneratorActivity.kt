@@ -1,40 +1,39 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.net.Uri
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
-import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
-import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
-import com.example.seanrafferty.mygrouprandomiser.R.id.toolbar
-import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
-import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
-
 import kotlinx.android.synthetic.main.activity_group_event_generator.*
-import kotlinx.android.synthetic.main.fragment_group_event_generator.view.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
         TeamFragment.OnFragmentInteractionListener
 {
-    override fun onFragmentInteraction(teams : ArrayList<Team>) {
+    override fun onFragmentInteraction(teams : ArrayList<Team>)
+    {
         Toast.makeText(this, "Feature Not Available!", Toast.LENGTH_LONG).show()
+        return
+
+        var groupEvent = CreateEventGroupFromContent()
+        if(groupEvent != null)
+        {
+            var eventManager = EventManager(this)
+
+            var result = eventManager.SaveEvent(groupEvent)
+        }
     }
 
     override fun onTeamsRandomized(teams: ArrayList<Team>)
@@ -118,7 +117,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             Log.d(object{}.javaClass.enclosingMethod.name, " fragment position : $position")
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            //return PlaceholderFragment.newInstance(position + 1)
 
             var fragment = Fragment()
 
@@ -146,6 +144,22 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         Teams = teams
         var fragment = supportFragmentManager.fragments[1] as TeamFragment
         fragment.UpdateRecyclerAdapter(Teams)
+    }
+
+    /**
+     * Create the group event object from the provided content in the activity
+     * @return a created GroupEvent object
+     */
+    private fun CreateEventGroupFromContent() : GroupEvent
+    {
+        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+
+        //get the setupFragment
+        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        var dateTime = eventFragment.GetSelectedDateAndTime()
+
+        var groupEvent = GroupEvent(0, dateTime, _GroupID, Teams)
+        return groupEvent
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
