@@ -91,7 +91,7 @@ class PlayerDBHandler
         var AllPlayers = ReadAllPlayers()
         Log.d("PlayerDBHandler", "AllPlayers list: ${AllPlayers.size}")
 
-        /*var groupPlayers = _DB.ReadAllPlayersForAGroup(group)
+        var groupPlayers = MyGroupDBHandler(_DB).ReadAllPlayersForAGroup(group)
         Log.d("PlayerDBHandler", "groupPlayers list: ${groupPlayers.size}")
 
         //read through the list of all players
@@ -106,7 +106,7 @@ class PlayerDBHandler
                 Log.d(object{}.javaClass.enclosingMethod.name, "Adding player ${mappedPlayer[0].Name}")
                 resultList.add(mappedPlayer[0])
             }
-        }*/
+        }
         return resultList
     }
 

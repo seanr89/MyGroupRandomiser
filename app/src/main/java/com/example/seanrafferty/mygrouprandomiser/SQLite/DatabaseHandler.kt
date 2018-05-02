@@ -17,7 +17,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 9
+        val DBVersion = 10
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -44,9 +44,13 @@ class DatabaseHandler : SQLiteOpenHelper
         const val TeamName = "Name"
         const val TeamEventID = "eventID"
 
-        const val EventTeamMappingTable = "eventTeams"
-        const val EventID = "eventID"
+//        const val EveTeamMappingTable = "eventTeams"
+//        const val EventID = "eventID"
+//        const val TeamID = "teamID"
+
+        const val TeamPlayerMappingTable = "teamPlayers"
         const val TeamID = "teamID"
+        //playerID is already noted in group player mapping
 
     }
 
@@ -100,7 +104,8 @@ class DatabaseHandler : SQLiteOpenHelper
             CreateGroupPlayersTable(db)
             CreateEventTable(db)
             CreateTeamTable(db)
-            CreateEventTeamMappingTable(db)
+            //CreateEventTeamMappingTable(db)
+            CreateTeamPlayerMapping(db)
 
             Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
         }
@@ -121,13 +126,13 @@ class DatabaseHandler : SQLiteOpenHelper
         var sqlDeleteGroupPlayerMapping = "DROP TABLE IF EXISTS $GroupPlayerTable"
         var sqlDeleteEventTable = "DROP TABLE IF EXISTS $EventTable"
         var sqlDeleteTeam = "DROP TABLE IF EXISTS $TeamTable"
-        var sqlDeleteEventTeamMapping = "DROP TABLE IF EXISTS $EventTeamMappingTable"
+        var sqlDeleteTeamPlayerMapping = "DROP TABLE IF EXISTS $TeamPlayerMappingTable"
         db.execSQL(sqlDeleteGroup)
         db.execSQL(sqlDeletePlayer)
         db.execSQL(sqlDeleteGroupPlayerMapping)
         db.execSQL(sqlDeleteEventTable)
         db.execSQL(sqlDeleteTeam)
-        db.execSQL(sqlDeleteEventTeamMapping)
+        db.execSQL(sqlDeleteTeamPlayerMapping)
         onCreate(db)
     }
 
@@ -176,13 +181,23 @@ class DatabaseHandler : SQLiteOpenHelper
     /**
      * Create mapping table for event and team
      */
-    private fun CreateEventTeamMappingTable(db: SQLiteDatabase)
+//    private fun CreateEventTeamMappingTable(db: SQLiteDatabase)
+//    {
+//        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+//
+//        var sql : String = "CREATE TABLE IF NOT EXISTS $EventTeamMappingTable " +
+//                "($EventID INTEGER "+
+//                "$TeamID INTEGER);"
+//        db.execSQL(sql)
+//    }
+
+    private fun CreateTeamPlayerMapping(db: SQLiteDatabase)
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
-        var sql : String = "CREATE TABLE IF NOT EXISTS $EventTeamMappingTable " +
-                "($EventID INTEGER "+
-                "$TeamID INTEGER);"
+        var sql : String = "CREATE TABLE IF NOT EXISTS $TeamPlayerMappingTable " +
+                "($TeamID INTEGER "+
+                "$PlayerID INTEGER);"
         db.execSQL(sql)
     }
 }

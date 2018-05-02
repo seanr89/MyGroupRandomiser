@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
+import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import android.util.Log
@@ -98,10 +99,24 @@ class EventDBHandler
         return result
     }
 
+    /**
+     *
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
+     */
     fun CreateGroupEvent(event:GroupEvent) :Int
     {
         Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
 
-        return 0
+        var db = _DB.GetWritableDataBaseObject()
+
+        var result : Int
+
+        var values = ContentValues()
+        values.put(DatabaseHandler.EventDate, event.Date.toString())
+        values.put(DatabaseHandler.EventGroupID, event.GroupID)
+
+        result = db!!.insert(DatabaseHandler.EventTable, "", values).toInt()
+
+        return result
     }
 }

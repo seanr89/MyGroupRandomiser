@@ -96,6 +96,8 @@ class MyGroupDBHandler
         return modelList as ArrayList<Player>
     }
 
+
+
     /**
      * Read all assigned player ids for a group
      * @param myGroup : the group to query for players assigned
