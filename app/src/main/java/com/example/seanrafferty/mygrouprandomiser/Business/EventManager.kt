@@ -14,7 +14,7 @@ class EventManager(val context: Context)
 {
     /**
      * Operation to save the provided event
-     * @return : Int to denote the success status
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     fun SaveEvent(groupEvent: GroupEvent)
     {
@@ -25,15 +25,17 @@ class EventManager(val context: Context)
         var EventID = EventDB.CreateGroupEvent(groupEvent)
         groupEvent.ID = EventID
 
+        //SEAN- CONVERT TO JSON MULTI SAVE
+
         //Create the team and insert player team mappings for team one
-        var teamOneID = TeamDB.CreateTeam(groupEvent.EventTeams[0], groupEvent.ID)
+        var teamOneID = TeamDB.InsertTeam(groupEvent.EventTeams[0], groupEvent.ID)
         for(teamOnePlayer : Player in groupEvent.EventTeams[0].Players)
         {
             TeamDB.CreateTeamPlayerMapping(teamOneID, teamOnePlayer.ID)
         }
 
         //Create the team and insert player team mappings for team two
-        var teamTwoID = TeamDB.CreateTeam(groupEvent.EventTeams[2], groupEvent.ID)
+        var teamTwoID = TeamDB.InsertTeam(groupEvent.EventTeams[2], groupEvent.ID)
         for(teamTwoPlayer : Player in groupEvent.EventTeams[1].Players)
         {
             TeamDB.CreateTeamPlayerMapping(teamTwoID, teamTwoPlayer.ID)

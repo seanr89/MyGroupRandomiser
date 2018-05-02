@@ -89,10 +89,7 @@ class PlayerDBHandler
 
         //request all players and all players for the current group
         var AllPlayers = ReadAllPlayers()
-        Log.d("PlayerDBHandler", "AllPlayers list: ${AllPlayers.size}")
-
         var groupPlayers = MyGroupDBHandler(_DB).ReadAllPlayersForAGroup(group)
-        Log.d("PlayerDBHandler", "groupPlayers list: ${groupPlayers.size}")
 
         //read through the list of all players
         for(item : Player in AllPlayers)
@@ -103,7 +100,6 @@ class PlayerDBHandler
             //if not append to the list
             if(mappedPlayer == null || mappedPlayer.isEmpty())
             {
-                Log.d(object{}.javaClass.enclosingMethod.name, "Adding player ${mappedPlayer[0].Name}")
                 resultList.add(mappedPlayer[0])
             }
         }
@@ -113,7 +109,7 @@ class PlayerDBHandler
     /**
      * Insert a new player
      * @param player - Player object to be inserted
-     * @return int
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     fun InsertPlayer(player: Player) : Int
     {

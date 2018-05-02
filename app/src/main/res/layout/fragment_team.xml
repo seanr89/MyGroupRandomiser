@@ -9,7 +9,9 @@
         android:id="@+id/TeamOneHeader"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="Team Orange" />
+        android:text="Team Orange"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TeamOnePlayerRecycler"
@@ -24,7 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_below="@+id/TeamOnePlayerRecycler"
-        android:text="Team Blue" />
+        android:text="Team Blue"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TeamTwoPlayerRecycler"

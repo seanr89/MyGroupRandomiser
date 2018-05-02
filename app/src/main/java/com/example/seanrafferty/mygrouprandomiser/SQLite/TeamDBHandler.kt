@@ -16,10 +16,10 @@ class TeamDBHandler
     }
 
     /**
-     *
+     * Save the team to the database
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
-    fun CreateTeam(team : Team, eventID: Int) : Int
+    fun InsertTeam(team : Team, eventID: Int) : Int
     {
         var result : Int
 
@@ -35,7 +35,7 @@ class TeamDBHandler
     }
 
     /**
-     *
+     * Save the player to the current team in the database as a mapping
      */
     fun CreateTeamPlayerMapping(teamID : Int, playerID : Int) : Int
     {
