@@ -158,7 +158,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         var dateTime = eventFragment.GetSelectedDateAndTime()
 
-        var groupEvent = GroupEvent(0, dateTime, _GroupID, Teams)
+        var groupEvent = GroupEvent(0, dateTime, _GroupID, false, Teams)
         return groupEvent
     }
 

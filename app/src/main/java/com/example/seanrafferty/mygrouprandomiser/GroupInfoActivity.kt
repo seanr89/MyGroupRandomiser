@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
@@ -50,8 +51,9 @@ class GroupInfoActivity : AppCompatActivity() {
         }
 
         //Setup Recycler View to view all players
-        var MyGroupDBHandler = MyGroupDBHandler(DatabaseHandler(this))
-        val assignedPlayers = MyGroupDBHandler.ReadAllPlayersForAGroup(MyGroup(ID, ""))
+        var GroupManager = MyGroupManager(this)
+        val assignedPlayers = GroupManager.ReadAllPlayersForGroup(MyGroup(ID, ""))
+
         Log.d("GroupInfoActivity", "assignedPlayers count: ${assignedPlayers.size}")
         var playerAdapter = PlayerRecyclerAdapter(assignedPlayers, false)
         Log.d("GroupInfoActivity", "assignedPlayers added to adapter")

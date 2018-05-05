@@ -49,7 +49,7 @@ class EventDBHandler
             do
             {
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventpkID))
-                val date = UtilityMethods.Companion.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
+                val date = UtilityMethods.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
                 val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
 
                 arrayList.add(GroupEvent(id, date, groupID))
@@ -115,6 +115,8 @@ class EventDBHandler
         var values = ContentValues()
         values.put(DatabaseHandler.EventDate, event.Date.toString())
         values.put(DatabaseHandler.EventGroupID, event.GroupID)
+        //default the event to incomplete
+        values.put(DatabaseHandler.EventCompleted, 0)
 
         result = db!!.insert(DatabaseHandler.EventTable, "", values).toInt()
 

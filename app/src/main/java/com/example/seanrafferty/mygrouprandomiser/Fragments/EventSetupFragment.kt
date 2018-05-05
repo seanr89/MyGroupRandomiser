@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Business.TeamRandomiser
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
@@ -70,7 +71,7 @@ class EventSetupFragment : Fragment()
         viewDate = view.findViewById(R.id.EventDateView)
         viewTime = view.findViewById(R.id.EventTimeView)
 
-        var playerList = MyGroupDBHandler(DatabaseHandler(context)).ReadAllPlayersForAGroup(MyGroup(arguments!!.getInt(ARG_GROUP_NUMBER), ""))
+        var playerList = MyGroupManager(context).ReadAllPlayersForGroup(MyGroup(arguments!!.getInt(ARG_GROUP_NUMBER), ""))
         _PlayerAdapter = PlayerRecyclerAdapter(playerList, true)
         viewManager = LinearLayoutManager(activity)
         _PlayerRecycler = view.findViewById<RecyclerView>(R.id.PlayerEventRecycler).apply{

@@ -17,7 +17,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 10
+        val DBVersion = 11
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -38,6 +38,7 @@ class DatabaseHandler : SQLiteOpenHelper
         const val EventpkID = "ID"
         const val EventDate = "Date"
         const val EventGroupID = "mygroupID"
+        const val EventCompleted = "completed"
 
         const val TeamTable = "team"
         const val TeampkID = "ID"
@@ -173,6 +174,7 @@ class DatabaseHandler : SQLiteOpenHelper
         var sql : String = "CREATE TABLE IF NOT EXISTS $EventTable " +
                 "($EventpkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "$EventDate TEXT, " +
+                "$EventCompleted INTEGER, " +
                 "$EventGroupID INTEGER);"
         db.execSQL(sql)
     }

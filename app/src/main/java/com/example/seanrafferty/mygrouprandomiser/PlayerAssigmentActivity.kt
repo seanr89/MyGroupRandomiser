@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Button
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
@@ -39,8 +40,8 @@ class PlayerAssigmentActivity : AppCompatActivity()
         }
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
-        val UnassignedPlayers = _PlayerDBHandler.GetAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
-        var playerAdapter = PlayerRecyclerAdapter(UnassignedPlayers as ArrayList<Player>, true)
+        val unassignedPlayers = MyGroupManager(this).ReadAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
+        var playerAdapter = PlayerRecyclerAdapter(unassignedPlayers as ArrayList<Player>, true)
 
         viewManager = LinearLayoutManager(this)
         recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{

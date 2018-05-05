@@ -76,37 +76,6 @@ class PlayerDBHandler
     }
 
     /**
-     * Query all players that are not assigned to a the current group
-     * @param group : the selected group
-     * @return : a list of Player objects
-     */
-    fun GetAllPlayersNotAssignedToGroup(group:MyGroup) : List<Player>
-    {
-        Log.d("PlayerDBHandler", object{}.javaClass.enclosingMethod.name)
-
-        //Create and initialise a list
-        var resultList : MutableList<Player> = arrayListOf()
-
-        //request all players and all players for the current group
-        var AllPlayers = ReadAllPlayers()
-        var groupPlayers = MyGroupDBHandler(_DB).ReadAllPlayersForAGroup(group)
-
-        //read through the list of all players
-        for(item : Player in AllPlayers)
-        {
-            //now to filter - check if the current player is already assigned to the group!!
-            //if current player(item) is in list of group players
-            var mappedPlayer = groupPlayers.filter { it.ID == item.ID }
-            //if not append to the list
-            if(mappedPlayer == null || mappedPlayer.isEmpty())
-            {
-                resultList.add(mappedPlayer[0])
-            }
-        }
-        return resultList
-    }
-
-    /**
      * Insert a new player
      * @param player - Player object to be inserted
      * @return the row ID of the newly inserted row, or -1 if an error occurred
