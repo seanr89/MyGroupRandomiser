@@ -1,9 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
@@ -65,7 +63,7 @@ class MainActivity : AppCompatActivity()
             when(item.itemId)
             {
                 R.id.action_players -> {
-                    NavigationControls.Companion.NavigateToPlayerActivity(this)
+                    NavigationControls.NavigateToPlayerActivity(this)
                     return true
                 }
                 R.id.action_settings -> {
@@ -94,12 +92,6 @@ class MainActivity : AppCompatActivity()
         groupList = groupDB.ReadAllGroups()
         return groupList
     }
-
-    ////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Navigation Controls
-     */
-    ////////////////////////////////////////////////////////////////////////////////
 }
 
 

@@ -100,7 +100,8 @@ class EventDBHandler
     }
 
     /**
-     *
+     * Insert an new group event
+     * @param event : group event to be parsed and inserted
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     fun CreateGroupEvent(event:GroupEvent) :Int

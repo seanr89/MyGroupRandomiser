@@ -40,13 +40,13 @@ class GroupInfoActivity : AppCompatActivity() {
         var btn_assign_players = findViewById<Button>(R.id.btn_assign_players)
         btn_assign_players.setOnClickListener()
         {
-            NavigationControls.Companion.NavigateToPlayerAssignment(this, ID)
+            NavigationControls.NavigateToPlayerAssignment(this, ID)
         }
 
         var btn_create_event = findViewById<Button>(R.id.btn_create_event)
         btn_create_event.setOnClickListener()
         {
-            NavigationControls.Companion.NavigateToGroupCreateEventActivity(this, ID)
+            NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
 
         //Setup Recycler View to view all players
