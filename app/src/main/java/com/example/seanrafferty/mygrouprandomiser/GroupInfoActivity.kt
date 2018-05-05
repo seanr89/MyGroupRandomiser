@@ -110,6 +110,13 @@ class GroupInfoActivity : AppCompatActivity() {
         groupEventCountTextView.text = eventCount.toString()
         val groupPlayerCountTextView = findViewById<TextView>(R.id.groupPlayerCountView)
         groupPlayerCountTextView.text = playerCount.toString()
+    }
+
+    /**
+     * Request all of the events for a group
+     */
+    private fun RequestAllEventsForGroup(group:MyGroup)
+    {
 
     }
 }

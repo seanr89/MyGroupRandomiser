@@ -44,6 +44,7 @@ class DatabaseHandler : SQLiteOpenHelper
         const val TeampkID = "ID"
         const val TeamName = "Name"
         const val TeamEventID = "eventID"
+        const val TeamScore = "score"
 
 //        const val EveTeamMappingTable = "eventTeams"
 //        const val EventID = "eventID"
@@ -160,6 +161,7 @@ class DatabaseHandler : SQLiteOpenHelper
         var sql : String = "CREATE TABLE IF NOT EXISTS $TeamTable " +
                 "($TeampkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "$TeamName TEXT, " +
+                "$TeamScore INT, " +
                 "$TeamEventID INTEGER);"
         db.execSQL(sql)
     }

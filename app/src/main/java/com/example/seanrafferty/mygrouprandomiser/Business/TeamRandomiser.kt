@@ -20,16 +20,9 @@ class TeamRandomiser
         if(players.isEmpty())
             return null!!
 
-//        var mutList = players.toMutableList()
-//        //Log.d(object{}.javaClass.enclosingMethod.name, "${mutList.size}")
-//        var shuffledMut = mutList.shuffle()
-//        var list : List<Player> = mutList.shuffled()
-
         var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
         var teamOne = Team(0, "Team One")
         var teamTwo = Team(0, "Team Two")
-
-//        Log.d(object{}.javaClass.enclosingMethod.name, "arrayList shuffled")
 
         var teamOneAdd = false
 

@@ -33,6 +33,7 @@ class TeamDBHandler
         var values = ContentValues()
         values.put(DatabaseHandler.TeamName, team.Name)
         values.put(DatabaseHandler.TeamEventID, eventID)
+        values.put(DatabaseHandler.TeamScore, 0)
 
         result = db!!.insert(DatabaseHandler.TeamTable, "", values).toInt()
 
