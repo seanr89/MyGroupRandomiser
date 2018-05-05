@@ -104,7 +104,6 @@ class DatabaseHandler : SQLiteOpenHelper
             CreateGroupPlayersTable(db)
             CreateEventTable(db)
             CreateTeamTable(db)
-            //CreateEventTeamMappingTable(db)
             CreateTeamPlayerMapping(db)
 
             Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
@@ -177,19 +176,6 @@ class DatabaseHandler : SQLiteOpenHelper
                 "$EventGroupID INTEGER);"
         db.execSQL(sql)
     }
-
-    /**
-     * Create mapping table for event and team
-     */
-//    private fun CreateEventTeamMappingTable(db: SQLiteDatabase)
-//    {
-//        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
-//
-//        var sql : String = "CREATE TABLE IF NOT EXISTS $EventTeamMappingTable " +
-//                "($EventID INTEGER "+
-//                "$TeamID INTEGER);"
-//        db.execSQL(sql)
-//    }
 
     private fun CreateTeamPlayerMapping(db: SQLiteDatabase)
     {

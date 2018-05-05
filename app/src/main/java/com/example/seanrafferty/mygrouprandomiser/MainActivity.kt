@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity()
             NavigationControls.NavigateToEditGroupActivity(this)
         }
 
-        //Handle listview item selection
+        //Handle listview item selection for a group
         _GroupListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             // Handle group item selection and ensure object casting
             var selectedGroup = _GroupListView.adapter.getItem(position) as MyGroup

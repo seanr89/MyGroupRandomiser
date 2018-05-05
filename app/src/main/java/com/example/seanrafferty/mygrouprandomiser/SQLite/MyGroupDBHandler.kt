@@ -71,6 +71,8 @@ class MyGroupDBHandler
 
     /**
      * Read all the players for a provided group
+     * @param group : the group to query
+     * @return an list of players
      */
     fun ReadAllPlayersForAGroup(group:MyGroup) : ArrayList<Player>
     {
@@ -101,6 +103,7 @@ class MyGroupDBHandler
     /**
      * Read all assigned player ids for a group
      * @param myGroup : the group to query for players assigned
+     * @return a list of player ID's
      */
     fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : MutableList<Int>
     {
@@ -153,6 +156,7 @@ class MyGroupDBHandler
 
     /**
      * Read and parse and Groups stored in the database
+     * @return all available MyGroups
      */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {
@@ -179,6 +183,6 @@ class MyGroupDBHandler
             }
         }
         cursor.close()
-        return arrayList;
+        return arrayList
     }
 }

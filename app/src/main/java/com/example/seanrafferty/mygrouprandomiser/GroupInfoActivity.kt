@@ -11,6 +11,7 @@ import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.Play
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.EventDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
@@ -90,13 +91,23 @@ class GroupInfoActivity : AppCompatActivity() {
 
         groupIDTextView.text = group.ID.toString()
         groupNameTextView.text = group.Name
+
+        RefreshGroupInfoStats(group)
     }
 
     /**
-     *
+     * Handle the refreshing of player and event count stats for an individual group
+     * @param group : the group to query
      */
-    private fun GetGroupPlayerandEventStats(id: Int)
+    private fun RefreshGroupInfoStats(group : MyGroup)
     {
+        var playerCount = MyGroupDBHandler(DatabaseHandler(this)).GetPlayerCountAssignedToGroup(group)
+        var eventCount = EventDBHandler(DatabaseHandler(this)).GetCountOfEventsForGrouo(group)
+
+        val groupEventCountTextView = findViewById<TextView>(R.id.groupEventCountView)
+        groupEventCountTextView.text = eventCount.toString()
+        val groupPlayerCountTextView = findViewById<TextView>(R.id.groupPlayerCountView)
+        groupPlayerCountTextView.text = playerCount.toString()
 
     }
 }

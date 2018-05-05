@@ -73,6 +73,17 @@
             android:text="Event Count"
             android:textStyle="bold"/>
 
+            <!-- Field to display the Event Count for the group-->
+            <TextView
+                android:id="@+id/groupEventCountView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/groupNameView"
+                android:layout_toRightOf="@+id/groupEventCountHeader"
+                android:text="Count" />
+
         <TextView
             android:id="@+id/groupPlayerCountHeader"
             android:layout_width="wrap_content"
@@ -82,6 +93,17 @@
             android:layout_below="@+id/groupEventCountHeader"
             android:text="Player Count"
             android:textStyle="bold"/>
+
+            <!-- Field to display the player Count for the group-->
+            <TextView
+                android:id="@+id/groupPlayerCountView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/groupEventCountView"
+                android:layout_toRightOf="@+id/groupPlayerCountHeader"
+                android:text="Count" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/PlayerRecycler"
