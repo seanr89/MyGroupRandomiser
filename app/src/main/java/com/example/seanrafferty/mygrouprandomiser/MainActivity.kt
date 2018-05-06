@@ -134,11 +134,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 DBReset.onUpgrade(DBReset.writableDatabase, 11 , 11)
                 var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
                 dbInitData.RunDataInitialisation()
-                
+
                 RefreshListView()
             }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

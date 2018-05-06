@@ -2,15 +2,28 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 
 class EventStatsActivity : AppCompatActivity() {
 
-    private var _GroupID = 0
+    private var EventID = 0
+    private lateinit var eventManager : EventManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_stats)
 
-        _GroupID = intent.getStringExtra("GroupID").toInt()
+        EventID = intent.getStringExtra("EventID").toInt()
+
+        RequestAndDisplayEventStats(EventID)
+    }
+
+    /**
+     * Request the relevant data for an event and display contents of screen
+     * @param eventID : the unique ID of the event
+     */
+    private fun RequestAndDisplayEventStats(eventID: Int)
+    {
+
     }
 }

@@ -47,6 +47,15 @@ class EventManager(val context: Context)
     }
 
     /**
+     * Not Yet Implemented
+     * Request a full event by ID : with teams and players included!
+     */
+    fun GetEventByID(eventID: Int) : GroupEvent
+    {
+        return null!!
+    }
+
+    /**
      * Request all events for a group - does not yet support team and player details
      * @param myGroup : group to request events
      * @return an arraylist of group events

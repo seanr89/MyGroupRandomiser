@@ -36,7 +36,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
         {
             //Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
             SaveSelectedAssignments()
-            NavigationControls.Companion.NavigateToGroupInfoActivity(this, groupID)
+            NavigationControls.NavigateToGroupInfoActivity(this, groupID)
         }
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
