@@ -52,7 +52,13 @@ class EventManager(val context: Context)
      */
     fun GetEventByID(eventID: Int) : GroupEvent
     {
-        return null!!
+        var DBHandler = DatabaseHandler(context)
+        var event = EventDBHandler(DBHandler).GetEventByID(eventID)
+
+        var teamsManager = TeamManager(context)
+        event.EventTeams = teamsManager.ReadTeamsForEvent(eventID)
+
+        return event
     }
 
     /**
@@ -73,5 +79,7 @@ class EventManager(val context: Context)
     fun EventComplete(groupEvent: GroupEvent)
     {
         Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+
+
     }
 }

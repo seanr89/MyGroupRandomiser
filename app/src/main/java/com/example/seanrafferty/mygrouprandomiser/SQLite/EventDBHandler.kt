@@ -61,6 +61,40 @@ class EventDBHandler
     }
 
     /**
+     * Read a single group event by the ID
+     * @param id : unique group event ID
+     * @return the populated group event
+     */
+    fun GetEventByID(id:Int) : GroupEvent
+    {
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.EventTable} WHERE ${DatabaseHandler.EventpkID} = ${id}"
+        val db = _DB.GetReadableDataBaseObject()
+
+        var cursor: Cursor? = null
+        try {
+            cursor = db!!.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            // if table not yet present, create it
+            return null!!
+        }
+
+        if (cursor!!.moveToFirst()) {
+            do
+            {
+                val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventpkID))
+                val date = UtilityMethods.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
+                val complete = UtilityMethods.ConvertIntToBoolean(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventCompleted)))
+                val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
+
+                return GroupEvent(id, date, groupID, complete)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+
+        return null!!
+    }
+
+    /**
      * Query all the events for a group - Note without Teams list
      * @param group : the MyGroup object to query
      * @return : A collection of events for a group filtered by ID

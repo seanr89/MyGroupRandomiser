@@ -61,15 +61,40 @@ class TeamDBHandler
     }
 
     /**
-     *
+     * Read the teams for a single event
+     * @param eventID : the ID of the event
+     * @param list of teams for an event (minus players)
      */
-    fun ReadTeamsForEvent(event:GroupEvent) : ArrayList<Team>
+    fun ReadTeamsForEvent(eventID:Int) : ArrayList<Team>
     {
         var db = _DB.GetReadableDataBaseObject()
         var arrayList = ArrayList<Team>()
 
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.TeamTable} WHERE ${DatabaseHandler.TeamEventID} = $eventID"
 
-        return null!!
+        try
+        {
+            var cursor = db!!.rawQuery(selectQuery, null)
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do
+                {
+                    val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.TeampkID))
+                    val name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.TeamName))
+                    val score = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.TeamScore))
+                    arrayList.add(Team(id, name, score))
+                }
+                while (cursor.moveToNext())
+            }
+            cursor.close()
+        }
+        catch (e: SQLiteException)
+        {
+            // if cursor has a sql exception
+            Log.e(object{}.javaClass.enclosingMethod.name, e.message)
+            return null!!
+        }
+        return arrayList
     }
 
     /**
