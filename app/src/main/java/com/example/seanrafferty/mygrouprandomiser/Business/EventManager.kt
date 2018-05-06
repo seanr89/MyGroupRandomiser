@@ -76,10 +76,15 @@ class EventManager(val context: Context)
         return events
     }
 
+    /**
+     * Update an event to be completed
+     * @param groupEvent : the event to be updated to be completed
+     */
     fun EventComplete(groupEvent: GroupEvent)
     {
         Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
 
-
+        var eventDB = EventDBHandler(DatabaseHandler(context))
+        eventDB.UpdateEventComplete(groupEvent)
     }
 }

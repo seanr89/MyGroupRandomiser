@@ -24,6 +24,7 @@ class EventStatsActivity : AppCompatActivity() {
      */
     private fun RequestAndDisplayEventStats(eventID: Int)
     {
-
+        var eventManager = EventManager(this)
+        var event = eventManager.GetEventByID(EventID)
     }
 }
