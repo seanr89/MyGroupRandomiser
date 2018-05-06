@@ -165,11 +165,13 @@ class EventDBHandler
      */
     fun UpdateEventComplete(event: GroupEvent) : Int
     {
-        var db = _DB.GetWritableDataBaseObject()
+        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
 
-        var result : Int
+        var db = _DB.GetWritableDataBaseObject()
+        var result = 0
 
         var values = ContentValues()
+        //1 de-notes completed
         values.put(DatabaseHandler.EventCompleted, 1)
 
         result = db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)

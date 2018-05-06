@@ -3,6 +3,7 @@ package com.example.seanrafferty.mygrouprandomiser.Business
 import android.content.Context
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
+import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.TeamDBHandler
 
 class TeamManager(val context: Context?)
@@ -34,6 +35,13 @@ class TeamManager(val context: Context?)
         var teams = teamsDB.ReadTeamsForEvent(eventID)
 
         //now to communicate the get the players for each
+        var teamOnePlayerIDs = teamsDB.ReadPlayerIDsForTeamID(teams[0].ID)
+        var teamTwoPlayerIDs = teamsDB.ReadPlayerIDsForTeamID(teams[1].ID)
+
+        //initialise player db handler to query the player info
+        var playerDB = PlayerDBHandler(dbHandler)
+        teams[0].Players = playerDB.ReadAllPlayersInListOfIDs(teamOnePlayerIDs)
+        teams[1].Players = playerDB.ReadAllPlayersInListOfIDs(teamTwoPlayerIDs)
 
         return teams
     }
