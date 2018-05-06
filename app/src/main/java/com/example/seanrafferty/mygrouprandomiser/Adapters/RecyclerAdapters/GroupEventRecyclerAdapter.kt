@@ -14,8 +14,9 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>) : Recycler
         return EventViewHolder(v)
     }
 
-    override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getItemCount(): Int
+    {
+        return eventList.count()
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {

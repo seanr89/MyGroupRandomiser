@@ -2,6 +2,8 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
@@ -14,8 +16,9 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
+import kotlinx.android.synthetic.main.activity_navigation_bar.*
 
-class MainActivity : AppCompatActivity()
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     lateinit var _GroupListView : ListView
 
@@ -91,6 +94,43 @@ class MainActivity : AppCompatActivity()
         //Request all groups from the database and return the data
         groupList = groupDB.ReadAllGroups()
         return groupList
+    }
+
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        when (item.itemId) {
+            R.id.nav_camera -> {
+                // Handle the camera action
+            }
+            R.id.nav_gallery -> {
+
+            }
+            R.id.nav_slideshow -> {
+
+            }
+            R.id.nav_manage -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_send -> {
+
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 }
 
