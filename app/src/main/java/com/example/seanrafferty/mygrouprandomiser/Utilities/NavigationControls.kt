@@ -82,5 +82,18 @@ class NavigationControls {
             intent.putExtra("GroupID", groupID.toString())
             startActivity(context, intent, null)
         }
+
+        /**
+         * Navigate to the EventStats Activity for an individual event
+         * @param context : current activity context navigating from
+         * @param eventID : the event ID to review stats
+         *
+         */
+        fun NavigateToEventStatsActivity(context: Context, eventID: Int)
+        {
+            var intent= Intent(context, EventStatsActivity::class.java)
+            intent.putExtra("EventID", eventID.toString())
+            startActivity(context, intent, null)
+        }
     }
 }

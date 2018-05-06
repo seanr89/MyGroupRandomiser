@@ -26,11 +26,21 @@ class UtilityMethods
         }
 
         /**
-         *
+         * Handle conversion of int to boolean
+         * converts 1 to true else everything is false
+         * @param value : value to check
          */
-//        fun ReadDateTimeToViewableString(dateTime: LocalDateTime) : String
-//        {
-//
-//        }
+        fun ConvertIntToBoolean(value:Int) : Boolean
+        {
+            var result = false
+
+            result = when(value) {
+                1 -> true
+                else -> { // Note the block
+                    false
+                }
+            }
+            return result
+        }
     }
 }

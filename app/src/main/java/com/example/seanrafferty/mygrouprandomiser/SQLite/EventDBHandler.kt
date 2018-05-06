@@ -50,9 +50,10 @@ class EventDBHandler
             {
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventpkID))
                 val date = UtilityMethods.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
+                val complete = UtilityMethods.ConvertIntToBoolean(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventCompleted)))
                 val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
 
-                arrayList.add(GroupEvent(id, date, groupID))
+                arrayList.add(GroupEvent(id, date, groupID, complete))
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -119,6 +120,25 @@ class EventDBHandler
         values.put(DatabaseHandler.EventCompleted, 0)
 
         result = db!!.insert(DatabaseHandler.EventTable, "", values).toInt()
+
+        return result
+    }
+
+    /**
+     * Incomplete operation to update an event to be completed
+     * @param event : the event with its respective ID
+     * @return the number of rows affected or 0 if failed
+     */
+    fun UpdateEventComplete(event: GroupEvent) : Int
+    {
+        var db = _DB.GetWritableDataBaseObject()
+
+        var result : Int
+
+        var values = ContentValues()
+        values.put(DatabaseHandler.EventCompleted, 1)
+
+        result = db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)
 
         return result
     }

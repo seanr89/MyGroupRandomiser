@@ -30,9 +30,11 @@
         <activity
             android:name=".GroupEventGeneratorActivity"
             android:label="@string/title_activity_group_event_generator">
-            <!--android:theme="@style/AppTheme.NoActionBar">-->
+
+            <!-- android:theme="@style/AppTheme.NoActionBar"> -->
 
         </activity>
+        <activity android:name=".EventStatsActivity"></activity>
     </application>
 
 </manifest>
