@@ -51,24 +51,22 @@ class GroupInfoActivity : AppCompatActivity() {
         }
 
         //Setup Recycler View to view all players
-        var GroupManager = MyGroupManager(this)
-        val assignedPlayers = GroupManager.ReadAllPlayersForGroup(MyGroup(ID, ""))
-
-        Log.d("GroupInfoActivity", "assignedPlayers count: ${assignedPlayers.size}")
-        var playerAdapter = PlayerRecyclerAdapter(assignedPlayers, false)
-        Log.d("GroupInfoActivity", "assignedPlayers added to adapter")
-        viewManager = LinearLayoutManager(this)
-        recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
-
-            // use a linear layout manager
-            layoutManager = viewManager
-
-            // specify an viewAdapter (see also next example)
-            adapter = playerAdapter
-        }
+//        var GroupManager = MyGroupManager(this)
+//        val assignedPlayers = GroupManager.ReadAllPlayersForGroup(MyGroup(ID, ""))
+//        var playerAdapter = PlayerRecyclerAdapter(assignedPlayers, false)
+//        Log.d("GroupInfoActivity", "assignedPlayers added to adapter")
+//        viewManager = LinearLayoutManager(this)
+//        recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
+//            // use this setting to improve performance if you know that changes
+//            // in content do not change the layout size of the RecyclerView
+//            setHasFixedSize(true)
+//
+//            // use a linear layout manager
+//            layoutManager = viewManager
+//
+//            // specify an viewAdapter (see also next example)
+//            adapter = playerAdapter
+//        }
     }
 
     /**

@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * with xml menu option file targetted
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.action_overflow, menu)
+       // menuInflater.inflate(R.menu.action_overflow, menu)
         return true
     }
 
@@ -63,20 +63,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
-            when(item.itemId)
-            {
-                R.id.action_players -> {
-                    NavigationControls.NavigateToPlayerActivity(this)
-                    return true
-                }
-                R.id.action_settings -> {
-                    Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
-                    var DBReset = DatabaseHandler(this)
-                    DBReset.onUpgrade(DBReset.writableDatabase, 9 , 9)
-                    var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
-                    dbInitData.RunDataInitialisation()
-                }
-            }
+//            when(item.itemId)
+//            {
+//                R.id.action_players -> {
+//                    NavigationControls.NavigateToPlayerActivity(this)
+//                    return true
+//                }
+//                R.id.action_settings -> {
+//                    Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
+//                    var DBReset = DatabaseHandler(this)
+//                    DBReset.onUpgrade(DBReset.writableDatabase, 9 , 9)
+//                    var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
+//                    dbInitData.RunDataInitialisation()
+//                }
+//            }
         return true
     }
 
@@ -109,23 +109,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
-
+            R.id.nav_players -> {
+                NavigationControls.NavigateToPlayerActivity(this)
             }
-            R.id.nav_send -> {
-
+            R.id.nav_init_db -> {
+                Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
+                var DBReset = DatabaseHandler(this)
+                DBReset.onUpgrade(DBReset.writableDatabase, 11 , 11)
+                var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
+                dbInitData.RunDataInitialisation()
             }
         }
 

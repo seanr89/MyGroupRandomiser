@@ -60,4 +60,9 @@ class EventManager(val context: Context)
 
         return events
     }
+
+    fun EventComplete(groupEvent: GroupEvent)
+    {
+        Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+    }
 }
