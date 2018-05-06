@@ -129,7 +129,26 @@ class TeamDBHandler
             Log.e(object{}.javaClass.enclosingMethod.name, e.message)
             return null!!
         }
-
         return arrayList
+    }
+
+    /**
+     * Update the goals scored by a team
+     * @param teamID : the id of the Team to update
+     * @param score : the number of goals the team scored
+     * @return the number of rows affected or 0
+     */
+    fun UpdateTeamScore(teamID : Int, score: Int) : Int
+    {
+        var db = _DB.GetWritableDataBaseObject()
+
+        var result = 0
+
+        var values = ContentValues()
+        values.put(DatabaseHandler.TeamScore, score)
+
+        result = db!!.update(DatabaseHandler.TeamTable, values, "${DatabaseHandler.TeampkID}=$teamID", null)
+
+        return result
     }
 }

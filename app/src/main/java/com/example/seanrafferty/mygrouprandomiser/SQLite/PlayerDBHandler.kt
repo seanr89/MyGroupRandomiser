@@ -53,6 +53,41 @@ class PlayerDBHandler
     }
 
     /**
+     * Read all available players from the list of player IDs
+     * @param playerIDs : the list of playerIDs to read player info for
+     * @return a list of players
+     */
+    fun ReadAllPlayersInListOfIDs(playerIDs : ArrayList<Int>) : ArrayList<Player>
+    {
+        var arrayList = ArrayList<Player>()
+
+        var combinedString = playerIDs.joinToString(",", "<", ">")
+
+        // Select All Query
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerTable} WHERE ${DatabaseHandler.PlayerpkID} IN ($combinedString)"
+        val db = _DB.readableDatabase
+
+        var cursor = db!!.rawQuery(selectQuery, null)
+        if (cursor != null)
+        {
+            if (cursor.moveToFirst()) {
+                do
+                {
+                    val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerpkID))
+                    val name =cursor.getString(cursor.getColumnIndex(DatabaseHandler.PlayerName))
+                    val rating = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
+
+                    arrayList.add(Player(id, name, rating))
+                }
+                while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        return arrayList
+        return null!!
+    }
+
+    /**
      * Insert and Assign player list to a group
      * @param playerList : the list of players to assign to a group
      * @param group : the group to assign these players
