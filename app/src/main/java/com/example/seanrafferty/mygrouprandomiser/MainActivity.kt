@@ -105,12 +105,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    /**
+     * Handle refreshing of listview adapater datasource
+     */
+    private fun RefreshListView()
+    {
+        var data = RequestGroups()
+        var adapter = _GroupListView.adapter as GroupAdapter
+        adapter.arrayList = data
+        adapter.notifyDataSetChanged()
+    }
 
+    /**
+     * Handle item selection events for navigation drawer item selection
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_manage -> {
-
+                Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
             }
             R.id.nav_players -> {
                 NavigationControls.NavigateToPlayerActivity(this)
@@ -121,6 +134,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 DBReset.onUpgrade(DBReset.writableDatabase, 11 , 11)
                 var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
                 dbInitData.RunDataInitialisation()
+                
+                RefreshListView()
             }
         }
 
