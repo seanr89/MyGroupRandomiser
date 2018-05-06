@@ -21,8 +21,8 @@ class TeamRandomiser
             return null!!
 
         var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
-        var teamOne = Team(0, "Team One")
-        var teamTwo = Team(0, "Team Two")
+        var teamOne = Team(0, "Team One", 0)
+        var teamTwo = Team(0, "Team Two", 0)
 
         var teamOneAdd = false
 

@@ -64,8 +64,8 @@ class TeamFragment : Fragment()
         }
         else
         {
-            InitialiseTeamOneRecycler(Team(0, "Team One"), view)
-            InitialiseTeamTwoRecycler(Team(0, "Team Two"), view)
+            InitialiseTeamOneRecycler(Team(0, "Team One", 0), view)
+            InitialiseTeamTwoRecycler(Team(0, "Team Two", 0), view)
         }
 
         var btn_save_event = view.findViewById<Button>(R.id.btn_save_event)
