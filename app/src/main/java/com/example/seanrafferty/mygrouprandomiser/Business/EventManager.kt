@@ -78,7 +78,7 @@ class EventManager(val context: Context)
 
     /**
      * Update an event to be completed
-     * @param groupEvent : the event to be updated to be completed
+     * @param groupEvent : the event to be updated to be completedgsfsef
      */
     fun EventComplete(groupEvent: GroupEvent)
     {
