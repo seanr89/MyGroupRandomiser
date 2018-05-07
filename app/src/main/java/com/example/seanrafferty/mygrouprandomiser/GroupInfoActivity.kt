@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
@@ -49,6 +51,16 @@ class GroupInfoActivity : AppCompatActivity() {
         {
             NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
+
+        var btn_event_stats = findViewById<Button>(R.id.btn_event_stats)
+        btn_event_stats.setOnClickListener()
+        {
+            Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
+            //NavigationControls.NavigateToEventStatsActivity(this,)
+        }
+
+        var eventManager = EventManager(this)
+        var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
 
         //Setup Recycler View to view all players
 //        var GroupManager = MyGroupManager(this)

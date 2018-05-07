@@ -16,6 +16,7 @@ import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import kotlinx.android.synthetic.main.activity_group_event_generator.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(),
@@ -34,8 +35,12 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
             var result = eventManager.SaveEvent(groupEvent)
         }
+        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
     }
 
+    /**
+     * Handle event from setup fragment noting the completion team randomisation
+     */
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
         Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
@@ -89,7 +94,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_group_event_generator, menu)
+        //menuInflater.inflate(R.menu.menu_group_event_generator, menu)
         return true
     }
 

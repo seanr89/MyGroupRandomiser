@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //Log.d("ListView Selected","${selectedGroup.toString()} selected")
             NavigationControls.NavigateToGroupInfoActivity(this, selectedGroup.ID)
         }
-        
+
         nav_view.setNavigationItemSelectedListener(this)
     }
 

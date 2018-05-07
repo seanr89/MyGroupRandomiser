@@ -121,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text="Assign Players"
+        android:text="Ass.. Player"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -131,9 +131,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/btn_assign_players"
-        android:text="Create Event"
+        android:text="Create Evnt"
         app:layout_constraintBottom_toBottomOf="@+id/btn_assign_players"
         app:layout_constraintStart_toEndOf="@+id/btn_assign_players" />
+
+    <Button
+        android:id="@+id/btn_event_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/btnGroupEventStats"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_create_event"
+        app:layout_constraintStart_toEndOf="@+id/btn_create_event" />
 
 
 </android.support.constraint.ConstraintLayout>

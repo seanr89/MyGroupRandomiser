@@ -52,10 +52,10 @@ class InitialiseDataDBHandler
         playerDB.InsertPlayer(Player(0, "Conor J Murphy", 9))
         playerDB.InsertPlayer(Player(0, "Chris McShane", 7))
         playerDB.InsertPlayer(Player(0, "Michael Hayes", 8))
-        playerDB.InsertPlayer(Player(0, "David McCrory", 8))
+        playerDB.InsertPlayer(Player(0, "David Morgan", 8))
         playerDB.InsertPlayer(Player(0, "William Lawrence", 8))
         playerDB.InsertPlayer(Player(0, "Sergei", 9))
-        playerDB.InsertPlayer(Player(0, "James Davidson", 7))
+        playerDB.InsertPlayer(Player(0, "James Davison", 7))
         playerDB.InsertPlayer(Player(0, "Ryan Bevin", 8))
         playerDB.InsertPlayer(Player(0, "Mark Latten", 7))
         playerDB.InsertPlayer(Player(0, "Mark Lutton", 6))
@@ -68,7 +68,7 @@ class InitialiseDataDBHandler
     private fun InitialiseGroupPlayerAssignment()
     {
         Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
-        var PlayerDBHandler = PlayerDBHandler(_DB)
+        var playerDBHandler = PlayerDBHandler(_DB)
 
         var players = ArrayList<Player>()
         players.add(Player(1, "", 0))
@@ -88,6 +88,6 @@ class InitialiseDataDBHandler
         players.add(Player(15, "", 0))
         var group = MyGroup(1, "")
 
-        PlayerDBHandler.AssignPlayersToGroup(players, group)
+        playerDBHandler.AssignPlayersToGroup(players, group)
     }
 }
