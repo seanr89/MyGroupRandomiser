@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.BaseAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 import kotlinx.android.synthetic.main.group_listview_item.view.*
 import kotlinx.android.synthetic.main.player_listview_item.view.*
 
@@ -17,15 +19,18 @@ class PlayerAdapter : BaseAdapter
     var context: Context? = null
     var myInflater: LayoutInflater? = null
 
+    private var selectionOption : SelectionOption
+
     /**
      * object constructor
      */
-    constructor(con: Context, arrList: ArrayList<Player>) : super()
+    constructor(con: Context, arrList: ArrayList<Player>, selectionOption: SelectionOption = SelectionOption.NO_SELECT) : super()
     {
         //println("PlayerAdapter: Constructor")
-        this.context = con;
+        this.context = con
         this.arrayList = arrList
         this.myInflater = LayoutInflater.from(context)
+        this.selectionOption = selectionOption
     }
 
     /**

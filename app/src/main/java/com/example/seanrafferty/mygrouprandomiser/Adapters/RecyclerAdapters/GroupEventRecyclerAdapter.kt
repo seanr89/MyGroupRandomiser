@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
-class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>) : RecyclerView.Adapter<GroupEventRecyclerAdapter.EventViewHolder>()
+class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
+                                var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<GroupEventRecyclerAdapter.EventViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupEventRecyclerAdapter.EventViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.player_listview_item, parent, false)

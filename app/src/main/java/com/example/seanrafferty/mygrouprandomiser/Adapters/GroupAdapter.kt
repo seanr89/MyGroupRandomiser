@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 import kotlinx.android.synthetic.main.group_listview_item.view.*
 
 class GroupAdapter : BaseAdapter
@@ -15,15 +16,18 @@ class GroupAdapter : BaseAdapter
     var context: Context? = null
     var myInflater: LayoutInflater? = null
 
+    private var selectionOption : SelectionOption
+
     /**
      * Constructor
      */
-    constructor(con: Context, arrList: ArrayList<MyGroup>) : super()
+    constructor(con: Context, arrList: ArrayList<MyGroup>, selectionOption: SelectionOption = SelectionOption.NO_SELECT) : super()
     {
         println("GroupAdapter: Constructor")
         this.context = con;
         this.arrayList = arrList
         this.myInflater = LayoutInflater.from(context)
+        this.selectionOption = selectionOption
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View

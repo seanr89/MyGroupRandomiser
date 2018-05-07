@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
-class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : Boolean = false) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
+class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : Boolean = false,
+                            var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
 {
     var SelectedItems : ArrayList<Player> = arrayListOf()
 
