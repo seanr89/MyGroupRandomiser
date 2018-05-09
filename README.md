@@ -30,4 +30,19 @@ Phase 2
 Phase 3
 - Publish to App Store
 - Location Data
--
+
+
+Process Flow (Phase 1)
+1. Create a Group to allow players to join/be assigned too
+  a. A group is a collection of players who play together at scheduled group events
+2. Allow players to be created
+3. Assign a player to a group
+4. Create an event for a group
+5. Select Date, Time and Players too Attend
+6. Randomize teams
+  a. Step 1 is standard random shuffle
+  b. step 2 is to shuffle with ratings to also Assist
+7. Save Teams to Events
+8. View event and update statistics
+  a. event complete
+  b. goals scored
