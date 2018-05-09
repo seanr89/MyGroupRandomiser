@@ -46,6 +46,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="10dp"
         android:height="@dimen/actionBarSize"
+        android:layout_weight="230dp"
         android:text="Switch" />
 
 </LinearLayout>
