@@ -17,6 +17,7 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import kotlinx.android.synthetic.main.activity_navigation_bar.*
+import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
 
         _GroupListView = findViewById(R.id.GroupListView) as ListView
 

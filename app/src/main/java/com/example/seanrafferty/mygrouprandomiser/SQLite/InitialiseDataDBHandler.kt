@@ -23,6 +23,9 @@ class InitialiseDataDBHandler
         InitialiseGroupPlayerAssignment()
     }
 
+    /**
+     * Initialise test groups to allow players to be assigned
+     */
     private fun InitialiseDemoGroups()
     {
         Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
@@ -33,11 +36,14 @@ class InitialiseDataDBHandler
         myGroupDB.CreateGroup(MyGroup(-1, "Group 1"))
         myGroupDB.CreateGroup(MyGroup(-1, "Group 3"))
         myGroupDB.CreateGroup(MyGroup(-1, "Group 4"))
-        myGroupDB.CreateGroup(MyGroup(-1, "Group 5"))
-        myGroupDB.CreateGroup(MyGroup(-1, "Group 6"))
+       // myGroupDB.CreateGroup(MyGroup(-1, "Group 5"))
+       // myGroupDB.CreateGroup(MyGroup(-1, "Group 6"))
 
     }
 
+    /**
+     * Initialise test player data set
+     */
     private fun InitialiseDemoPlayers()
     {
         Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
@@ -63,8 +69,12 @@ class InitialiseDataDBHandler
         playerDB.InsertPlayer(Player(0, "Cormac Byrne", 8))
         playerDB.InsertPlayer(Player(0, "Emmet Mulholland", 8))
         playerDB.InsertPlayer(Player(0, "Sean Mills", 3))
+        playerDB.InsertPlayer(Player(0, "Andrew Williamson", 5))
     }
 
+    /**
+     * Initialise test data set of players assigned to a single group
+     */
     private fun InitialiseGroupPlayerAssignment()
     {
         Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
@@ -86,6 +96,11 @@ class InitialiseDataDBHandler
         players.add(Player(13, "", 0))
         players.add(Player(14, "", 0))
         players.add(Player(15, "", 0))
+        players.add(Player(16, "", 0))
+        players.add(Player(17, "", 0))
+        players.add(Player(18, "", 0))
+        players.add(Player(19, "", 0))
+        players.add(Player(20, "", 0))
         var group = MyGroup(1, "")
 
         playerDBHandler.AssignPlayersToGroup(players, group)

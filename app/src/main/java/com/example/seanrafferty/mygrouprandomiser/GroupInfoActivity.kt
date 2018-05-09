@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.GroupEventRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
@@ -18,6 +19,7 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.EventDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
 /**
  * Activity to display and handle GroupInfo details
@@ -62,23 +64,20 @@ class GroupInfoActivity : AppCompatActivity() {
         var eventManager = EventManager(this)
         var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
 
-        //Setup Recycler View to view all players
-//        var GroupManager = MyGroupManager(this)
-//        val assignedPlayers = GroupManager.ReadAllPlayersForGroup(MyGroup(ID, ""))
-//        var playerAdapter = PlayerRecyclerAdapter(assignedPlayers, false)
+        var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, SelectionOption.SINGLE_SELECT)
 //        Log.d("GroupInfoActivity", "assignedPlayers added to adapter")
-//        viewManager = LinearLayoutManager(this)
-//        recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
-//            // use this setting to improve performance if you know that changes
-//            // in content do not change the layout size of the RecyclerView
-//            setHasFixedSize(true)
-//
-//            // use a linear layout manager
-//            layoutManager = viewManager
-//
-//            // specify an viewAdapter (see also next example)
-//            adapter = playerAdapter
-//        }
+        viewManager = LinearLayoutManager(this)
+        recyclerView = findViewById<RecyclerView>(R.id.GroupInfoRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = recyclerAdapter
+        }
     }
 
     /**
@@ -120,13 +119,5 @@ class GroupInfoActivity : AppCompatActivity() {
         groupEventCountTextView.text = eventCount.toString()
         val groupPlayerCountTextView = findViewById<TextView>(R.id.groupPlayerCountView)
         groupPlayerCountTextView.text = playerCount.toString()
-    }
-
-    /**
-     * Request all of the events for a group
-     */
-    private fun RequestAllEventsForGroup(group:MyGroup)
-    {
-
     }
 }
