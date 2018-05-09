@@ -24,7 +24,7 @@ class GroupAdapter : BaseAdapter
     constructor(con: Context, arrList: ArrayList<MyGroup>, selectionOption: SelectionOption = SelectionOption.NO_SELECT) : super()
     {
         println("GroupAdapter: Constructor")
-        this.context = con;
+        this.context = con
         this.arrayList = arrList
         this.myInflater = LayoutInflater.from(context)
         this.selectionOption = selectionOption
