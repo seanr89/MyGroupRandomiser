@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="actionBarSize">30dp</dimen>
+    <dimen name="actionBarSize">55dp</dimen>
+    <dimen name="tabBarSize">30dp</dimen>
 </resources>
