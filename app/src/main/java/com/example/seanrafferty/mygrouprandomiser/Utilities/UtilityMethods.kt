@@ -11,8 +11,14 @@ class UtilityMethods
         /**
          *
          */
-        fun ConvertStringToDateTime(dateString: String): LocalDateTime {
+        fun ConvertStringToDateTime(dateString: String): LocalDateTime
+        {
             var localDateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+            return localDateTime
+        }
+
+        fun ConvertISODateStringToDateTime(dateString: String): LocalDateTime {
+            var localDateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_DATE_TIME)
             return localDateTime
         }
 

@@ -54,7 +54,7 @@ class InitialiseDataDBHandler
         playerDB.InsertPlayer(Player(0, "Stephen Quinn", 7))
         playerDB.InsertPlayer(Player(0, "Steven Kennedy", 8))
         playerDB.InsertPlayer(Player(0, "Francy Donald", 10))
-        playerDB.InsertPlayer(Player(0, "Stephen Kelso", 9))
+        playerDB.InsertPlayer(Player(0, "Stephen Kelso", 8))
         playerDB.InsertPlayer(Player(0, "Conor J Murphy", 9))
         playerDB.InsertPlayer(Player(0, "Chris McShane", 7))
         playerDB.InsertPlayer(Player(0, "Michael Hayes", 8))
@@ -70,6 +70,7 @@ class InitialiseDataDBHandler
         playerDB.InsertPlayer(Player(0, "Emmet Mulholland", 8))
         playerDB.InsertPlayer(Player(0, "Sean Mills", 3))
         playerDB.InsertPlayer(Player(0, "Andrew Williamson", 5))
+        playerDB.InsertPlayer(Player(0, "Ross Meikle", 7))
     }
 
     /**
@@ -101,6 +102,7 @@ class InitialiseDataDBHandler
         players.add(Player(18, "", 0))
         players.add(Player(19, "", 0))
         players.add(Player(20, "", 0))
+        players.add(Player(21, "", 0))
         var group = MyGroup(1, "")
 
         playerDBHandler.AssignPlayersToGroup(players, group)

@@ -25,8 +25,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 {
     override fun onFragmentInteraction(teams : ArrayList<Team>)
     {
-        Toast.makeText(this, "Feature Not Available!", Toast.LENGTH_LONG).show()
-        return
+        //Toast.makeText(this, "Feature Not Available!", Toast.LENGTH_LONG).show()
+        //return
 
         var groupEvent = CreateEventGroupFromContent()
         if(groupEvent != null)
@@ -35,7 +35,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
             var result = eventManager.SaveEvent(groupEvent)
         }
-        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
+        //NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
     }
 
     /**
