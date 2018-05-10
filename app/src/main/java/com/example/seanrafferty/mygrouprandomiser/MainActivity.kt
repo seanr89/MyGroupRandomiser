@@ -21,8 +21,8 @@ import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
+    
     lateinit var _GroupListView : ListView
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
