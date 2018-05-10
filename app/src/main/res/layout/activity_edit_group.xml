@@ -39,14 +39,4 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="264dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="10dp"
-        android:height="@dimen/actionBarSize"
-        android:layout_weight="230dp"
-        android:text="Switch" />
-
 </LinearLayout>
