@@ -18,7 +18,7 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
     var SelectedItems : ArrayList<GroupEvent> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupEventRecyclerAdapter.EventViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.player_listview_item, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.event_listview_item, parent, false)
         return EventViewHolder(v)
     }
 

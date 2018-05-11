@@ -5,14 +5,23 @@
 
 
     <TextView
-        android:id="@+id/EventIDTextHeader"
-        android:layout_width="match_parent"
+        android:id="@+id/EventDateText"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:padding="10dp"
-        android:text="Event ID"
+        android:text="Event Date"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/checkBoxCompleted"
+        android:layout_width="141dp"
+        android:layout_height="47dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="13dp"
+        android:clickable="false"
+        android:text="Completed" />
+
 
 </RelativeLayout>
