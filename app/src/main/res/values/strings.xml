@@ -23,6 +23,7 @@
     <!-- Group Info Act -->
     <string name="GroupIDString">Group ID</string>
     <string name="GroupNameString">Group Name</string>
+    <string name="GroupPlayerCountString">Player Count</string>
     <string name="btnGroupEventStats">Evnt Stats</string>
 
     <!-- Team Details -->

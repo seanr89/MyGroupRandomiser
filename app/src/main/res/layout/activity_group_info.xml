@@ -24,31 +24,11 @@
         android:layout_below="@+id/GroupInfoTextHeader">
 
         <TextView
-            android:id="@+id/groupIDViewHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="14dp"
-            android:text="@string/GroupIDString"
-            android:textStyle="bold"/>
-
-            <!-- Field to display the ID for the group-->
-            <TextView
-                android:id="@+id/groupIDView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:layout_marginLeft="43dp"
-                android:layout_toRightOf="@+id/groupIDViewHeader"
-                android:text="ID" />
-
-        <TextView
             android:id="@+id/groupNameViewHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:layout_marginLeft="14dp"
-            android:layout_below="@+id/groupIDView"
             android:text="@string/GroupNameString"
             android:textStyle="bold"/>
 
@@ -59,7 +39,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/groupIDView"
                 android:layout_toRightOf="@+id/groupNameViewHeader"
                 android:text="NAME" />
 
@@ -91,7 +70,7 @@
             android:layout_marginTop="14dp"
             android:layout_marginLeft="14dp"
             android:layout_below="@+id/groupEventCountHeader"
-            android:text="Player Count"
+            android:text="@string/GroupPlayerCountString"
             android:textStyle="bold"/>
 
             <!-- Field to display the player Count for the group-->

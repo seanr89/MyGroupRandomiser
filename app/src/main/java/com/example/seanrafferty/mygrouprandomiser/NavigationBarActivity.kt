@@ -58,20 +58,10 @@ class NavigationBarActivity : AppCompatActivity(), NavigationView.OnNavigationIt
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-//            R.id.nav_camera -> {
-//                // Handle the camera action
-//            }
-//            R.id.nav_gallery -> {
-//
-//            }
-//            R.id.nav_slideshow -> {
-//
-//            }
             R.id.nav_manage -> {
 
             }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
