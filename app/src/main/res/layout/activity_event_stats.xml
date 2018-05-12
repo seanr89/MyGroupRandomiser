@@ -6,4 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".EventStatsActivity">
 
+    <TextView
+        android:id="@+id/txtViewEventDateHeader"
+        android:layout_width="73dp"
+        android:layout_height="28dp"
+        android:text="Date"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/txtViewEventDateContent"
+        android:layout_width="150dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="105dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txtViewEventDateHeader"
+        tools:layout_editor_absoluteY="19dp" />
+
+    <TextView
+        android:id="@+id/txtViewTeamOneHeader"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:text="Team One Score"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="67dp" />
+
+    <TextView
+        android:id="@+id/txtViewTeamTwoHeader"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:text="Team Two Score"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="145dp" />
+
+    <NumberPicker
+        android:id="@+id/pickerTeamOne"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toEndOf="@+id/txtViewTeamOneHeader"
+        tools:layout_editor_absoluteY="56dp"></NumberPicker>
+
+    <NumberPicker
+        android:id="@+id/pickerTeamTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toEndOf="@+id/txtViewTeamTwoHeader"
+        tools:layout_editor_absoluteY="132dp"></NumberPicker>
 </android.support.constraint.ConstraintLayout>

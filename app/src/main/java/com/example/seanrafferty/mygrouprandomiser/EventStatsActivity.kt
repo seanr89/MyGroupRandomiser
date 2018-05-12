@@ -3,6 +3,7 @@ package com.example.seanrafferty.mygrouprandomiser
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
+import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 class EventStatsActivity : AppCompatActivity()
 {
@@ -29,9 +30,10 @@ class EventStatsActivity : AppCompatActivity()
     }
 
     /**
-     * 
+     * Handle the update of the score for the provided team
+     * @param team : the team with the provided score
      */
-    private fun UpdateTeamScore()
+    private fun UpdateTeamScore(team : Team)
     {
 
     }
