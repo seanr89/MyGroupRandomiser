@@ -14,7 +14,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtViewEventDateContent"
@@ -23,7 +24,8 @@
         android:layout_marginStart="105dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/txtViewEventDateHeader"
-        tools:layout_editor_absoluteY="19dp" />
+        tools:layout_editor_absoluteY="19dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtViewTeamOneHeader"
@@ -33,7 +35,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="67dp" />
+        tools:layout_editor_absoluteY="67dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtViewTeamTwoHeader"
@@ -43,7 +46,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="145dp" />
+        tools:layout_editor_absoluteY="145dp"
+        tools:ignore="MissingConstraints" />
 
     <NumberPicker
         android:id="@+id/pickerTeamOne"
@@ -51,7 +55,8 @@
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toEndOf="@+id/txtViewTeamOneHeader"
-        tools:layout_editor_absoluteY="56dp"></NumberPicker>
+        tools:layout_editor_absoluteY="56dp"
+        tools:ignore="MissingConstraints"></NumberPicker>
 
     <NumberPicker
         android:id="@+id/pickerTeamTwo"
@@ -59,5 +64,6 @@
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toEndOf="@+id/txtViewTeamTwoHeader"
-        tools:layout_editor_absoluteY="132dp"></NumberPicker>
+        tools:layout_editor_absoluteY="132dp"
+        tools:ignore="MissingConstraints"></NumberPicker>
 </android.support.constraint.ConstraintLayout>
