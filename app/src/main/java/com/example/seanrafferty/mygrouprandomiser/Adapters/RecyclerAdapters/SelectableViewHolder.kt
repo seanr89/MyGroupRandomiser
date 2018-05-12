@@ -9,4 +9,14 @@ import android.view.View
 class SelectableViewHolder : RecyclerView.ViewHolder {
 
     constructor(itemView: View) : super(itemView)
+
+    /**
+     * Initialisation block used when constructor initialisation cannot
+     */
+    init
+    {
+        itemView.setOnClickListener { v: View  ->
+
+        }
+    }
 }

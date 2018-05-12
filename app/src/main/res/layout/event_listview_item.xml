@@ -5,7 +5,7 @@
 
 
     <TextView
-        android:id="@+id/EventDateText"
+        android:id="@+id/eventDateText"
         android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -14,7 +14,7 @@
         android:textSize="20sp" />
 
     <CheckBox
-        android:id="@+id/checkBoxCompleted"
+        android:id="@+id/eventCheckBoxCompleted"
         android:layout_width="141dp"
         android:layout_height="47dp"
         android:layout_alignParentEnd="true"

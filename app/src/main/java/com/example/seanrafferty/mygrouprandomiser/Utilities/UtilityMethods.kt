@@ -31,7 +31,12 @@ class UtilityMethods
          */
         fun ConvertDateToSQLString(date: LocalDateTime): String {
             val stringDate = date.format(DateTimeFormatter.ISO_DATE_TIME)
+            return stringDate
+        }
 
+        fun ConvertDateTimeToString(date: LocalDateTime): String
+        {
+            val stringDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
             return stringDate
         }
 

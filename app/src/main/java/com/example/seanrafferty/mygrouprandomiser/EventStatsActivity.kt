@@ -4,10 +4,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 
-class EventStatsActivity : AppCompatActivity() {
+class EventStatsActivity : AppCompatActivity()
+{
 
     private var EventID = 0
-    private lateinit var eventManager : EventManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
