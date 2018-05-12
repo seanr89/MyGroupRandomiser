@@ -27,4 +27,12 @@ class EventStatsActivity : AppCompatActivity()
         var eventManager = EventManager(this)
         var event = eventManager.GetEventByID(EventID)
     }
+
+    /**
+     * 
+     */
+    private fun UpdateTeamScore()
+    {
+
+    }
 }

@@ -24,7 +24,10 @@
     <string name="GroupIDString">Group ID</string>
     <string name="GroupNameString">Group Name</string>
     <string name="GroupPlayerCountString">Player Count</string>
-    <string name="btnGroupEventStats">Evnt Stats</string>
+
+    <string name="btnGroupAssignPlayers">Assign Player</string>
+    <string name="btnCreateEvent">New Event</string>
+    <string name="btnGroupEventStats">Event Stats</string>
 
     <!-- Team Details -->
     <string name="TeamIDString">Team ID</string>

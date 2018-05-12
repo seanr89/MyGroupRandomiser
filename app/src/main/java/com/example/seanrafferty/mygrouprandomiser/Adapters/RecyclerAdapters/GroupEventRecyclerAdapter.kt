@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
@@ -73,7 +74,8 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
                 holder.itemView.setOnClickListener()
                 {
                     //SingleItemSelected(holder.itemView, position)
-                    NavigationControls.NavigateToEventStatsActivity(activity, SelectedItems[position].ID)
+                    Toast.makeText(activity, "Not Yet Available!!", Toast.LENGTH_LONG).show()
+                    //NavigationControls.NavigateToEventStatsActivity(activity, SelectedItems[position].ID)
                 }
             }
             SelectionOption.MULTI_SELECT ->

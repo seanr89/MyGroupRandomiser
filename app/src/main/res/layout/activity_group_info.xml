@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text="Ass.. Player"
+        android:text="@string/btnGroupAssignPlayers"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -110,18 +110,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/btn_assign_players"
-        android:text="Create Evnt"
+        android:text="@string/btnCreateEvent"
         app:layout_constraintBottom_toBottomOf="@+id/btn_assign_players"
         app:layout_constraintStart_toEndOf="@+id/btn_assign_players" />
 
-    <Button
-        android:id="@+id/btn_event_stats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/btnGroupEventStats"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_create_event"
-        app:layout_constraintStart_toEndOf="@+id/btn_create_event" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_event_stats"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:text="@string/btnGroupEventStats"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/btn_create_event"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/btn_create_event" />-->
 
 
 </android.support.constraint.ConstraintLayout>

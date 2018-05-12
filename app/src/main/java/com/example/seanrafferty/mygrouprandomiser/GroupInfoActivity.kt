@@ -49,12 +49,12 @@ class GroupInfoActivity : AppCompatActivity() {
             NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
 
-        var btn_event_stats = findViewById<Button>(R.id.btn_event_stats)
-        btn_event_stats.setOnClickListener()
-        {
-            Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
-            //NavigationControls.NavigateToEventStatsActivity(this,)
-        }
+//        var btn_event_stats = findViewById<Button>(R.id.btn_event_stats)
+//        btn_event_stats.setOnClickListener()
+//        {
+//            Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
+//            //NavigationControls.NavigateToEventStatsActivity(this,)
+//        }
 
         var eventManager = EventManager(this)
         var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
