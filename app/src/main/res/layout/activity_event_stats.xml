@@ -73,16 +73,18 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="224dp" />
+        tools:layout_editor_absoluteY="224dp"
+        tools:ignore="MissingConstraints" />
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/switchEventCompleted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="125dp"
         android:text="Switch"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        tools:layout_editor_absoluteY="215dp" />
+        tools:layout_editor_absoluteY="215dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnUpdateEvent"
@@ -90,5 +92,6 @@
         android:layout_height="wrap_content"
         android:text="Update"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="275dp" />
+        tools:layout_editor_absoluteY="275dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

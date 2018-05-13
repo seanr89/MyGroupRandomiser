@@ -159,7 +159,7 @@ class EventDBHandler
     }
 
     /**
-     * Incomplete operation to update an event to be completed
+     * Update an event to be completed
      * @param event : the event with its respective ID
      * @return the number of rows affected or 0 if failed
      */
@@ -173,6 +173,27 @@ class EventDBHandler
         var values = ContentValues()
         //1 de-notes completed
         values.put(DatabaseHandler.EventCompleted, 1)
+
+        result = db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)
+
+        return result
+    }
+
+    /**
+     * Update an event to be InComplete
+     * @param event : the event with its respective ID
+     * @return the number of rows affected or 0 if failed
+     */
+    fun UpdateEventInComplete(event: GroupEvent) : Int
+    {
+        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
+
+        var db = _DB.GetWritableDataBaseObject()
+        var result = 0
+
+        var values = ContentValues()
+        //1 de-notes completed
+        values.put(DatabaseHandler.EventCompleted, 0)
 
         result = db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)
 
