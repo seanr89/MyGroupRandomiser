@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignin;
+    private TextView textViewSignUp;
 
     private ProgressBar progressBar;
 
@@ -33,16 +34,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        if(firebaseAuth.getCurrentUser() != null){
+            finish();
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        }
+
         progressBar = new ProgressBar(this);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
-        textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
+        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
 
         buttonRegister.setOnClickListener(this);
-        textViewSignin.setOnClickListener(this);
+        textViewSignUp.setOnClickListener(this);
     }
 
 
@@ -53,6 +59,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(view == buttonRegister)
         {
             registerUser();
+        }
+
+        if(view == textViewSignUp){
+            startActivity(new Intent(this,LoginActivity.class));
         }
     }
 
@@ -75,7 +85,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //user is successfully registered
-                            Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }
                         else
                         {

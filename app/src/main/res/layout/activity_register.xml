@@ -13,6 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:text="User Registration"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            />
 
         <EditText
             android:layout_margin="15dp"
@@ -39,7 +47,7 @@
 
         <TextView
             android:text="Already Registered? Sign in here!"
-            android:id="@+id/textViewSignIn"
+            android:id="@+id/textViewSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
