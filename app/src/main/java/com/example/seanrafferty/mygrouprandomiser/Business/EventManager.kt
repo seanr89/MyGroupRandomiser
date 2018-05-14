@@ -77,7 +77,7 @@ class EventManager(val context: Context)
     }
 
     /**
-     * Update an event to be completed
+     * Update an event to be completed (only that so far)
      * @param groupEvent : the event to be updated to be completedgsfsef
      */
     fun EventComplete(groupEvent: GroupEvent)
@@ -86,5 +86,13 @@ class EventManager(val context: Context)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
         eventDB.UpdateEventComplete(groupEvent)
+    }
+
+    fun EventInComplete(groupEvent: GroupEvent)
+    {
+        Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+
+        var eventDB = EventDBHandler(DatabaseHandler(context))
+        eventDB.UpdateEventInComplete(groupEvent)
     }
 }
