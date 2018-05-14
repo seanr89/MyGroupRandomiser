@@ -1,23 +1,39 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
 import android.graphics.Color
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.TextView
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
+import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 
+/**
+ * RecyclerAdapter - with primary usecase of the group info page
+ * provides method for single or multi-selection of items
+ * Single selection targets event stats activity
+ * @param eventList : the list of events to be parsed and displayed
+ * @param activity : the parent activity
+ * @param selectionOption : the option to handle selection events (none, single or multi)
+ */
 class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
-                                var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<GroupEventRecyclerAdapter.EventViewHolder>()
+                                var activity: AppCompatActivity,
+                                var selectionOption: SelectionOption = SelectionOption.NO_SELECT) :
+        RecyclerView.Adapter<GroupEventRecyclerAdapter.EventViewHolder>()
 {
 
-    lateinit var SelectedItems : ArrayList<GroupEvent>
+    var SelectedItems : ArrayList<GroupEvent> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupEventRecyclerAdapter.EventViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.player_listview_item, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.event_listview_item, parent, false)
         return EventViewHolder(v)
     }
 
@@ -26,7 +42,14 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
         return eventList.count()
     }
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+    /**
+     *
+     */
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int)
+    {
+
+        holder?.txtDate?.text = UtilityMethods.ConvertDateTimeToString(SelectedItems[position].Date)
+        holder?.checkBoxCompleted.setChecked(SelectedItems[position].Completed)
 
         if(isItemSelected(position))
         {
@@ -37,6 +60,9 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
             ColourItemDeSelected(holder.itemView)
         }
 
+        /*
+        Handle selection choices
+         */
         when(selectionOption)
         {
             SelectionOption.NO_SELECT ->
@@ -47,7 +73,9 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
             {
                 holder.itemView.setOnClickListener()
                 {
-                    SingleItemSelected(holder.itemView, position)
+                    //SingleItemSelected(holder.itemView, position)
+                    Toast.makeText(activity, "Not Yet Available!!", Toast.LENGTH_LONG).show()
+                    //NavigationControls.NavigateToEventStatsActivity(activity, SelectedItems[position].ID)
                 }
             }
             SelectionOption.MULTI_SELECT ->
@@ -61,6 +89,10 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
     }
 
 
+    /**
+     * Handle and process single item selection for an item
+     * @param view : the view to handle item selection and processing
+     */
     private fun SingleItemSelected(view:View, position: Int)
     {
         Log.d("GroupEventRecyclerAdapter", object{}.javaClass.enclosingMethod.name)
@@ -73,6 +105,9 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
         ColourItemSelected(view)
     }
 
+    /**
+     * Handle and process item selection when mutli-selection is available
+     */
     private fun MultiItemSelected(view:View, position: Int)
     {
         Log.d("GroupEventRecyclerAdapter", object{}.javaClass.enclosingMethod.name)
@@ -137,6 +172,13 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
     // Each data item is just a string in this case that is shown in a TextView.
     class EventViewHolder : RecyclerView.ViewHolder
     {
+        var txtDate: TextView
+        var checkBoxCompleted : CheckBox
+
         constructor(itemView: View) : super(itemView)
+        {
+            txtDate = itemView.findViewById<TextView>(R.id.eventDateText)
+            checkBoxCompleted = itemView.findViewById<CheckBox>(R.id.eventCheckBoxCompleted)
+        }
     }
 }

@@ -49,7 +49,7 @@ class EventDBHandler
             do
             {
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventpkID))
-                val date = UtilityMethods.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
+                val date = UtilityMethods.ConvertISODateStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
                 val complete = UtilityMethods.ConvertIntToBoolean(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventCompleted)))
                 val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
 
@@ -111,7 +111,7 @@ class EventDBHandler
         {
             //now to filter - check if the current player is already assigned to the group!!
             var mappedGroups = allGroupEvents.filter { it.GroupID == group.ID }
-            if (mappedGroups == null || mappedGroups.isEmpty())
+            if (mappedGroups != null || !mappedGroups.isEmpty())
             {
                 resultList = mappedGroups as ArrayList<GroupEvent>
             }
@@ -148,7 +148,7 @@ class EventDBHandler
         var result : Int
 
         var values = ContentValues()
-        values.put(DatabaseHandler.EventDate, event.Date.toString())
+        values.put(DatabaseHandler.EventDate, UtilityMethods.ConvertDateToSQLString(event.Date))
         values.put(DatabaseHandler.EventGroupID, event.GroupID)
         //default the event to incomplete
         values.put(DatabaseHandler.EventCompleted, 0)

@@ -8,20 +8,35 @@ import java.util.*
 class UtilityMethods
 {
     companion object {
+
         /**
-         *
+         * read in date time string (dd/mm/yyyy hh:mm) and convert to local date time
          */
-        fun ConvertStringToDateTime(dateString: String): LocalDateTime {
+        fun ConvertStringToDateTime(dateString: String): LocalDateTime
+        {
             var localDateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
             return localDateTime
         }
 
         /**
-         *
+         * process a date time string in ISO date time format and convert to LocalDateTime
+         */
+        fun ConvertISODateStringToDateTime(dateString: String): LocalDateTime {
+            var localDateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_DATE_TIME)
+            return localDateTime
+        }
+
+        /**
+         * read in datetime parameter and convert to ISO DATE TIME formatted string
          */
         fun ConvertDateToSQLString(date: LocalDateTime): String {
             val stringDate = date.format(DateTimeFormatter.ISO_DATE_TIME)
+            return stringDate
+        }
 
+        fun ConvertDateTimeToString(date: LocalDateTime): String
+        {
+            val stringDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
             return stringDate
         }
 

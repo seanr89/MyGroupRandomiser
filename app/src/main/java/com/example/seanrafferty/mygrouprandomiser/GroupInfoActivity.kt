@@ -49,18 +49,17 @@ class GroupInfoActivity : AppCompatActivity() {
             NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
 
-        var btn_event_stats = findViewById<Button>(R.id.btn_event_stats)
-        btn_event_stats.setOnClickListener()
-        {
-            Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
-            //NavigationControls.NavigateToEventStatsActivity(this,)
-        }
+//        var btn_event_stats = findViewById<Button>(R.id.btn_event_stats)
+//        btn_event_stats.setOnClickListener()
+//        {
+//            Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
+//            //NavigationControls.NavigateToEventStatsActivity(this,)
+//        }
 
         var eventManager = EventManager(this)
         var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
 
-        var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, SelectionOption.SINGLE_SELECT)
-//        Log.d("GroupInfoActivity", "assignedPlayers added to adapter")
+        var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, this, SelectionOption.SINGLE_SELECT)
         viewManager = LinearLayoutManager(this)
         recyclerView = findViewById<RecyclerView>(R.id.GroupInfoRecycler).apply{
             // use this setting to improve performance if you know that changes
@@ -92,10 +91,7 @@ class GroupInfoActivity : AppCompatActivity() {
      */
     private fun RefreshMyGroupInfo(group : MyGroup)
     {
-        val groupIDTextView = findViewById<TextView>(R.id.groupIDView)
         val groupNameTextView = findViewById<TextView>(R.id.groupNameView)
-
-        groupIDTextView.text = group.ID.toString()
         groupNameTextView.text = group.Name
 
         RefreshGroupInfoStats(group)

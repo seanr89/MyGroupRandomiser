@@ -191,6 +191,7 @@ class EventSetupFragment : Fragment()
 
     /**
      * Request and return all selected players
+     * @return all selected players items
      */
     fun GetSelectedPlayers() : ArrayList<Player>
     {
@@ -198,17 +199,20 @@ class EventSetupFragment : Fragment()
         return _PlayerAdapter.SelectedItems
     }
 
+    /**
+     * Handle the request for date and time string parameters and convert to LocalDateTime
+     * @return ISO_Date_Time formatted localdatetime
+     */
     fun GetSelectedDateAndTime() : LocalDateTime
     {
-        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
         var Date = viewDate.text
         var Time = viewTime.text
 
         var dateTimeString = "${Date.toString()} ${Time.toString()}"
-        Log.d("Method", "Formatted time : $dateTimeString")
 
         var dateTime : LocalDateTime
-        dateTime = UtilityMethods.ConvertStringToDateTime("${Date.toString()} ${Time.toString()}")
+        dateTime = UtilityMethods.ConvertStringToDateTime(dateTimeString)
         return dateTime
     }
 
