@@ -16,6 +16,16 @@ class MyGroupManager(val context: Context?)
 {
 
     /**
+     * Handle the creation of a new MyGroup and save to the database
+     * @param group : the group to be inserted
+     */
+    fun CreateGroup(group : MyGroup) : Int
+    {
+        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
+        return MyGroupDB.CreateGroup(group)
+    }
+
+    /**
      * New method to move events to business layer from datalayer
      */
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>

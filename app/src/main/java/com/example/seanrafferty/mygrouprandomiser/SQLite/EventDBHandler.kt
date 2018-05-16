@@ -121,6 +121,7 @@ class EventDBHandler
 
     /**
      * Query and return the count of events for a group
+     * @return a integer count of events
      */
     fun GetCountOfEventsForGrouo(group : MyGroup) : Int
     {
@@ -161,9 +162,10 @@ class EventDBHandler
     /**
      * Update an event to be completed
      * @param event : the event with its respective ID
+     * @param completed : integer parameter (default = 0) to identify if the event is completed
      * @return the number of rows affected or 0 if failed
      */
-    fun UpdateEventComplete(event: GroupEvent) : Int
+    fun UpdateEventCompleted(event: GroupEvent, completed : Int = 0) : Int
     {
         Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
 
@@ -172,28 +174,7 @@ class EventDBHandler
 
         var values = ContentValues()
         //1 de-notes completed
-        values.put(DatabaseHandler.EventCompleted, 1)
-
-        result = db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)
-
-        return result
-    }
-
-    /**
-     * Update an event to be InComplete
-     * @param event : the event with its respective ID
-     * @return the number of rows affected or 0 if failed
-     */
-    fun UpdateEventInComplete(event: GroupEvent) : Int
-    {
-        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
-
-        var db = _DB.GetWritableDataBaseObject()
-        var result = 0
-
-        var values = ContentValues()
-        //1 de-notes completed
-        values.put(DatabaseHandler.EventCompleted, 0)
+        values.put(DatabaseHandler.EventCompleted, completed)
 
         result = db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)
 

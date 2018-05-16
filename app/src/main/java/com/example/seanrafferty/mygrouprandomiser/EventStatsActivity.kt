@@ -14,7 +14,6 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 
 class EventStatsActivity : AppCompatActivity()
 {
-
     private var EventID = 0
     private lateinit var Event : GroupEvent
 
@@ -43,13 +42,13 @@ class EventStatsActivity : AppCompatActivity()
     private fun InitialiseNumberPickers() {
         var nbrPickerTeamOne = findViewById<NumberPicker>(R.id.pickerTeamOne)
         //Set the minimum value of NumberPicker
-        nbrPickerTeamOne.minValue = 0;
+        nbrPickerTeamOne.minValue = 0
         //Specify the maximum value/number of NumberPicker
-        nbrPickerTeamOne.maxValue = 10;
+        nbrPickerTeamOne.maxValue = 10
 
         var nbrPickerTeamTwo = findViewById<NumberPicker>(R.id.pickerTeamTwo)
         //Set the minimum value of NumberPicker
-        nbrPickerTeamTwo.minValue = 0;
+        nbrPickerTeamTwo.minValue = 0
         //Specify the maximum value/number of NumberPicker
         nbrPickerTeamTwo.maxValue = 10
     }
@@ -84,6 +83,10 @@ class EventStatsActivity : AppCompatActivity()
         nbrPickerTeamTwo.value = event.EventTeams[1].Score
     }
 
+    /**
+     * Handle the updating of event team scores and completed status
+     * @param event : the GroupEvent
+     */
     private fun UpdateEvent(event: GroupEvent)
     {
         var nbrPickerTeamOne = findViewById<NumberPicker>(R.id.pickerTeamOne)
@@ -110,6 +113,7 @@ class EventStatsActivity : AppCompatActivity()
 
     /**
      * Handle the update of the score for the provided team
+     * @param score : the score of the team
      * @param team : the team with the provided score
      */
     private fun UpdateTeamScore(score: Int, team : Team)

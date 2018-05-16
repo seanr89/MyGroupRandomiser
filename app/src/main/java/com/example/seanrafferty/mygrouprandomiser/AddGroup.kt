@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
@@ -41,9 +42,9 @@ class AddGroup : AppCompatActivity() {
         val nameTextView = findViewById<TextView>(R.id.nameText)
         val name : String = nameTextView.text.toString()
 
-        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(this))
+        var groupManager = MyGroupManager(this)
 
-        result = MyGroupDB.CreateGroup(MyGroup(0, name))
+        result = groupManager.CreateGroup(MyGroup(0, name))
 
         return result
     }

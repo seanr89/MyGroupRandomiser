@@ -23,6 +23,10 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
         TeamFragment.OnFragmentInteractionListener
 {
+    var _GroupID : Int = 0
+    lateinit var Teams : ArrayList<Team>
+
+
     override fun onFragmentInteraction(teams : ArrayList<Team>)
     {
         //Toast.makeText(this, "Feature Not Available!", Toast.LENGTH_LONG).show()
@@ -35,20 +39,19 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
             var result = eventManager.SaveEvent(groupEvent)
         }
-        //NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
+        Toast.makeText(this, "Event Scheduled", Toast.LENGTH_LONG).show()
+        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
     }
 
     /**
      * Handle event from setup fragment noting the completion team randomisation
+     * @param teams : handle the randomization of teams with update the respective fragments
      */
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
         Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
-
-    var _GroupID : Int = 0
-    lateinit var Teams : ArrayList<Team>
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
