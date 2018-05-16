@@ -75,7 +75,7 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
                 {
                     //SingleItemSelected(holder.itemView, position)
                     //Toast.makeText(activity, "Not Yet Available!!", Toast.LENGTH_LONG).show()
-                    NavigationControls.NavigateToEventStatsActivity(activity, SelectedItems[position].ID)
+                    NavigationControls.NavigateToEventStatsActivity(activity, eventList[position].ID)
                 }
             }
             SelectionOption.MULTI_SELECT ->

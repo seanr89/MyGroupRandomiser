@@ -61,7 +61,7 @@ class PlayerDBHandler
     {
         var arrayList = ArrayList<Player>()
 
-        var combinedString = playerIDs.joinToString(",", "<", ">")
+        var combinedString = playerIDs.joinToString(",", "", "")
 
         // Select All Query
         var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerTable} WHERE ${DatabaseHandler.PlayerpkID} IN ($combinedString)"

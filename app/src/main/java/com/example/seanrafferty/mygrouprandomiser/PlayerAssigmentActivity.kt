@@ -59,7 +59,8 @@ class PlayerAssigmentActivity : AppCompatActivity()
 
 
     /**
-     * Operation to handle the saving of selected players
+     * Operation to handle the saving of selected players to the provided group
+     * GroupID is found at load time
      */
     private fun SaveSelectedAssignments()
     {

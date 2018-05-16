@@ -82,7 +82,7 @@ class EventDBHandler
             do
             {
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventpkID))
-                val date = UtilityMethods.ConvertStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
+                val date = UtilityMethods.ConvertISODateStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
                 val complete = UtilityMethods.ConvertIntToBoolean(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventCompleted)))
                 val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
 

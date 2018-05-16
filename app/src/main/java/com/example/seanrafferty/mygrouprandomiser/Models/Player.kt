@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 import java.io.Serializable
 
 /*
+https://www.youtube.com/watch?v=H7I3zs-L-1w
 https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b725c8d1d
  */
 

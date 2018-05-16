@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_init_db -> {
                 Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
                 var DBReset = DatabaseHandler(this)
-                DBReset.onUpgrade(DBReset.writableDatabase, 11 , 11)
+                DBReset.onUpgrade(DBReset.writableDatabase, DatabaseHandler.DBVersion , DatabaseHandler.DBVersion)
                 var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
                 dbInitData.RunDataInitialisation()
 
