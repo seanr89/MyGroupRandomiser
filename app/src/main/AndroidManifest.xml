@@ -29,7 +29,8 @@
             android:name=".PlayerActivity"
             android:label="Player Info" />
         <activity android:name=".AddPlayerActivity" />
-        <activity android:name=".GroupInfoActivity" />
+        <activity android:name=".GroupInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".PlayerAssigmentActivity" />
         <activity
             android:name=".GroupEventGeneratorActivity"

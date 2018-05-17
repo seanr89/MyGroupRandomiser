@@ -40,8 +40,14 @@ class TeamManager(val context: Context?)
 
         //initialise player db handler to query the player info
         var playerDB = PlayerDBHandler(dbHandler)
-        teams[0].Players = playerDB.ReadAllPlayersInListOfIDs(teamOnePlayerIDs)
-        teams[1].Players = playerDB.ReadAllPlayersInListOfIDs(teamTwoPlayerIDs)
+        if(teamOnePlayerIDs.isNotEmpty())
+        {
+            teams[0].Players = playerDB.ReadAllPlayersInListOfIDs(teamOnePlayerIDs)
+        }
+        if(teamTwoPlayerIDs.isNotEmpty())
+        {
+            teams[1].Players = playerDB.ReadAllPlayersInListOfIDs(teamTwoPlayerIDs)
+        }
 
         return teams
     }

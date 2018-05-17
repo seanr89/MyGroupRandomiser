@@ -1,7 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.Fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
-import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 import com.example.seanrafferty.mygrouprandomiser.R
@@ -20,13 +18,13 @@ import com.example.seanrafferty.mygrouprandomiser.R
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [TeamFragment.OnFragmentInteractionListener] interface
+ * [TeamsFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [TeamFragment.newInstance] factory method to
+ * Use the [TeamsFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class TeamFragment : Fragment()
+class TeamsFragment : Fragment()
 {
     private var listener: OnFragmentInteractionListener? = null
     var _Teams : ArrayList<Team> = arrayListOf()
@@ -79,7 +77,7 @@ class TeamFragment : Fragment()
 
     private fun InitialiseTeamOneRecycler(team: Team, view:View)
     {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d("TeamsFragment", object{}.javaClass.enclosingMethod.name)
         teamOneviewManager = LinearLayoutManager(activity)
         teamOnePlayerAdapter = PlayerRecyclerAdapter(team.Players, false)
         teamOnePlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamOnePlayerRecycler).apply{
@@ -97,7 +95,7 @@ class TeamFragment : Fragment()
 
     private fun InitialiseTeamTwoRecycler(team: Team, view:View)
     {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d("TeamsFragment", object{}.javaClass.enclosingMethod.name)
         teamTwoviewManager = LinearLayoutManager(activity)
         teamTwoPlayerAdapter = PlayerRecyclerAdapter(team.Players, false)
         teamTwoPlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamTwoPlayerRecycler).apply{
@@ -118,7 +116,7 @@ class TeamFragment : Fragment()
      */
     override fun onAttach(context: Context)
     {
-        //Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name + " number: " + ID)
+        //Log.d("TeamsFragment", object{}.javaClass.enclosingMethod.name + " number: " + ID)
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
@@ -138,7 +136,7 @@ class TeamFragment : Fragment()
      */
     fun UpdateRecyclerAdapter(teams: ArrayList<Team>)
     {
-        Log.d("TeamFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d("TeamsFragment", object{}.javaClass.enclosingMethod.name)
         _Teams = teams
         teamOnePlayerAdapter.playerList = teams[0].Players
         teamOnePlayerAdapter.notifyDataSetChanged()
@@ -176,11 +174,11 @@ class TeamFragment : Fragment()
          *
          * @param teams Parameter 1.
          * @param number Parameter 2.
-         * @return A new instance of fragment TeamFragment.
+         * @return A new instance of fragment TeamsFragment.
          */
         @JvmStatic
-        fun newInstance(teams : ArrayList<Team>, number: Int, tag:String): TeamFragment {
-            val fragment = TeamFragment()
+        fun newInstance(teams : ArrayList<Team>, number: Int, tag:String): TeamsFragment {
+            val fragment = TeamsFragment()
             val args = Bundle()
             args.putSerializable(ARG_TEAMS, teams)
             args.putInt(ARG_TEAM_NUMBER, number)
