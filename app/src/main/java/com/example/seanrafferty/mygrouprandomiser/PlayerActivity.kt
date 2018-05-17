@@ -25,7 +25,7 @@ class PlayerActivity : AppCompatActivity() {
          * Create listener on + item click event
          */
         fab.setOnClickListener { view ->
-            NavigationControls.Companion.NavigateToAddPlayerActivity(this)
+            NavigationControls.NavigateToAddPlayerActivity(this)
         }
 
         /**

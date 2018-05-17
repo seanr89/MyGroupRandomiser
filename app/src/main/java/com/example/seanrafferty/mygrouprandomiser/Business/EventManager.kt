@@ -47,6 +47,16 @@ class EventManager(val context: Context)
     }
 
     /**
+     * Handle the removal of all events marked as completed from the provided events
+     * @param events : the list of events
+     * @return a filtered collection of events
+     */
+    fun RemoveCompletedEventsFromList(events: ArrayList<GroupEvent>) : ArrayList<GroupEvent>
+    {
+        return events.filter { it.Completed == true } as ArrayList<GroupEvent>
+    }
+
+    /**
      * Not Yet Implemented
      * Request a full event by ID : with teams and players included!
      */
@@ -78,21 +88,25 @@ class EventManager(val context: Context)
 
     /**
      * Update an event to be completed (only that so far)
-     * @param groupEvent : the event to be updated to be completedgsfsef
+     * @param groupEvent : the event to be updated to be completed
      */
     fun EventComplete(groupEvent: GroupEvent)
     {
         Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
-        eventDB.UpdateEventComplete(groupEvent)
+        eventDB.UpdateEventCompleted(groupEvent, 1)
     }
 
+    /**
+     * Update an event status to be incomplete
+     * @param groupEvent : the event to be updated to be incomplete
+     */
     fun EventInComplete(groupEvent: GroupEvent)
     {
         Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
-        eventDB.UpdateEventInComplete(groupEvent)
+        eventDB.UpdateEventCompleted(groupEvent, 0)
     }
 }

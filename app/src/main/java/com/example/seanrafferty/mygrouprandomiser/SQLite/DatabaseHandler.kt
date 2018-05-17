@@ -17,7 +17,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 11
+        val DBVersion = 12
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -186,7 +186,7 @@ class DatabaseHandler : SQLiteOpenHelper
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
 
         var sql : String = "CREATE TABLE IF NOT EXISTS $TeamPlayerMappingTable " +
-                "($TeamID INTEGER "+
+                "($TeamID INTEGER, " +
                 "$PlayerID INTEGER);"
         db.execSQL(sql)
     }

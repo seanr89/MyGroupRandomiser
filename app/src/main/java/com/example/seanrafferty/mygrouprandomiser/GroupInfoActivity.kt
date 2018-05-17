@@ -33,7 +33,7 @@ class GroupInfoActivity : AppCompatActivity() {
         //now we need to request data from the DB for the passed in ID
         SelectedGroup = GetGroupFromDB(ID)
 
-        //now refresh the data
+        //now refresh the data with selected group details
         RefreshMyGroupInfo(SelectedGroup)
 
         //Create Button Listener to navigate
@@ -49,15 +49,11 @@ class GroupInfoActivity : AppCompatActivity() {
             NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
 
-//        var btn_event_stats = findViewById<Button>(R.id.btn_event_stats)
-//        btn_event_stats.setOnClickListener()
-//        {
-//            Toast.makeText(this, "Not Yet Available!!", Toast.LENGTH_LONG).show()
-//            //NavigationControls.NavigateToEventStatsActivity(this,)
-//        }
-
         var eventManager = EventManager(this)
         var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
+
+        //SEAN - Remove all completed events
+        //SEAN - Remove all completed events
 
         var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, this, SelectionOption.SINGLE_SELECT)
         viewManager = LinearLayoutManager(this)

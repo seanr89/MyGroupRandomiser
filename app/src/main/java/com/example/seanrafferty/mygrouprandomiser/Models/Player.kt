@@ -1,6 +1,14 @@
 package com.example.seanrafferty.mygrouprandomiser.Models
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import java.io.Serializable
+
+/*
+https://www.youtube.com/watch?v=H7I3zs-L-1w
+https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b725c8d1d
+ */
 
 /**
  * Serializable - Player object model used to store and access individual player data
@@ -8,6 +16,9 @@ import java.io.Serializable
  * @param Name : The name of the player
  * @param Rating : how skillful is the player (rated 1 too 10 with 10 being highest rating)
  */
-data class Player constructor(var ID: Int, var Name: String, var Rating: Int) : Serializable
+@Entity(tableName = "PlayerData")
+data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
+                              , @ColumnInfo(name = "name") var Name: String
+                              , @ColumnInfo(name = "rating")var Rating: Int) : Serializable
 {
 }

@@ -39,6 +39,7 @@ class AddPlayerActivity : AppCompatActivity() {
 
     /**
      * Read player details and save content to the internal DB
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     private fun SaveNewPlayer() : Int
     {

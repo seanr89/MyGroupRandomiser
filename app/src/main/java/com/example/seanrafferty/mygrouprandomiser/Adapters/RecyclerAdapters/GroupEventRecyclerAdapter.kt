@@ -48,8 +48,8 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
     override fun onBindViewHolder(holder: EventViewHolder, position: Int)
     {
 
-        holder?.txtDate?.text = UtilityMethods.ConvertDateTimeToString(SelectedItems[position].Date)
-        holder?.checkBoxCompleted.setChecked(SelectedItems[position].Completed)
+        holder?.txtDate?.text = UtilityMethods.ConvertDateTimeToString(eventList[position].Date)
+        holder?.checkBoxCompleted.setChecked(eventList[position].Completed)
 
         if(isItemSelected(position))
         {
@@ -74,8 +74,8 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
                 holder.itemView.setOnClickListener()
                 {
                     //SingleItemSelected(holder.itemView, position)
-                    Toast.makeText(activity, "Not Yet Available!!", Toast.LENGTH_LONG).show()
-                    //NavigationControls.NavigateToEventStatsActivity(activity, SelectedItems[position].ID)
+                    //Toast.makeText(activity, "Not Yet Available!!", Toast.LENGTH_LONG).show()
+                    NavigationControls.NavigateToEventStatsActivity(activity, eventList[position].ID)
                 }
             }
             SelectionOption.MULTI_SELECT ->
@@ -177,8 +177,8 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
 
         constructor(itemView: View) : super(itemView)
         {
-            txtDate = itemView.findViewById<TextView>(R.id.eventDateText)
-            checkBoxCompleted = itemView.findViewById<CheckBox>(R.id.eventCheckBoxCompleted)
+            txtDate = itemView.findViewById(R.id.eventDateText)
+            checkBoxCompleted = itemView.findViewById(R.id.eventCheckBoxCompleted)
         }
     }
 }
