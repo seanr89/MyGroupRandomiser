@@ -132,6 +132,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_players -> {
                 NavigationControls.NavigateToPlayerActivity(this)
             }
+            R.id.nav_addGroup -> {
+                NavigationControls.NavigateToEditGroupActivity(this)
+            }
             R.id.nav_init_db -> {
                 Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
                 var DBReset = DatabaseHandler(this)

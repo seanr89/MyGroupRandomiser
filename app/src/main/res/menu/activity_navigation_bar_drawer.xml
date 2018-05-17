@@ -25,6 +25,11 @@
             android:icon="@drawable/ic_people_black"
             android:title="Players" />
         <item
+            android:id="@+id/nav_addGroup"
+            android:icon="@drawable/ic_storage_black"
+            android:title="Add Group" />
+
+        <item
             android:id="@+id/nav_init_db"
             android:icon="@drawable/ic_storage_black"
             android:title="Initialise DB" />
