@@ -21,8 +21,9 @@ import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
-    
+    //List of groups to be displayed within a list view
     lateinit var _GroupListView : ListView
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)

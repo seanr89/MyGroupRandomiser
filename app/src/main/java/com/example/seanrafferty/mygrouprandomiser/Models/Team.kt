@@ -13,7 +13,7 @@ import java.io.Serializable
 data class Team constructor(var ID:Int, var Name:String, var Score:Int = 0, var Players:ArrayList<Player>) : Serializable
 {
     /**
-     * default constructuor to initialise player list
+     * default constructor to initialise player list
      */
     constructor(ID: Int, Name:String, Score:Int) : this(ID, Name, Score, ArrayList())
 }

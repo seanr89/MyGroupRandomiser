@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
-import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamFragment
+import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamsFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_group_event_generator.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
-        TeamFragment.OnFragmentInteractionListener
+        TeamsFragment.OnFragmentInteractionListener
 {
     var _GroupID : Int = 0
     lateinit var Teams : ArrayList<Team>
@@ -131,7 +131,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             when(position)
             {
                 0 -> fragment = EventSetupFragment.newInstance(_GroupID)
-                1 -> fragment = TeamFragment.newInstance(Teams, 1, "Team1")
+                1 -> fragment = TeamsFragment.newInstance(Teams, 1, "Team1")
                 else -> { // Note the block
                     print("x is neither 0, 1 nor 2")
                 }
@@ -150,7 +150,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         Teams = teams
-        var fragment = supportFragmentManager.fragments[1] as TeamFragment
+        var fragment = supportFragmentManager.fragments[1] as TeamsFragment
         fragment.UpdateRecyclerAdapter(Teams)
     }
 
