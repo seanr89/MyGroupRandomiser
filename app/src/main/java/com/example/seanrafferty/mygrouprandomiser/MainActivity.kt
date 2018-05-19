@@ -37,12 +37,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var groupAdapter = GroupAdapter(this, groupList)
         _GroupListView.adapter = groupAdapter;
 
-        var btn_add_group = findViewById<Button>(R.id.btnAddGroup)
-        btn_add_group.setOnClickListener()
-        {
-            NavigationControls.NavigateToEditGroupActivity(this)
-        }
-
         //Handle listview item selection for a group
         _GroupListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             // Handle group item selection and ensure object casting

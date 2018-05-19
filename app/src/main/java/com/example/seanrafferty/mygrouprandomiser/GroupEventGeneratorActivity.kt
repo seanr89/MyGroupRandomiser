@@ -29,9 +29,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     override fun onFragmentInteraction(teams : ArrayList<Team>)
     {
-        //Toast.makeText(this, "Feature Not Available!", Toast.LENGTH_LONG).show()
-        //return
-
         var groupEvent = CreateEventGroupFromContent()
         if(groupEvent != null)
         {

@@ -28,12 +28,16 @@ class AddGroup : AppCompatActivity() {
             {
                 NavigationControls.NavaigateToMainActivity(this)
             }
+            else
+            {
+                Toast.makeText(this, "Sorry - Saving Failed!", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     /**
      * Create and Save a group the DB
-     * @returns : integer to denote the status
+     * @returns : integer to denote the status of the insert event
      */
     fun CreateAndSaveGroup() : Int
     {
