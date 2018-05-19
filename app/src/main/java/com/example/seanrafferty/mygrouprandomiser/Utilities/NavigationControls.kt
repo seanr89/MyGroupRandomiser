@@ -95,5 +95,17 @@ class NavigationControls {
             intent.putExtra("EventID", eventID.toString())
             startActivity(context, intent, null)
         }
+
+        /**
+         * Navigate to the event info page
+         * @param context : current activity context navigating from
+         * @param eventID : the event ID to review stats
+         */
+        fun NavigateToEventInfoActivity(context: Context, eventID: Int)
+        {
+            var intent= Intent(context, EventInfoActivity::class.java)
+            intent.putExtra("EventID", eventID.toString())
+            startActivity(context, intent, null)
+        }
     }
 }
