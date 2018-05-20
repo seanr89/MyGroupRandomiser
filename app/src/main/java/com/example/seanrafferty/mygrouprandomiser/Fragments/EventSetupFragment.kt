@@ -30,6 +30,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.format.DateTimeParseException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -212,7 +213,15 @@ class EventSetupFragment : Fragment()
         var dateTimeString = "${Date.toString()} ${Time.toString()}"
 
         var dateTime : LocalDateTime
-        dateTime = UtilityMethods.ConvertStringToDateTime(dateTimeString)
+
+        dateTime = try {
+            UtilityMethods.ConvertStringToDateTime(dateTimeString)
+        }
+        catch(e : DateTimeParseException) {
+            // Throw invalid date message
+            System.out.println("Exception was thrown")
+            LocalDateTime.now()
+        }
         return dateTime
     }
 
