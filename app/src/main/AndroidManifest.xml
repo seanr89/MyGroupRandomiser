@@ -41,7 +41,7 @@
         <activity
             android:name=".EventStatsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GoogleLogin">
+        <activity android:name=".FirebaseContent.GoogleLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,7 +57,7 @@
 
 
         <service
-            android:name=".MyFirebaseInstanceIDService">
+            android:name=".FirebaseContent.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

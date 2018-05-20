@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         _GroupListView = findViewById(R.id.GroupListView) as ListView
 
-        // Handler code here. - request all stored MyGroup objects and append these to a listview adapter
+        // request all stored MyGroup objects and append these to a listview adapter
         var groupList = RequestGroups()
         var groupAdapter = GroupAdapter(this, groupList)
         _GroupListView.adapter = groupAdapter;
@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         _GroupListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             // Handle group item selection and ensure object casting
             var selectedGroup = _GroupListView.adapter.getItem(position) as MyGroup
-            //Log.d("ListView Selected","${selectedGroup.toString()} selected")
+            //now navigate to the group info activity
             NavigationControls.NavigateToGroupInfoActivity(this, selectedGroup.ID)
         }
-
+        //initialise the navigation app drawer to be loaded in
         nav_view.setNavigationItemSelectedListener(this)
     }
 
@@ -83,12 +83,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * Request all stored groups available
      * @returns An arraylist of MyGroup objects
      */
-    fun RequestGroups() : ArrayList<MyGroup>
+    private fun RequestGroups() : ArrayList<MyGroup>
     {
         println("Method: " + object{}.javaClass.enclosingMethod.name)
         //initialise an ArrayList and a DatabaseHandler object
-        var groupList: ArrayList<MyGroup>
-        var groupDB = MyGroupDBHandler(DatabaseHandler(this))
+        val groupList: ArrayList<MyGroup>
+        val groupDB = MyGroupDBHandler(DatabaseHandler(this))
 
         //Request all groups from the database and return the data
         groupList = groupDB.ReadAllGroups()
@@ -109,8 +109,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun RefreshListView()
     {
-        var data = RequestGroups()
-        var adapter = _GroupListView.adapter as GroupAdapter
+        val data = RequestGroups()
+        val adapter = _GroupListView.adapter as GroupAdapter
         adapter.arrayList = data
         adapter.notifyDataSetChanged()
     }

@@ -134,7 +134,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
                 }
             }
             return fragment
-            //return PlaceholderFragment.newInstance(position + 1)
         }
 
         override fun getCount(): Int {
@@ -143,6 +142,10 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         }
     }
 
+    /**
+     * trigger the updating of the teams fragement with the players that have been randomized
+     * @param teams : the two auto generated teams with random players
+     */
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
         Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)

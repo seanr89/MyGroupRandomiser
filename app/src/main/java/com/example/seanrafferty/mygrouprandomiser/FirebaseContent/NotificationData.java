@@ -1,4 +1,4 @@
-package com.example.seanrafferty.mygrouprandomiser;
+package com.example.seanrafferty.mygrouprandomiser.FirebaseContent;
 
 class NotificationData {
         public static final String TEXT = "TEXT";

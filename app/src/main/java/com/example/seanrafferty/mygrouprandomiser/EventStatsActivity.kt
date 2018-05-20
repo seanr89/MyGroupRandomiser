@@ -63,7 +63,7 @@ class EventStatsActivity : AppCompatActivity()
     {
         var eventManager = EventManager(this)
 
-        return eventManager.GetEventByID(EventID)
+        return eventManager.GetEventByID(eventID)
     }
 
     /**

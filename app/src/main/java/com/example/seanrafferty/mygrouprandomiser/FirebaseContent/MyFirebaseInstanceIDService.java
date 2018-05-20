@@ -1,4 +1,4 @@
-package com.example.seanrafferty.mygrouprandomiser;
+package com.example.seanrafferty.mygrouprandomiser.FirebaseContent;
 
 import android.app.Service;
 import android.util.Log;
