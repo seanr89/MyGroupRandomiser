@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * Handle refreshing of listview adapater datasource
+     * Handle refreshing of listview adapter datasource
      */
     private fun RefreshListView()
     {
