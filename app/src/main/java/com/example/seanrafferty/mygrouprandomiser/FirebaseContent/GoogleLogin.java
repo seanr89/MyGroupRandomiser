@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.seanrafferty.mygrouprandomiser.MainActivity;
@@ -27,7 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class GoogleLogin extends AppCompatActivity {
 
-    SignInButton button;
+    Button button;
     FirebaseAuth mAuth;
     GoogleApiClient mGoogleApiClient;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -44,7 +45,7 @@ public class GoogleLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_login);
 
-        button = (SignInButton) findViewById(R.id.buttonGoogleSignIn);
+        button = (Button) findViewById(R.id.buttonGoogleSignIn);
         mAuth = FirebaseAuth.getInstance();
 
         button.setOnClickListener(new View.OnClickListener() {
