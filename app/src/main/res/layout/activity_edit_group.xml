@@ -5,25 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddGroup">
+    tools:context=".AddGroup"
+    android:background="@drawable/background">
 
-    <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="10dp"
-    android:text="Group Details"
-    android:textColor="@color/colorPrimary"
-    android:textSize="20sp"
-    android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/addgrouptitle" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/nametextfield" />
+
 
     <EditText
         android:id="@+id/nameText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="" />
+        android:textAlignment="center"
+        android:textColor="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,17 +40,8 @@
             android:id="@+id/btn_save_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Group"
+            android:background="@drawable/addgroupbtn"
             android:textSize="16sp" />
     </LinearLayout>
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="264dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="10dp"
-        android:height="@dimen/actionBarSize"
-        android:text="Switch" />
 
 </LinearLayout>
