@@ -18,6 +18,7 @@ import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventInfoFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
+import com.example.seanrafferty.mygrouprandomiser.R.id.*
 
 import kotlinx.android.synthetic.main.activity_event_info.*
 import kotlinx.android.synthetic.main.fragment_event_info.view.*
