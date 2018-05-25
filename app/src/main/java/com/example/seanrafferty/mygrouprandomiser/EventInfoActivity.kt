@@ -14,12 +14,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
+import com.example.seanrafferty.mygrouprandomiser.Fragments.EventInfoFragment
+import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
+import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 
 import kotlinx.android.synthetic.main.activity_event_info.*
 import kotlinx.android.synthetic.main.fragment_event_info.view.*
 
-class EventInfoActivity : AppCompatActivity() {
+class EventInfoActivity : AppCompatActivity()
+{
 
+    private lateinit var Event : GroupEvent
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -35,6 +41,10 @@ class EventInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_event_info)
 
         setSupportActionBar(toolbar)
+
+        var eventManager = EventManager(this)
+        Event = eventManager.GetEventByID(intent.getStringExtra("EventID").toInt())
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -82,12 +92,15 @@ class EventInfoActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            //return PlaceholderFragment.newInstance(position + 1)
 
             when(position)
             {
-
+                0 -> return EventInfoFragment.newInstance()
+                1 -> return SingleTeamFragment.newInstance(Event.EventTeams[0])
+                2 -> return SingleTeamFragment.newInstance(Event.EventTeams[1])
             }
+            return null!!
         }
 
         override fun getCount(): Int {
@@ -99,33 +112,33 @@ class EventInfoActivity : AppCompatActivity() {
     /**
      * A placeholder fragment containing a simple view.
      */
-    class PlaceholderFragment : Fragment() {
-
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.fragment_event_info, container, false)
-            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
-            return rootView
-        }
-
-        companion object {
-            /**
-             * The fragment argument representing the section number for this
-             * fragment.
-             */
-            private val ARG_SECTION_NUMBER = "section_number"
-
-            /**
-             * Returns a new instance of this fragment for the given section
-             * number.
-             */
-            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-                val fragment = PlaceholderFragment()
-                val args = Bundle()
-                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                fragment.arguments = args
-                return fragment
-            }
-        }
-    }
+//    class PlaceholderFragment : Fragment() {
+//
+//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+//                                  savedInstanceState: Bundle?): View? {
+//            val rootView = inflater.inflate(R.layout.fragment_event_info, container, false)
+//            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
+//            return rootView
+//        }
+//
+//        companion object {
+//            /**
+//             * The fragment argument representing the section number for this
+//             * fragment.
+//             */
+//            private val ARG_SECTION_NUMBER = "section_number"
+//
+//            /**
+//             * Returns a new instance of this fragment for the given section
+//             * number.
+//             */
+//            fun newInstance(sectionNumber: Int): PlaceholderFragment {
+//                val fragment = PlaceholderFragment()
+//                val args = Bundle()
+//                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+//                fragment.arguments = args
+//                return fragment
+//            }
+//        }
+//    }
 }

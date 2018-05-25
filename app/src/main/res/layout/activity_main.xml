@@ -21,22 +21,10 @@ tools:openDrawer="start">
     android:layout_margin="@dimen/actionBarSize"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/GroupsTextHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Groups"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
     <ListView
         android:id="@+id/GroupListView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/GroupsTextHeader" />
+        android:layout_height="wrap_content" />
 </RelativeLayout>
 
 <android.support.design.widget.NavigationView
