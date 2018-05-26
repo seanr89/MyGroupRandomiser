@@ -42,13 +42,13 @@ class GroupInfoActivity : AppCompatActivity() {
         {
             NavigationControls.NavigateToPlayerAssignment(this, ID)
         }
-
         var btn_create_event = findViewById<Button>(R.id.btn_create_event)
         btn_create_event.setOnClickListener()
         {
             NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
 
+        //initialise the event manager and request all events for the group
         var eventManager = EventManager(this)
         var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
 
@@ -87,7 +87,6 @@ class GroupInfoActivity : AppCompatActivity() {
     {
         val groupNameTextView = findViewById<TextView>(R.id.groupNameView)
         groupNameTextView.text = group.Name
-
         RefreshGroupInfoStats(group)
     }
 

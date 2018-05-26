@@ -23,18 +23,21 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
         TeamsFragment.OnFragmentInteractionListener
 {
-    var _GroupID : Int = 0
-    lateinit var Teams : ArrayList<Team>
+    private var _GroupID : Int = 0
+    private lateinit var Teams : ArrayList<Team>
 
 
+    /**
+     * Handle the interaction of the event setup fragment
+     * @param teams : the array list of teams generated
+     */
     override fun onFragmentInteraction(teams : ArrayList<Team>)
     {
         var groupEvent = CreateEventGroupFromContent()
         if(groupEvent != null)
         {
             var eventManager = EventManager(this)
-
-            var result = eventManager.SaveEvent(groupEvent)
+            eventManager.SaveEvent(groupEvent)
         }
         Toast.makeText(this, "Event Scheduled", Toast.LENGTH_LONG).show()
         NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
@@ -87,7 +90,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     private fun configureTabLayoutTitles(layout : TabLayout)
     {
-        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+        //Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         layout.getTabAt(0)!!.text = "Event Setup"
         layout.getTabAt(1)!!.text = "Teams"
     }
@@ -143,7 +146,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     }
 
     /**
-     * trigger the updating of the teams fragement with the players that have been randomized
+     * trigger the updating of the teams fragment with the players that have been randomized
      * @param teams : the two auto generated teams with random players
      */
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
@@ -166,45 +169,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         var dateTime = eventFragment.GetSelectedDateAndTime()
 
-        var groupEvent = GroupEvent(0, dateTime, _GroupID, false, Teams)
-        return groupEvent
+        return GroupEvent(0, dateTime, _GroupID, false, Teams)
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////
-                                /** REMOVE THE BELOW CONTENT */
-    ////////////////////////////////////////////////////////////////////////////////////////
-                                /** REMOVE THE BELOW CONTENT */
-    ////////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-//    class PlaceholderFragment : Fragment() {
-//
-//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                                  savedInstanceState: Bundle?): View? {
-//            val rootView = inflater.inflate(R.layout.fragment_group_event_generator, container, false)
-//            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
-//            return rootView
-//        }
-//
-//        companion object {
-//            /**
-//             * The fragment argument representing the section number for this
-//             * fragment.
-//             */
-//            private val ARG_SECTION_NUMBER = "section_number"
-//
-//            /**
-//             * Returns a new instance of this fragment for the given section
-//             * number.
-//             */
-//            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-//                val fragment = PlaceholderFragment()
-//                val args = Bundle()
-//                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-//                fragment.arguments = args
-//                return fragment
-//            }
-//        }
-//    }
 }

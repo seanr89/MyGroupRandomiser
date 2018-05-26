@@ -24,6 +24,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
  */
 class SingleTeamFragment : Fragment() {
 
+    //initialise the team and player recycler object
     private lateinit var team : Team
     private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
 
@@ -39,6 +40,7 @@ class SingleTeamFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
+        //check that there is players available
         if(team.Players.isNotEmpty())
         {
             val teamviewManager = LinearLayoutManager(activity)
@@ -47,10 +49,8 @@ class SingleTeamFragment : Fragment() {
                 // use this setting to improve performance if you know that changes
                 // in content do not change the layout size of the RecyclerView
                 setHasFixedSize(true)
-
                 // use a linear layout manager
                 layoutManager = teamviewManager
-
                 // specify an viewAdapter (see also next example)
                 adapter = playerRecyclerAdapter
             }
@@ -62,7 +62,9 @@ class SingleTeamFragment : Fragment() {
         return view
     }
 
-
+    /*
+    Companion static class for fragment
+     */
     companion object {
 
         private val ARG_TEAM = "TEAM_ARG"
@@ -73,7 +75,6 @@ class SingleTeamFragment : Fragment() {
          * @param team : team parameter with player data
          * @return A new instance of fragment SingleTeamFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(team : Team) =
                 SingleTeamFragment().apply {
