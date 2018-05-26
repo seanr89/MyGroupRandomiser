@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
+import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -81,6 +83,9 @@ class EventInfoFragment : Fragment()  {
     }
 
     companion object {
+
+        private val ARG_EVENT = "EVENT_ARG"
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -91,11 +96,10 @@ class EventInfoFragment : Fragment()  {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(event : GroupEvent) =
                 EventInfoFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+                        putSerializable(EventInfoFragment.ARG_EVENT, event)
                     }
                 }
     }

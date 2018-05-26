@@ -2,31 +2,23 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.net.Uri
 import android.support.design.widget.TabLayout
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventInfoFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
-import com.example.seanrafferty.mygrouprandomiser.R.id.*
-
 import kotlinx.android.synthetic.main.activity_event_info.*
-import kotlinx.android.synthetic.main.fragment_event_info.view.*
 
 class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInteractionListener
 {
-    override fun onFragmentInteraction(uri: Uri) {
+    override fun onFragmentInteraction(uri: Uri)
+    {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -101,7 +93,7 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
 
             when(position)
             {
-                0 -> return EventInfoFragment.newInstance()
+                0 -> return EventInfoFragment.newInstance(Event)
                 1 -> return SingleTeamFragment.newInstance(Event.EventTeams[0])
                 2 -> return SingleTeamFragment.newInstance(Event.EventTeams[1])
             }

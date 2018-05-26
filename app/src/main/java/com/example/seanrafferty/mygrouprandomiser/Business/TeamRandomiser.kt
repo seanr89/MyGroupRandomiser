@@ -47,5 +47,19 @@ class TeamRandomiser
         return Teams
     }
 
+    /**
+     * Handle the generation of teams and player selection based on player ratings
+     * @param players : a collection of players to sort
+     * @return a collection of team objects : with sorted players
+     */
+    fun RandomizePlayerListByRating(players: ArrayList<Player>) : ArrayList<Team>
+    {
+        Log.d("TeamRandomiser", object{}.javaClass.enclosingMethod.name)
+        //Check if the players list is empty first
+        if(players.isEmpty())
+            return null!!
+
+        return null!!
+    }
 
 }
