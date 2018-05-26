@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
@@ -38,20 +39,26 @@ class SingleTeamFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
-        val teamviewManager = LinearLayoutManager(activity)
-        playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
-        view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
+        if(team.Players.isNotEmpty())
+        {
+            val teamviewManager = LinearLayoutManager(activity)
+            playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
+            view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                setHasFixedSize(true)
 
-            // use a linear layout manager
-            layoutManager = teamviewManager
+                // use a linear layout manager
+                layoutManager = teamviewManager
 
-            // specify an viewAdapter (see also next example)
-            adapter = playerRecyclerAdapter
+                // specify an viewAdapter (see also next example)
+                adapter = playerRecyclerAdapter
+            }
         }
-
+        else
+        {
+            Toast.makeText(activity, "No Players for the team", Toast.LENGTH_LONG).show()
+        }
         return view
     }
 
@@ -63,8 +70,7 @@ class SingleTeamFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param team : team parameter with player data
          * @return A new instance of fragment SingleTeamFragment.
          */
         // TODO: Rename and change types and number of parameters
