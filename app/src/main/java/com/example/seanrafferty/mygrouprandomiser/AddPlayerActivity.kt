@@ -43,16 +43,13 @@ class AddPlayerActivity : AppCompatActivity() {
      */
     private fun SaveNewPlayer() : Int
     {
-        Log.d("AddPlayerActivity", object{}.javaClass.enclosingMethod.name)
-        var result : Int
-        val nameTextView = findViewById(R.id.playerNameEditView) as TextView
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        val nameTextView = findViewById<TextView>(R.id.playerNameEditView)
         val name : String = nameTextView.text.toString()
         val rating = _RatingSpinner.selectedItem
 
         var playerDB = PlayerDBHandler(DatabaseHandler(this))
 
-        result = playerDB.InsertPlayer(Player(0, name, rating.toString().toInt()))
-
-        return result
+        return playerDB.InsertPlayer(Player(0, name, rating.toString().toInt()))
     }
 }

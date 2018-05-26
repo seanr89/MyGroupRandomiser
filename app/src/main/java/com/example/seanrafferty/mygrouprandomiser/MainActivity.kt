@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     //List of groups to be displayed within a list view
-    lateinit var _GroupListView : ListView
+    private lateinit var _GroupListView : ListView
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        _GroupListView = findViewById(R.id.GroupListView) as ListView
+        _GroupListView = findViewById(R.id.GroupListView)
 
         // request all stored MyGroup objects and append these to a listview adapter
         var groupList = RequestGroups()
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun RequestGroups() : ArrayList<MyGroup>
     {
-        println("Method: " + object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
         //initialise an ArrayList and a DatabaseHandler object
         val groupList: ArrayList<MyGroup>
         val groupDB = MyGroupDBHandler(DatabaseHandler(this))
@@ -117,6 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /**
      * Handle item selection events for navigation drawer item selection
+     * @param item : handle the selection of the menu items
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
