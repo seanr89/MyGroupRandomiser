@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.fragment_event_info.view.*
 
 class EventInfoActivity : AppCompatActivity()
 {
-
     private lateinit var Event : GroupEvent
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
