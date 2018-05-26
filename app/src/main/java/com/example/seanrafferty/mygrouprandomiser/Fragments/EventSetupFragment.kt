@@ -225,6 +225,10 @@ class EventSetupFragment : Fragment()
         return dateTime
     }
 
+    interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        fun onFragmentInteraction(uri: Uri)
+    }
 
     companion object {
         /**
