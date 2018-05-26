@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser
 
+import android.net.Uri
 import android.support.design.widget.TabLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -16,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventInfoFragment
+import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.R.id.*
@@ -23,8 +25,12 @@ import com.example.seanrafferty.mygrouprandomiser.R.id.*
 import kotlinx.android.synthetic.main.activity_event_info.*
 import kotlinx.android.synthetic.main.fragment_event_info.view.*
 
-class EventInfoActivity : AppCompatActivity()
+class EventInfoActivity: EventInfoFragment.OnFragmentInteractionListener, AppCompatActivity()
 {
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private lateinit var Event : GroupEvent
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -107,6 +113,8 @@ class EventInfoActivity : AppCompatActivity()
             // Show 3 total pages.
             return 3
         }
+
+
     }
 
     /**
