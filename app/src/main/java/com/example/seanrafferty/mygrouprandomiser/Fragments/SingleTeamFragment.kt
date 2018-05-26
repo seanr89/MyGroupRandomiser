@@ -3,12 +3,16 @@ package com.example.seanrafferty.mygrouprandomiser.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
 
 /**
@@ -18,22 +22,37 @@ import com.example.seanrafferty.mygrouprandomiser.R
  *
  */
 class SingleTeamFragment : Fragment() {
-    // Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var team : Team
+    private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            //param1 = it.getString(ARG_PARAM1)
-            //param2 = it.getString(ARG_PARAM2)
+            team = it.getSerializable(ARG_TEAM) as Team
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_team, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
+
+        val teamviewManager = LinearLayoutManager(activity)
+        playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
+        view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = teamviewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = playerRecyclerAdapter
+        }
+
+        return view
     }
 
 
