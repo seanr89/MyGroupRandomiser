@@ -57,15 +57,14 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/groupEventCountView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Events"
                         android:textSize="14sp" />
                     <TextView
+                        android:id="@+id/groupEventCountView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
                         android:textStyle="bold"
                         android:paddingTop="10dp"
                         android:textColor="@color/startblue"
@@ -103,15 +102,14 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/groupPlayerCountView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Players"
                         android:textSize="14sp" />
                     <TextView
+                        android:id="@+id/groupPlayerCountView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="18"
                         android:textStyle="bold"
                         android:paddingTop="10dp"
                         android:textColor="@color/startblue"
