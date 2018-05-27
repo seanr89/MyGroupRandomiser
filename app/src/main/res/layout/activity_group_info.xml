@@ -1,71 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/graylight"
+    android:orientation="vertical"
     tools:context=".GroupInfoActivity">
-
-    <TextView
-        android:id="@+id/GroupInfoTextHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Group Info"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/GroupInfoTextHeader"
-        android:layout_marginTop="25dp">
+        android:layout_height="280dp">
 
-        <!-- Field to display the Name for the group-->
-        <TextView
-            android:id="@+id/groupNameView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:orientation="vertical"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="159dp"
-            android:layout_marginTop="104dp"
-            android:text="NAME" />
+            android:background="@drawable/gradientbackground">
 
-        <!-- Field to display the Event Count for the group-->
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/ic_info_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Group Information"
+                android:textColor="#fff"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="340dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="170dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/groupEventCountView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Events"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textStyle="bold"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/startblue"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/groupNameView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Science Park"
+                        android:textStyle="bold"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/startblue"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/groupPlayerCountView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Players"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18"
+                        android:textStyle="bold"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/startblue"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp">
+
         <TextView
-            android:id="@+id/groupEventCountView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/groupNameView"
-            android:layout_marginTop="141dp"
-            android:text="Count" />
-
-        <!-- Field to display the player Count for the group-->
-        <TextView
-            android:id="@+id/groupPlayerCountView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/groupNameView"
-            android:layout_marginTop="181dp"
-            android:text="Count" />
+            android:text="Events"
+            android:textSize="14sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/GroupInfoRecycler"
-            android:layout_width="191dp"
+            android:layout_width="match_parent"
             android:layout_height="196dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="78dp"
-            android:layout_marginStart="53dp"
             tools:layout_editor_absoluteX="8dp" />
 
-    </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="80dp">
+        <Button
+            android:id="@+id/btn_assign_players"
+            android:background="@drawable/buttonstylewithgradient"
+            android:textColor="#fff"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="15dp"
+            android:text="Add Player"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_create_event"
+            android:textColor="#fff"
+            android:background="@drawable/buttonstylewithgradient"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:text="Create Event"
+            android:layout_toEndOf="@+id/btn_assign_players"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_assign_players"
+            app:layout_constraintStart_toEndOf="@+id/btn_assign_players" />
+
+
+    </LinearLayout>
+
+
+<!--
+
+    &lt;!&ndash; Field to display the Name for the group&ndash;&gt;
+    <TextView
+        android:id="@+id/groupNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/GroupInfoRecycler"
+        android:layout_marginTop="54dp"
+        android:text="NAME" />
+
+    &lt;!&ndash; Field to display the Event Count for the group&ndash;&gt;
+    <TextView
+        android:id="@+id/groupEventCountView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/groupNameView"
+        android:layout_marginTop="82dp"
+        android:text="Count" />
+
+    &lt;!&ndash; Field to display the player Count for the group&ndash;&gt;
+    <TextView
+        android:id="@+id/groupPlayerCountView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/groupNameView"
+        android:layout_marginTop="113dp"
+        android:text="Count" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/GroupInfoRecycler"
+        android:layout_width="191dp"
+        android:layout_height="196dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="78dp"
+        android:layout_marginStart="53dp"
+        tools:layout_editor_absoluteX="8dp" />
+
 
     <Button
         android:id="@+id/btn_assign_players"
@@ -87,25 +240,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_assign_players"
         app:layout_constraintStart_toEndOf="@+id/btn_assign_players" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/groupinfocontent" />
+-->
 
-    <!--<Button-->
-    <!--android:id="@+id/btn_event_stats"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:text="@string/btnGroupEventStats"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/btn_create_event"-->
-    <!--app:layout_constraintStart_toEndOf="@+id/btn_create_event" />-->
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
