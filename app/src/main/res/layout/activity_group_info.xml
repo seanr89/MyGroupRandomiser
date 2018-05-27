@@ -94,6 +94,7 @@
 
     </RelativeLayout>
 
+    <!-- Button provide logic to navigate to the assign player screen -->
     <Button
         android:id="@+id/btn_assign_players"
         android:layout_width="wrap_content"
@@ -104,6 +105,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Button to handle event creation -->
     <Button
         android:id="@+id/btn_create_event"
         android:layout_width="wrap_content"
@@ -113,15 +115,6 @@
         android:text="@string/btnCreateEvent"
         app:layout_constraintBottom_toBottomOf="@+id/btn_assign_players"
         app:layout_constraintStart_toEndOf="@+id/btn_assign_players" />
-
-    <!--<Button-->
-        <!--android:id="@+id/btn_event_stats"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:text="@string/btnGroupEventStats"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/btn_create_event"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/btn_create_event" />-->
 
 
 </android.support.constraint.ConstraintLayout>
