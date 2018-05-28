@@ -24,9 +24,12 @@
         <!-- android:label="@string/title_activity_navigation_bar" -->
         <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
         <!-- <activity -->
-        android:name=".PlayerActivity"
-        android:label="Player Info" />
-        <activity android:name=".AddPlayerActivity" />
+        <activity
+            android:name=".PlayerActivity">
+        </activity>
+        <activity
+            android:name=".AddPlayerActivity">
+        </activity>
         <activity
             android:name=".GroupInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />

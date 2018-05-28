@@ -19,7 +19,6 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
-        //setSupportActionBar(toolbar)
 
         /**
          * Create listener on + item click event
@@ -31,9 +30,9 @@ class PlayerActivity : AppCompatActivity() {
         /**
          * initialise the player ListView, request all players and append into an adapter
          */
-        _PlayerListView = findViewById(R.id.PlayerListView) as ListView
-        var playerList = RequestAllPlayers()
-        var playerAdapter = PlayerAdapter(this, playerList)
+        _PlayerListView = findViewById(R.id.PlayerListView)
+        val playerList = RequestAllPlayers()
+        val playerAdapter = PlayerAdapter(this, playerList)
         _PlayerListView.adapter = playerAdapter;
     }
 

@@ -25,7 +25,7 @@ class PlayerDBHandler
      */
     fun ReadAllPlayers() : ArrayList<Player>
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
         var arrayList = ArrayList<Player>()
 
