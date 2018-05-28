@@ -31,10 +31,10 @@ class PlayerActivity : AppCompatActivity() {
         /**
          * initialise the player ListView, request all players and append into an adapter
          */
-        _PlayerListView = findViewById(R.id.PlayerListView)
+        _PlayerListView = findViewById(R.id.PlayerListView) as ListView
         var playerList = RequestAllPlayers()
         var playerAdapter = PlayerAdapter(this, playerList)
-        _PlayerListView.adapter = playerAdapter
+        _PlayerListView.adapter = playerAdapter;
     }
 
     /**
@@ -43,11 +43,14 @@ class PlayerActivity : AppCompatActivity() {
      */
     fun RequestAllPlayers() : ArrayList<Player>
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        Log.d("PlayerActivity", object{}.javaClass.enclosingMethod.name)
 
-        //initialise the play database
+        //initialise an ArrayList and a DatabaseHandler object
+        var playerList: ArrayList<Player>
         var playerDB = PlayerDBHandler(DatabaseHandler(this))
         //query DB for all players and return
-        return playerDB.ReadAllPlayers()
+        playerList = playerDB.ReadAllPlayers()
+
+        return playerList
     }
 }

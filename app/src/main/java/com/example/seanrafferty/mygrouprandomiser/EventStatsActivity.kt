@@ -33,7 +33,6 @@ class EventStatsActivity : AppCompatActivity()
             UpdateEvent(Event)
         }
 
-        //once all is setup handle event request
         RequestAndDisplayEventStats(Event)
     }
 
@@ -63,6 +62,7 @@ class EventStatsActivity : AppCompatActivity()
     private fun RequestEventForEventID(eventID: Int) : GroupEvent
     {
         var eventManager = EventManager(this)
+
         return eventManager.GetEventByID(eventID)
     }
 

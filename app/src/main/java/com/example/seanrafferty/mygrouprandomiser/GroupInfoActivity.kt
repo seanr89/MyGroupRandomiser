@@ -29,9 +29,9 @@ class GroupInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_info)
 
-        val groupID = intent.getStringExtra("GroupID").toInt()
+        val ID = intent.getStringExtra("GroupID").toInt()
         //now we need to request data from the DB for the passed in ID
-        SelectedGroup = GetGroupFromDB(groupID)
+        SelectedGroup = GetGroupFromDB(ID)
 
         //now refresh the data with selected group details
         RefreshMyGroupInfo(SelectedGroup)
@@ -40,38 +40,31 @@ class GroupInfoActivity : AppCompatActivity() {
         var btn_assign_players = findViewById<Button>(R.id.btn_assign_players)
         btn_assign_players.setOnClickListener()
         {
-            NavigationControls.NavigateToPlayerAssignment(this, groupID)
+            NavigationControls.NavigateToPlayerAssignment(this, ID)
         }
         var btn_create_event = findViewById<Button>(R.id.btn_create_event)
         btn_create_event.setOnClickListener()
         {
-            NavigationControls.NavigateToGroupCreateEventActivity(this, groupID)
+            NavigationControls.NavigateToGroupCreateEventActivity(this, ID)
         }
 
         //initialise the event manager and request all events for the group
-        val eventManager = EventManager(this)
-        val groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
+        var eventManager = EventManager(this)
+        var groupEvents = eventManager.GetAllEventsForAGroup(SelectedGroup)
 
         //SEAN - Remove all completed events
         //SEAN - Remove all completed events
 
-        if(groupEvents.isNotEmpty())
-        {
-            var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, this, SelectionOption.SINGLE_SELECT)
-            viewManager = LinearLayoutManager(this)
-            recyclerView = findViewById<RecyclerView>(R.id.GroupInfoRecycler).apply{
-                // use this setting to improve performance if you know that changes
-                // in content do not change the layout size of the RecyclerView
-                setHasFixedSize(true)
-                // use a linear layout manager
-                layoutManager = viewManager
-                // specify an viewAdapter (see also next example)
-                adapter = recyclerAdapter
-            }
-        }
-        else
-        {
-            Toast.makeText(this, "No Events available", Toast.LENGTH_LONG).show()
+        var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, this, SelectionOption.SINGLE_SELECT)
+        viewManager = LinearLayoutManager(this)
+        recyclerView = findViewById<RecyclerView>(R.id.GroupInfoRecycler).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+            // use a linear layout manager
+            layoutManager = viewManager
+            // specify an viewAdapter (see also next example)
+            adapter = recyclerAdapter
         }
     }
 
@@ -82,8 +75,8 @@ class GroupInfoActivity : AppCompatActivity() {
      */
     private fun GetGroupFromDB(id: Int) : MyGroup
     {
-        val myGroupDB = MyGroupDBHandler(DatabaseHandler(this))
-        return myGroupDB.ReadMyGroupByID(id)
+        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(this))
+        return MyGroupDB.ReadMyGroupByID(id)
     }
 
     /**
@@ -103,8 +96,8 @@ class GroupInfoActivity : AppCompatActivity() {
      */
     private fun RefreshGroupInfoStats(group : MyGroup)
     {
-        val playerCount = MyGroupDBHandler(DatabaseHandler(this)).GetPlayerCountAssignedToGroup(group)
-        val eventCount = EventDBHandler(DatabaseHandler(this)).GetCountOfEventsForGrouo(group)
+        var playerCount = MyGroupDBHandler(DatabaseHandler(this)).GetPlayerCountAssignedToGroup(group)
+        var eventCount = EventDBHandler(DatabaseHandler(this)).GetCountOfEventsForGrouo(group)
 
         val groupEventCountTextView = findViewById<TextView>(R.id.groupEventCountView)
         groupEventCountTextView.text = eventCount.toString()

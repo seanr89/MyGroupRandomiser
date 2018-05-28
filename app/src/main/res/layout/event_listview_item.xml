@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/graylight"
     android:layout_height="wrap_content">
 
 
     <TextView
         android:id="@+id/eventDateText"
-        android:layout_width="205dp"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
+        android:background="@color/graylight"
         android:padding="10dp"
         android:text="Event Date"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <CheckBox
         android:id="@+id/eventCheckBoxCompleted"
-        android:layout_width="125dp"
-        android:layout_height="47dp"
+        android:layout_width="176dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginLeft="55dp"
+        android:background="@color/graylight"
         android:clickable="false"
         android:text="Completed" />
 
