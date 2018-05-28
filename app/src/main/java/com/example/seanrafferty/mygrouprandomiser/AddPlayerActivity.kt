@@ -1,6 +1,5 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,7 +21,6 @@ class AddPlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_player)
 
         val ratings = Array(10, { i -> (i + 1) })
-
         _RatingSpinner = findViewById(R.id.spinnerRating)
 
         val spinnerAdapter = ArrayAdapter(

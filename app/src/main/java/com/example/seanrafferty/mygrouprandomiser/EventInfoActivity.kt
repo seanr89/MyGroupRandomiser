@@ -45,7 +45,6 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
@@ -56,7 +55,6 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
 //        }
-
     }
 
 

@@ -51,8 +51,8 @@ class PlayerAdapter : BaseAdapter
         var playerObj = arrayList[position]
 
         //Add single player content to the available text views
-        view.playerNameView.text = playerObj.Name
-        view.playerRatingView.text = playerObj.Rating.toString()
+        view.txtPlayerName.text = playerObj.Name
+        view.txtPlayerRating.text = playerObj.Rating.toString()
 
 
         return view
