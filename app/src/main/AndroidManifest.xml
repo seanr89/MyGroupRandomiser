@@ -19,11 +19,6 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".AddGroup" />
-        <!-- <activity -->
-        <!-- android:name=".NavigationBarActivity" -->
-        <!-- android:label="@string/title_activity_navigation_bar" -->
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
-        <!-- <activity -->
         <activity
             android:name=".PlayerActivity">
         </activity>
@@ -37,9 +32,6 @@
         <activity
             android:name=".GroupEventGeneratorActivity"
             android:label="@string/title_activity_group_event_generator">
-
-            <!-- android:theme="@style/AppTheme.NoActionBar"> -->
-
         </activity>
         <activity
             android:name=".EventStatsActivity"
@@ -47,7 +39,6 @@
         <activity android:name=".FirebaseContent.GoogleLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,8 +47,6 @@
             android:label="@string/title_activity_event_info"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-
 
         <service
             android:name=".FirebaseContent.MyFirebaseInstanceIDService">

@@ -123,8 +123,8 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
         constructor(itemView: View, selectable: Boolean) : super(itemView)
         {
             itemSelectable = selectable
-            txtName = itemView.findViewById<TextView>(R.id.playerNameView)
-            txtRating = itemView.findViewById<TextView>(R.id.playerRatingView)
+            txtName = itemView.findViewById(R.id.txtPlayerName)
+            txtRating = itemView.findViewById(R.id.txtPlayerRating)
         }
     }
 }
