@@ -26,33 +26,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     private var _GroupID : Int = 0
     private lateinit var Teams : ArrayList<Team>
 
-
-    /**
-     * Handle the interaction of the event setup fragment
-     * @param teams : the array list of teams generated
-     */
-    override fun onFragmentInteraction(teams : ArrayList<Team>)
-    {
-        var groupEvent = CreateEventGroupFromContent()
-        if(groupEvent != null)
-        {
-            var eventManager = EventManager(this)
-            eventManager.SaveEvent(groupEvent)
-        }
-        Toast.makeText(this, "Event Scheduled", Toast.LENGTH_LONG).show()
-        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
-    }
-
-    /**
-     * Handle event from setup fragment noting the completion team randomisation
-     * @param teams : handle the randomization of teams with update the respective fragments
-     */
-    override fun onTeamsRandomized(teams: ArrayList<Team>)
-    {
-        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
-        UpdateTeamsFragmentsWithRandomizedPlayers(teams)
-    }
-
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -75,7 +48,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         mSectionsPagerAdapter!!.getItem(2)
-
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
@@ -115,8 +87,12 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
 
     /**
-     * A [FragmentPagerAdapter] that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
+     * The [android.support.v4.view.PagerAdapter] that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * [android.support.v4.app.FragmentStatePagerAdapter].
      */
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
@@ -133,14 +109,14 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
                 0 -> fragment = EventSetupFragment.newInstance(_GroupID)
                 1 -> fragment = TeamsFragment.newInstance(Teams, 1, "Team1")
                 else -> { // Note the block
-                    print("x is neither 0, 1 nor 2")
+                    print("x is neither 0, or 1")
                 }
             }
             return fragment
         }
 
         override fun getCount(): Int {
-            // Show 3 total pages.
+            // Show 2 total pages.
             return 2
         }
     }
@@ -165,10 +141,47 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
-        //get the setupFragment
+        //get the setupFragment and request the current selected date and time of the event
         var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         var dateTime = eventFragment.GetSelectedDateAndTime()
 
         return GroupEvent(0, dateTime, _GroupID, false, Teams)
     }
+
+
+
+    ///////***************************************************************////////
+    ///////***************************************************************////////
+    ///////***************************************************************////////
+
+    /**
+     * Handle the interaction of the event setup fragment
+     * @param teams : the array list of teams generated
+     */
+    override fun onFragmentInteraction(teams : ArrayList<Team>)
+    {
+        var groupEvent = CreateEventGroupFromContent()
+        if(groupEvent != null)
+        {
+            var eventManager = EventManager(this)
+            eventManager.SaveEvent(groupEvent)
+        }
+        Toast.makeText(this, "Event Scheduled", Toast.LENGTH_LONG).show()
+        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
+    }
+
+    /**
+     * Handle event from setup fragment noting the completion team randomisation
+     * @param teams : handle the randomization of teams with update the respective fragments
+     */
+    override fun onTeamsRandomized(teams: ArrayList<Team>)
+    {
+        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+        UpdateTeamsFragmentsWithRandomizedPlayers(teams)
+    }
+
+
+    ///////***************************************************************////////
+    ///////***************************************************************////////
+    ///////***************************************************************////////
 }
