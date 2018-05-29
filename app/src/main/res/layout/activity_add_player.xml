@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/graylight"
-    tools:context=".AddGroup"
+    tools:context=".AddPlayerActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
