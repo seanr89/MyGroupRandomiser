@@ -26,7 +26,6 @@ class PlayerAdapter : BaseAdapter
      */
     constructor(con: Context, arrList: ArrayList<Player>, selectionOption: SelectionOption = SelectionOption.NO_SELECT) : super()
     {
-        //println("PlayerAdapter: Constructor")
         this.context = con
         this.arrayList = arrList
         this.myInflater = LayoutInflater.from(context)

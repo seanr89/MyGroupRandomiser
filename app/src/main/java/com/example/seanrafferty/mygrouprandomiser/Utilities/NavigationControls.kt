@@ -13,14 +13,10 @@ class NavigationControls {
 
     companion object
     {
-        fun NavaigateToMainActivity(context : Context)
-        {
-            val intent= Intent(context, MainActivity::class.java)
-            startActivity(context, intent, null)
-        }
-
         /**
          * Navigation to the player assignment screen
+         * @param context : current activity context navigating from
+         * @param groupID : the id of the group current a part of
          */
         fun NavigateToPlayerAssignment(context: Context, groupID : Int)
         {
@@ -29,6 +25,11 @@ class NavigationControls {
             startActivity(context, intent, null)
         }
 
+        /**
+         * Navigation to the GroupInfo Activity
+         * @param context : current activity context navigating from
+         * @param groupID : the current GroupID selected
+         */
         fun NavigateToGroupInfoActivity(context: Context, groupID : Int)
         {
             val intent= Intent(context, GroupInfoActivity::class.java)
@@ -37,7 +38,8 @@ class NavigationControls {
         }
 
         /**
-         *  Navigate and start the Main Activity
+         * Navigate and start the Main Activity
+         * @param context : current activity context navigating from
          */
         fun NavigateToMainActivity(context: Context)
         {
@@ -47,6 +49,7 @@ class NavigationControls {
 
         /**
          * Navigate to the player activity
+         * @param context : current activity context navigating from
          */
         fun NavigateToPlayerActivity(context: Context)
         {
@@ -56,6 +59,7 @@ class NavigationControls {
 
         /**
          * Navigate to the Edit/Add group Activity
+         * @param context : current activity context navigating from
          */
         fun NavigateToEditGroupActivity(context: Context)
         {
@@ -65,6 +69,7 @@ class NavigationControls {
 
         /**
          * Navigate to the Add Player Activity
+         * @param context : current activity context navigating from
          */
         fun NavigateToAddPlayerActivity(context: Context)
         {
@@ -74,25 +79,13 @@ class NavigationControls {
 
         /**
          * Navigate to the MyGroup Create Event Activity
+         * @param context : current activity context navigating from
          * @param groupID : unique id for a group
          */
         fun NavigateToGroupCreateEventActivity(context: Context, groupID: Int)
         {
             var intent= Intent(context, GroupEventGeneratorActivity::class.java)
             intent.putExtra("GroupID", groupID.toString())
-            startActivity(context, intent, null)
-        }
-
-        /**
-         * Navigate to the EventStats Activity for an individual event
-         * @param context : current activity context navigating from
-         * @param eventID : the event ID to review stats
-         *
-         */
-        fun NavigateToEventStatsActivity(context: Context, eventID: Int)
-        {
-            var intent= Intent(context, EventStatsActivity::class.java)
-            intent.putExtra("EventID", eventID.toString())
             startActivity(context, intent, null)
         }
 

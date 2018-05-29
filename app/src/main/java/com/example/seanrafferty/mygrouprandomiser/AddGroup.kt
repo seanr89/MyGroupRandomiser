@@ -23,7 +23,7 @@ class AddGroup : AppCompatActivity() {
 
             if(result >= 1)
             {
-                NavigationControls.NavaigateToMainActivity(this)
+                NavigationControls.NavigateToMainActivity(this)
             }
             else
             {

@@ -13,11 +13,6 @@ import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -48,11 +43,6 @@ class EventInfoFragment : Fragment()  {
         return fragment;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
@@ -62,6 +52,9 @@ class EventInfoFragment : Fragment()  {
         }
     }
 
+    /**
+     * Handle detachment of the fragment
+     */
     override fun onDetach() {
         super.onDetach()
         listener = null
@@ -79,7 +72,6 @@ class EventInfoFragment : Fragment()  {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
