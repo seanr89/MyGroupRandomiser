@@ -36,9 +36,6 @@ class InitialiseDataDBHandler
         myGroupDB.CreateGroup(MyGroup(-1, "Group 1"))
         myGroupDB.CreateGroup(MyGroup(-1, "Group 3"))
         myGroupDB.CreateGroup(MyGroup(-1, "Group 4"))
-       // myGroupDB.CreateGroup(MyGroup(-1, "Group 5"))
-       // myGroupDB.CreateGroup(MyGroup(-1, "Group 6"))
-
     }
 
     /**

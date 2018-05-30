@@ -7,6 +7,11 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Update
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 
+/*
+https://www.youtube.com/watch?v=H7I3zs-L-1w
+https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b725c8d1d
+ */
+
 @Dao
 interface PlayerDao {
 
