@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.GroupAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
@@ -87,13 +88,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun RequestGroups() : ArrayList<MyGroup>
     {
         Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
-        //initialise an ArrayList and a DatabaseHandler object
-        val groupList: ArrayList<MyGroup>
-        val groupDB = MyGroupDBHandler(DatabaseHandler(this))
+        val groupManager = MyGroupManager(this)
 
         //Request all groups from the database and return the data
-        groupList = groupDB.ReadAllGroups()
-        return groupList
+        return groupManager.ReadAllGroups()
     }
 
 
