@@ -30,8 +30,10 @@ class AddPlayerActivity : AppCompatActivity() {
         _SavePlayerBtn = findViewById(R.id.btn_save_player)
         _SavePlayerBtn.setOnClickListener()
         {
-            SaveNewPlayer()
-            NavigationControls.NavigateToPlayerActivity(this)
+            if(SaveNewPlayer() >= 1)
+            {
+                NavigationControls.NavigateToPlayerActivity(this)
+            }
         }
     }
 
@@ -46,8 +48,12 @@ class AddPlayerActivity : AppCompatActivity() {
         val name : String = nameTextView.text.toString()
         val rating = _RatingSpinner.selectedItem
 
-        var playerDB = PlayerDBHandler(DatabaseHandler(this))
-
-        return playerDB.InsertPlayer(Player(0, name, rating.toString().toInt()))
+        if(name.isNotEmpty())
+        {
+            var playerDB = PlayerDBHandler(DatabaseHandler(this))
+            return playerDB.InsertPlayer(Player(0, name, rating.toString().toInt()))
+        }
+        Toast.makeText(this, "No Name Provided", Toast.LENGTH_LONG).show()
+        return 0
     }
 }
