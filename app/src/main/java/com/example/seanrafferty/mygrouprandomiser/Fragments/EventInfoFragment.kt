@@ -39,7 +39,6 @@ class EventInfoFragment : Fragment()  {
         val fragment = inflater.inflate(R.layout.fragment_event_info, null);
 
 
-
         return fragment;
     }
 

@@ -1,0 +1,20 @@
+package com.example.seanrafferty.mygrouprandomiser.SQLite.Databases
+
+import android.arch.persistence.db.SupportSQLiteOpenHelper
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.DatabaseConfiguration
+import android.arch.persistence.room.InvalidationTracker
+import android.arch.persistence.room.RoomDatabase
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
+
+
+@Database(entities = arrayOf(Player::class), version = 1)
+class PlayerDatabase : RoomDatabase() {
+    override fun createOpenHelper(config: DatabaseConfiguration?): SupportSQLiteOpenHelper {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun createInvalidationTracker(): InvalidationTracker {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}

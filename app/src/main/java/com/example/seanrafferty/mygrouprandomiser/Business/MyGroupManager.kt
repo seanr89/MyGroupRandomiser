@@ -25,6 +25,12 @@ class MyGroupManager(val context: Context?)
         return MyGroupDB.CreateGroup(group)
     }
 
+    fun ReadAllGroups() : ArrayList<MyGroup>
+    {
+        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
+        return MyGroupDB.ReadAllGroups()
+    }
+
     /**
      * New method to move events to business layer from datalayer
      */
