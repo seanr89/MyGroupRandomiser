@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -20,7 +21,6 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 class PlayerAssigmentActivity : AppCompatActivity()
 {
     lateinit var _PlayerDBHandler : PlayerDBHandler
-
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var recyclerView: RecyclerView
     var groupID : Int = 0
@@ -64,7 +64,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
      */
     private fun SaveSelectedAssignments()
     {
-        Log.d("Method",object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
         var adapter = recyclerView.adapter as PlayerRecyclerAdapter
         var players = adapter.SelectedItems
@@ -72,6 +72,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
         if(!players.isEmpty())
         {
             _PlayerDBHandler.AssignPlayersToGroup(players, MyGroup(groupID, ""))
+            Toast.makeText(this, "Players Assigned", Toast.LENGTH_LONG).show()
         }
     }
 }
