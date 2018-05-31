@@ -26,17 +26,22 @@ class MyGroupDBHandler
     @Throws(SQLiteConstraintException::class)
     fun CreateGroup(group: MyGroup) : Int
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
-        var result : Int = 0
+        var result = 0
 
         var values = ContentValues()
         values.put("Name", group.Name)
 
         val db = _DB.GetWritableDataBaseObject()
-
-        result = db!!.insert(DatabaseHandler.groupTableName, "", values).toInt()
-
+        try
+        {
+            result = db!!.insertOrThrow(DatabaseHandler.groupTableName, "", values).toInt()
+        }
+        catch (e: SQLiteException)
+        {
+            Log.e("EXCEPTION", "Error on create ${e.message}")
+        }
         return result;
     }
 
@@ -44,6 +49,7 @@ class MyGroupDBHandler
      * Read the information for an individual MyGroup object
      * @param id - a unique object for a MyGroup object
      */
+    @Throws(SQLiteConstraintException::class)
     fun ReadMyGroupByID(id:Int) : MyGroup
     {
         var selectQuery: String = "SELECT * FROM ${DatabaseHandler.groupTableName} WHERE ${DatabaseHandler.grouppkID} = $id"
