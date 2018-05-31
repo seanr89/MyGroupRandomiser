@@ -37,7 +37,7 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_info)
 
-        setSupportActionBar(toolbar)
+        /*setSupportActionBar(toolbar)*/
 
         var eventManager = EventManager(this)
         Event = eventManager.GetEventByID(intent.getStringExtra("EventID").toInt())

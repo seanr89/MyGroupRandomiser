@@ -31,6 +31,7 @@
         <activity android:name=".PlayerAssigmentActivity" />
         <activity
             android:name=".GroupEventGeneratorActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_group_event_generator">
         </activity>
         <activity
