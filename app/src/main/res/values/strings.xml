@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Group Randomizer</string>
+    <string name="app_name">Shuffle Up</string>
 
     <!-- Group List View -->
     <string name="group_leftTextView">Group Name</string>
