@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // request all stored MyGroup objects and append these to a listview adapter
         var groupList = RequestGroups()
         var groupAdapter = GroupAdapter(this, groupList)
-        _GroupListView.adapter = groupAdapter;
+        _GroupListView.adapter = groupAdapter
 
         //Handle listview item selection for a group
         _GroupListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
@@ -64,20 +64,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
-//            when(item.itemId)
-//            {
-//                R.id.action_players -> {
-//                    NavigationControls.NavigateToPlayerActivity(this)
-//                    return true
-//                }
-//                R.id.action_settings -> {
-//                    Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
-//                    var DBReset = DatabaseHandler(this)
-//                    DBReset.onUpgrade(DBReset.writableDatabase, 9 , 9)
-//                    var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
-//                    dbInitData.RunDataInitialisation()
-//                }
-//            }
         return true
     }
 
@@ -131,7 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 NavigationControls.NavigateToEditGroupActivity(this)
             }
             R.id.nav_init_db -> {
-                Toast.makeText(this, "Settings not available", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Resetting Database", Toast.LENGTH_LONG).show()
                 var DBReset = DatabaseHandler(this)
                 DBReset.onUpgrade(DBReset.writableDatabase, DatabaseHandler.DBVersion , DatabaseHandler.DBVersion)
                 var dbInitData = InitialiseDataDBHandler(DatabaseHandler(this))
