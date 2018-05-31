@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser
 
+import android.app.PendingIntent.getActivity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -7,10 +8,7 @@ import android.support.v4.view.GravityCompat
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import com.example.seanrafferty.mygrouprandomiser.Adapters.GroupAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -18,20 +16,41 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import kotlinx.android.synthetic.main.activity_navigation_bar.*
 import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignIn.getLastSignedInAccount
+import org.w3c.dom.Text
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     //List of groups to be displayed within a list view
     private lateinit var _GroupListView : ListView
+    private lateinit var GoogleUserName: TextView
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        //Get Google Profile information
 
+        val acct = getLastSignedInAccount(this@MainActivity)
+        if (acct != null) {
+            val personName = acct.displayName
+            val personGivenName = acct.givenName
+            val personFamilyName = acct.familyName
+            val personEmail = acct.email
+            val personId = acct.id
+            val personPhoto = acct.photoUrl
+        }
+
+
+         GoogleUserName = findViewById(R.id.textView2)
+         GoogleUserName.text = acct?.displayName
+        
         _GroupListView = findViewById(R.id.GroupListView)
 
         // request all stored MyGroup objects and append these to a listview adapter
