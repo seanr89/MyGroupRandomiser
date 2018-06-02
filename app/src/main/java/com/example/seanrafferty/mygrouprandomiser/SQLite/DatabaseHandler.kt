@@ -1,16 +1,12 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
-import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
-import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
-import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
-import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.crashlytics.android.Crashlytics
 
 class DatabaseHandler : SQLiteOpenHelper
 {
@@ -88,30 +84,37 @@ class DatabaseHandler : SQLiteOpenHelper
     {
         Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name + " For Version " + DBVersion)
 
-        //Create the Group Table if it doesn't already exist
-        var sqlCreateGroup: String =  "CREATE TABLE IF NOT EXISTS ${groupTableName} " +
-            "(${grouppkID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            "${groupName} TEXT, " +
-            "${groupDate} TEXT);"
-
-        var sqlCreatePlayer: String = "CREATE TABLE IF NOT EXISTS ${PlayerTable} " +
-                "(${PlayerpkID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                "${PlayerName} TEXT, " +
-                "${PlayerRating} INTEGER);"
-
-        if(db != null)
+        try
         {
-            db.execSQL(sqlCreateGroup)
-            db.execSQL(sqlCreatePlayer)
-            CreateGroupPlayersTable(db)
-            CreateEventTable(db)
-            CreateTeamTable(db)
-            CreateTeamPlayerMapping(db)
+            //Create the Group Table if it doesn't already exist
+            var sqlCreateGroup: String =  "CREATE TABLE IF NOT EXISTS ${groupTableName} " +
+                    "(${grouppkID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    "${groupName} TEXT, " +
+                    "${groupDate} TEXT);"
 
-            Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
+            var sqlCreatePlayer: String = "CREATE TABLE IF NOT EXISTS ${PlayerTable} " +
+                    "(${PlayerpkID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    "${PlayerName} TEXT, " +
+                    "${PlayerRating} INTEGER);"
+
+            if(db != null)
+            {
+                db.execSQL(sqlCreateGroup)
+                db.execSQL(sqlCreatePlayer)
+                CreateGroupPlayersTable(db)
+                CreateEventTable(db)
+                CreateTeamTable(db)
+                CreateTeamPlayerMapping(db)
+
+                Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
+            }
+            else{
+                println("database is null")
+            }
         }
-        else{
-            println("database is null")
+        catch(e: SQLiteException)
+        {
+            Crashlytics.log("SQL database failed to initialize")
         }
     }
 

@@ -22,6 +22,9 @@ android {
     }
 }
 
+/*
+https://mvnrepository.com/ to search for library versions
+ */
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -30,8 +33,9 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:support-v4:27.1.0'
     implementation 'com.android.support:design:27.1.0'
-    implementation 'com.google.firebase:firebase-auth:15.0.0'
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
     implementation 'com.google.android.gms:play-services-auth:15.0.0'
     implementation "android.arch.persistence.room:runtime:1.0.0"
     testImplementation 'junit:junit:4.12'
