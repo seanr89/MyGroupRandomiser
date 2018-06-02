@@ -10,7 +10,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.Player
 
 class MyGroupDBHandler
 {
-    lateinit var _DB : DatabaseHandler
+    val _DB : DatabaseHandler
 
     /**
      * constructor for player DB handler
@@ -22,6 +22,8 @@ class MyGroupDBHandler
 
     /**
      * INSERT a new Group to the database
+     * @param group : the group to insert
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     @Throws(SQLiteConstraintException::class)
     fun CreateGroup(group: MyGroup) : Int
@@ -48,6 +50,7 @@ class MyGroupDBHandler
     /**
      * Read the information for an individual MyGroup object
      * @param id - a unique object for a MyGroup object
+     * @return the group associated to the id - or null
      */
     @Throws(SQLiteConstraintException::class)
     fun ReadMyGroupByID(id:Int) : MyGroup
@@ -147,7 +150,9 @@ class MyGroupDBHandler
     }
 
     /**
-     *
+     * Request the total number of players assigned a single group
+     * @param group : the group to query
+     * @return the count of players - default is zero
      */
     fun GetPlayerCountAssignedToGroup(group : MyGroup) : Int
     {
@@ -162,7 +167,7 @@ class MyGroupDBHandler
 
     /**
      * Read and parse and Groups stored in the database
-     * @return all available MyGroups
+     * @return all available MyGroup objects
      */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {

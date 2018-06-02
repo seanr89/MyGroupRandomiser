@@ -41,10 +41,12 @@ class EventDBHandler
         try {
             cursor = db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            // if table not yet present, create it
+            // exception on the query fall over
+            Log.e("EXCEPTION", "query failed with message : ${e.message}")
             return null!!
         }
 
+        //check the cursor has an item then start processing using a while loop
         if (cursor!!.moveToFirst()) {
             do
             {
@@ -74,7 +76,7 @@ class EventDBHandler
         try {
             cursor = db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            // if table not yet present, create it
+            Log.e("EXCEPTION", "query failed with message : ${e.message}")
             return null!!
         }
 

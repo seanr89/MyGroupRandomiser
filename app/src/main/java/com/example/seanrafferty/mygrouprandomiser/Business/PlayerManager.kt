@@ -17,4 +17,15 @@ class PlayerManager(val context: Context?)
         var db = PlayerDBHandler(DatabaseHandler(context))
         return db.ReadAllPlayers()
     }
+
+    /**
+     * Insert a new player into the database
+     * @param player : the player to be inserted
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
+     */
+    fun SavePlayer(player : Player) : Int
+    {
+        var db = PlayerDBHandler(DatabaseHandler(context))
+        return db.InsertPlayer(player)
+    }
 }

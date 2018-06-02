@@ -20,6 +20,7 @@ class AddPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_player)
 
+        //Initialise the player rating system (count is 1 to 10/11)
         val ratings = Array(10, { i -> (i + 1) })
         _RatingSpinner = findViewById(R.id.spinnerRating)
 
@@ -30,6 +31,7 @@ class AddPlayerActivity : AppCompatActivity() {
         _SavePlayerBtn = findViewById(R.id.btn_save_player)
         _SavePlayerBtn.setOnClickListener()
         {
+            //Run save player and check that the return is a unique ID
             if(SaveNewPlayer() >= 1)
             {
                 NavigationControls.NavigateToPlayerActivity(this)

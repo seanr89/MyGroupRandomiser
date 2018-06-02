@@ -17,7 +17,7 @@ class MyGroupManager(val context: Context?)
 
     /**
      * Handle the creation of a new MyGroup and save to the database
-     * @param group : the group to be inserted
+     * @param group the row ID of the newly inserted row, or -1 if an error occurred
      */
     fun CreateGroup(group : MyGroup) : Int
     {
@@ -25,6 +25,10 @@ class MyGroupManager(val context: Context?)
         return MyGroupDB.CreateGroup(group)
     }
 
+    /**
+     * Operation to request all available groups stored
+     * @return an ArrayList of MyGroup objects
+     */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {
         var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
@@ -32,7 +36,7 @@ class MyGroupManager(val context: Context?)
     }
 
     /**
-     * New method to move events to business layer from datalayer
+     * New method to move events to business layer from database
      */
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>
     {
