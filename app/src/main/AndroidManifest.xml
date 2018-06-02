@@ -5,6 +5,8 @@
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,45 +19,38 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddGroup" />
-        <activity
-            android:name=".PlayerActivity">
-        </activity>
-        <activity
-            android:name=".AddPlayerActivity">
-        </activity>
+        <activity android:name=".PlayerActivity"></activity>
+        <activity android:name=".AddPlayerActivity"></activity>
         <activity
             android:name=".GroupInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PlayerAssigmentActivity" />
         <activity
             android:name=".GroupEventGeneratorActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_group_event_generator">
-        </activity>
+            android:label="@string/title_activity_group_event_generator"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".EventStatsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FirebaseContent.GoogleLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".EventInfoActivity"
             android:label="@string/title_activity_event_info"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <service
-            android:name=".FirebaseContent.MyFirebaseInstanceIDService">
+        <service android:name=".FirebaseContent.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
 
     </application>
 
