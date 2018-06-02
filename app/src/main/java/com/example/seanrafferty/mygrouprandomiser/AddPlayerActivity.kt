@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import com.example.seanrafferty.mygrouprandomiser.Business.PlayerManager
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
@@ -52,8 +53,8 @@ class AddPlayerActivity : AppCompatActivity() {
 
         if(name.isNotEmpty())
         {
-            var playerDB = PlayerDBHandler(DatabaseHandler(this))
-            return playerDB.InsertPlayer(Player(0, name, rating.toString().toInt()))
+            var playerManager = PlayerManager(this)
+            return playerManager.SavePlayer(Player(0, name, rating.toString().toInt()))
         }
         Toast.makeText(this, "No Name Provided", Toast.LENGTH_LONG).show()
         return 0
