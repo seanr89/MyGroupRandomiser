@@ -1,4 +1,41 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
 
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/txtPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtPlayerRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="65dp"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
+
+
+<!--
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,31 +46,19 @@
         android:id="@+id/txtNameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:text="Name:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Name:" />
 
     <TextView
         android:id="@+id/txtRatingHeader"
         android:layout_width="wrap_content"
         android:background="@color/graylight"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
-        android:text="Rating:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNameHeader" />
+        android:text="Rating:" />
 
     <TextView
         android:id="@+id/txtPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
         android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/txtNameHeader"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +69,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:text="Rating"
-        app:layout_constraintStart_toEndOf="@+id/txtRatingHeader"
-        app:layout_constraintTop_toBottomOf="@+id/txtPlayerName" />
+        android:text="Rating" />
 </android.support.constraint.ConstraintLayout>
+-->
