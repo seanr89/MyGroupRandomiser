@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
         //Get Google Profile information
 
+        //Handle google account info from user login credentials
         val acct = getLastSignedInAccount(this@MainActivity)
         if (acct != null) {
             val personName = acct.displayName

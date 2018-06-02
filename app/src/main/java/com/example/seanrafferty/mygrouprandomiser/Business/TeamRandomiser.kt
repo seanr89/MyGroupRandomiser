@@ -68,6 +68,8 @@ class TeamRandomiser
         //first sort the player list by rating
         players.sortBy({this.selector(it)})
 
+
+
         return null!!
     }
 

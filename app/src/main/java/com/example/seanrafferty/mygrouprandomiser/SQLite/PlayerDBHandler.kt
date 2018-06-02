@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
 import android.content.ContentValues
+import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
@@ -117,6 +118,7 @@ class PlayerDBHandler
      * @param player - Player object to be inserted
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
+    @Throws(SQLiteException::class)
     fun InsertPlayer(player: Player) : Int
     {
         Log.d("PlayerDBHandler", object{}.javaClass.enclosingMethod.name)
@@ -127,6 +129,13 @@ class PlayerDBHandler
 
         val db = _DB.GetWritableDataBaseObject()
 
-        return db!!.insert(DatabaseHandler.PlayerTable, "", values).toInt()
+        return try {
+            db!!.insert(DatabaseHandler.PlayerTable, "", values).toInt()
+        }
+        catch (e: SQLiteException)
+        {
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            -1
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.example.seanrafferty.mygrouprandomiser.SQLite
 
 import android.content.ContentValues
 import android.database.Cursor
-import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -25,7 +24,7 @@ class MyGroupDBHandler
      * @param group : the group to insert
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
-    @Throws(SQLiteConstraintException::class)
+    @Throws(SQLiteException::class)
     fun CreateGroup(group: MyGroup) : Int
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
@@ -33,7 +32,7 @@ class MyGroupDBHandler
         var result = 0
 
         var values = ContentValues()
-        values.put("Name", group.Name)
+        values.put(DatabaseHandler.groupName, group.Name)
 
         val db = _DB.GetWritableDataBaseObject()
         try
@@ -42,7 +41,7 @@ class MyGroupDBHandler
         }
         catch (e: SQLiteException)
         {
-            Log.e("EXCEPTION", "Error on create ${e.message}")
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
         }
         return result;
     }
@@ -52,24 +51,23 @@ class MyGroupDBHandler
      * @param id - a unique object for a MyGroup object
      * @return the group associated to the id - or null
      */
-    @Throws(SQLiteConstraintException::class)
+    @Throws(SQLiteException::class)
     fun ReadMyGroupByID(id:Int) : MyGroup
     {
-        var selectQuery: String = "SELECT * FROM ${DatabaseHandler.groupTableName} WHERE ${DatabaseHandler.grouppkID} = $id"
+        val selectQuery = "SELECT * FROM ${DatabaseHandler.groupTableName} WHERE ${DatabaseHandler.grouppkID} = $id"
         val db = _DB.GetReadableDataBaseObject()
 
-        var group : MyGroup
+        var group = MyGroup()
 
-        var cursor: Cursor? = null
+        var cursor: Cursor?
 
         try {
             cursor = db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            // if table not yet present, create it
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
             return null!!
         }
 
-        group = MyGroup()
         if (cursor!!.moveToFirst()) {
             group.ID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.grouppkID))
             group.Name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.groupName))
@@ -114,6 +112,7 @@ class MyGroupDBHandler
      * @param myGroup : the group to query for players assigned
      * @return a list of player ID's
      */
+    @Throws(SQLiteException::class)
     fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : MutableList<Int>
     {
         Log.d("MyGroupDBHandler", object{}.javaClass.enclosingMethod.name)
@@ -142,7 +141,7 @@ class MyGroupDBHandler
         catch (e: SQLiteException)
         {
             // if cursor has a sql exception
-            Log.e(object{}.javaClass.enclosingMethod.name, e.message)
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
             return null!!
         }
 
@@ -179,7 +178,13 @@ class MyGroupDBHandler
         var selectQuery = "SELECT * FROM ${DatabaseHandler.groupTableName}"
         val db = _DB.GetReadableDataBaseObject()
 
-        var cursor = db!!.rawQuery(selectQuery, null)
+        var cursor: Cursor?
+        try {
+            cursor = db!!.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            return null!!
+        }
 
         if(cursor != null)
         {
