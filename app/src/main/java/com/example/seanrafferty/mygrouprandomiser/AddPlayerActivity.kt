@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import com.example.seanrafferty.mygrouprandomiser.Business.PlayerManager
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
@@ -20,6 +21,7 @@ class AddPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_player)
 
+        //Initialise the player rating system (count is 1 to 10/11)
         val ratings = Array(10, { i -> (i + 1) })
         _RatingSpinner = findViewById(R.id.spinnerRating)
 
@@ -30,6 +32,7 @@ class AddPlayerActivity : AppCompatActivity() {
         _SavePlayerBtn = findViewById(R.id.btn_save_player)
         _SavePlayerBtn.setOnClickListener()
         {
+            //Run save player and check that the return is a unique ID
             if(SaveNewPlayer() >= 1)
             {
                 NavigationControls.NavigateToPlayerActivity(this)
@@ -50,8 +53,8 @@ class AddPlayerActivity : AppCompatActivity() {
 
         if(name.isNotEmpty())
         {
-            var playerDB = PlayerDBHandler(DatabaseHandler(this))
-            return playerDB.InsertPlayer(Player(0, name, rating.toString().toInt()))
+            var playerManager = PlayerManager(this)
+            return playerManager.SavePlayer(Player(0, name, rating.toString().toInt()))
         }
         Toast.makeText(this, "No Name Provided", Toast.LENGTH_LONG).show()
         return 0

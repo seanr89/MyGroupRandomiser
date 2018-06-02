@@ -218,13 +218,16 @@ class EventSetupFragment : Fragment()
             UtilityMethods.ConvertStringToDateTime(dateTimeString)
         }
         catch(e : DateTimeParseException) {
-            // Throw invalid date message
+            // Throw invalid date message and spit back out the current date and time
             System.out.println("Exception was thrown")
             LocalDateTime.now()
         }
         return dateTime
     }
 
+    /**
+     * Handle fragment external event call to main activity
+     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)

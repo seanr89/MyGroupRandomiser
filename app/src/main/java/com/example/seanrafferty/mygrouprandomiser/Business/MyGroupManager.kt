@@ -17,7 +17,7 @@ class MyGroupManager(val context: Context?)
 
     /**
      * Handle the creation of a new MyGroup and save to the database
-     * @param group : the group to be inserted
+     * @param group the row ID of the newly inserted row, or -1 if an error occurred
      */
     fun CreateGroup(group : MyGroup) : Int
     {
@@ -25,6 +25,10 @@ class MyGroupManager(val context: Context?)
         return MyGroupDB.CreateGroup(group)
     }
 
+    /**
+     * Operation to request all available groups stored
+     * @return an ArrayList of MyGroup objects
+     */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {
         var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
@@ -32,7 +36,9 @@ class MyGroupManager(val context: Context?)
     }
 
     /**
-     * New method to move events to business layer from datalayer
+     * New method to move events to business layer from database
+     * @param group : the group to request players for
+     * @return a filtered arraylist of players assigned to a group
      */
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>
     {
@@ -42,8 +48,8 @@ class MyGroupManager(val context: Context?)
 
     /**
      * Query all players that are not assigned to a the current group
-     * @param group : the selected group
-     * @return : a list of Player objects
+     * @param group : the selected group used to filter
+     * @return : a list of Player objects filtered to not already be present in the group
      */
     fun ReadAllPlayersNotAssignedToGroup(group : MyGroup) : List<Player>
     {
@@ -55,21 +61,30 @@ class MyGroupManager(val context: Context?)
         var playerDB = PlayerDBHandler(DatabaseHandler(context))
 
         //request all players and all players for the current group
-        var AllPlayers = playerDB.ReadAllPlayers()
+        var allPlayers = playerDB.ReadAllPlayers()
         var groupPlayers = ReadAllPlayersForGroup(group)
 
-        //read through the list of all players
-        for(item : Player in AllPlayers)
+        if(allPlayers.isNotEmpty())
         {
-            //now to filter - check if the current player is already assigned to the group!!
-            //if current player(item) is in list of group players
-            var mappedPlayer = groupPlayers.filter { it.ID == item.ID }
-            //if not append to the list
-            if(mappedPlayer == null || mappedPlayer.isEmpty())
+            //if no players assigned to the group - just return all players!
+            if(groupPlayers.isEmpty())
             {
-                resultList.add(mappedPlayer[0])
+                return allPlayers
+            }
+            //read through the list of all players
+            for(item : Player in allPlayers)
+            {
+                //now to filter - check if the current player is already assigned to the group!!
+                //if current player(item) is in list of group players
+                var mappedPlayer = groupPlayers.filter { it.ID == item.ID }
+                //if not append to the list
+                if(mappedPlayer == null || mappedPlayer.isEmpty())
+                {
+                    resultList.add(mappedPlayer[0])
+                }
             }
         }
+
         return resultList
     }
 }
