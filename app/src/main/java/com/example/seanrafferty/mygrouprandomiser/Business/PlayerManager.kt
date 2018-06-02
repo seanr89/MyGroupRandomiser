@@ -12,6 +12,10 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 class PlayerManager(val context: Context?)
 {
 
+    /**
+     * Request all players
+     * @return an ArrayList of players
+     */
     fun ReadAllPlayers() : ArrayList<Player>
     {
         var db = PlayerDBHandler(DatabaseHandler(context))

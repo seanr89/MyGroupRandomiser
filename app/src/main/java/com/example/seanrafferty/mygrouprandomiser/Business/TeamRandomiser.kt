@@ -20,10 +20,15 @@ class TeamRandomiser
         if(players.isEmpty())
             return null!!
 
+        //Shuffle the player list
         var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
+
+        //Initialise two team objects to be populated with players
         var teamOne = Team(0, "Team One", 0)
         var teamTwo = Team(0, "Team Two", 0)
 
+        //create parameter that is used to process what team each player is assigned
+        //defaults to say last player was not added to Team1
         var teamOneAdd = false
 
         for(item : Player in shuffledList)
@@ -40,6 +45,7 @@ class TeamRandomiser
             }
         }
 
+        //create an array list of teams and add each team to it!
         var Teams = ArrayList<Team>()
         Teams.add(teamOne)
         Teams.add(teamTwo)
@@ -59,7 +65,12 @@ class TeamRandomiser
         if(players.isEmpty())
             return null!!
 
+        //first sort the player list by rating
+        players.sortBy({this.selector(it)})
+
         return null!!
     }
+
+    private fun selector(p: Player): Int = p.Rating
 
 }

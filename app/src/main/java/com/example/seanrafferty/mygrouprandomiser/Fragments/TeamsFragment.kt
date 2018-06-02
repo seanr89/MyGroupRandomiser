@@ -41,7 +41,7 @@ class TeamsFragment : Fragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            //this is how i should have setup credentials
+            //this is how i should have setup credentials for the two teams!!
         }
     }
 

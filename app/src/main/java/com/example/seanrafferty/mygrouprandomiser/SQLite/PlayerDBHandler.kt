@@ -11,6 +11,7 @@ Database Handler relating solely to Player info
 class PlayerDBHandler
 {
     var _DB : DatabaseHandler
+
     /**
      * constructor for player DB handler
      */
@@ -20,7 +21,7 @@ class PlayerDBHandler
     }
 
     /**
-     * Read all stored players and return
+     * Read all stored players
      * @return ArrayList of players
      */
     fun ReadAllPlayers() : ArrayList<Player>
@@ -61,6 +62,7 @@ class PlayerDBHandler
     {
         var arrayList = ArrayList<Player>()
 
+        //combine all of the player IDs from the list to a comma separated string
         var combinedString = playerIDs.joinToString(",", "", "")
 
         // Select All Query

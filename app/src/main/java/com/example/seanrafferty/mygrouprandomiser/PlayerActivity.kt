@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.ListView
 import com.example.seanrafferty.mygrouprandomiser.Adapters.PlayerAdapter
+import com.example.seanrafferty.mygrouprandomiser.Business.PlayerManager
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
@@ -13,8 +14,6 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import kotlinx.android.synthetic.main.activity_player.*
 
 class PlayerActivity : AppCompatActivity() {
-
-    lateinit var _PlayerListView : ListView;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +27,12 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         /**
-         * initialise the player ListView, request all players and append into an adapter
+         * initialise the player ListView, request all players, append into an adapter and add to listview
          */
-        _PlayerListView = findViewById(R.id.PlayerListView)
+        val playerListView = this.findViewById<ListView>(R.id.PlayerListView)
         val playerList = RequestAllPlayers()
         val playerAdapter = PlayerAdapter(this, playerList)
-        _PlayerListView.adapter = playerAdapter;
+        playerListView.adapter = playerAdapter;
     }
 
     /**
@@ -42,14 +41,10 @@ class PlayerActivity : AppCompatActivity() {
      */
     fun RequestAllPlayers() : ArrayList<Player>
     {
-        Log.d("PlayerActivity", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
-        //initialise an ArrayList and a DatabaseHandler object
-        var playerList: ArrayList<Player>
-        var playerDB = PlayerDBHandler(DatabaseHandler(this))
-        //query DB for all players and return
-        playerList = playerDB.ReadAllPlayers()
-
-        return playerList
+        //Initialise the player manager and request all players
+        var playerManager = PlayerManager(this)
+        return playerManager.ReadAllPlayers()
     }
 }
