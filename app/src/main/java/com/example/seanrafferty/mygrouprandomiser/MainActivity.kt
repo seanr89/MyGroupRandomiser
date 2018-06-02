@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Get Google Profile information
 
         //Handle google account info from user login credentials
+        //wonder if this could be added to an account manager
         val acct = getLastSignedInAccount(this@MainActivity)
         if (acct != null) {
             val personName = acct.displayName
@@ -47,7 +48,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val personId = acct.id
             val personPhoto = acct.photoUrl
         }
-
 
          GoogleUserName = findViewById(R.id.textView2)
          GoogleUserName.text = acct?.displayName
