@@ -40,17 +40,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Handle google account info from user login credentials
         //wonder if this could be added to an account manager
         val acct = getLastSignedInAccount(this@MainActivity)
-        if (acct != null) {
+        if (acct != null)
+        {
+            //we might not need this then - or handle the user details into the system
             val personName = acct.displayName
             val personGivenName = acct.givenName
             val personFamilyName = acct.familyName
             val personEmail = acct.email
             val personId = acct.id
             val personPhoto = acct.photoUrl
+
+            UpdateNavigationBarDetails(acct)
         }
 
-         GoogleUserName = findViewById(R.id.textView2)
-         GoogleUserName.text = acct?.displayName
+        GoogleUserName = findViewById(R.id.textView2)
+        GoogleUserName.text = acct?.displayName
         
         _GroupListView = findViewById(R.id.GroupListView)
 
@@ -71,8 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * handle creation of option action overflow on view
-     * with xml menu option file targetted
+     * handle creation of option action overflow on view (3 vertical dots)
+     * with xml menu option file targeted
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
        // menuInflater.inflate(R.menu.action_overflow, menu)
@@ -85,6 +89,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
         return true
+    }
+
+    /**
+     * Handle updating navigation drawer user content
+     */
+    private fun UpdateNavigationBarDetails(acct : GoogleSignInAccount)
+    {
+        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
+        if (acct != null)
+        {
+            var txtNavHeader = findViewById<TextView>(R.id.textViewNavDrawerEmail)
+            txtNavHeader.text = acct.email
+        }
     }
 
     /**

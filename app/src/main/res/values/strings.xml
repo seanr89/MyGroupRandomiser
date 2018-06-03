@@ -4,7 +4,7 @@
     <!-- Group List View -->
     <string name="group_leftTextView">Group Name</string>
 
-    <!-- Action Overflow Items -->
+    <!-- Action Overflow Items (The three dots) -->
     <string name="overflow_players">Players</string>
     <string name="overflow_settings">Settings</string>
 
@@ -12,14 +12,13 @@
     <string name="title_activity_navigation_bar">Nav Drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">My Group Randomizer</string>
+    <string name="nav_header_title">Shuffle Up</string>
     <string name="nav_header_subtitle">srafferty89@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="nav_header_logout">Logout</string>
-    <string name="title_activity_player">PlayerActivity</string>
 
-    <!-- Navigation Drawer menu labels -->
+    <string name="title_activity_player">Player Activity</string>
 
     <!-- Group Info Act -->
     <string name="GroupIDString">Group ID</string>
