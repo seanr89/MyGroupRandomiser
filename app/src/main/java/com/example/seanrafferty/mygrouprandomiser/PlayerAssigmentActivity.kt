@@ -41,20 +41,29 @@ class PlayerAssigmentActivity : AppCompatActivity()
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
         val unassignedPlayers = MyGroupManager(this).ReadAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
-        var playerAdapter = PlayerRecyclerAdapter(unassignedPlayers as ArrayList<Player>, true)
 
-        viewManager = LinearLayoutManager(this)
-        recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
+        if(unassignedPlayers.isNotEmpty())
+        {
+            var playerAdapter = PlayerRecyclerAdapter(unassignedPlayers as ArrayList<Player>, true)
 
-            // use a linear layout manager
-            layoutManager = viewManager
+            viewManager = LinearLayoutManager(this)
+            recyclerView = findViewById<RecyclerView>(R.id.PlayerRecycler).apply{
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                setHasFixedSize(true)
 
-            // specify an viewAdapter (see also next example)
-            adapter = playerAdapter
+                // use a linear layout manager
+                layoutManager = viewManager
+
+                // specify an viewAdapter (see also next example)
+                adapter = playerAdapter
+            }
         }
+        else
+        {
+            Toast.makeText(this, "No Players Found!", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 
