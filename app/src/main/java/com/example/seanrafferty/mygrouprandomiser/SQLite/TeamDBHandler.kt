@@ -60,6 +60,22 @@ class TeamDBHandler
         return result
     }
 
+    fun DeleteTeamPlayerMappings(teamID: Int) :Int
+    {
+        var result = 0
+        var db = _DB.GetWritableDataBaseObject()
+
+        return try {
+            result = db!!.delete(DatabaseHandler.TeamPlayerMappingTable, "${DatabaseHandler.TeamID}=?", arrayOf(Integer.toString(teamID)))
+            db.close()
+            result
+        }
+        catch(e: SQLiteException)
+        {
+            -1
+        }
+    }
+
     /**
      * Read the teams for a single event
      * @param eventID : the ID of the event

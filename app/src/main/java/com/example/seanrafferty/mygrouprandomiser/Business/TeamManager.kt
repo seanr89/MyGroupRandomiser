@@ -22,9 +22,13 @@ class TeamManager(val context: Context?)
         return -1
     }
 
-    fun DeletePlayerTeamMappings() : Int
+    fun DeletePlayerTeamMappings(team: Team) : Int
     {
         return -1
+        var dbHandler = DatabaseHandler(context)
+        var teamsDB = TeamDBHandler(dbHandler)
+
+        return teamsDB.DeleteTeamPlayerMappings(team.ID)
     }
 
     /**
