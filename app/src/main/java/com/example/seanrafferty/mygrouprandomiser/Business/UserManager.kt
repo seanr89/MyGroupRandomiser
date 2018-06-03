@@ -8,4 +8,9 @@ import android.content.Context
  */
 class UserManager (val context: Context?)
 {
+
+    fun IsNewUser(personID : String) : Boolean
+    {
+        return false
+    }
 }
