@@ -61,7 +61,10 @@ class TeamDBHandler
     }
 
     /**
-     * Handle the deletion/removal of a
+     * Handle the deletion/removal of a player from a team
+     * @param teamID
+     * @param playerID
+     * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     fun DeletePlayerFromTeam(teamID: Int, playerID: Int) : Int
     {
@@ -81,7 +84,9 @@ class TeamDBHandler
     }
 
     /**
-     *
+     * Operation to handle the removal of all player mappings to a team
+     * @param teamID
+     * @return the row ID of the removed rows, or -1 if an error occurred
      */
     fun DeletePlayerMappingsForTeam(teamID: Int) :Int
     {

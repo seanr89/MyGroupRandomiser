@@ -9,6 +9,9 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.TeamDBHandler
 class TeamManager(val context: Context?)
 {
 
+    /**
+     *
+     */
     fun SaveNewTeamForEvent(team:Team, eventID : Int) : Int
     {
         var dbHandler = DatabaseHandler(context)
@@ -17,11 +20,17 @@ class TeamManager(val context: Context?)
         return teamsDB.InsertTeam(team, eventID)
     }
 
-    fun SavePlayersToTeam() : Int
+    /**
+     *
+     */
+    fun SavePlayersToTeam(team: Team) : Int
     {
         return -1
     }
 
+    /**
+     *
+     */
     fun DeletePlayerTeamMappings(team: Team) : Int
     {
         return -1
