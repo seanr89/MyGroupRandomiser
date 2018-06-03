@@ -1,6 +1,5 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.app.PendingIntent.getActivity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -8,20 +7,20 @@ import android.support.v4.view.GravityCompat
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.*
 import com.example.seanrafferty.mygrouprandomiser.Adapters.GroupAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.InitialiseDataDBHandler
-import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import kotlinx.android.synthetic.main.activity_navigation_bar.*
 import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignIn.getLastSignedInAccount
-import org.w3c.dom.Text
+import android.widget.TextView
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
@@ -35,8 +34,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        //Get Google Profile information
 
+        //Get Google Profile information
         //Handle google account info from user login credentials
         //wonder if this could be added to an account manager
         val acct = getLastSignedInAccount(this@MainActivity)
@@ -99,7 +98,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
         if (acct != null)
         {
-            var txtNavHeader = findViewById<TextView>(R.id.textViewNavDrawerEmail)
+            val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+            val headerView = navigationView.getHeaderView(0)
+
+            var txtNavHeader = headerView.findViewById<TextView>(R.id.textViewNavDrawerEmail)
             txtNavHeader.text = acct.email
         }
     }

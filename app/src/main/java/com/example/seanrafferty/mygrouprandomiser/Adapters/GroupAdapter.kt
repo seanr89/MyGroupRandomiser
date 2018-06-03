@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.group_listview_item.view.*
 class GroupAdapter : BaseAdapter
 {
     var arrayList = ArrayList<MyGroup>()
-    var context: Context? = null
     var myInflater: LayoutInflater? = null
 
     private var selectionOption : SelectionOption
@@ -23,26 +22,19 @@ class GroupAdapter : BaseAdapter
      */
     constructor(con: Context, arrList: ArrayList<MyGroup>, selectionOption: SelectionOption = SelectionOption.NO_SELECT) : super()
     {
-        println("GroupAdapter: Constructor")
-        this.context = con
+        //println("GroupAdapter: Constructor")
         this.arrayList = arrList
-        this.myInflater = LayoutInflater.from(context)
+        this.myInflater = LayoutInflater.from(con)
         this.selectionOption = selectionOption
     }
 
+    /**
+     * Initialise and populate each individual view with group info
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View
     {
         //println("PlayerAdapter: getView called")
-        val view: View
-
-        if(convertView == null)
-        {
-            view = myInflater!!.inflate(R.layout.group_listview_item, null)
-        }
-        else
-        {
-            view = convertView
-        }
+        val view: View = convertView ?: myInflater!!.inflate(R.layout.group_listview_item, null)
 
         var groupObj = arrayList[position]
 
@@ -51,6 +43,9 @@ class GroupAdapter : BaseAdapter
         return view
     }
 
+    /**
+     * get the group item at the selected position
+     */
     override fun getItem(position: Int): MyGroup {
         return arrayList[position]
     }

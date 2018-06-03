@@ -32,7 +32,7 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
         holder?.txtRating?.text = playerList[position].Rating.toString()
 
         //if each item is selectable
-        if(selectable)
+        if(selectable || selectionOption != SelectionOption.NO_SELECT)
         {
             if(isItemSelected(position))
             {
