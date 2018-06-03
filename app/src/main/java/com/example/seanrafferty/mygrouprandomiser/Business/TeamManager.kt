@@ -9,6 +9,24 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.TeamDBHandler
 class TeamManager(val context: Context?)
 {
 
+    fun SaveNewTeamForEvent(team:Team, eventID : Int) : Int
+    {
+        var dbHandler = DatabaseHandler(context)
+        var teamsDB = TeamDBHandler(dbHandler)
+
+        return teamsDB.InsertTeam(team, eventID)
+    }
+
+    fun SavePlayersToTeam() : Int
+    {
+        return -1
+    }
+
+    fun DeletePlayerTeamMappings() : Int
+    {
+        return -1
+    }
+
     /**
      * Update the known number of goals for a team
      * @param score : the number of goals scored

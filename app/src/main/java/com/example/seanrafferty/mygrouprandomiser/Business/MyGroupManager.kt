@@ -35,6 +35,12 @@ class MyGroupManager(val context: Context?)
         return MyGroupDB.ReadAllGroups()
     }
 
+    fun ReadGroupByID(id : Int) : MyGroup
+    {
+        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
+        return MyGroupDB.ReadMyGroupByID(id)
+    }
+
     /**
      * New method to move events to business layer from database
      * @param group : the group to request players for
@@ -43,7 +49,25 @@ class MyGroupManager(val context: Context?)
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>
     {
         var groupDB = MyGroupDBHandler(DatabaseHandler(context))
-        return groupDB.ReadAllPlayersForAGroup(group)
+        var playerManager = PlayerManager(context)
+
+        var modelList: MutableList<Player> = mutableListOf()
+
+        //Get all of the player IDs
+        var playerIDs = groupDB.ReadAllPlayerIDsForGroup(group)
+
+        //Get all Players
+        var players = playerManager.ReadAllPlayers()
+
+        for(item: Int in playerIDs)
+        {
+            var player = players.filter { it.ID == item }
+            if(player != null)
+            {
+                modelList.add(player[0])
+            }
+        }
+        return modelList as ArrayList<Player>
     }
 
     /**
@@ -53,7 +77,7 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllPlayersNotAssignedToGroup(group : MyGroup) : List<Player>
     {
-        Log.d("MyGroupManager", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
         //Create and initialise a list
         var resultList : MutableList<Player> = arrayListOf()
@@ -84,7 +108,6 @@ class MyGroupManager(val context: Context?)
                 }
             }
         }
-
         return resultList
     }
 }

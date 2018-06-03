@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
@@ -70,7 +71,14 @@ class PlayerDBHandler
         var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerTable} WHERE ${DatabaseHandler.PlayerpkID} IN ($combinedString)"
         val db = _DB.readableDatabase
 
-        var cursor = db!!.rawQuery(selectQuery, null)
+        var cursor: Cursor?
+        try {
+            cursor = db!!.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            return null!!
+        }
+
         if (cursor != null)
         {
             if (cursor.moveToFirst()) {
@@ -87,7 +95,6 @@ class PlayerDBHandler
         }
         cursor.close()
         return arrayList
-        return null!!
     }
 
     /**

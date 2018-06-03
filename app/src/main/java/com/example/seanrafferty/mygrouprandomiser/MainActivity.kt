@@ -21,8 +21,6 @@ import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn.getLastSignedInAccount
 import android.widget.TextView
 
-
-
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     //List of groups to be displayed within a list view

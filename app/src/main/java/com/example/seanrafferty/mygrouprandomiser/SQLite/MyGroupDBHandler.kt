@@ -76,36 +76,6 @@ class MyGroupDBHandler
         return group
     }
 
-    /**
-     * Read all the players for a provided group
-     * @param group : the group to query
-     * @return an list of players
-     */
-    fun ReadAllPlayersForAGroup(group:MyGroup) : ArrayList<Player>
-    {
-        Log.d("MyGroupDBHandler", object{}.javaClass.enclosingMethod.name)
-
-        var modelList: MutableList<Player> = mutableListOf()
-
-        //Get all of the player IDs
-        var playerIDs = ReadAllPlayerIDsForGroup(group)
-
-        var playerDBHandler = PlayerDBHandler(_DB)
-        //Get all Players
-        var players = playerDBHandler.ReadAllPlayers()
-
-        for(item: Int in playerIDs)
-        {
-            var player = players.filter { it.ID == item }
-            if(player != null)
-            {
-                modelList.add(player[0])
-            }
-        }
-        return modelList as ArrayList<Player>
-    }
-
-
 
     /**
      * Read all assigned player ids for a group
@@ -115,12 +85,12 @@ class MyGroupDBHandler
     @Throws(SQLiteException::class)
     fun ReadAllPlayerIDsForGroup(myGroup:MyGroup) : MutableList<Int>
     {
-        Log.d("MyGroupDBHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
-        var arrayList: MutableList<Int> = mutableListOf<Int>()
+        var arrayList: MutableList<Int> = mutableListOf()
+
         // Select query with where in the clause
-        var selectQuery: String = "SELECT * FROM ${DatabaseHandler.GroupPlayerTable} WHERE ${DatabaseHandler.GroupID} = ${myGroup.ID}"
-        //Log.d("MyGroupDBHandler", "query $selectQuery")
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.GroupPlayerTable} WHERE ${DatabaseHandler.GroupID} = ${myGroup.ID}"
         val db = _DB.GetReadableDataBaseObject()
 
         var cursor: Cursor?
@@ -144,7 +114,6 @@ class MyGroupDBHandler
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
             return null!!
         }
-
         return arrayList
     }
 
@@ -156,7 +125,7 @@ class MyGroupDBHandler
     fun GetPlayerCountAssignedToGroup(group : MyGroup) : Int
     {
         var result = 0
-        var resultList  = ReadAllPlayerIDsForGroup(group)
+        var resultList= ReadAllPlayerIDsForGroup(group)
         if(!resultList.isEmpty())
         {
             result = resultList.size
@@ -170,7 +139,7 @@ class MyGroupDBHandler
      */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
         var arrayList = ArrayList<MyGroup>()
 

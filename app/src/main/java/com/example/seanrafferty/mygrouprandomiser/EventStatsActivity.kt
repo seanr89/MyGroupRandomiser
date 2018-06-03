@@ -62,7 +62,6 @@ class EventStatsActivity : AppCompatActivity()
     private fun RequestEventForEventID(eventID: Int) : GroupEvent
     {
         var eventManager = EventManager(this)
-
         return eventManager.GetEventByID(eventID)
     }
 
@@ -72,7 +71,6 @@ class EventStatsActivity : AppCompatActivity()
      */
     private fun RequestAndDisplayEventStats(event: GroupEvent)
     {
-
         var txtEventDate = findViewById<TextView>(R.id.txtViewEventDateContent)
         txtEventDate.text = UtilityMethods.ConvertDateTimeToString(event.Date)
 

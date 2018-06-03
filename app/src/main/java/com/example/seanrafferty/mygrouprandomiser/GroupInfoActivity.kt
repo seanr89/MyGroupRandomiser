@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.GroupEventRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
+import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.EventDBHandler
@@ -75,8 +76,8 @@ class GroupInfoActivity : AppCompatActivity() {
      */
     private fun GetGroupFromDB(id: Int) : MyGroup
     {
-        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(this))
-        return MyGroupDB.ReadMyGroupByID(id)
+        var groupManager = MyGroupManager(this)
+        return groupManager.ReadGroupByID(id)
     }
 
     /**
@@ -97,7 +98,7 @@ class GroupInfoActivity : AppCompatActivity() {
     private fun RefreshGroupInfoStats(group : MyGroup)
     {
         var playerCount = MyGroupDBHandler(DatabaseHandler(this)).GetPlayerCountAssignedToGroup(group)
-        var eventCount = EventDBHandler(DatabaseHandler(this)).GetCountOfEventsForGrouo(group)
+        var eventCount = EventDBHandler(DatabaseHandler(this)).GetCountOfEventsForGroup(group)
 
         val groupEventCountTextView = findViewById<TextView>(R.id.groupEventCountView)
         groupEventCountTextView.text = eventCount.toString()

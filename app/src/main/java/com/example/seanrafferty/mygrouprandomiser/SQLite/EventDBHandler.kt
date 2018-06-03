@@ -125,7 +125,7 @@ class EventDBHandler
      * Query and return the count of events for a group
      * @return a integer count of events
      */
-    fun GetCountOfEventsForGrouo(group : MyGroup) : Int
+    fun GetCountOfEventsForGroup(group : MyGroup) : Int
     {
         var resultList = GetAllGroupEventsForGroup(group)
         var result = 0
