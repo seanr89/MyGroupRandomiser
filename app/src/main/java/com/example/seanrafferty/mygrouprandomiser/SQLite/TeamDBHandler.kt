@@ -60,7 +60,30 @@ class TeamDBHandler
         return result
     }
 
-    fun DeleteTeamPlayerMappings(teamID: Int) :Int
+    /**
+     * Handle the deletion/removal of a
+     */
+    fun DeletePlayerFromTeam(teamID: Int, playerID: Int) : Int
+    {
+        var result = 0
+        var db = _DB.GetWritableDataBaseObject()
+
+        return try {
+            result = db!!.delete(DatabaseHandler.TeamPlayerMappingTable, "${DatabaseHandler.TeamID}=? AND ${DatabaseHandler.PlayerID}=?"
+                    , arrayOf(Integer.toString(teamID),Integer.toString(playerID)))
+            db.close()
+            result
+        }
+        catch(e: SQLiteException)
+        {
+            -1
+        }
+    }
+
+    /**
+     *
+     */
+    fun DeletePlayerMappingsForTeam(teamID: Int) :Int
     {
         var result = 0
         var db = _DB.GetWritableDataBaseObject()

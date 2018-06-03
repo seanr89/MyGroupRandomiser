@@ -28,7 +28,7 @@ class TeamManager(val context: Context?)
         var dbHandler = DatabaseHandler(context)
         var teamsDB = TeamDBHandler(dbHandler)
 
-        return teamsDB.DeleteTeamPlayerMappings(team.ID)
+        return teamsDB.DeletePlayerMappingsForTeam(team.ID)
     }
 
     /**
