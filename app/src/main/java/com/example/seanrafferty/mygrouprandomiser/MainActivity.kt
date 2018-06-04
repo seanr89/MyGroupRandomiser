@@ -20,13 +20,14 @@ import kotlinx.android.synthetic.main.activity_navigation_bar.*
 import kotlinx.android.synthetic.main.app_bar_navigation_bar.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn.getLastSignedInAccount
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
     //List of groups to be displayed within a list view
     private lateinit var _GroupListView : ListView
     private lateinit var GoogleUserName: TextView
-
+    var mAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -69,6 +70,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         //initialise the navigation app drawer to be loaded in
         nav_view.setNavigationItemSelectedListener(this)
+
+        mAuth.addAuthStateListener {
+            if(mAuth.currentUser==null){
+                this.finish()
+            }
+        }
     }
 
     /**
@@ -161,6 +168,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 dbInitData.RunDataInitialisation()
 
                 RefreshListView()
+            }
+            R.id.Logout ->{
+                mAuth.signOut()
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)

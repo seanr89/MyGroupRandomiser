@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
 import com.example.seanrafferty.mygrouprandomiser.*
+import android.support.annotation.NonNull
+import com.google.android.gms.tasks.OnCompleteListener
+import com.firebase.ui.auth.provider.TwitterProvider.signOut
+import com.google.android.gms.tasks.Task
 
 
 /**
@@ -100,5 +104,6 @@ class NavigationControls {
             intent.putExtra("EventID", eventID.toString())
             startActivity(context, intent, null)
         }
+
     }
 }

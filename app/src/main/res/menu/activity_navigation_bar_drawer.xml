@@ -33,6 +33,13 @@
             android:id="@+id/nav_init_db"
             android:icon="@drawable/ic_storage_black"
             android:title="Initialise DB" />
+
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/ic_storage_black"
+            android:title="Logout" />
+
+
     </group>
 
     <!--<item android:title="Communicate">-->
