@@ -12,7 +12,7 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.TeamDBHandler
 /**
  * Business logic object to handle the managing of Group Events
  */
-class EventManager(val context: Context)
+class EventManager(val context: Context?)
 {
     /**
      * Operation to save the provided event
