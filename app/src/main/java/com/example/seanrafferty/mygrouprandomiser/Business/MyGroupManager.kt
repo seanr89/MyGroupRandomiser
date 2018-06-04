@@ -48,6 +48,7 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>
     {
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         var groupDB = MyGroupDBHandler(DatabaseHandler(context))
         var playerManager = PlayerManager(context)
 
@@ -59,13 +60,20 @@ class MyGroupManager(val context: Context?)
         //Get all Players
         var players = playerManager.ReadAllPlayers()
 
-        for(item: Int in playerIDs)
+        if(playerIDs.isNotEmpty())
         {
-            var player = players.filter { it.ID == item }
-            if(player != null)
+            for(item: Int in playerIDs)
             {
-                modelList.add(player[0])
+                var player = players.filter { it.ID == item }
+                if(player != null)
+                {
+                    modelList.add(player[0])
+                }
             }
+        }
+        else
+        {
+            Log.d("TAG", "No Player IDs found")
         }
         return modelList as ArrayList<Player>
     }
@@ -86,7 +94,11 @@ class MyGroupManager(val context: Context?)
 
         //request all players and all players for the current group
         var allPlayers = playerDB.ReadAllPlayers()
+
         var groupPlayers = ReadAllPlayersForGroup(group)
+
+        if(groupPlayers.isEmpty())
+            return allPlayers
 
         if(allPlayers.isNotEmpty())
         {
@@ -102,9 +114,9 @@ class MyGroupManager(val context: Context?)
                 //if current player(item) is in list of group players
                 var mappedPlayer = groupPlayers.filter { it.ID == item.ID }
                 //if not append to the list
-                if(mappedPlayer == null || mappedPlayer.isEmpty())
+                if(mappedPlayer.isEmpty())
                 {
-                    resultList.add(mappedPlayer[0])
+                    resultList.add(item)
                 }
             }
         }

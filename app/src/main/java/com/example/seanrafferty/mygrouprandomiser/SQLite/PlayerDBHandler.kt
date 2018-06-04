@@ -33,7 +33,7 @@ class PlayerDBHandler
         var arrayList = ArrayList<Player>()
 
         // Select All Query
-        var selectQuery: String = "SELECT * FROM ${DatabaseHandler.PlayerTable}"
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerTable}"
         val db = _DB.readableDatabase
 
         var cursor = db!!.rawQuery(selectQuery, null)
