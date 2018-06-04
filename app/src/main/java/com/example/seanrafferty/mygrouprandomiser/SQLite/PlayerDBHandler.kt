@@ -16,6 +16,7 @@ class PlayerDBHandler
 
     /**
      * constructor for player DB handler
+     * @param db : DatabaseHandler to allow interaction
      */
     constructor(db:DatabaseHandler)
     {

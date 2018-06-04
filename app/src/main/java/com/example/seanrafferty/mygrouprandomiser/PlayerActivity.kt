@@ -32,7 +32,7 @@ class PlayerActivity : AppCompatActivity() {
         val playerListView = this.findViewById<ListView>(R.id.PlayerListView)
         val playerList = RequestAllPlayers()
         val playerAdapter = PlayerAdapter(this, playerList)
-        playerListView.adapter = playerAdapter;
+        playerListView.adapter = playerAdapter
     }
 
     /**

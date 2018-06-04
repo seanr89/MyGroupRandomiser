@@ -3,7 +3,6 @@ package com.example.seanrafferty.mygrouprandomiser
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +11,6 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,11 +19,8 @@ import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
 import kotlinx.android.synthetic.main.activity_edit_group.*
-import kotlinx.android.synthetic.main.fragment_event_info.*
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.Math.E
-import java.util.jar.Manifest
 
 class AddGroup : AppCompatActivity() {
     val MY_REQUEST_CAMERA = 10
@@ -96,9 +91,16 @@ class AddGroup : AppCompatActivity() {
         val nameTextView = findViewById<TextView>(R.id.nameText)
         val name : String = nameTextView.text.toString()
 
-        var groupManager = MyGroupManager(this)
-
-       return groupManager.CreateGroup(MyGroup(0, name))
+        if(!name.isNullOrBlank())
+        {
+            var groupManager = MyGroupManager(this)
+            return groupManager.CreateGroup(MyGroup(0, name))
+        }
+        else
+        {
+            Toast.makeText(this, "No Name Provided", Toast.LENGTH_SHORT).show()
+            return -1
+        }
     }
 
     private fun checkPermissionRG(){

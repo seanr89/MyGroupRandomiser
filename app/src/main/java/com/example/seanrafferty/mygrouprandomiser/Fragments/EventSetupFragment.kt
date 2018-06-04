@@ -196,7 +196,7 @@ class EventSetupFragment : Fragment()
      */
     fun GetSelectedPlayers() : ArrayList<Player>
     {
-        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         return _PlayerAdapter.SelectedItems
     }
 
@@ -206,7 +206,7 @@ class EventSetupFragment : Fragment()
      */
     fun GetSelectedDateAndTime() : LocalDateTime
     {
-        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         var Date = viewDate.text
         var Time = viewTime.text
 
@@ -219,7 +219,7 @@ class EventSetupFragment : Fragment()
         }
         catch(e : DateTimeParseException) {
             // Throw invalid date message and spit back out the current date and time
-            System.out.println("Exception was thrown")
+            System.out.println("Exception was thrown when parsing date")
             LocalDateTime.now()
         }
         return dateTime
