@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
+import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamsFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
@@ -65,6 +66,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         //Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         layout.getTabAt(0)!!.text = "Event Setup"
         layout.getTabAt(1)!!.text = "Teams"
+        layout.getTabAt(2)!!.text = "T 1"
+        layout.getTabAt(3)!!.text = "T 2"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -83,6 +86,18 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    /**
+     * Test method to handle fragment navigation on click event
+     *
+     */
+    fun NavigateToFirstTeam()
+    {
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+
+        container.setCurrentItem(2, true)
     }
 
 
@@ -108,6 +123,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             {
                 0 -> fragment = EventSetupFragment.newInstance(_GroupID)
                 1 -> fragment = TeamsFragment.newInstance(Teams, 1, "Team1")
+                2 -> fragment = SingleTeamFragment.newInstance(Teams[0])
+                3 -> fragment = SingleTeamFragment.newInstance(Teams[1])
                 else -> { // Note the block
                     print("x is neither 0, or 1")
                 }
@@ -116,8 +133,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         }
 
         override fun getCount(): Int {
-            // Show 2 total pages.
-            return 2
+            // Show X total pages.
+            return 4
         }
     }
 
@@ -129,8 +146,10 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         Teams = teams
-        var fragment = supportFragmentManager.fragments[1] as TeamsFragment
-        fragment.UpdateRecyclerAdapter(Teams)
+       // var fragment = supportFragmentManager.fragments[1] as TeamsFragment
+       // fragment.UpdateRecyclerAdapter(Teams)
+
+        NavigateToFirstTeam()
     }
 
     /**

@@ -54,7 +54,7 @@ class TeamsFragment : Fragment()
 
         _Teams = bundle!!.getSerializable(ARG_TEAMS) as ArrayList<Team>
 
-        if(!_Teams.isEmpty())
+        if(_Teams != null && _Teams.isNotEmpty())
         {
             InitialiseTeamOneRecycler(_Teams[0], view)
             InitialiseTeamTwoRecycler(_Teams[1], view)

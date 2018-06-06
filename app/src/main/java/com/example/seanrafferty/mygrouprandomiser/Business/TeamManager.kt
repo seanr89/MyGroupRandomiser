@@ -10,7 +10,9 @@ class TeamManager(val context: Context?)
 {
 
     /**
-     *
+     * Operation to save a new team as a part of an event
+     * @param team :
+     * @param eventID :
      */
     fun SaveNewTeamForEvent(team:Team, eventID : Int) : Int
     {
@@ -21,7 +23,8 @@ class TeamManager(val context: Context?)
     }
 
     /**
-     *
+     * Handle the sample of players to a team created
+     * @param team : the team with players assigned
      */
     fun SavePlayersToTeam(team: Team) : Int
     {

@@ -41,7 +41,7 @@ class SingleTeamFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
         //check that there is players available
-        if(team.Players.isNotEmpty())
+        if(team.Players != null && team.Players.isNotEmpty())
         {
             val teamviewManager = LinearLayoutManager(activity)
             playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)

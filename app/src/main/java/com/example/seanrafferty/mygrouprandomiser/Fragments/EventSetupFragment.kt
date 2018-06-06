@@ -172,7 +172,7 @@ class EventSetupFragment : Fragment()
         Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
 
         var players = GetSelectedPlayers()
-        if(!players.isEmpty())
+        if(players.isNotEmpty())
         {
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
@@ -181,7 +181,10 @@ class EventSetupFragment : Fragment()
             mCallback!!.onTeamsRandomized(teamArray)
             return
         }
-        Toast.makeText(context, "No Players Selected!", Toast.LENGTH_LONG).show()
+        else
+        {
+            Toast.makeText(context, "No Players Selected!", Toast.LENGTH_LONG).show()
+        }
     }
 
     // Container Activity must implement this interface

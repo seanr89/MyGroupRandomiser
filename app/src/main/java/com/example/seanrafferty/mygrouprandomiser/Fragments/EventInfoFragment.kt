@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.NumberPicker
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Business.TeamManager
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
@@ -50,14 +47,15 @@ class EventInfoFragment : Fragment()  {
 
         InitialiseNumberPickers(event, fragment)
 
+        SetCompletedSwitch(event, fragment)
+
         //setup the button event for updating event details
         var btn_update = fragment.findViewById<Button>(R.id.btnUpdateEvent)
         btn_update.setOnClickListener()
         {
             UpdateEvent(event, fragment)
         }
-
-        return fragment;
+        return fragment
     }
 
     override fun onAttach(context: Context) {
@@ -102,6 +100,17 @@ class EventInfoFragment : Fragment()  {
     }
 
     /**
+     * Set the switch to be enabled or disabled based on the event status
+     * @param event : event to read the event status
+     * @param fragmentView : the current fragment view
+     */
+    private fun SetCompletedSwitch(event:GroupEvent, fragmentView: View)
+    {
+        var switch = fragmentView.findViewById<Switch>(R.id.switchEventCompleted)
+        switch.isChecked = event.Completed
+    }
+
+    /**
      * Handle the updating of event team scores and completed status
      * @param event : the GroupEvent
      * @param fragmentView :
@@ -141,6 +150,11 @@ class EventInfoFragment : Fragment()  {
     {
         Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
 
+        if(event.Completed)
+        {
+            Toast.makeText(activity, "Event Has Been Completed!", Toast.LENGTH_LONG).show()
+            return
+        }
         var teamManager = TeamManager(context)
         teamManager.UpdateTeamScore(score, team)
     }
