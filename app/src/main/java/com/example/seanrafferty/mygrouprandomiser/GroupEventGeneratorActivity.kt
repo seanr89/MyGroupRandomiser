@@ -123,8 +123,14 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             {
                 0 -> fragment = EventSetupFragment.newInstance(_GroupID)
                 1 -> fragment = TeamsFragment.newInstance(Teams, 1, "Team1")
-                2 -> fragment = SingleTeamFragment.newInstance(Teams[0])
-                3 -> fragment = SingleTeamFragment.newInstance(Teams[1])
+                2 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
+                else {
+                    SingleTeamFragment.newInstance(Teams[0], "Team1")
+                }
+                3 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
+                else {
+                    SingleTeamFragment.newInstance(Teams[1], "Team1")
+                }
                 else -> { // Note the block
                     print("x is neither 0, or 1")
                 }
@@ -148,6 +154,11 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         Teams = teams
        // var fragment = supportFragmentManager.fragments[1] as TeamsFragment
        // fragment.UpdateRecyclerAdapter(Teams)
+
+        var teamOneFragment = mSectionsPagerAdapter!!.getItem(2) as SingleTeamFragment
+        teamOneFragment.UpdateTeamPlayers(teams[0])
+
+        var teamTwoFragment = mSectionsPagerAdapter!!.getItem(3) as SingleTeamFragment
 
         NavigateToFirstTeam()
     }

@@ -85,8 +85,8 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
             when(position)
             {
                 0 -> return EventInfoFragment.newInstance(Event)
-                1 -> return SingleTeamFragment.newInstance(Event.EventTeams[0])
-                2 -> return SingleTeamFragment.newInstance(Event.EventTeams[1])
+                1 -> return SingleTeamFragment.newInstance(Event.EventTeams[0], "Team 1")
+                2 -> return SingleTeamFragment.newInstance(Event.EventTeams[1], "Team 2")
             }
             return null!!
         }

@@ -25,13 +25,13 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 class SingleTeamFragment : Fragment() {
 
     //initialise the team and player recycler object
-    private lateinit var team : Team
+    private lateinit var Team : Team
     private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            team = it.getSerializable(ARG_TEAM) as Team
+            Team = it.getSerializable(ARG_TEAM) as Team
         }
     }
 
@@ -41,10 +41,10 @@ class SingleTeamFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
         //check that there is players available
-        if(team.Players != null && team.Players.isNotEmpty())
+        if(Team.Players != null && Team.Players.isNotEmpty())
         {
             val teamviewManager = LinearLayoutManager(activity)
-            playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
+            playerRecyclerAdapter = PlayerRecyclerAdapter(Team.Players, false, SelectionOption.NO_SELECT)
             view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
                 // use this setting to improve performance if you know that changes
                 // in content do not change the layout size of the RecyclerView
@@ -62,24 +62,34 @@ class SingleTeamFragment : Fragment() {
         return view
     }
 
+    fun UpdateTeamPlayers(team : Team)
+    {
+        Team = team
+        //playerRecyclerAdapter.playerList = team.Players
+        //playerRecyclerAdapter.notifyDataSetChanged()
+    }
+
     /*
     Companion static class for fragment
      */
     companion object {
 
         private val ARG_TEAM = "TEAM_ARG"
+        private val ARG_TAG = "TAG"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
          * @param team : team parameter with player data
+         * @param tag:
          * @return A new instance of fragment SingleTeamFragment.
          */
         @JvmStatic
-        fun newInstance(team : Team) =
+        fun newInstance(team : Team, tag : String) =
                 SingleTeamFragment().apply {
                     arguments = Bundle().apply {
                         putSerializable(ARG_TEAM, team)
+                        putString(ARG_TAG, tag)
                     }
                 }
     }
