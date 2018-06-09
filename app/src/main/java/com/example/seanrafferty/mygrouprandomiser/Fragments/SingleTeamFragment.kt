@@ -31,19 +31,9 @@ class SingleTeamFragment : Fragment() {
     lateinit var idTag : String
     private lateinit var playerRecycler : RecyclerView
 
-    /**
-     *
-     */
-//    init
-//    {
-//        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-//
-//        playerRecyclerAdapter = PlayerRecyclerAdapter(arrayListOf(), false, SelectionOption.NO_SELECT)
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         arguments?.let {
             team = it.getSerializable(ARG_TEAM) as Team
             idTag = it.getString(ARG_TAG)
@@ -68,12 +58,8 @@ class SingleTeamFragment : Fragment() {
         {
             playerRecyclerAdapter.playerList = arrayListOf()
         }
-        Log.d("TAG", "$idTag with playercount : ${playerRecyclerAdapter.itemCount}" )
 
         val teamviewManager = LinearLayoutManager(activity)
-        Log.d("TAG $idTag", "item 1")
-        //playerRecyclerAdapter = PlayerRecyclerAdapter(Team.Players, false, SelectionOption.NO_SELECT)
-        Log.d("TAG $idTag", "item 2")
         playerRecycler = view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -83,41 +69,14 @@ class SingleTeamFragment : Fragment() {
             // specify an viewAdapter (see also next example)
             adapter = playerRecyclerAdapter
         }
-        Log.d("TAG $idTag", "item 3")
         playerRecyclerAdapter.notifyDataSetChanged()
 
         return view
     }
 
     /**
-     *
-     */
-    override fun onResume() {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-        super.onResume()
-
-        var fragmentView = view
-
-//        try {
-//
-//        }
-//        catch(e : UninitializedPropertyAccessException)
-//        {
-//            Log.d("TAG", object{}.javaClass.enclosingMethod.name +  "exception : ${e.message}")
-//        }
-//        try {
-//            playerRecyclerAdapter.playerList.clear()
-//            playerRecyclerAdapter.playerList = Team.Players
-//            playerRecyclerAdapter.notifyDataSetChanged()
-//        }
-//        catch(e : UninitializedPropertyAccessException)
-//        {
-//            Log.d("TAG", object{}.javaClass.enclosingMethod.name +  "exception : ${e.message}")
-//        }
-    }
-
-    /**
-     *
+     * Handle request to update player content
+     * NEEDS TO BE PROPERLY DOCUMENTED AND TESTED
      */
     fun UpdateTeamPlayers(singleTeam : Team)
     {
@@ -137,7 +96,6 @@ class SingleTeamFragment : Fragment() {
             Log.d("TAG", object{}.javaClass.enclosingMethod.name + "Exception caught")
             playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
             playerRecycler.adapter = playerRecyclerAdapter
-            //playerRecyclerAdapter.notifyDataSetChanged()
         }
     }
 

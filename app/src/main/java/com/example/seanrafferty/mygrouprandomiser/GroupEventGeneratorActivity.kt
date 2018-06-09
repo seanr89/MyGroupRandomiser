@@ -91,7 +91,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     /**
      * Test method to handle fragment navigation on click event
-     *
+     * TODO - Handle exceptions if the fragment does not exist!
      */
     fun NavigateToFirstTeam()
     {
@@ -150,8 +150,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         Teams = teams
-       // var fragment = supportFragmentManager.fragments[1] as TeamsFragment
-       // fragment.UpdateRecyclerAdapter(Teams)
 
         var teamOneFragment = supportFragmentManager.fragments[1] as SingleTeamFragment
         teamOneFragment.UpdateTeamPlayers(Teams[0])
