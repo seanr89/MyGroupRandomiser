@@ -17,19 +17,26 @@ Phase 1
 - Creation of players
 - Creation of events
 - Creation of teams
+- Include firebase
+- Login
 
 Phase 2
 - Handle data rating
+    - use in shuffling
+- app notification
+- manual team generation
 - Handle storing of team results
-
-Phase 2
-- Include firebase
+- First time login onboarding
+    - includes GDPR
+    - User Private and Public status
 - Removal of Data Initialisation Content
 - Authentication and Authorisation
+- Geo-location
 
 Phase 3
 - Publish to App Store
-- Location Data
+    - Group optimizations
+    - admob
 
 
 Process Flow (Phase 1)
