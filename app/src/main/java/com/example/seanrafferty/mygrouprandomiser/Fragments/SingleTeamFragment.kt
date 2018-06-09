@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,48 +26,119 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 class SingleTeamFragment : Fragment() {
 
     //initialise the team and player recycler object
-    private lateinit var Team : Team
+    private lateinit var team : Team
     private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
+    lateinit var idTag : String
+    private lateinit var playerRecycler : RecyclerView
+
+    /**
+     *
+     */
+//    init
+//    {
+//        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+//
+//        playerRecyclerAdapter = PlayerRecyclerAdapter(arrayListOf(), false, SelectionOption.NO_SELECT)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         arguments?.let {
-            Team = it.getSerializable(ARG_TEAM) as Team
+            team = it.getSerializable(ARG_TEAM) as Team
+            idTag = it.getString(ARG_TAG)
         }
+        playerRecyclerAdapter = PlayerRecyclerAdapter(arrayListOf(), false, SelectionOption.NO_SELECT)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        retainInstance = true
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
+        Log.d("TAG $idTag", object{}.javaClass.enclosingMethod.name)
+
         //check that there is players available
-        if(Team.Players != null && Team.Players.isNotEmpty())
+        if(team.Players != null && team.Players.isNotEmpty())
         {
-            val teamviewManager = LinearLayoutManager(activity)
-            playerRecyclerAdapter = PlayerRecyclerAdapter(Team.Players, false, SelectionOption.NO_SELECT)
-            view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
-                // use this setting to improve performance if you know that changes
-                // in content do not change the layout size of the RecyclerView
-                setHasFixedSize(true)
-                // use a linear layout manager
-                layoutManager = teamviewManager
-                // specify an viewAdapter (see also next example)
-                adapter = playerRecyclerAdapter
-            }
+            playerRecyclerAdapter.playerList = team.Players
         }
         else
         {
-            Toast.makeText(activity, "No Players for the team", Toast.LENGTH_LONG).show()
+            playerRecyclerAdapter.playerList = arrayListOf()
         }
+        Log.d("TAG", "$idTag with playercount : ${playerRecyclerAdapter.itemCount}" )
+
+        val teamviewManager = LinearLayoutManager(activity)
+        Log.d("TAG $idTag", "item 1")
+        //playerRecyclerAdapter = PlayerRecyclerAdapter(Team.Players, false, SelectionOption.NO_SELECT)
+        Log.d("TAG $idTag", "item 2")
+        playerRecycler = view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+            // use a linear layout manager
+            layoutManager = teamviewManager
+            // specify an viewAdapter (see also next example)
+            adapter = playerRecyclerAdapter
+        }
+        Log.d("TAG $idTag", "item 3")
+        playerRecyclerAdapter.notifyDataSetChanged()
+
         return view
     }
 
-    fun UpdateTeamPlayers(team : Team)
+    /**
+     *
+     */
+    override fun onResume() {
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        super.onResume()
+
+        var fragmentView = view
+
+//        try {
+//
+//        }
+//        catch(e : UninitializedPropertyAccessException)
+//        {
+//            Log.d("TAG", object{}.javaClass.enclosingMethod.name +  "exception : ${e.message}")
+//        }
+//        try {
+//            playerRecyclerAdapter.playerList.clear()
+//            playerRecyclerAdapter.playerList = Team.Players
+//            playerRecyclerAdapter.notifyDataSetChanged()
+//        }
+//        catch(e : UninitializedPropertyAccessException)
+//        {
+//            Log.d("TAG", object{}.javaClass.enclosingMethod.name +  "exception : ${e.message}")
+//        }
+    }
+
+    /**
+     *
+     */
+    fun UpdateTeamPlayers(singleTeam : Team)
     {
-        Team = team
-        //playerRecyclerAdapter.playerList = team.Players
-        //playerRecyclerAdapter.notifyDataSetChanged()
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+
+        team = singleTeam
+        try
+        {
+            if(playerRecyclerAdapter != null)
+            {
+                playerRecyclerAdapter.playerList = team.Players
+                playerRecyclerAdapter.notifyDataSetChanged()
+            }
+        }
+        catch(e : UninitializedPropertyAccessException)
+        {
+            Log.d("TAG", object{}.javaClass.enclosingMethod.name + "Exception caught")
+            playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
+            playerRecycler.adapter = playerRecyclerAdapter
+            //playerRecyclerAdapter.notifyDataSetChanged()
+        }
     }
 
     /*

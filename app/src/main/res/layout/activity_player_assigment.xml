@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:text="Science Park"
+                    android:text="Group Name"
                     android:textColor="@color/startblue"
                     android:textSize="14sp"
                     android:textStyle="bold" />

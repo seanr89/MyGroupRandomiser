@@ -19,6 +19,7 @@ import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
 import com.example.seanrafferty.mygrouprandomiser.Business.TeamRandomiser
+import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
@@ -47,6 +48,7 @@ import kotlin.collections.ArrayList
 class EventSetupFragment : Fragment()
 {
     private var mCallback: OnRandomTeamsGenerated? = null
+    private var mCallbackSave : OnSaveEvent? = null
 
     //Recycler manager details
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -93,6 +95,12 @@ class EventSetupFragment : Fragment()
             CreateRandomTeams()
         }
 
+        var btn_save_event = view.findViewById<Button>(R.id.btn_save_event)
+        btn_save_event.setOnClickListener()
+        {
+            CreateEventAndAlertListener()
+        }
+
         viewDate.setOnClickListener()
         {
             SetDate(viewDate)
@@ -115,11 +123,19 @@ class EventSetupFragment : Fragment()
         } else {
             throw RuntimeException(context.toString() + " must implement OnRandomTeamsGenerated")
         }
+
+        if(context is EventSetupFragment.OnSaveEvent) {
+            mCallbackSave = context
+        }
+        else {
+            throw RuntimeException(context.toString() + " must implement OnSaveEvent")
+        }
     }
 
     override fun onDetach() {
         super.onDetach()
         mCallback = null
+        mCallbackSave = null
     }
 
     /**
@@ -187,10 +203,22 @@ class EventSetupFragment : Fragment()
         }
     }
 
+    fun CreateEventAndAlertListener()
+    {
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+
+        mCallbackSave!!.saveEvent()
+    }
+
     // Container Activity must implement this interface
     interface OnRandomTeamsGenerated
     {
         fun onTeamsRandomized(teams : ArrayList<Team>)
+    }
+
+    interface OnSaveEvent
+    {
+        fun saveEvent()
     }
 
     /**
@@ -226,14 +254,6 @@ class EventSetupFragment : Fragment()
             LocalDateTime.now()
         }
         return dateTime
-    }
-
-    /**
-     * Handle fragment external event call to main activity
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {

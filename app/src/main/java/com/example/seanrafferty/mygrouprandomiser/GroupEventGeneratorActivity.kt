@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_group_event_generator.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
+        EventSetupFragment.OnSaveEvent,
         TeamsFragment.OnFragmentInteractionListener
 {
     private var _GroupID : Int = 0
@@ -65,9 +66,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         //Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         layout.getTabAt(0)!!.text = "Event Setup"
-        layout.getTabAt(1)!!.text = "Teams"
-        layout.getTabAt(2)!!.text = "T 1"
-        layout.getTabAt(3)!!.text = "T 2"
+        layout.getTabAt(1)!!.text = "T 1"
+        layout.getTabAt(2)!!.text = "T 2"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -96,8 +96,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     fun NavigateToFirstTeam()
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-
-        container.setCurrentItem(2, true)
+        container.setCurrentItem(1, true)
     }
 
 
@@ -122,14 +121,13 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
             when(position)
             {
                 0 -> fragment = EventSetupFragment.newInstance(_GroupID)
-                1 -> fragment = TeamsFragment.newInstance(Teams, 1, "Team1")
-                2 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
+                1 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
                 else {
                     SingleTeamFragment.newInstance(Teams[0], "Team1")
                 }
-                3 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
+                2 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 2", 0), "Team2")
                 else {
-                    SingleTeamFragment.newInstance(Teams[1], "Team1")
+                    SingleTeamFragment.newInstance(Teams[1], "Team2")
                 }
                 else -> { // Note the block
                     print("x is neither 0, or 1")
@@ -140,7 +138,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
         override fun getCount(): Int {
             // Show X total pages.
-            return 4
+            return 3
         }
     }
 
@@ -155,10 +153,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
        // var fragment = supportFragmentManager.fragments[1] as TeamsFragment
        // fragment.UpdateRecyclerAdapter(Teams)
 
-        var teamOneFragment = mSectionsPagerAdapter!!.getItem(2) as SingleTeamFragment
-        teamOneFragment.UpdateTeamPlayers(teams[0])
-
-        var teamTwoFragment = mSectionsPagerAdapter!!.getItem(3) as SingleTeamFragment
+        var teamOneFragment = supportFragmentManager.fragments[1] as SingleTeamFragment
+        teamOneFragment.UpdateTeamPlayers(Teams[0])
 
         NavigateToFirstTeam()
     }
@@ -174,7 +170,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         //get the setupFragment and request the current selected date and time of the event
         var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         var dateTime = eventFragment.GetSelectedDateAndTime()
-
         return GroupEvent(0, dateTime, _GroupID, false, Teams)
     }
 
@@ -190,14 +185,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     override fun onFragmentInteraction(teams : ArrayList<Team>)
     {
-        var groupEvent = CreateEventGroupFromContent()
-        if(groupEvent != null)
-        {
-            var eventManager = EventManager(this)
-            eventManager.SaveEvent(groupEvent)
-        }
-        Toast.makeText(this, "Event Scheduled", Toast.LENGTH_LONG).show()
-        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
     }
 
     /**
@@ -208,6 +195,22 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     {
         Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
+    }
+
+    /**
+     *
+     */
+    override fun saveEvent()
+    {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var groupEvent = CreateEventGroupFromContent()
+        if(groupEvent != null)
+        {
+            var eventManager = EventManager(this)
+            eventManager.SaveEvent(groupEvent)
+        }
+        Toast.makeText(this, "Event Scheduled", Toast.LENGTH_LONG).show()
+        NavigationControls.NavigateToGroupInfoActivity(this, _GroupID)
     }
 
 

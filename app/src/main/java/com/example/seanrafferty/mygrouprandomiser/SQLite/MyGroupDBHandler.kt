@@ -43,7 +43,8 @@ class MyGroupDBHandler
         {
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
         }
-        return result;
+        db.close()
+        return result
     }
 
     /**
@@ -65,6 +66,7 @@ class MyGroupDBHandler
             cursor = db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            db.close()
             return null!!
         }
 
@@ -73,6 +75,7 @@ class MyGroupDBHandler
             group.Name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.groupName))
         }
         cursor.close()
+        db.close()
         return group
     }
 
@@ -112,8 +115,10 @@ class MyGroupDBHandler
         {
             // if cursor has a sql exception
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            db.close()
             return null!!
         }
+        cursor.close()
         return arrayList
     }
 
