@@ -1,11 +1,13 @@
 package com.example.seanrafferty.mygrouprandomiser
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
@@ -30,6 +32,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
         setContentView(R.layout.activity_player_assigment)
 
         groupID = intent.getStringExtra("GroupID").toInt()
+        RequestAndDisplayGroupNameByID(groupID, this)
 
         var btn_save_selected = findViewById<Button>(R.id.btn_save_selected)
         btn_save_selected.setOnClickListener()
@@ -40,6 +43,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
         }
 
         _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
+
         val unassignedPlayers = MyGroupManager(this).ReadAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
 
         if(unassignedPlayers.isNotEmpty())
@@ -64,6 +68,20 @@ class PlayerAssigmentActivity : AppCompatActivity()
             Toast.makeText(this, "No Players Found!", Toast.LENGTH_LONG).show()
         }
 
+    }
+
+    /**
+     * Handle the requesting and displaying of group name info on the activity
+     * @param groupID : group ID to query the group for
+     * @param context : the current activity context
+     */
+    private fun RequestAndDisplayGroupNameByID(groupID : Int, context : Context?)
+    {
+        var groupManager = MyGroupManager(context)
+        var currentGroup = groupManager.ReadGroupByID(groupID);
+
+        var txtViewGroupName = findViewById<TextView>(R.id.txtViewGroupName)
+        txtViewGroupName.text = currentGroup.Name
     }
 
 

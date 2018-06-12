@@ -12,7 +12,7 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/gradientbackground"
@@ -54,7 +54,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
@@ -84,12 +84,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
+                    android:text="Set Date"
                     android:textColor="@color/startblue"
                     android:textSize="14sp"
-                    android:text="Set Date"
                     android:textStyle="bold" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -110,9 +109,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
+                    android:text="Set Time"
                     android:textColor="@color/startblue"
                     android:textSize="14sp"
-                    android:text="Set Time"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -127,9 +126,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@color/graylight"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="32dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -196,7 +195,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/buttonstylewithgradient"
-            android:text="Add Player"
+            android:text="Shuffle"
             android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

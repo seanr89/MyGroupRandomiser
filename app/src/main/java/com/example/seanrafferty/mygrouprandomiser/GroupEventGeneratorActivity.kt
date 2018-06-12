@@ -14,7 +14,6 @@ import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
 import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
-import com.example.seanrafferty.mygrouprandomiser.Fragments.TeamsFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
@@ -22,11 +21,11 @@ import kotlinx.android.synthetic.main.activity_group_event_generator.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
-        EventSetupFragment.OnSaveEvent,
-        TeamsFragment.OnFragmentInteractionListener
+        EventSetupFragment.OnSaveEvent
 {
     private var _GroupID : Int = 0
     private lateinit var Teams : ArrayList<Team>
+    private val TAG = "GroupEventGeneratorAct"
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -50,13 +49,17 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         mSectionsPagerAdapter!!.getItem(2)
+
         // Set up the ViewPager with the sections adapter.
+        container.offscreenPageLimit = 2 //initialise off page limit to 2
         container.adapter = mSectionsPagerAdapter
 
         val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(container)
 
         configureTabLayoutTitles(tabLayout)
+
+        //TODO - NEED to add a viewpager or adapter page changer
     }
 
     /**
@@ -151,19 +154,25 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         Teams = teams
 
+        //same here
         var teamOneFragment = supportFragmentManager.fragments[1] as SingleTeamFragment
         teamOneFragment.UpdateTeamPlayers(Teams[0])
+
+        //may want to add in a try catch around this!!
+        var teamTwoFragment = supportFragmentManager.fragments[2] as SingleTeamFragment
+        teamTwoFragment.UpdateTeamPlayers(Teams[1])
 
         NavigateToFirstTeam()
     }
 
     /**
      * Create the group event object from the provided content in the activity
+     * Also includes the addition of the teams to the event
      * @return a created GroupEvent object
      */
     private fun CreateEventGroupFromContent() : GroupEvent
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         //get the setupFragment and request the current selected date and time of the event
         var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
@@ -171,19 +180,9 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         return GroupEvent(0, dateTime, _GroupID, false, Teams)
     }
 
-
-
     ///////***************************************************************////////
     ///////***************************************************************////////
     ///////***************************************************************////////
-
-    /**
-     * Handle the interaction of the event setup fragment
-     * @param teams : the array list of teams generated
-     */
-    override fun onFragmentInteraction(teams : ArrayList<Team>)
-    {
-    }
 
     /**
      * Handle event from setup fragment noting the completion team randomisation
@@ -191,19 +190,22 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
-        Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
     /**
-     *
+     * Handle the saving of an event to the database!!
      */
     override fun saveEvent()
     {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        //initialise the group event and request event data from the setup fragment
         var groupEvent = CreateEventGroupFromContent()
         if(groupEvent != null)
         {
+            //initialise the event manager and start the saving process
             var eventManager = EventManager(this)
             eventManager.SaveEvent(groupEvent)
         }

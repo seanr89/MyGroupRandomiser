@@ -50,11 +50,19 @@ class EventInfoFragment : Fragment()  {
         SetCompletedSwitch(event, fragment)
 
         //setup the button event for updating event details
-        var btn_update = fragment.findViewById<Button>(R.id.btnUpdateEvent)
-        btn_update.setOnClickListener()
+//        var btn_update = fragment.findViewById<Button>(R.id.btnUpdateEvent)
+//        btn_update.setOnClickListener()
+//        {
+//            UpdateEvent(event, fragment)
+//        }
+
+        //Move to the completed switch to handle event update!!
+        var switch = fragment.findViewById<Switch>(R.id.switchEventCompleted)
+        switch.setOnClickListener()
         {
             UpdateEvent(event, fragment)
         }
+
         return fragment
     }
 

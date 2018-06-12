@@ -58,6 +58,8 @@ class EventSetupFragment : Fragment()
     private lateinit var viewDate : TextView
     private lateinit var viewTime : TextView
 
+    private val TAG = "EventSetupFragment"
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
