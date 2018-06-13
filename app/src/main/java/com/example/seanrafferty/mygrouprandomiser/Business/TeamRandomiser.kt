@@ -9,13 +9,14 @@ import com.example.seanrafferty.mygrouprandomiser.Models.Team
  */
 class TeamRandomiser
 {
+    private val TAG = "TeamRandomiser"
     /**
      * Shuffle the players provided and append to two teams (one and two) and return the teams as a collection
      * @param players : a collection of players
      */
     fun RandomizePlayerListIntoTeams(players:ArrayList<Player>) : ArrayList<Team>
     {
-        Log.d("TeamRandomiser", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         //Check if the players list is empty first
         if(players.isEmpty())
             return null!!
@@ -23,44 +24,26 @@ class TeamRandomiser
         //Shuffle the player list
         var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
 
-        //Initialise two team objects to be populated with players
-        var teamOne = Team(0, "Team One", 0)
-        var teamTwo = Team(0, "Team Two", 0)
+        //initialise the array and two teams
+        var teams = CreateTeams()
 
-        //create parameter that is used to process what team each player is assigned
-        //defaults to say last player was not added to Team1
-        var teamOneAdd = false
+        teams = ShuffleTeamsBasic(shuffledList, teams)
 
-        for(item : Player in shuffledList)
-        {
-            if(!teamOneAdd)
-            {
-                teamOneAdd = true
-                teamOne.Players.add(item)
-            }
-            else
-            {
-                teamOneAdd = false
-                teamTwo.Players.add(item)
-            }
-        }
+        var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
+        Log.d(TAG, "Player Average Difference is : $averageDifference")
 
-        //create an array list of teams and add each team to it!
-        var Teams = ArrayList<Team>()
-        Teams.add(teamOne)
-        Teams.add(teamTwo)
-
-        return Teams
+        return teams
     }
 
     /**
      * Handle the generation of teams and player selection based on player ratings
+     * by sorting the players by rating and distributing evenly
      * @param players : a collection of players to sort
      * @return a collection of team objects : with sorted players
      */
-    fun RandomizePlayerListByRating(players: ArrayList<Player>) : ArrayList<Team>
+    fun RandomizePlayerListBySortedRating(players: ArrayList<Player>) : ArrayList<Team>
     {
-        Log.d("TeamRandomiser", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         //Check if the players list is empty first
         if(players.isEmpty())
             return null!!
@@ -68,11 +51,79 @@ class TeamRandomiser
         //first sort the player list by rating
         players.sortBy({this.selector(it)})
 
+        //initialise the array and two teams
+        var teams = CreateTeams()
 
+        teams = ShuffleTeamsBasic(players, teams)
 
-        return null!!
+        var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
+        Log.d(TAG, "Player Average Difference is : $averageDifference")
+
+        return teams
     }
 
+    /**
+     * select player rating content
+     * @return the provided player rating (used for sorting)
+     */
     private fun selector(p: Player): Int = p.Rating
 
+
+    /**
+     * calculate the average rating of the the players in the included team
+     * N.B. could be move to the team object itself!!
+     * @param team : the team to read player data
+     * @return 0.0 as default or the average rating
+     */
+    private fun CalculateTeamPlayerAverage(team: Team) : Double
+    {
+        var result = 0.0
+        if(team != null && team.Players.isNotEmpty())
+        {
+            val ratings = team.Players.map { it.Rating }
+            result = ratings.average()
+        }
+        return result
+    }
+
+    /**
+     * Handle the basic shuffling and sorting of teams (i.e. read through loop provided)
+     * @param players
+     * @param teams
+     * @return array of teams with players added into each team
+     */
+    private fun ShuffleTeamsBasic(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
+    {
+        var teamOneAdd = false
+        for(item : Player in players)
+        {
+            if(!teamOneAdd)
+            {
+                teamOneAdd = true
+                teams[0].Players.add(item)
+            }
+            else
+            {
+                teamOneAdd = false
+                teams[1].Players.add(item)
+            }
+        }
+        return teams
+    }
+
+    /**
+     * Simple internal method to create an array list with two team objects provided
+     * @return A list that contains two teams
+     */
+    private fun CreateTeams() : ArrayList<Team>
+    {
+        var teamOne = Team(0, "Team One", 0)
+        var teamTwo = Team(0, "Team Two", 0)
+
+        var Teams = ArrayList<Team>()
+        Teams.add(teamOne)
+        Teams.add(teamTwo)
+
+        return Teams!!
+    }
 }

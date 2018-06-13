@@ -31,26 +31,33 @@ class PlayerDBHandler
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
-        var arrayList = ArrayList<Player>()
-
         // Select All Query
         var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerTable}"
         val db = _DB.readableDatabase
 
-        var cursor = db!!.rawQuery(selectQuery, null)
-        if (cursor != null)
-        {
-            if (cursor.moveToFirst()) {
-                do
-                {
-                    val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerpkID))
-                    val name =cursor.getString(cursor.getColumnIndex(DatabaseHandler.PlayerName))
-                    val rating = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
+        var cursor: Cursor? = null
+        cursor = try {
+            db!!.rawQuery(selectQuery, null)
+        }
+        catch (e: SQLiteException) {
+            // exception on the query fall over
+            Log.e("EXCEPTION", "query failed with message : ${e.message}")
+            cursor!!.close()
+            return null!!
+        }
 
-                    arrayList.add(Player(id, name, rating))
-                }
-                while (cursor.moveToNext())
+        var arrayList = ArrayList<Player>()
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerpkID))
+                val name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.PlayerName))
+                val rating = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
+                arrayList.add(Player(id, name, rating))
             }
+            while (cursor.moveToNext())
+
         }
         cursor.close()
         return arrayList
@@ -72,11 +79,13 @@ class PlayerDBHandler
         var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerTable} WHERE ${DatabaseHandler.PlayerpkID} IN ($combinedString)"
         val db = _DB.readableDatabase
 
-        var cursor: Cursor?
-        try {
-            cursor = db!!.rawQuery(selectQuery, null)
+        var cursor: Cursor? = null
+        cursor = try
+        {
+            db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            cursor!!.close()
             return null!!
         }
 
@@ -88,7 +97,6 @@ class PlayerDBHandler
                     val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerpkID))
                     val name =cursor.getString(cursor.getColumnIndex(DatabaseHandler.PlayerName))
                     val rating = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
-
                     arrayList.add(Player(id, name, rating))
                 }
                 while (cursor.moveToNext())
@@ -126,7 +134,7 @@ class PlayerDBHandler
      * @param player - Player object to be inserted
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
-    @Throws(SQLiteException::class)
+    //@Throws(SQLiteException::class)
     fun InsertPlayer(player: Player) : Int
     {
         Log.d("PlayerDBHandler", object{}.javaClass.enclosingMethod.name)

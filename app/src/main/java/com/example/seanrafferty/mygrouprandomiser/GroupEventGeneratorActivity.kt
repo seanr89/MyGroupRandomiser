@@ -177,7 +177,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         //get the setupFragment and request the current selected date and time of the event
         var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         var dateTime = eventFragment.GetSelectedDateAndTime()
-        return GroupEvent(0, dateTime, _GroupID, false, Teams)
+        return GroupEvent(0, dateTime, _GroupID, false, false, Teams)
     }
 
     ///////***************************************************************////////

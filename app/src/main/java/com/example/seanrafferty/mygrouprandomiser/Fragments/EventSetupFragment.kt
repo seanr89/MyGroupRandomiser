@@ -145,7 +145,7 @@ class EventSetupFragment : Fragment()
      */
     private fun SetDate(textView: TextView)
     {
-        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         val cal = Calendar.getInstance()
 
@@ -166,7 +166,7 @@ class EventSetupFragment : Fragment()
      */
     private fun SetTime(textView: TextView, view : View)
     {
-        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         val cal = Calendar.getInstance()
         val hour = cal.get(Calendar.HOUR_OF_DAY)
@@ -187,7 +187,7 @@ class EventSetupFragment : Fragment()
      */
     private fun CreateRandomTeams()
     {
-        Log.d("EventSetupFragment", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var players = GetSelectedPlayers()
         if(players.isNotEmpty())
@@ -243,7 +243,7 @@ class EventSetupFragment : Fragment()
         var Date = viewDate.text
         var Time = viewTime.text
 
-        var dateTimeString = "${Date.toString()} ${Time.toString()}"
+        var dateTimeString = "$Date $Time"
 
         var dateTime : LocalDateTime
 

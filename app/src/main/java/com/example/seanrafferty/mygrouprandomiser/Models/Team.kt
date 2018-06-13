@@ -7,6 +7,7 @@ import java.io.Serializable
  * Data object to detail the players of a team
  * @param ID - Unique ID of the Team
  * @param Score : the number of goals scored by the team (default = 0)
+ * @param AverageRating : (default = 0.0)
  * @param Players - A collection of the Player objects
  */
 @Entity(tableName = "TeamData")
@@ -16,4 +17,20 @@ data class Team constructor(var ID:Int, var Name:String, var Score:Int = 0, var 
      * default constructor to initialise player list
      */
     constructor(ID: Int, Name:String, Score:Int) : this(ID, Name, Score, ArrayList())
+
+
+    /**
+     * calculate the average rating of the the players in the included team
+     * @return 0.0 as default or the average rating of the players
+     */
+    fun CalculateTeamPlayerAverage() : Double
+    {
+        var result = 0.0
+        if(this != null && this.Players.isNotEmpty())
+        {
+            val ratings = this.Players.map { it.Rating }
+            result = ratings.average()
+        }
+        return result
+    }
 }

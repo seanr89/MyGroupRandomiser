@@ -13,7 +13,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 12
+        val DBVersion = 13
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -35,6 +35,7 @@ class DatabaseHandler : SQLiteOpenHelper
         const val EventDate = "Date"
         const val EventGroupID = "mygroupID"
         const val EventCompleted = "completed"
+        const val EventBalanced = "balanced"
 
         const val TeamTable = "team"
         const val TeampkID = "ID"
@@ -180,7 +181,8 @@ class DatabaseHandler : SQLiteOpenHelper
                 "($EventpkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "$EventDate TEXT, " +
                 "$EventCompleted INTEGER, " +
-                "$EventGroupID INTEGER);"
+                "$EventGroupID INTEGER" +
+                "$EventBalanced INTEGER);"
         db.execSQL(sql)
     }
 

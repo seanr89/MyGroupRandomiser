@@ -1,5 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
+import android.arch.persistence.room.Database
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
@@ -43,6 +44,7 @@ class EventDBHandler
         } catch (e: SQLiteException) {
             // exception on the query fall over
             Log.e("EXCEPTION", "query failed with message : ${e.message}")
+            cursor!!.close()
             return null!!
         }
 
@@ -77,6 +79,7 @@ class EventDBHandler
             cursor = db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
             Log.e("EXCEPTION", "query failed with message : ${e.message}")
+            cursor!!.close()
             return null!!
         }
 
@@ -87,12 +90,13 @@ class EventDBHandler
                 val date = UtilityMethods.ConvertISODateStringToDateTime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.EventDate)))
                 val complete = UtilityMethods.ConvertIntToBoolean(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventCompleted)))
                 val groupID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventGroupID))
-
-                return GroupEvent(id, date, groupID, complete)
+                var balanced = UtilityMethods.ConvertIntToBoolean(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.EventBalanced)))
+                //ensure cursor is closed
+                cursor.close()
+                return GroupEvent(id, date, groupID, complete, balanced)
             } while (cursor.moveToNext())
         }
         cursor.close()
-
         return null!!
     }
 
@@ -123,6 +127,7 @@ class EventDBHandler
 
     /**
      * Query and return the count of events for a group
+     * @param group : the group to query the number of events
      * @return a integer count of events
      */
     fun GetCountOfEventsForGroup(group : MyGroup) : Int
@@ -155,6 +160,7 @@ class EventDBHandler
         values.put(DatabaseHandler.EventGroupID, event.GroupID)
         //default the event to incomplete
         values.put(DatabaseHandler.EventCompleted, 0)
+        values.put(DatabaseHandler.EventBalanced, 0)
 
         result = db!!.insert(DatabaseHandler.EventTable, "", values).toInt()
 
@@ -172,7 +178,7 @@ class EventDBHandler
         Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
 
         var db = _DB.GetWritableDataBaseObject()
-        var result = 0
+        var result : Int
 
         var values = ContentValues()
         //1 de-notes completed
