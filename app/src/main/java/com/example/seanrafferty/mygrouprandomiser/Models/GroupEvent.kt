@@ -17,7 +17,7 @@ data class GroupEvent constructor(var ID:Int, var Date: LocalDateTime, var Group
     /**
      * Secondary Constructor
      */
-    constructor(ID:Int, Date: LocalDateTime, GroupID:Int, Completed:Boolean, Balanced: Boolean, Teams:ArrayList<Team>) : this(ID, Date, GroupID, Completed)
+    constructor(ID:Int, Date: LocalDateTime, GroupID:Int, Completed:Boolean, Balanced: Boolean, Teams:ArrayList<Team>) : this(ID, Date, GroupID, Completed, Balanced)
     {
         EventTeams = Teams
     }

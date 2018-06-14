@@ -94,7 +94,8 @@ class EventSetupFragment : Fragment()
         var btn_randomise = view.findViewById<Button>(R.id.btn_randomise_players)
         btn_randomise.setOnClickListener()
         {
-            CreateRandomTeams()
+            //CreateRandomTeams()
+            CreateTeamsByRatingAndTriggerEvent()
         }
 
         var btn_save_event = view.findViewById<Button>(R.id.btn_save_event)
@@ -194,6 +195,26 @@ class EventSetupFragment : Fragment()
         {
             var randomiser = TeamRandomiser()
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
+
+            //then return back to where it needs to go - ie the fragment activity
+            mCallback!!.onTeamsRandomized(teamArray)
+            return
+        }
+        else
+        {
+            Toast.makeText(context, "No Players Selected!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun CreateTeamsByRatingAndTriggerEvent()
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        var players = GetSelectedPlayers()
+        if(players.isNotEmpty())
+        {
+            var randomiser = TeamRandomiser()
+            var teamArray = randomiser.RandomizePlayerListBySortedRating(players)
 
             //then return back to where it needs to go - ie the fragment activity
             mCallback!!.onTeamsRandomized(teamArray)

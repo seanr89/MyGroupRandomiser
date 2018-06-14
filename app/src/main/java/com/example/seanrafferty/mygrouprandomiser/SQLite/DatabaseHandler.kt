@@ -181,7 +181,7 @@ class DatabaseHandler : SQLiteOpenHelper
                 "($EventpkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "$EventDate TEXT, " +
                 "$EventCompleted INTEGER, " +
-                "$EventGroupID INTEGER" +
+                "$EventGroupID INTEGER," +
                 "$EventBalanced INTEGER);"
         db.execSQL(sql)
     }
