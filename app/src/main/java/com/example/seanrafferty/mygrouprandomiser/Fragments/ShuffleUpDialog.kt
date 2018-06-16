@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.R
 import android.content.DialogInterface
 import android.app.*
+import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.widget.Toast
 
@@ -19,16 +20,31 @@ https://guides.codepath.com/android/using-dialogfragment
  */
 class ShuffleUpDialog : DialogFragment()
 {
+    private var mCallback: RandomisationSelectedListener? = null
     private val TAG = "ShuffleUpDialog"
 
+    /**
+     *
+     */
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ShuffleUpDialog.RandomisationSelectedListener) {
+            mCallback = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement RandomisationSelectedListener")
+        }
+    }
+
+    /**
+     *
+     */
     override fun onCreateDialog(savedInstanceState: Bundle?): AlertDialog
     {
         // Use the Builder class for convenient dialog construction
         var dialog = AlertDialog.Builder(activity)
 
         // 2. Chain together various setter methods to set the dialog characteristics
-        dialog.setMessage(R.string.shuffle_dialog_message)
-                .setTitle(R.string.shuffle_dialog_title)
+        dialog.setTitle(R.string.shuffle_dialog_title)
 
         // Add the buttons for selecting cancel
         dialog.setNegativeButton(R.string.shuffle_cancel, DialogInterface.OnClickListener { dialog, id ->
@@ -37,12 +53,14 @@ class ShuffleUpDialog : DialogFragment()
             dialog?.cancel()
         })
 
+        var items = R.array.shuffleoptions
+        Log.d(TAG, "Items found : $items")
         //Initialise the list view dialog array
-        dialog.setItems(R.array.ShuffleOptions, DialogInterface.OnClickListener{ dialog, id ->
+        dialog.setItems(R.array.shuffleoptions, DialogInterface.OnClickListener{ dialog, id ->
             // User clicked Cancel button
             Toast.makeText(context, "Selected!", Toast.LENGTH_LONG).show()
 
-            var items = view.getResources().getStringArray(R.array.ShuffleOptions);
+            var items = this.resources.getStringArray(R.array.shuffleoptions);
             var selectedItem = items[id]
 
             handleActionSelectedFromItems(selectedItem)
@@ -88,6 +106,7 @@ class ShuffleUpDialog : DialogFragment()
     private fun onRandomShuffleSelected()
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        mCallback!!.shufflePlayersRandomly()
     }
 
     /**
@@ -96,6 +115,7 @@ class ShuffleUpDialog : DialogFragment()
     private fun onRatingShuffleSelected()
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        mCallback!!.shufflePlayersByRating()
     }
 
 
@@ -103,18 +123,19 @@ class ShuffleUpDialog : DialogFragment()
      * Defines the listener interface controls to communicate back to the
      */
     // Defines the listener interface
-    interface ShuffleOptionRandomiseListener {
+    interface RandomisationSelectedListener {
         //void onFinishEditDialog(String inputText);
         fun shufflePlayersRandomly()
-    }
-
-    /**
-     *
-     */
-    interface ShuffleOptionRatingsListener
-    {
         fun shufflePlayersByRating()
     }
+
+//    /**
+//     *
+//     */
+//    interface ShuffleOptionRatingsListener
+//    {
+//        fun shufflePlayersByRating()
+//    }
 
     /**
      * Static object to provide event initialisation and display

@@ -45,7 +45,7 @@ import kotlin.collections.ArrayList
  * create an instance of this fragment.
  *
  */
-class EventSetupFragment : Fragment(), ShuffleUpDialog.ShuffleOptionRandomiseListener, ShuffleUpDialog.ShuffleOptionRatingsListener
+class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedListener
 {
     private var mCallback: OnRandomTeamsGenerated? = null
     private var mCallbackSave : OnSaveEvent? = null
@@ -164,7 +164,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.ShuffleOptionRandomiseLis
     }
 
     /**
-     * Open a time dialog and handle the on set listender to update text view
+     * Open a time dialog and handle the on set listener to update text view
      */
     private fun SetTime(textView: TextView, view : View)
     {
@@ -236,9 +236,12 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.ShuffleOptionRandomiseLis
     fun CreateEventAndAlertListener()
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-
         mCallbackSave!!.saveEvent()
     }
+
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
     // Container Activity must implement this interface
     interface OnRandomTeamsGenerated
@@ -246,15 +249,28 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.ShuffleOptionRandomiseLis
         fun onTeamsRandomized(teams : ArrayList<Team>)
     }
 
+    /**
+     *
+     */
     interface OnSaveEvent
     {
         fun saveEvent()
     }
 
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+
+    /**
+     *
+     */
     override fun shufflePlayersRandomly() {
         CreateRandomTeams()
     }
 
+    /**
+     *
+     */
     override fun shufflePlayersByRating() {
         CreateTeamsByRatingAndTriggerEvent()
     }
@@ -293,6 +309,11 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.ShuffleOptionRandomiseLis
         }
         return dateTime
     }
+
+
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
     companion object {
         /**
