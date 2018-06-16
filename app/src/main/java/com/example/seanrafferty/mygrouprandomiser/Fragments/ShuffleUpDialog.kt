@@ -16,7 +16,7 @@ https://guides.codepath.com/android/using-dialogfragment
  */
 
 /**
- *
+ * dialog box used to display the shuffle options available
  */
 class ShuffleUpDialog : DialogFragment()
 {
@@ -66,18 +66,6 @@ class ShuffleUpDialog : DialogFragment()
             handleActionSelectedFromItems(selectedItem)
         })
 
-//        dialog.setNeutralButton(R.string.shuffle_randomize, DialogInterface.OnClickListener { dialog, id ->
-//            // User clicked Randomize button
-//            Toast.makeText(context, "Randomize!", Toast.LENGTH_LONG).show()
-//            onRandomShuffleSelected()
-//        })
-//
-//        dialog.setNeutralButton(R.string.shuffle_rating, DialogInterface.OnClickListener { dialog, id ->
-//            // User clicked Rating button
-//            Toast.makeText(context, "Rating!", Toast.LENGTH_LONG).show()
-//            onRatingShuffleSelected()
-//        })
-
         return dialog.create().apply { setCanceledOnTouchOutside(false) }
     }
 
@@ -101,7 +89,7 @@ class ShuffleUpDialog : DialogFragment()
     }
 
     /**
-     *
+     * operation to trigger parent fragment event to shuffle players randomly
      */
     private fun onRandomShuffleSelected()
     {
@@ -110,7 +98,7 @@ class ShuffleUpDialog : DialogFragment()
     }
 
     /**
-     *
+     * operation to trigger parent fragment event to shuffle players by rating
      */
     private fun onRatingShuffleSelected()
     {
@@ -129,13 +117,9 @@ class ShuffleUpDialog : DialogFragment()
         fun shufflePlayersByRating()
     }
 
-//    /**
-//     *
-//     */
-//    interface ShuffleOptionRatingsListener
-//    {
-//        fun shufflePlayersByRating()
-//    }
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
     /**
      * Static object to provide event initialisation and display

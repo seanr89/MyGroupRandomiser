@@ -231,7 +231,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     }
 
     /**
-     *
+     * method to trigger the save event method for the accompanying activity listener
      */
     fun CreateEventAndAlertListener()
     {
@@ -262,14 +262,14 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     /////////////////////////////////////////////////////////////////////////////
 
     /**
-     *
+     * event listener call used to trigger the creation of team player lists randomly
      */
     override fun shufflePlayersRandomly() {
         CreateRandomTeams()
     }
 
     /**
-     *
+     * event listener call used to trigger the creation of team player lists based on rating
      */
     override fun shufflePlayersByRating() {
         CreateTeamsByRatingAndTriggerEvent()
