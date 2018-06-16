@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
@@ -30,6 +31,8 @@ class SingleTeamFragment : Fragment() {
     private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
     lateinit var idTag : String
     private lateinit var playerRecycler : RecyclerView
+    private lateinit var teamRatingTxtView : TextView
+    private val TAG = "SingleTeamFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +74,23 @@ class SingleTeamFragment : Fragment() {
         }
         playerRecyclerAdapter.notifyDataSetChanged()
 
+        teamRatingTxtView = view.findViewById(R.id.TeamRating)
+
+        //set the team rating view content
+        setTeamRatingView(team.CalculateTeamPlayerAverage())
+
         return view
+    }
+
+    /**
+     *
+     */
+    fun setTeamRatingView(rating : Double)
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        if(teamRatingTxtView != null)
+            teamRatingTxtView.text = "Rating : $rating"
     }
 
     /**
@@ -97,9 +116,11 @@ class SingleTeamFragment : Fragment() {
             playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
             playerRecycler.adapter = playerRecyclerAdapter
         }
+        //again ensure that the team rating is set
+        setTeamRatingView(team.CalculateTeamPlayerAverage())
     }
 
-    /*
+    /**|
     Companion static class for fragment
      */
     companion object {

@@ -49,7 +49,7 @@ class TeamRandomiser
             return null!!
 
         //first sort the player list by rating
-        players.sortBy({this.selector(it)})
+        players.sortByDescending({this.selector(it)})
 
         //initialise the array and two teams
         var teams = CreateTeams()

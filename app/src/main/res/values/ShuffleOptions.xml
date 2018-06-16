@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="ShuffleOptions">
+        <item>Randomize</item>
+        <item>Rating</item>
+    </array>
+</resources>

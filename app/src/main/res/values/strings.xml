@@ -63,4 +63,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <!-- Shuffle Dialog -->
+    <string name="shuffle_dialog_title">Shuffles</string>
+    <string name="shuffle_dialog_message">Select a Shuffle</string>
+    <string name="shuffle_ok">Ok</string>
+    <string name="shuffle_cancel">Cancel</string>
+    <string name="shuffle_randomize">Random</string>
+    <string name="shuffle_rating">Rating</string>
 </resources>

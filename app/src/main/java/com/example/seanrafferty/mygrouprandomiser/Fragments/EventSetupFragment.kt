@@ -45,7 +45,7 @@ import kotlin.collections.ArrayList
  * create an instance of this fragment.
  *
  */
-class EventSetupFragment : Fragment()
+class EventSetupFragment : Fragment(), ShuffleUpDialog.ShuffleOptionRandomiseListener, ShuffleUpDialog.ShuffleOptionRatingsListener
 {
     private var mCallback: OnRandomTeamsGenerated? = null
     private var mCallbackSave : OnSaveEvent? = null
@@ -95,7 +95,8 @@ class EventSetupFragment : Fragment()
         btn_randomise.setOnClickListener()
         {
             //CreateRandomTeams()
-            CreateTeamsByRatingAndTriggerEvent()
+            //CreateTeamsByRatingAndTriggerEvent()
+            ShuffleUpDialog.show(activity)
         }
 
         var btn_save_event = view.findViewById<Button>(R.id.btn_save_event)
@@ -104,11 +105,11 @@ class EventSetupFragment : Fragment()
             CreateEventAndAlertListener()
         }
 
+        //Handle date and time event click events
         viewDate.setOnClickListener()
         {
             SetDate(viewDate)
         }
-
         viewTime.setOnClickListener()
         {
             SetTime(viewTime, view)
@@ -206,6 +207,9 @@ class EventSetupFragment : Fragment()
         }
     }
 
+    /**
+     *
+     */
     private fun CreateTeamsByRatingAndTriggerEvent()
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
@@ -226,6 +230,9 @@ class EventSetupFragment : Fragment()
         }
     }
 
+    /**
+     *
+     */
     fun CreateEventAndAlertListener()
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
@@ -242,6 +249,14 @@ class EventSetupFragment : Fragment()
     interface OnSaveEvent
     {
         fun saveEvent()
+    }
+
+    override fun shufflePlayersRandomly() {
+        CreateRandomTeams()
+    }
+
+    override fun shufflePlayersByRating() {
+        CreateTeamsByRatingAndTriggerEvent()
     }
 
     /**
