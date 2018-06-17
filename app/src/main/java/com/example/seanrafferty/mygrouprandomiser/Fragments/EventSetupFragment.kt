@@ -187,7 +187,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     /**
      * Operation to trigger the generation of two teams with random player assignment
      */
-    private fun CreateRandomTeams()
+    fun CreateRandomTeams()
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
@@ -210,7 +210,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     /**
      *
      */
-    private fun CreateTeamsByRatingAndTriggerEvent()
+    fun CreateTeamsByRatingAndTriggerEvent()
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 

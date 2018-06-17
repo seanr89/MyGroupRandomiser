@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Business.EventManager
 import com.example.seanrafferty.mygrouprandomiser.Fragments.EventSetupFragment
+import com.example.seanrafferty.mygrouprandomiser.Fragments.ShuffleUpDialog
 import com.example.seanrafferty.mygrouprandomiser.Fragments.SingleTeamFragment
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
@@ -21,8 +22,19 @@ import kotlinx.android.synthetic.main.activity_group_event_generator.*
 
 class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnRandomTeamsGenerated,
-        EventSetupFragment.OnSaveEvent
+        EventSetupFragment.OnSaveEvent,
+        ShuffleUpDialog.RandomisationSelectedListener
 {
+    override fun shufflePlayersRandomly() {
+        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        eventFragment.CreateRandomTeams()
+    }
+
+    override fun shufflePlayersByRating() {
+        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        eventFragment.CreateTeamsByRatingAndTriggerEvent()
+    }
+
     private var _GroupID : Int = 0
     private lateinit var Teams : ArrayList<Team>
     private val TAG = "GroupEventGeneratorAct"

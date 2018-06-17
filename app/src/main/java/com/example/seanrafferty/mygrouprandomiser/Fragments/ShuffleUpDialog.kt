@@ -8,6 +8,7 @@ import android.app.*
 import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.widget.Toast
+import com.example.seanrafferty.mygrouprandomiser.Fragments.ShuffleUpDialog.RandomisationSelectedListener
 
 
 /*
@@ -33,6 +34,17 @@ class ShuffleUpDialog : DialogFragment()
         } else {
             throw RuntimeException(context.toString() + " must implement RandomisationSelectedListener")
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        try {
+//            mCallback = (RandomisationSelectedListener()) getTargetFragment()
+//        }
+//        catch(e : ClassCastException)
+//        {
+//            throw RuntimeException(context.toString() + " must implement RandomisationSelectedListener")
+//        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): AlertDialog
@@ -66,7 +78,7 @@ class ShuffleUpDialog : DialogFragment()
 
     /**
      * handle the triggering of said shuffle event
-     * @param itemName
+     * @param itemName :
      */
     private fun handleActionSelectedFromItems(itemName : String)
     {
@@ -106,7 +118,7 @@ class ShuffleUpDialog : DialogFragment()
      * Defines the listener interface controls to communicate back to the
      */
     // Defines the listener interface
-    interface RandomisationSelectedListener {
+    public interface RandomisationSelectedListener {
         //void onFinishEditDialog(String inputText);
         fun shufflePlayersRandomly()
         fun shufflePlayersByRating()
