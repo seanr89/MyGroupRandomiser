@@ -57,5 +57,14 @@ class UtilityMethods
             }
             return result
         }
+
+        fun ConvertBooleanToInt(value : Boolean) : Int
+        {
+            if(value)
+            {
+                return 1
+            }
+            return 0
+        }
     }
 }

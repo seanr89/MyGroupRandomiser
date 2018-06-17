@@ -28,6 +28,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 class EventInfoFragment : Fragment()  {
 
     private lateinit var event: GroupEvent
+    private val TAG =  "EventInfoFragment"
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,13 +49,14 @@ class EventInfoFragment : Fragment()  {
         InitialiseNumberPickers(event, fragment)
 
         SetCompletedSwitch(event, fragment)
+        SetBalancedSwitchForEvent(event, fragment)
 
         //setup the button event for updating event details
-//        var btn_update = fragment.findViewById<Button>(R.id.btnUpdateEvent)
-//        btn_update.setOnClickListener()
-//        {
-//            UpdateEvent(event, fragment)
-//        }
+        var btn_update = fragment.findViewById<Button>(R.id.btnUpdateEvent)
+        btn_update.setOnClickListener()
+        {
+            Toast.makeText(context, "Button Disabled", Toast.LENGTH_LONG).show()
+        }
 
         //Move to the completed switch to handle event update!!
         var switch = fragment.findViewById<Switch>(R.id.switchEventCompleted)
@@ -90,7 +92,7 @@ class EventInfoFragment : Fragment()  {
      */
     private fun InitialiseNumberPickers(event: GroupEvent, fragmentView : View)
     {
-        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var nbrPickerTeamOne = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamOne)
         //Set the minimum value of NumberPicker
@@ -119,13 +121,24 @@ class EventInfoFragment : Fragment()  {
     }
 
     /**
+     * Set the switch to be enabled or disabled based on the event balanced rating
+     * @param event : event to read the event status
+     * @param fragmentView : the current fragment view
+     */
+    private fun SetBalancedSwitchForEvent(event:GroupEvent, fragmentView: View)
+    {
+        var switch = fragmentView.findViewById<Switch>(R.id.switchEventBalanced)
+        switch.isChecked = event.Balanced
+    }
+
+    /**
      * Handle the updating of event team scores and completed status
      * @param event : the GroupEvent
      * @param fragmentView :
      */
     private fun UpdateEvent(event: GroupEvent, fragmentView: View)
     {
-        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var nbrPickerTeamOne = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamOne)
         event.EventTeams[0].Score = nbrPickerTeamOne.value
@@ -136,6 +149,10 @@ class EventInfoFragment : Fragment()  {
         UpdateTeamScore(nbrPickerTeamTwo.value, event.EventTeams[1])
 
         val eventManager = EventManager(context)
+
+        val balancedSwitch = fragmentView.findViewById<Switch>(R.id.switchEventBalanced)
+        event.Balanced = balancedSwitch.isChecked
+        eventManager.UpdateEventBalanacedStatus(event)
 
         //Request current checked status of the switch and update the completion status accordingly
         var switch = fragmentView.findViewById<Switch>(R.id.switchEventCompleted)

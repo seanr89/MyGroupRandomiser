@@ -14,13 +14,14 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.TeamDBHandler
  */
 class EventManager(val context: Context?)
 {
+    private val TAG = "EventManager"
     /**
      * Operation to save the provided event
      * @param groupEvent : populated group event with 2 teams
      */
     fun SaveEvent(groupEvent: GroupEvent)
     {
-        Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         //Initialise the two database contexts to save the event and teams
         var eventDB = EventDBHandler(DatabaseHandler(context))
@@ -84,6 +85,19 @@ class EventManager(val context: Context?)
         var events = db.GetAllGroupEventsForGroup(myGroup)
 
         return events
+    }
+
+    /**
+     * Update the balanced rating of a single event
+     * @param event : the event to be updated
+     * @return the number of rows affected or 0 if failed
+     */
+    fun UpdateEventBalanacedStatus(event: GroupEvent) : Int
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        var db = EventDBHandler(DatabaseHandler(context))
+        return db.UpdateEventBalanced(event)
     }
 
     /**

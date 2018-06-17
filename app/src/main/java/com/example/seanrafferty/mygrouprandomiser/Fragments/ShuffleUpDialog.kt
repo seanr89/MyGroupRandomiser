@@ -24,7 +24,7 @@ class ShuffleUpDialog : DialogFragment()
     private val TAG = "ShuffleUpDialog"
 
     /**
-     *
+     * triggered before the view is created and displayed
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,9 +35,6 @@ class ShuffleUpDialog : DialogFragment()
         }
     }
 
-    /**
-     *
-     */
     override fun onCreateDialog(savedInstanceState: Bundle?): AlertDialog
     {
         // Use the Builder class for convenient dialog construction
@@ -53,8 +50,6 @@ class ShuffleUpDialog : DialogFragment()
             dialog?.cancel()
         })
 
-        var items = R.array.shuffleoptions
-        Log.d(TAG, "Items found : $items")
         //Initialise the list view dialog array
         dialog.setItems(R.array.shuffleoptions, DialogInterface.OnClickListener{ dialog, id ->
             // User clicked Cancel button

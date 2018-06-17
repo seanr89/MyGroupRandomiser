@@ -50,8 +50,6 @@ class SingleTeamFragment : Fragment() {
         retainInstance = true
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
-        Log.d("TAG $idTag", object{}.javaClass.enclosingMethod.name)
-
         //check that there is players available
         if(team.Players != null && team.Players.isNotEmpty())
         {

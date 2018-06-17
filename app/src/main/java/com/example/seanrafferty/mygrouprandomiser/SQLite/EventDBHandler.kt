@@ -16,6 +16,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 class EventDBHandler
 {
     var _DB : DatabaseHandler
+    private val TAG = "EventDBHandler"
 
     /**
      * constructor for player DB handler
@@ -31,7 +32,7 @@ class EventDBHandler
      */
     fun GetAllEvents() : ArrayList<GroupEvent>
     {
-        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var arrayList = ArrayList<GroupEvent>()
 
@@ -165,6 +166,31 @@ class EventDBHandler
         result = db!!.insert(DatabaseHandler.EventTable, "", values).toInt()
 
         return result
+    }
+
+    /**
+     * Update the passed in event balanced status
+     * @param event : the event with its respective ID and balanced status
+     * @return the number of rows affected or 0 if failed
+     */
+    fun UpdateEventBalanced(event: GroupEvent) : Int
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        var db = _DB.GetWritableDataBaseObject()
+
+        var values = ContentValues()
+        values.put(DatabaseHandler.EventBalanced, UtilityMethods.ConvertBooleanToInt(event.Balanced))
+
+        return try {
+            db!!.update(DatabaseHandler.EventTable, values, "${DatabaseHandler.EventpkID}=${event.ID}", null)
+        }
+        catch(e : SQLiteException)
+        {
+            0
+        }
+
+        return null!!
     }
 
     /**
