@@ -22,7 +22,7 @@ class AddPlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_player)
 
         //Initialise the player rating system (count is 1 to 10/11)
-        val ratings = Array(10, { i -> (i + 1) })
+        val ratings = Array(100, { i -> (i + 1) })
         _RatingSpinner = findViewById(R.id.spinnerRating)
 
         val spinnerAdapter = ArrayAdapter(

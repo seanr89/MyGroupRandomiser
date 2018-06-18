@@ -68,24 +68,6 @@ class TeamRandomiser
      */
     private fun selector(p: Player): Int = p.Rating
 
-
-    /**
-     * calculate the average rating of the the players in the included team
-     * N.B. could be move to the team object itself!!
-     * @param team : the team to read player data
-     * @return 0.0 as default or the average rating
-     */
-    private fun CalculateTeamPlayerAverage(team: Team) : Double
-    {
-        var result = 0.0
-        if(team != null && team.Players.isNotEmpty())
-        {
-            val ratings = team.Players.map { it.Rating }
-            result = ratings.average()
-        }
-        return result
-    }
-
     /**
      * Handle the basic shuffling and sorting of teams (i.e. read through loop provided)
      * @param players

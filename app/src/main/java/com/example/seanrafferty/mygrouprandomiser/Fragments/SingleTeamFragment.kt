@@ -88,7 +88,7 @@ class SingleTeamFragment : Fragment() {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         if(teamRatingTxtView != null)
-            teamRatingTxtView.text = "Rating : $rating"
+            teamRatingTxtView.text = "Rating : ${String.format("%.2f",rating)}"
     }
 
     /**
