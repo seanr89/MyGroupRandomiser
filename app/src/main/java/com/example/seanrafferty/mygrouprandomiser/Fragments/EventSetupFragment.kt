@@ -262,22 +262,24 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     /////////////////////////////////////////////////////////////////////////////
 
     /**
+     * N.B. no longer required as taken over by the parent activity
      * event listener call used to trigger the creation of team player lists randomly
      */
     override fun shufflePlayersRandomly() {
-        CreateRandomTeams()
+        //CreateRandomTeams()
     }
 
     /**
+     * N.B. no longer required as taken over by the parent activity
      * event listener call used to trigger the creation of team player lists based on rating
      */
     override fun shufflePlayersByRating() {
-        CreateTeamsByRatingAndTriggerEvent()
+        //CreateTeamsByRatingAndTriggerEvent()
     }
 
     /**
      * Request and return all selected players
-     * @return all selected players items
+     * @return all selected player items
      */
     fun GetSelectedPlayers() : ArrayList<Player>
     {

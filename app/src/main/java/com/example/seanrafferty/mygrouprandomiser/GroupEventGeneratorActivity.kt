@@ -80,9 +80,9 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     private fun configureTabLayoutTitles(layout : TabLayout)
     {
         //Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
-        layout.getTabAt(0)!!.text = "Event Setup"
-        layout.getTabAt(1)!!.text = "T 1"
-        layout.getTabAt(2)!!.text = "T 2"
+        layout.getTabAt(0)!!.text = "Setup"
+        layout.getTabAt(1)!!.text = "Team 1"
+        layout.getTabAt(2)!!.text = "Team 2"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

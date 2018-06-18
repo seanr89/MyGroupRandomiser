@@ -8,7 +8,6 @@ import android.app.*
 import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.widget.Toast
-import com.example.seanrafferty.mygrouprandomiser.Fragments.ShuffleUpDialog.RandomisationSelectedListener
 
 
 /*
@@ -36,23 +35,13 @@ class ShuffleUpDialog : DialogFragment()
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        try {
-//            mCallback = (RandomisationSelectedListener()) getTargetFragment()
-//        }
-//        catch(e : ClassCastException)
-//        {
-//            throw RuntimeException(context.toString() + " must implement RandomisationSelectedListener")
-//        }
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): AlertDialog
     {
         // Use the Builder class for convenient dialog construction
         var dialog = AlertDialog.Builder(activity)
 
         // 2. Chain together various setter methods to set the dialog characteristics
+        //N.B. unable to show message with items also displayed
         dialog.setTitle(R.string.shuffle_dialog_title)
 
         // Add the buttons for selecting cancel
@@ -78,16 +67,17 @@ class ShuffleUpDialog : DialogFragment()
 
     /**
      * handle the triggering of said shuffle event
-     * @param itemName :
+     * @param itemName : the name of the item selected in the list
      */
     private fun handleActionSelectedFromItems(itemName : String)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name + "itemName of $itemName")
 
+        //really not sure on this as it limits the effectiveness of adding new selection options
         when(itemName)
         {
             "Randomize" -> onRandomShuffleSelected()
-            "Shuffle" -> onRatingShuffleSelected()
+            "Rating" -> onRatingShuffleSelected()
             else ->
             {
                 Toast.makeText(context, "Unable to process", Toast.LENGTH_LONG).show()
@@ -117,8 +107,7 @@ class ShuffleUpDialog : DialogFragment()
     /**
      * Defines the listener interface controls to communicate back to the
      */
-    // Defines the listener interface
-    public interface RandomisationSelectedListener {
+    interface RandomisationSelectedListener {
         //void onFinishEditDialog(String inputText);
         fun shufflePlayersRandomly()
         fun shufflePlayersByRating()
@@ -136,7 +125,7 @@ class ShuffleUpDialog : DialogFragment()
 
         fun show(fragment: FragmentActivity?)
         {
-            Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+            //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
             ShuffleUpDialog().apply {
 
             }.show(fragment!!.fragmentManager, TAG)
