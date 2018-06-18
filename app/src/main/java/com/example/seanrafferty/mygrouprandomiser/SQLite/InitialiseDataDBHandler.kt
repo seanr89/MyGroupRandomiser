@@ -56,7 +56,7 @@ class InitialiseDataDBHandler
         playerDB.InsertPlayer(Player(0, "Chris McShane", 6))
         playerDB.InsertPlayer(Player(0, "Michael Hayes", 8))
         playerDB.InsertPlayer(Player(0, "David McCrory", 5))
-        playerDB.InsertPlayer(Player(0, "William Lawrence", 6))
+        playerDB.InsertPlayer(Player(0, "William Lawrence", 7))
         playerDB.InsertPlayer(Player(0, "Sergei", 9))
         playerDB.InsertPlayer(Player(0, "James Davidson", 7))
         playerDB.InsertPlayer(Player(0, "Ryan Bevin", 7))

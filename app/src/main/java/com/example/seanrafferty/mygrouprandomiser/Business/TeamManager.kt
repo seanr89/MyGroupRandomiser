@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Business
 
 import android.content.Context
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
@@ -84,5 +85,30 @@ class TeamManager(val context: Context?)
         }
 
         return teams
+    }
+
+
+    fun ReadTeamWithPlayerIDs(teamID : Int) : Team
+    {
+        var dbHandler = DatabaseHandler(context)
+        var teamsDB = TeamDBHandler(dbHandler)
+
+        var playerIDs = teamsDB.ReadPlayerIDsForTeamID(teamID)
+        var team = teamsDB.ReadTeam(teamID)
+        for(item : Int in playerIDs)
+        {
+            team.Players.add(Player(item,"", 0))
+        }
+        return null!!
+    }
+
+    /**
+     * Operation to read a single team
+     */
+    fun ReadTeamByID(teamID : Int) : Team
+    {
+        var dbHandler = DatabaseHandler(context)
+        var teamsDB = TeamDBHandler(dbHandler)
+        return teamsDB.ReadTeam(teamID)
     }
 }

@@ -21,7 +21,7 @@ class AddPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_player)
 
-        //Initialise the player rating system (count is 1 to 10/11)
+        //Initialise the player rating system (count is 1 to 100)
         val ratings = Array(100, { i -> (i + 1) })
         _RatingSpinner = findViewById(R.id.spinnerRating)
 

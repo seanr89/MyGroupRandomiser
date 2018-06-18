@@ -60,13 +60,13 @@ class MyGroupDBHandler
 
         var group = MyGroup()
 
-        var cursor: Cursor?
+        var cursor: Cursor? = null
 
-        try {
-            cursor = db!!.rawQuery(selectQuery, null)
+        cursor = try {
+             db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
-            db.close()
+            cursor!!.close()
             return null!!
         }
 
@@ -96,27 +96,26 @@ class MyGroupDBHandler
         var selectQuery = "SELECT * FROM ${DatabaseHandler.GroupPlayerTable} WHERE ${DatabaseHandler.GroupID} = ${myGroup.ID}"
         val db = _DB.GetReadableDataBaseObject()
 
-        var cursor: Cursor?
-        try
+        var cursor: Cursor? = null
+        cursor = try
         {
-            cursor = db!!.rawQuery(selectQuery, null)
-
-            if (cursor != null && cursor.moveToFirst()) {
-                do
-                {
-                    val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerID))
-                    arrayList.add(id)
-                }
-                while (cursor.moveToNext())
-            }
-            cursor.close()
+            db!!.rawQuery(selectQuery, null)
         }
         catch (e: SQLiteException)
         {
             // if cursor has a sql exception
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            cursor!!.close()
             db.close()
             return null!!
+        }
+        if (cursor != null && cursor.moveToFirst()) {
+            do
+            {
+                val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerID))
+                arrayList.add(id)
+            }
+            while (cursor.moveToNext())
         }
         cursor.close()
         return arrayList
@@ -152,11 +151,12 @@ class MyGroupDBHandler
         var selectQuery = "SELECT * FROM ${DatabaseHandler.groupTableName}"
         val db = _DB.GetReadableDataBaseObject()
 
-        var cursor: Cursor?
-        try {
-            cursor = db!!.rawQuery(selectQuery, null)
+        var cursor: Cursor? = null
+        cursor = try {
+             db!!.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            cursor!!.close()
             return null!!
         }
 

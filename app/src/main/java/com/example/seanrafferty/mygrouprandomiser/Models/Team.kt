@@ -9,7 +9,7 @@ import java.io.Serializable
  * @param Score : the number of goals scored by the team (default = 0)
  * @param Players - A collection of the Player objects
  */
-@Entity(tableName = "TeamData")
+@Entity(tableName = "Team")
 data class Team constructor(var ID:Int, var Name:String, var Score:Int = 0, var Players:ArrayList<Player>) : Serializable
 {
     /**

@@ -79,7 +79,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     private fun configureTabLayoutTitles(layout : TabLayout)
     {
-        //Log.d("GroupEventGeneratorAct", object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         layout.getTabAt(0)!!.text = "Setup"
         layout.getTabAt(1)!!.text = "Team 1"
         layout.getTabAt(2)!!.text = "Team 2"
@@ -110,7 +110,7 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     fun NavigateToFirstTeam()
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         container.setCurrentItem(1, true)
     }
 

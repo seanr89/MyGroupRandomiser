@@ -1,9 +1,11 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 class TeamDBHandler
@@ -16,6 +18,44 @@ class TeamDBHandler
     constructor(db:DatabaseHandler)
     {
         _DB = db
+    }
+
+    /**
+     * SELECT an individual team
+     * @param teamID : unique value for an individual team
+     * @return a team object or null
+     */
+    fun ReadTeam(teamID : Int) : Team
+    {
+        var db = _DB.GetReadableDataBaseObject()
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.TeamTable} WHERE ${DatabaseHandler.TeampkID} = $teamID"
+
+        var cursor: Cursor? = null
+        cursor = try {
+            db!!.rawQuery(selectQuery, null)
+        }
+        catch (e: SQLiteException) {
+            // exception on the query fall over
+            Log.e("EXCEPTION", "query failed with message : ${e.message}")
+            cursor!!.close()
+            return null!!
+        }
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.TeampkID))
+                val name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.TeamName))
+                val score = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.TeamScore))
+                cursor.close()
+                return Team(id, name, score)
+            }
+            while (cursor.moveToNext())
+
+        }
+        cursor.close()
+        return null!!
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Models
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
 
 /**
@@ -10,5 +11,8 @@ import android.arch.persistence.room.Entity
  * @param modifier : the modification calculation to update the players rating
  */
 @Entity(tableName = "PlayerSkill")
-data class PlayerSkill(var id : Int, var name : String, var modifier : Double) {
+data class PlayerSkill(@PrimaryKey(autoGenerate = true)var id : Int
+                       , var name : String
+                       , var modifier : Double)
+{
 }
