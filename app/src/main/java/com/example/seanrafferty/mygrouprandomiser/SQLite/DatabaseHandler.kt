@@ -10,6 +10,7 @@ import com.crashlytics.android.Crashlytics
 
 class DatabaseHandler : SQLiteOpenHelper
 {
+    private val TAG = "DatabaseHandler"
 
     companion object {
         val DBName = "GroupDB.db"
@@ -43,9 +44,14 @@ class DatabaseHandler : SQLiteOpenHelper
         const val TeamEventID = "eventID"
         const val TeamScore = "score"
 
-//        const val EveTeamMappingTable = "eventTeams"
-//        const val EventID = "eventID"
-//        const val TeamID = "teamID"
+        const val PlayerSkillTable = "playerskill"
+        const val PlayerSkillpkID = "ID"
+        const val PlayerSkillName = "Name"
+        const val PlayerSkillModifier = "Modifier"
+
+        const val PlayerSkillMappingTable = "playerSkillMapping"
+        const val PlayerSkillPlayerMappingID = "PlayerID"
+        const val PlayerSkillID = "PlayerSkillID"
 
         const val TeamPlayerMappingTable = "teamPlayers"
         const val TeamID = "teamID"
@@ -106,6 +112,8 @@ class DatabaseHandler : SQLiteOpenHelper
                 CreateEventTable(db)
                 CreateTeamTable(db)
                 CreateTeamPlayerMapping(db)
+                //CreatePlayerSkillsTable(db)
+                //CreatePlayerSkillMappingTable(db)
 
                 Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
             }
@@ -132,12 +140,16 @@ class DatabaseHandler : SQLiteOpenHelper
         var sqlDeleteEventTable = "DROP TABLE IF EXISTS $EventTable"
         var sqlDeleteTeam = "DROP TABLE IF EXISTS $TeamTable"
         var sqlDeleteTeamPlayerMapping = "DROP TABLE IF EXISTS $TeamPlayerMappingTable"
+        var sqlDeletePlayerSkillTable = "DROP TABLE IF EXISTS $PlayerSkillTable"
+        var sqlDeletePlayerSkillMappingTable = "DROP TABLE IF EXISTS $PlayerSkillMappingTable"
         db.execSQL(sqlDeleteGroup)
         db.execSQL(sqlDeletePlayer)
         db.execSQL(sqlDeleteGroupPlayerMapping)
         db.execSQL(sqlDeleteEventTable)
         db.execSQL(sqlDeleteTeam)
         db.execSQL(sqlDeleteTeamPlayerMapping)
+        db.execSQL(sqlDeletePlayerSkillTable)
+        db.execSQL(sqlDeletePlayerSkillMappingTable)
         onCreate(db)
     }
 
@@ -147,7 +159,7 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     private fun CreateGroupPlayersTable(db: SQLiteDatabase)
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var sql: String = "CREATE TABLE IF NOT EXISTS $GroupPlayerTable " +
                 "($GroupID INTEGER, "+
@@ -160,7 +172,7 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     private fun CreateTeamTable(db: SQLiteDatabase)
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var sql : String = "CREATE TABLE IF NOT EXISTS $TeamTable " +
                 "($TeampkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -175,7 +187,7 @@ class DatabaseHandler : SQLiteOpenHelper
      */
     private fun CreateEventTable(db: SQLiteDatabase)
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var sql : String = "CREATE TABLE IF NOT EXISTS $EventTable " +
                 "($EventpkID INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -186,13 +198,35 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sql)
     }
 
+    /**
+     * Operation to create the mapping table between players and teams
+     */
     private fun CreateTeamPlayerMapping(db: SQLiteDatabase)
     {
-        Log.d("DatabaseHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var sql : String = "CREATE TABLE IF NOT EXISTS $TeamPlayerMappingTable " +
                 "($TeamID INTEGER, " +
                 "$PlayerID INTEGER);"
+        db.execSQL(sql)
+    }
+
+    private fun CreatePlayerSkillsTable(db: SQLiteDatabase)
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        var sql : String = "CREATE TABLE IF NOT EXISTS $PlayerSkillTable " +
+                "($PlayerSkillpkID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$PlayerSkillName TEXT," +
+                "$PlayerSkillModifier REAL);"
+        db.execSQL(sql)
+    }
+
+    private fun CreatePlayerSkillMappingTable(db: SQLiteDatabase)
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        var sql : String = "CREATE TABLE IF NOT EXISTS $PlayerSkillMappingTable " +
+                "($PlayerSkillPlayerMappingID INTEGER, " +
+                "$PlayerSkillID TEXT);"
         db.execSQL(sql)
     }
 }
