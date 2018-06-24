@@ -14,7 +14,7 @@ https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b7
  * Serializable - Player object model used to store and access individual player data
  * @param ID : unique player identifier used in data store
  * @param Name : The name of the player
- * @param Rating : how skillful is the player (rated 1 too 10 with 10 being highest rating)
+ * @param Rating : how skillful is the player (rated 1 too 100 with 100 being highest rating)
  */
 @Entity(tableName = "PlayerData")
 data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int

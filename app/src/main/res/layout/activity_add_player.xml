@@ -12,7 +12,7 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/gradientbackground"
@@ -22,9 +22,9 @@
             android:id="@+id/imageView9"
             android:layout_width="61dp"
             android:layout_height="47dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="26dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,9 +34,9 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
             android:text="Add Player"
             android:textColor="#fff"
             android:textSize="21sp"
@@ -50,19 +50,18 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="340dp"
-        android:layout_height="160dp"
+        android:layout_height="190dp"
         android:layout_centerHorizontal="true"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="172dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout3">
 
         <LinearLayout
+            android:id="@+id/parent_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -87,15 +86,16 @@
                     android:layout_height="wrap_content"
                     android:background="@color/fui_transparent"
                     android:gravity="center_horizontal"
-                    android:paddingTop="10dp"
-                    android:textColorHint="@color/startblue"
                     android:hint="Enter player name"
                     android:inputType="textPersonName"
+                    android:paddingTop="10dp"
                     android:text=""
                     android:textColor="@color/startblue"
+                    android:textColorHint="@color/startblue"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -112,9 +112,26 @@
                 <Spinner
                     android:id="@+id/spinnerRating"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </Spinner>
+                    android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearskills"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- recycler to handle player skills-->
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
