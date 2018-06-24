@@ -157,10 +157,10 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            textView.text = SimpleDateFormat("dd/MM/yyyy").format(cal.time)
         }
         datePickerDialog.setOnDateSetListener(dateSetListener)
-
-        textView.text = SimpleDateFormat("dd/MM/yyyy").format(cal.time)
     }
 
     /**
@@ -177,11 +177,13 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
         val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
             cal.set(Calendar.HOUR, hourOfDay)
             cal.set(Calendar.MINUTE, minute)
+
+            textView.text = SimpleDateFormat("HH:mm").format(cal.time)
         }
 
         val dialog = TimePickerDialog(activity, timePickerDialogListener, hour, minute, true)
         dialog.show()
-        textView.text = SimpleDateFormat("HH:mm").format(cal.time)
+
     }
 
     /**
