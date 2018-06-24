@@ -1,24 +1,30 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.R
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
 /**
  * Recycler Adapter to handle display controls for player skill objects
  */
-class PlayerSkillRecyclerAdapter() : RecyclerView.Adapter<PlayerSkillRecyclerAdapter.ViewHolder>()
+class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
+                                 var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<PlayerSkillRecyclerAdapter.ViewHolder>()
 {
-    //var SelectedItems = arrayListOf()
+    var SelectedItems  : ArrayList<T> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.playerskill_listview_item, parent, false)
+        return ViewHolder(v, selectionOption)
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -41,9 +47,9 @@ class PlayerSkillRecyclerAdapter() : RecyclerView.Adapter<PlayerSkillRecyclerAda
     {
         var itemSelectable : Boolean = false
 
-        constructor(itemView: View, selectable: Boolean) : super(itemView)
+        constructor(itemView: View, selectable : SelectionOption) : super(itemView)
         {
-            itemSelectable = selectable
+            //itemSelectable = selectable
             //txtName = itemView.findViewById(R.id.txtPlayerName)
             //txtRating = itemView.findViewById(R.id.txtPlayerRating)
         }
