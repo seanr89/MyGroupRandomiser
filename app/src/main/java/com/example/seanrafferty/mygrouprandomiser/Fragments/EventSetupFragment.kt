@@ -29,6 +29,7 @@ import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.MyGroupDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 import org.w3c.dom.Text
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeParseException
@@ -175,15 +176,13 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
         val minute = cal.get(Calendar.MINUTE)
 
         val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            cal.set(Calendar.HOUR, hourOfDay)
+            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
             cal.set(Calendar.MINUTE, minute)
-
             textView.text = SimpleDateFormat("HH:mm").format(cal.time)
         }
 
         val dialog = TimePickerDialog(activity, timePickerDialogListener, hour, minute, true)
         dialog.show()
-
     }
 
     /**

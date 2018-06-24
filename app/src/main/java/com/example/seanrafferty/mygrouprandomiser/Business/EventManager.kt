@@ -130,7 +130,7 @@ class EventManager(val context: Context?)
      */
     fun EventInComplete(groupEvent: GroupEvent)
     {
-        Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
         eventDB.UpdateEventCompleted(groupEvent, 0)
@@ -145,34 +145,41 @@ class EventManager(val context: Context?)
      */
     fun UpdatePlayerRatingFromEventTeam(team: Team, teamStatus: TeamStatus = TeamStatus.UNKNOWN, unBalanced : Boolean = false)
     {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
         if(teamStatus == TeamStatus.DRAW || teamStatus == TeamStatus.UNKNOWN)
             return
 
         var playerManager = PlayerManager(context)
         for(item : Player in team.Players)
         {
-            item.Rating = updatePlayerRatingByBalanceAndSuccess(item.Rating, teamStatus, unBalanced)
+            item.Rating = updatePlayerRatingByBalanceAndStatus(item.Rating, teamStatus, unBalanced)
             playerManager.UpdatePlayerRating(item)
         }
     }
 
     /**
-     *
+     * Handle the updating of a players rating based on if they where in teh winning team and balanced status
+     * @param rating :
+     * @param teamStatus :
+     * @param unBalanced :
      */
-    private fun updatePlayerRatingByBalanceAndSuccess(rating : Int, teamStatus: TeamStatus, inBalanced: Boolean) : Int
+    private fun updatePlayerRatingByBalanceAndStatus(rating : Int, teamStatus: TeamStatus, unBalanced: Boolean) : Int
     {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
         var newRating = 0
         when (teamStatus)
         {
             TeamStatus.WIN ->{
-                newRating = if(inBalanced) {
+                newRating = if(unBalanced) {
                     rating + 2
                 } else {
                     rating + 1
                 }
             }
             TeamStatus.LOSS ->{
-                if(!inBalanced)
+                if(!unBalanced)
                 {
                     newRating = rating - 1
                 }
@@ -190,10 +197,13 @@ class EventManager(val context: Context?)
     }
 
     /**
-     *
+     * update the number of goals each team scored, the player ratings and if the teams where unbalanced on event completion
+     * @param event :
      */
     fun UpdateEventOnCompletion(event: GroupEvent)
     {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
         //1. Update team scores
         var teamManager = TeamManager(context)
         teamManager.UpdateTeamScore(event.EventTeams[0].Score, event.EventTeams[0])
