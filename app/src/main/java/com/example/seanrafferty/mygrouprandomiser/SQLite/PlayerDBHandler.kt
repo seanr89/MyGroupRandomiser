@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 
 /**
 Database Handler relating solely to Player info
@@ -152,6 +153,27 @@ class PlayerDBHandler
         {
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
             -1
+        }
+    }
+
+    /**
+     * Access and Update the rating of an individual player
+     * @param player :
+     * @return the id of the row affected or 0 if failed
+     */
+    fun UpdatePlayerRating(player: Player) : Int
+    {
+        var db = _DB.GetWritableDataBaseObject()
+
+        var values = ContentValues()
+        values.put(DatabaseHandler.PlayerRating, player.Rating)
+
+        return try {
+            db!!.update(DatabaseHandler.PlayerTable, values, "${DatabaseHandler.PlayerpkID}=${player.ID}", null)
+        }
+        catch(e : SQLiteException)
+        {
+            0
         }
     }
 }

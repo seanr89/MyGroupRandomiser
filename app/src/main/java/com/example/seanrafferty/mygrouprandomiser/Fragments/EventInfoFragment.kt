@@ -140,48 +140,28 @@ class EventInfoFragment : Fragment()  {
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
-        var nbrPickerTeamOne = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamOne)
-        event.EventTeams[0].Score = nbrPickerTeamOne.value
-        UpdateTeamScore(nbrPickerTeamOne.value, event.EventTeams[0])
-
-        var nbrPickerTeamTwo = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamTwo)
-        event.EventTeams[1].Score = nbrPickerTeamTwo.value
-        UpdateTeamScore(nbrPickerTeamTwo.value, event.EventTeams[1])
-
         val eventManager = EventManager(context)
-
-        val balancedSwitch = fragmentView.findViewById<Switch>(R.id.switchEventBalanced)
-        event.Balanced = balancedSwitch.isChecked
-        eventManager.UpdateEventBalanacedStatus(event)
 
         //Request current checked status of the switch and update the completion status accordingly
         var switch = fragmentView.findViewById<Switch>(R.id.switchEventCompleted)
-        if(switch.isChecked)
+        if(!switch.isChecked)
         {
-            eventManager.EventComplete(event)
-        }
-        else
-        {
-            eventManager.EventInComplete(event)
-        }
-    }
-
-    /**
-     * Handle the update of the score for the provided team
-     * @param score : the score of the team
-     * @param team : the team with the provided score
-     */
-    private fun UpdateTeamScore(score: Int, team : Team)
-    {
-        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
-
-        if(event.Completed)
-        {
-            Toast.makeText(activity, "Event Has Been Completed!", Toast.LENGTH_LONG).show()
+            //eventManager.EventComplete(event)
+            Toast.makeText(context, "Event is already complete!", Toast.LENGTH_LONG).show()
             return
         }
-        var teamManager = TeamManager(context)
-        teamManager.UpdateTeamScore(score, team)
+
+        //Team1
+        var nbrPickerTeamOne = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamOne)
+        event.EventTeams[0].Score = nbrPickerTeamOne.value
+        //Team2
+        var nbrPickerTeamTwo = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamTwo)
+        event.EventTeams[1].Score = nbrPickerTeamTwo.value
+        //Balanced
+        val balancedSwitch = fragmentView.findViewById<Switch>(R.id.switchEventBalanced)
+        event.Balanced = balancedSwitch.isChecked
+
+        eventManager.UpdateEventOnCompletion(event)
     }
 
     /**

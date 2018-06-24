@@ -105,7 +105,7 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
 
     ////////////////////////////////////////////////////////////////////////////////
     /**
-     * Custom class for handling a singe recycler view item
+     * Custom class for handling a single recycler view item
      */
     ////////////////////////////////////////////////////////////////////////////////
 

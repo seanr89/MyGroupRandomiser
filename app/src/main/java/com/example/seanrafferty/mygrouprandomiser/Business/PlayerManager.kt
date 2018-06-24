@@ -32,4 +32,13 @@ class PlayerManager(val context: Context?)
         var db = PlayerDBHandler(DatabaseHandler(context))
         return db.InsertPlayer(player)
     }
+
+    /**
+     *
+     */
+    fun UpdatePlayerRating(player : Player) : Int
+    {
+        var db = PlayerDBHandler(DatabaseHandler(context))
+        return db.UpdatePlayerRating(player)
+    }
 }

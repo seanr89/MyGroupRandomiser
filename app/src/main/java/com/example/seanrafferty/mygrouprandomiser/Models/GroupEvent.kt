@@ -30,4 +30,36 @@ data class GroupEvent constructor(var ID:Int
     {
         EventTeams = Teams
     }
+
+    fun TeamOneStatus() : TeamStatus
+    {
+        if(EventTeams.any())
+        {
+            return if(EventTeams[0].Score == EventTeams[1].Score) {
+                TeamStatus.DRAW
+            } else if(EventTeams[0].Score > EventTeams[1].Score) {
+                TeamStatus.WIN
+            } else {
+                TeamStatus.LOSS
+            }
+        }
+
+        return TeamStatus.UNKNOWN
+    }
+
+    fun TeamTwoStatus() : TeamStatus
+    {
+        if(EventTeams.any())
+        {
+            return if(EventTeams[0].Score == EventTeams[1].Score) {
+                TeamStatus.DRAW
+            } else if(EventTeams[1].Score > EventTeams[2].Score) {
+                TeamStatus.WIN
+            } else {
+                TeamStatus.LOSS
+            }
+        }
+
+        return TeamStatus.UNKNOWN
+    }
 }
