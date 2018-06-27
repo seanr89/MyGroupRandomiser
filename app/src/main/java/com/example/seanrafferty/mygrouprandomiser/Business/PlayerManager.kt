@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Business
 
 import android.content.Context
+import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
@@ -31,6 +32,12 @@ class PlayerManager(val context: Context?)
     {
         var db = PlayerDBHandler(DatabaseHandler(context))
         return db.InsertPlayer(player)
+    }
+
+    fun AssignPlayersToGroup(players : ArrayList<Player>, group : MyGroup)
+    {
+        var db = PlayerDBHandler(DatabaseHandler(context))
+        db.AssignPlayersToGroup(players, group)
     }
 
     /**

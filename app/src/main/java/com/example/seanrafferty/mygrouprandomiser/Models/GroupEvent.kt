@@ -31,35 +31,43 @@ data class GroupEvent constructor(var ID:Int
         EventTeams = Teams
     }
 
+    /**
+     * Request the status of the first team of the event based on the goals scored
+     * @return the team status
+     */
     fun TeamOneStatus() : TeamStatus
     {
         if(EventTeams.any())
         {
-            return if(EventTeams[0].Score == EventTeams[1].Score) {
-                TeamStatus.DRAW
-            } else if(EventTeams[0].Score > EventTeams[1].Score) {
-                TeamStatus.WIN
-            } else {
-                TeamStatus.LOSS
-            }
+            return checkTeamStatus(EventTeams[0], EventTeams[1])
         }
-
         return TeamStatus.UNKNOWN
     }
 
+    /**
+     * Request the status of the 2nd team of the event based on the goals scored
+     * @return the team status
+     */
     fun TeamTwoStatus() : TeamStatus
     {
         if(EventTeams.any())
         {
-            return if(EventTeams[0].Score == EventTeams[1].Score) {
-                TeamStatus.DRAW
-            } else if(EventTeams[1].Score > EventTeams[2].Score) {
-                TeamStatus.WIN
-            } else {
-                TeamStatus.LOSS
-            }
+            return checkTeamStatus(EventTeams[1], EventTeams[0])
         }
-
         return TeamStatus.UNKNOWN
+    }
+
+    /**
+     * generic method to process team status
+     */
+    private fun checkTeamStatus(teamToCheck: Team, otherTeam: Team) :TeamStatus
+    {
+        return if(EventTeams[0].Score == EventTeams[1].Score) {
+            TeamStatus.DRAW
+        } else if(EventTeams[1].Score > EventTeams[0].Score) {
+            TeamStatus.WIN
+        } else {
+            TeamStatus.LOSS
+        }
     }
 }

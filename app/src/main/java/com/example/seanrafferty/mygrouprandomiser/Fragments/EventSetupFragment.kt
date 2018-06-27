@@ -148,12 +148,10 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     private fun SetDate(textView: TextView)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         val cal = Calendar.getInstance()
-
         val datePickerDialog : DatePickerDialog = DatePickerDialog(activity)
         datePickerDialog.show()
+
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
@@ -169,8 +167,6 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     private fun SetTime(textView: TextView, view : View)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         val cal = Calendar.getInstance()
         val hour = cal.get(Calendar.HOUR_OF_DAY)
         val minute = cal.get(Calendar.MINUTE)
@@ -180,7 +176,6 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
             cal.set(Calendar.MINUTE, minute)
             textView.text = SimpleDateFormat("HH:mm").format(cal.time)
         }
-
         val dialog = TimePickerDialog(activity, timePickerDialogListener, hour, minute, true)
         dialog.show()
     }
@@ -209,7 +204,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     }
 
     /**
-     *
+     * Operation to trigger the shuffling of players and assignment of teams by rating!
      */
     fun CreateTeamsByRatingAndTriggerEvent()
     {
@@ -236,7 +231,6 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     fun CreateEventAndAlertListener()
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         mCallbackSave!!.saveEvent()
     }
 
@@ -251,7 +245,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     }
 
     /**
-     *
+     * container activity must implement this interface to trigger the saving of the event
      */
     interface OnSaveEvent
     {
@@ -284,7 +278,6 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     fun GetSelectedPlayers() : ArrayList<Player>
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         return _PlayerAdapter.SelectedItems
     }
 
@@ -294,7 +287,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     fun GetSelectedDateAndTime() : LocalDateTime
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         var Date = viewDate.text
         var Time = viewTime.text
 

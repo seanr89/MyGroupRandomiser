@@ -22,7 +22,7 @@ class AddPlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_player)
 
         //Initialise the player rating system (count is 1 to 100)
-        val ratings = Array(100, { i -> (i + 1) })
+        val ratings = Array(100) { i -> (i + 1) }
         _RatingSpinner = findViewById(R.id.spinnerRating)
 
         val spinnerAdapter = ArrayAdapter(
@@ -46,7 +46,7 @@ class AddPlayerActivity : AppCompatActivity() {
      */
     private fun SaveNewPlayer() : Int
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         val nameTextView = findViewById<TextView>(R.id.playerNameEditView)
         val name : String = nameTextView.text.toString()
         val rating = _RatingSpinner.selectedItem

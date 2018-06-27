@@ -41,6 +41,7 @@ class SingleTeamFragment : Fragment() {
             team = it.getSerializable(ARG_TEAM) as Team
             idTag = it.getString(ARG_TAG)
         }
+        //initialise the default recycler
         playerRecyclerAdapter = PlayerRecyclerAdapter(arrayListOf(), false, SelectionOption.NO_SELECT)
     }
 
@@ -50,7 +51,7 @@ class SingleTeamFragment : Fragment() {
         retainInstance = true
         val view: View = inflater.inflate(R.layout.fragment_single_team, container, false)
 
-        //check that there is players available
+        //check that there is players available and if not initialise the player list
         if(team.Players != null && team.Players.isNotEmpty())
         {
             playerRecyclerAdapter.playerList = team.Players

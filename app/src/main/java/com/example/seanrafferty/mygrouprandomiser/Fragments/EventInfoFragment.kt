@@ -97,15 +97,15 @@ class EventInfoFragment : Fragment()  {
         var nbrPickerTeamOne = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamOne)
         //Set the minimum value of NumberPicker
         nbrPickerTeamOne.minValue = 0
-        //Specify the maximum value/number of NumberPicker
-        nbrPickerTeamOne.maxValue = 10
+        //Specify the maximum value/number of NumberPicker and set the score
+        nbrPickerTeamOne.maxValue = 15
         nbrPickerTeamOne.value = event.EventTeams[0].Score
 
         var nbrPickerTeamTwo = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamTwo)
         //Set the minimum value of NumberPicker
         nbrPickerTeamTwo.minValue = 0
-        //Specify the maximum value/number of NumberPicker
-        nbrPickerTeamTwo.maxValue = 10
+        //Specify the maximum value/number of NumberPicker and set the team two score
+        nbrPickerTeamTwo.maxValue = 15
         nbrPickerTeamTwo.value = event.EventTeams[1].Score
     }
 

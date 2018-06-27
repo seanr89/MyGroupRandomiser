@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
+import com.example.seanrafferty.mygrouprandomiser.Business.PlayerManager
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
@@ -22,7 +23,6 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
  */
 class PlayerAssigmentActivity : AppCompatActivity()
 {
-    lateinit var _PlayerDBHandler : PlayerDBHandler
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var recyclerView: RecyclerView
     var groupID : Int = 0
@@ -42,10 +42,7 @@ class PlayerAssigmentActivity : AppCompatActivity()
             NavigationControls.NavigateToGroupInfoActivity(this, groupID)
         }
 
-        _PlayerDBHandler = PlayerDBHandler(DatabaseHandler(this))
-
         val unassignedPlayers = MyGroupManager(this).ReadAllPlayersNotAssignedToGroup(MyGroup(groupID, ""))
-
         if(unassignedPlayers.isNotEmpty())
         {
             var playerAdapter = PlayerRecyclerAdapter(unassignedPlayers as ArrayList<Player>, true)
@@ -89,14 +86,14 @@ class PlayerAssigmentActivity : AppCompatActivity()
      */
     private fun SaveSelectedAssignments()
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-
+        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         var adapter = recyclerView.adapter as PlayerRecyclerAdapter
         var players = adapter.SelectedItems
 
         if(!players.isEmpty())
         {
-            _PlayerDBHandler.AssignPlayersToGroup(players, MyGroup(groupID, ""))
+            var playerManager = PlayerManager(this)
+            playerManager.AssignPlayersToGroup(players, MyGroup(groupID, ""))
             Toast.makeText(this, "Players Assigned", Toast.LENGTH_LONG).show()
         }
     }

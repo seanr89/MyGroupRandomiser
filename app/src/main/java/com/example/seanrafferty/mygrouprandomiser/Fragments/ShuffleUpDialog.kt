@@ -45,22 +45,18 @@ class ShuffleUpDialog : DialogFragment()
         dialog.setTitle(R.string.shuffle_dialog_title)
 
         // Add the buttons for selecting cancel
-        dialog.setNegativeButton(R.string.shuffle_cancel, DialogInterface.OnClickListener { dialog, id ->
+        dialog.setNegativeButton(R.string.shuffle_cancel) { dialog, id ->
             // User clicked Cancel button
-            Toast.makeText(context, "Cancel!", Toast.LENGTH_LONG).show()
             dialog?.cancel()
-        })
+        }
 
         //Initialise the list view dialog array
-        dialog.setItems(R.array.shuffleoptions, DialogInterface.OnClickListener{ dialog, id ->
+        dialog.setItems(R.array.shuffleoptions) { dialog, id ->
             // User clicked Cancel button
-            Toast.makeText(context, "Selected!", Toast.LENGTH_LONG).show()
-
             var items = this.resources.getStringArray(R.array.shuffleoptions);
             var selectedItem = items[id]
-
             handleActionSelectedFromItems(selectedItem)
-        })
+        }
 
         return dialog.create().apply { setCanceledOnTouchOutside(false) }
     }
@@ -90,7 +86,7 @@ class ShuffleUpDialog : DialogFragment()
      */
     private fun onRandomShuffleSelected()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         mCallback!!.shufflePlayersRandomly()
     }
 
@@ -99,10 +95,9 @@ class ShuffleUpDialog : DialogFragment()
      */
     private fun onRatingShuffleSelected()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         mCallback!!.shufflePlayersByRating()
     }
-
 
     /**
      * Defines the listener interface controls to communicate back to the
@@ -122,7 +117,6 @@ class ShuffleUpDialog : DialogFragment()
      */
     companion object {
         val TAG = ShuffleUpDialog::class.qualifiedName
-
         fun show(fragment: FragmentActivity?)
         {
             //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
