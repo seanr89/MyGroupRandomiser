@@ -14,7 +14,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 13
+        val DBVersion = 14
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -112,7 +112,7 @@ class DatabaseHandler : SQLiteOpenHelper
                 CreateEventTable(db)
                 CreateTeamTable(db)
                 CreateTeamPlayerMapping(db)
-                //CreatePlayerSkillsTable(db)
+                CreatePlayerSkillsTable(db)
                 //CreatePlayerSkillMappingTable(db)
 
                 Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
@@ -149,7 +149,7 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sqlDeleteTeam)
         db.execSQL(sqlDeleteTeamPlayerMapping)
         db.execSQL(sqlDeletePlayerSkillTable)
-        db.execSQL(sqlDeletePlayerSkillMappingTable)
+        //db.execSQL(sqlDeletePlayerSkillMappingTable)
         onCreate(db)
     }
 

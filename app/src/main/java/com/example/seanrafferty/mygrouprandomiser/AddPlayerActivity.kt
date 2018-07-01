@@ -2,10 +2,13 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.*
+import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerSkillRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.PlayerManager
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
@@ -38,6 +41,11 @@ class AddPlayerActivity : AppCompatActivity() {
                 NavigationControls.NavigateToPlayerActivity(this)
             }
         }
+
+        //TODO - implement in a recycler/listview here for player skill options
+        //id = recyclerPlayerSkills
+        var playerSkillsRecycler = findViewById<RecyclerView>(R.id.recyclerPlayerSkills)
+        var PlayerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(arrayListOf())
     }
 
     /**

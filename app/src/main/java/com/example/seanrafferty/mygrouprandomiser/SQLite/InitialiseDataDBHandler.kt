@@ -3,10 +3,12 @@ package com.example.seanrafferty.mygrouprandomiser.SQLite
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 
 class InitialiseDataDBHandler
 {
     var _DB : DatabaseHandler
+    private val TAG = "InitialiseDataDBHandler"
     /**
      * constructor for player DB handler
      */
@@ -21,6 +23,7 @@ class InitialiseDataDBHandler
         InitialiseDemoGroups()
         InitialiseDemoPlayers()
         InitialiseGroupPlayerAssignment()
+        InitialiasePlayerSkills()
     }
 
     /**
@@ -115,5 +118,19 @@ class InitialiseDataDBHandler
         var group = MyGroup(1, "")
 
         playerDBHandler.AssignPlayersToGroup(players, group)
+    }
+
+    /**
+     * Initialise a list of all default skills that a player can maintain
+     */
+    private fun InitialiasePlayerSkills()
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        var db = PlayerSkillDBHandler(_DB)
+
+        db.InsertPlayerSkill(PlayerSkill(0, "Runner", 1.5))
+        db.InsertPlayerSkill(PlayerSkill(0, "Goal Scorer", 1.6))
+        db.InsertPlayerSkill(PlayerSkill(0, "Defensive", 1.1))
     }
 }
