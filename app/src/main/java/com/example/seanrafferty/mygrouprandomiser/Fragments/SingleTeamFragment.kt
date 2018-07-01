@@ -98,7 +98,7 @@ class SingleTeamFragment : Fragment() {
      */
     fun UpdateTeamPlayers(singleTeam : Team)
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         team = singleTeam
         try
@@ -111,7 +111,7 @@ class SingleTeamFragment : Fragment() {
         }
         catch(e : UninitializedPropertyAccessException)
         {
-            Log.d("TAG", object{}.javaClass.enclosingMethod.name + "Exception caught")
+            Log.d(TAG, object{}.javaClass.enclosingMethod.name + "Exception caught")
             playerRecyclerAdapter = PlayerRecyclerAdapter(team.Players, false, SelectionOption.NO_SELECT)
             playerRecycler.adapter = playerRecyclerAdapter
         }

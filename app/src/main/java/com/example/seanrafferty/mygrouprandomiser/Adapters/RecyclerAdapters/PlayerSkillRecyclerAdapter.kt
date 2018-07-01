@@ -1,9 +1,12 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
@@ -14,7 +17,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
                                  var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<PlayerSkillRecyclerAdapter.ViewHolder>()
 {
-    var SelectedItems  : ArrayList<T> = arrayListOf()
+    var SelectedItems : ArrayList<PlayerSkill> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.playerskill_listview_item, parent, false)
@@ -26,7 +29,82 @@ class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder?.txtName?.text = itemList[position].name
+        holder?.txtModifier?.text = itemList[position].modifier.toString()
+
+        //Check if the item is selected
+        if(holder?.itemSelectable)
+        {
+            //if the current item is selected
+            if(isItemSelected(position))
+            {
+                SelectedItems.remove(itemList[position])
+                //var test = view.itemView
+                ColourItemDeSelected(holder.itemView)
+            }
+            else
+            {
+                SelectedItems.add(itemList[position])
+                ColourItemSelected(holder.itemView)
+            }
+
+            //Enable button click event for handling item clicks
+            holder.itemView.setOnClickListener {
+                SetItemSelected(position, holder.itemView)
+            }
+        }
+    }
+
+    /**
+     * Set the colour of the item view in the recycler to highlight selected
+     */
+    private fun ColourItemSelected(view:View)
+    {
+        view.setBackgroundColor(Color.LTGRAY)
+    }
+
+    /**
+     * Set the colour of the item view in the recycler to highlight de-selected
+     */
+    private fun ColourItemDeSelected(view:View)
+    {
+        view.setBackgroundColor(Color.WHITE)
+    }
+
+    /**
+     * Set the selected recycler view item as selected
+     * @param position :
+     * @param view :
+     */
+    private fun SetItemSelected(position: Int, view:View)
+    {
+        if(isItemSelected(position))
+        {
+            SelectedItems.remove(itemList[position])
+            //var test = view.itemView
+            ColourItemDeSelected(view)
+        }
+        else
+        {
+            SelectedItems.add(itemList[position])
+            ColourItemSelected(view)
+        }
+    }
+
+    /**
+     * check if the selected item has been selected or not
+     * @param position : the position of the item on the click event
+     * @return boolean : true if the item is in the selected list
+     */
+    private fun isItemSelected(position: Int) : Boolean
+    {
+        var result = false
+
+        if(!SelectedItems.filter { it.id == itemList[position].id }.isEmpty())
+        {
+            result = true
+        }
+        return result
     }
 
 
@@ -44,12 +122,25 @@ class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
     class ViewHolder : RecyclerView.ViewHolder
     {
         var itemSelectable : Boolean = false
+        var txtName : TextView
+        var txtModifier : TextView
 
         constructor(itemView: View, selectable : SelectionOption) : super(itemView)
         {
-            //itemSelectable = selectable
-            //txtName = itemView.findViewById(R.id.txtPlayerName)
-            //txtRating = itemView.findViewById(R.id.txtPlayerRating)
+            itemSelectable = isItemSelectable(selectable)
+            txtName = itemView.findViewById(R.id.txtViewSkillName)
+            txtModifier = itemView.findViewById(R.id.txtViewSkillModifier)
+        }
+
+        private fun isItemSelectable(selection: SelectionOption) : Boolean
+        {
+            var result = false
+            when(selection)
+            {
+                SelectionOption.SINGLE_SELECT -> result = true
+                SelectionOption.MULTI_SELECT -> result = true
+            }
+            return result
         }
     }
 }

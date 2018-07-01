@@ -2,6 +2,7 @@ package com.example.seanrafferty.mygrouprandomiser
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.*
@@ -12,6 +13,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.PlayerDBHandler
 import com.example.seanrafferty.mygrouprandomiser.Utilities.NavigationControls
+import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
 
 class AddPlayerActivity : AppCompatActivity() {
@@ -42,10 +44,19 @@ class AddPlayerActivity : AppCompatActivity() {
             }
         }
 
-        //TODO - implement in a recycler/listview here for player skill options
-        //id = recyclerPlayerSkills
-        var playerSkillsRecycler = findViewById<RecyclerView>(R.id.recyclerPlayerSkills)
-        var PlayerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(arrayListOf())
+        //Initialise the recycler view for the player skills data
+        val linearManager = LinearLayoutManager(this)
+        var playerManager = PlayerManager(this)
+        var PlayerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(playerManager.ReadAllAvailablePlayerSkills(), SelectionOption.MULTI_SELECT)
+        var playerSkillsRecycler = findViewById<RecyclerView>(R.id.recyclerPlayerSkills).apply{
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            setHasFixedSize(true)
+            // use a linear layout manager
+            layoutManager = linearManager
+            // specify an viewAdapter (see also next example)
+            adapter = PlayerSkillRecyclerAdapter
+        }
     }
 
     /**

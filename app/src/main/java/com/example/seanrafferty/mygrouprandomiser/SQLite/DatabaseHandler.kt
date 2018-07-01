@@ -113,7 +113,7 @@ class DatabaseHandler : SQLiteOpenHelper
                 CreateTeamTable(db)
                 CreateTeamPlayerMapping(db)
                 CreatePlayerSkillsTable(db)
-                //CreatePlayerSkillMappingTable(db)
+                CreatePlayerSkillMappingTable(db)
 
                 Toast.makeText(context, "Database v$DBVersion", Toast.LENGTH_LONG).show()
             }
@@ -149,7 +149,7 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sqlDeleteTeam)
         db.execSQL(sqlDeleteTeamPlayerMapping)
         db.execSQL(sqlDeletePlayerSkillTable)
-        //db.execSQL(sqlDeletePlayerSkillMappingTable)
+        db.execSQL(sqlDeletePlayerSkillMappingTable)
         onCreate(db)
     }
 
@@ -211,6 +211,9 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sql)
     }
 
+    /**
+     * Initialisation of player skill data table
+     */
     private fun CreatePlayerSkillsTable(db: SQLiteDatabase)
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
@@ -221,6 +224,9 @@ class DatabaseHandler : SQLiteOpenHelper
         db.execSQL(sql)
     }
 
+    /**
+     * Initialisation of player skill to player mapping table
+     */
     private fun CreatePlayerSkillMappingTable(db: SQLiteDatabase)
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
