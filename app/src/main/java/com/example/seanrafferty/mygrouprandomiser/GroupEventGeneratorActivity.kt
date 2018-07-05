@@ -70,8 +70,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         tabLayout.setupWithViewPager(container)
 
         configureTabLayoutTitles(tabLayout)
-
-        //TODO - NEED to add a viewpager or adapter page changer
     }
 
     /**

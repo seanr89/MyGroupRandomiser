@@ -3,7 +3,6 @@ package com.example.seanrafferty.mygrouprandomiser
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
@@ -16,9 +15,8 @@ class AddGroup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_group)
-//        groupImage.setOnClickListener{
-//            checkPermissionRG();
-//        }
+
+
         //initialise the button and setup the click event
         val btn_save_group = findViewById<Button>(R.id.btn_save_group)
         btn_save_group.setOnClickListener()
@@ -35,31 +33,6 @@ class AddGroup : AppCompatActivity() {
             }
         }
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        when(requestCode){
-//            MY_REQUEST_GALLERY -> try {
-//                val inputStream = contentResolver.openInputStream(data?.getData())
-//                filen = getFile()
-//                val fileOutputStream = FileOutputStream(filen)
-//                val buffer = ByteArray(1024)
-//                var bytesRead: Int
-//                while(true){
-//                    bytesRead = inputStream.read(buffer)
-//                    if(bytesRead == -1) break;
-//                    fileOutputStream.write(buffer, 0,bytesRead)
-//                }
-//                fileOutputStream.close()
-//                inputStream!!.close()
-//                groupImage.setImageURI(Uri.parse("file:///" + filen))
-//            }
-//            catch (e: Exception)
-//            {
-//                Log.e("","Error while creating temp file", e)
-//            }
-//        }
-//    }
 
     /**
      * Create and Save a group to the DB

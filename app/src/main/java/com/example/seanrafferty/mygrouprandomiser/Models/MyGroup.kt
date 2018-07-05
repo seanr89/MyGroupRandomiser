@@ -10,10 +10,13 @@ import java.util.*
  * @param CreationDate: Date Created for the group (defaults to current date and time)  ([var])
  */
 @Entity(tableName = "GroupData")
-data class MyGroup constructor(var ID: Int, var Name: String, var CreationDate : Date = Calendar.getInstance().getTime())
+data class MyGroup constructor(var ID: Int
+                               , var Name: String
+                               , var CreationDate : Date = Calendar.getInstance().getTime())
 {
     /**
      * A null/default object constructor
      */
     constructor() : this(-1, "")
 }
+

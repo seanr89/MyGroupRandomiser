@@ -66,7 +66,7 @@ class TeamRandomiser
      * select player rating content
      * @return the provided player rating (used for sorting)
      */
-    private fun selector(p: Player): Int = p.Rating
+    private fun selector(p: Player): Double = p.Rating
 
     /**
      * Handle the basic shuffling and sorting of teams (i.e. read through loop provided)
@@ -107,5 +107,31 @@ class TeamRandomiser
         Teams.add(teamTwo)
 
         return Teams!!
+    }
+}
+
+/**
+ * Custom class to compare teams and attempt to re-shuffle teams if necessary
+ * This class will start to take into account player skill values
+ * and can provide the updating of player skill values
+ */
+class TeamComparer
+{
+    /**
+     *
+     */
+    fun updatePlayerSkillWithModifier(player : Player)
+    {
+
+    }
+
+    /**
+     *
+     */
+    fun compareTeamsForUnBalancedSkills(teamOne : Team, teamTwo : Team) : Boolean
+    {
+        var result = false
+
+        return result
     }
 }

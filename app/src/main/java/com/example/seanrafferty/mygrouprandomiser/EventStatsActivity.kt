@@ -37,7 +37,7 @@ class EventStatsActivity : AppCompatActivity()
     }
 
     /**
-     * Handle initialisation of default values for team pickers
+     * Handle initialisation of default values for team pickers for goals scored
      */
     private fun InitialiseNumberPickers() {
         var nbrPickerTeamOne = findViewById<NumberPicker>(R.id.pickerTeamOne)

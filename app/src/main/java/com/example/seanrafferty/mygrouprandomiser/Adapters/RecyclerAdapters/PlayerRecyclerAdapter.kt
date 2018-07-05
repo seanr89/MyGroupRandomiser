@@ -68,8 +68,8 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
 
     /**
      * Set the selected recycler view item as selected
-     * @param position :
-     * @param view :
+     * @param position : the current position in the array and recycler position
+     * @param view : the current view where it adapter and viewholder is located
      */
     private fun SetItemSelected(position: Int, view:View)
     {
