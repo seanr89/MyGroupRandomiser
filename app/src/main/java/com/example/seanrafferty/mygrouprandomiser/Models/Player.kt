@@ -30,7 +30,7 @@ data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
      * new method to combine and return the total playerSkill modifier values
      * @return double value - defaulted to 1.0
      */
-    fun playerSkillModifierCombined() : Double
+    private fun playerSkillModifierCombined() : Double
     {
         var result = 1.0
         if(skills.isEmpty()) return result
@@ -42,9 +42,15 @@ data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
         return result
     }
 
+    /**
+     * calculation to return an updated and modified rating based on the PlayerSkills
+     * @return double or 1.0 as default
+     */
     fun skillModifiedRating() : Double
     {
         var result = 1.0
+
+        result = Rating * playerSkillModifierCombined()
 
         return result;
     }
