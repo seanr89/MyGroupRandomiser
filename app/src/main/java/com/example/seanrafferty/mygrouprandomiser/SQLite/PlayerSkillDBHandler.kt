@@ -79,7 +79,6 @@ class PlayerSkillDBHandler
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
             -1
         }
-
         return result
     }
 }

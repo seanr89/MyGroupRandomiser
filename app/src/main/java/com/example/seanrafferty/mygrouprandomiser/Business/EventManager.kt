@@ -173,9 +173,9 @@ class EventManager(val context: Context?)
         {
             TeamStatus.WIN ->{
                 newRating = if(unBalanced) {
-                    rating + 2
-                } else {
                     rating + 1
+                } else {
+                    rating + 2
                 }
             }
             TeamStatus.LOSS ->{

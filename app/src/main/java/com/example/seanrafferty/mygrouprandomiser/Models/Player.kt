@@ -22,9 +22,10 @@ https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b7
 data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
                                 , @ColumnInfo(name = "name") var Name: String
                                 , @ColumnInfo(name = "rating")var Rating: Double
-                                , @ColumnInfo(name = "isPrivate")var isPrivate : Boolean = false
+                                , @ColumnInfo(name = "isPrivate")var isPrivate : Boolean = true
                                 , var skills : ArrayList<PlayerSkill>) : Serializable
 {
+    constructor (id : Int, name : String, rating : Double = 0.0) : this(id,name,rating, true, arrayListOf())
 
     /**
      * new method to combine and return the total playerSkill modifier values
@@ -53,5 +54,22 @@ data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
         result = Rating * playerSkillModifierCombined()
 
         return result;
+    }
+
+    fun doesPlayerHaveSkill(skill: PlayerSkill) : Boolean
+    {
+        var result = false
+
+        if(this.skills.isEmpty())
+        {
+            return result
+        }
+
+        if(this.skills.filter { s -> s.name == skill.name }.count() == 1)
+        {
+            result = true
+        }
+
+        return result
     }
 }

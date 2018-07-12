@@ -33,6 +33,20 @@ data class Team constructor(var ID:Int, var Name:String, var Score:Int = 0, var 
         }
         return result
     }
+
+    fun GetCountOfPlayersWithSkill(skill: PlayerSkill) : Int
+    {
+        var result = 0
+
+        for(item : Player in this.Players)
+        {
+            if(item.doesPlayerHaveSkill(skill))
+            {
+                result += 1
+            }
+        }
+        return result
+    }
 }
 
 enum class TeamStatus

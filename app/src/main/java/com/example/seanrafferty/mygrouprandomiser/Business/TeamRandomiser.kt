@@ -48,7 +48,7 @@ class TeamRandomiser
         if(players.isEmpty())
             return null!!
 
-        //first sort the player list by rating
+        //first sort the player list by rating (now by the skill modified rating)
         players.sortByDescending({this.selector(it)})
 
         //initialise the array and two teams
@@ -61,12 +61,6 @@ class TeamRandomiser
 
         return teams
     }
-
-    /**
-     * select player rating content
-     * @return the provided player rating (used for sorting)
-     */
-    private fun selector(p: Player): Double = p.Rating
 
     /**
      * Handle the basic shuffling and sorting of teams (i.e. read through loop provided)
@@ -93,6 +87,31 @@ class TeamRandomiser
         return teams
     }
 
+    fun RandomizePlayersAndSortTeamsByRatingAndSkills(players: ArrayList<Player>) : ArrayList<Team>
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Check if the players list is empty first
+        if(players.isEmpty())
+            return null!!
+
+        //first sort the player list by rating (now by the skill modified rating)
+        players.sortByDescending({this.selector(it)})
+
+        //initialise the array and two teams
+        var teams = CreateTeams()
+
+
+        return null!!
+    }
+
+    /**
+     * Handle shuffling of players based on rating and ensure skills are not one sided
+     */
+    private fun ShuffleTeamsByRatingAndSkills(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
+    {
+       return null!!
+    }
+
     /**
      * Simple internal method to create an array list with two team objects provided
      * @return A list that contains two teams
@@ -108,6 +127,13 @@ class TeamRandomiser
 
         return Teams!!
     }
+
+    /**
+     * select player rating content
+     * @return the provided player rating (modified by skills) (used for sorting)
+     */
+    private fun selector(p: Player): Double = p.skillModifiedRating()
+
 }
 
 /**
@@ -117,14 +143,6 @@ class TeamRandomiser
  */
 class TeamComparer
 {
-    /**
-     *
-     */
-    fun updatePlayerSkillWithModifier(player : Player)
-    {
-
-    }
-
     /**
      *
      */
