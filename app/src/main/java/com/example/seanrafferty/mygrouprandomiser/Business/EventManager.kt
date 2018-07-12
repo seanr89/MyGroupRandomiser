@@ -164,24 +164,24 @@ class EventManager(val context: Context?)
      * @param teamStatus :
      * @param unBalanced :
      */
-    private fun updatePlayerRatingByBalanceAndStatus(rating : Int, teamStatus: TeamStatus, unBalanced: Boolean) : Int
+    private fun updatePlayerRatingByBalanceAndStatus(rating : Double, teamStatus: TeamStatus, unBalanced: Boolean) : Double
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
-        var newRating = 0
+        var newRating = 0.0
         when (teamStatus)
         {
             TeamStatus.WIN ->{
                 newRating = if(unBalanced) {
-                    rating + 1
+                    rating + 1.0
                 } else {
-                    rating + 2
+                    rating + 2.0
                 }
             }
             TeamStatus.LOSS ->{
                 if(!unBalanced)
                 {
-                    newRating = rating - 1
+                    newRating = rating - 1.0
                 }
             }
             TeamStatus.DRAW ->
