@@ -34,9 +34,16 @@ data class Team constructor(var ID:Int, var Name:String, var Score:Int = 0, var 
         return result
     }
 
+    /**
+     * Operation to get query the number of players in the team with the queried skill
+     * @param skill :
+     * @return the count of players who have the identified skill
+     */
     fun GetCountOfPlayersWithSkill(skill: PlayerSkill) : Int
     {
         var result = 0
+
+        if(this.Players.isEmpty()) return result
 
         for(item : Player in this.Players)
         {

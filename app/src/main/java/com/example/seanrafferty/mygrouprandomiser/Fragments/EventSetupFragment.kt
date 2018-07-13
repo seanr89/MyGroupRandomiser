@@ -190,7 +190,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
         var players = GetSelectedPlayers()
         if(players.isNotEmpty())
         {
-            var randomiser = TeamRandomiser()
+            var randomiser = TeamRandomiser(context)
             var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
 
             //then return back to where it needs to go - ie the fragment activity
@@ -213,7 +213,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
         var players = GetSelectedPlayers()
         if(players.isNotEmpty())
         {
-            var randomiser = TeamRandomiser()
+            var randomiser = TeamRandomiser(context)
             var teamArray = randomiser.RandomizePlayerListBySortedRating(players)
 
             //then return back to where it needs to go - ie the fragment activity

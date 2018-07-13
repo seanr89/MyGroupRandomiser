@@ -1,13 +1,15 @@
 package com.example.seanrafferty.mygrouprandomiser.Business
 
+import android.content.Context
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
 /**
  * Provides business logic for randomisation of players into teams
  */
-class TeamRandomiser
+class TeamRandomiser(val context: Context?)
 {
     private val TAG = "TeamRandomiser"
     /**
@@ -87,6 +89,11 @@ class TeamRandomiser
         return teams
     }
 
+    /**
+     *
+     * @param players :
+     * @return collection of teams with full sorting!
+     */
     fun RandomizePlayersAndSortTeamsByRatingAndSkills(players: ArrayList<Player>) : ArrayList<Team>
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
@@ -97,19 +104,29 @@ class TeamRandomiser
         //first sort the player list by rating (now by the skill modified rating)
         players.sortByDescending({this.selector(it)})
 
-        //initialise the array and two teams
-        var teams = CreateTeams()
+        //initialise the array and two teams to store the data
+        var teams = ShufflePlayersIntoTeamsByRatingAndSkills(players, CreateTeams())
 
+        var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
+        Log.d(TAG, "Player Average Difference is : $averageDifference")
 
-        return null!!
+        return teams
     }
 
     /**
      * Handle shuffling of players based on rating and ensure skills are not one sided
      */
-    private fun ShuffleTeamsByRatingAndSkills(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
+    private fun ShufflePlayersIntoTeamsByRatingAndSkills(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
     {
-       return null!!
+        //init param to id if the last player was added to the first team!!
+        var teamOneAdd = false
+        //Initialise the team comparer object
+        var comparer = TeamComparer(context)
+        for(item : Player in players)
+        {
+
+        }
+        return null!!
     }
 
     /**
@@ -143,6 +160,17 @@ class TeamRandomiser
  */
 class TeamComparer
 {
+    var skills : ArrayList<PlayerSkill> = arrayListOf()
+
+    /**
+     * constructor with initialisation request for a all player skills
+     */
+    constructor(context: Context?)
+    {
+        var playerManager = PlayerManager(context)
+        skills = playerManager.ReadAllAvailablePlayerSkills()
+    }
+
     /**
      *
      */

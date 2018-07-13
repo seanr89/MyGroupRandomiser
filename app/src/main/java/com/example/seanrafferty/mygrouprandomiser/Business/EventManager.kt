@@ -118,7 +118,7 @@ class EventManager(val context: Context?)
      */
     fun EventComplete(groupEvent: GroupEvent)
     {
-        Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
         eventDB.UpdateEventCompleted(groupEvent, 1)
@@ -160,37 +160,36 @@ class EventManager(val context: Context?)
 
     /**
      * Handle the updating of a players rating based on if they where in teh winning team and balanced status
-     * @param rating :
-     * @param teamStatus :
-     * @param unBalanced :
+     * @param rating : the rating value to update
+     * @param teamStatus : the status of the team that the player is apart of
+     * @param unBalanced : if the team was rated as un-balanced
+     * @return the updated/re-calculated rating value
      */
     private fun updatePlayerRatingByBalanceAndStatus(rating : Double, teamStatus: TeamStatus, unBalanced: Boolean) : Double
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
-        var newRating = 0.0
+        var newRating = rating
         when (teamStatus)
         {
-            TeamStatus.WIN ->{
+            TeamStatus.WIN ->
+            {
                 newRating = if(unBalanced) {
                     rating + 1.0
                 } else {
                     rating + 2.0
                 }
             }
-            TeamStatus.LOSS ->{
+            TeamStatus.LOSS ->
+            {
                 if(!unBalanced)
                 {
                     newRating = rating - 1.0
                 }
             }
-            TeamStatus.DRAW ->
+            else ->
             {
-                return rating
-            }
-            TeamStatus.UNKNOWN ->
-            {
-                return rating
+                return newRating
             }
         }
         return newRating
