@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
+import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 
 /**
@@ -54,7 +55,7 @@ class PlayerDBHandler
             {
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerpkID))
                 val name = cursor.getString(cursor.getColumnIndex(DatabaseHandler.PlayerName))
-                val rating = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
+                val rating = cursor.getDouble(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
                 arrayList.add(Player(id, name, rating))
             }
             while (cursor.moveToNext())
@@ -97,7 +98,7 @@ class PlayerDBHandler
                 {
                     val id = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerpkID))
                     val name =cursor.getString(cursor.getColumnIndex(DatabaseHandler.PlayerName))
-                    val rating = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
+                    val rating = cursor.getDouble(cursor.getColumnIndex(DatabaseHandler.PlayerRating))
                     arrayList.add(Player(id, name, rating))
                 }
                 while (cursor.moveToNext())
@@ -175,5 +176,15 @@ class PlayerDBHandler
         {
             0
         }
+    }
+
+    /**
+     *
+     */
+    fun InsertPlayerSkillToPlayer(player: Player, skill: PlayerSkill) : Int
+    {
+        var result = 0
+
+        return result
     }
 }

@@ -15,4 +15,5 @@ data class PlayerSkill(@PrimaryKey(autoGenerate = true)var id : Int
                        , var name : String
                        , var modifier : Double)
 {
+    constructor(id:Int) : this(id, "",0.0)
 }
