@@ -14,7 +14,7 @@ class DatabaseHandler : SQLiteOpenHelper
 
     companion object {
         val DBName = "GroupDB.db"
-        val DBVersion = 14
+        val DBVersion = 15
 
         const val groupTableName = "mygroup"
         const val grouppkID = "ID"
@@ -50,8 +50,8 @@ class DatabaseHandler : SQLiteOpenHelper
         const val PlayerSkillModifier = "Modifier"
 
         const val PlayerSkillMappingTable = "playerSkillMapping"
-        const val PlayerSkillPlayerMappingID = "PlayerID"
-        const val PlayerSkillID = "PlayerSkillID"
+        const val PlayerSkillMappingPlayerID = "PlayerID"
+        const val PlayerSkillMappingSkillID = "PlayerSkillID"
 
         const val TeamPlayerMappingTable = "teamPlayers"
         const val TeamID = "teamID"
@@ -102,7 +102,7 @@ class DatabaseHandler : SQLiteOpenHelper
             var sqlCreatePlayer: String = "CREATE TABLE IF NOT EXISTS ${PlayerTable} " +
                     "(${PlayerpkID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     "${PlayerName} TEXT, " +
-                    "${PlayerRating} INTEGER);"
+                    "${PlayerRating} REAL);"
 
             if(db != null)
             {
@@ -231,8 +231,8 @@ class DatabaseHandler : SQLiteOpenHelper
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         var sql : String = "CREATE TABLE IF NOT EXISTS $PlayerSkillMappingTable " +
-                "($PlayerSkillPlayerMappingID INTEGER, " +
-                "$PlayerSkillID TEXT);"
+                "($PlayerSkillMappingPlayerID INTEGER, " +
+                "$PlayerSkillMappingSkillID INTEGER);"
         db.execSQL(sql)
     }
 }

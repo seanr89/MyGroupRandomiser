@@ -179,12 +179,28 @@ class PlayerDBHandler
     }
 
     /**
-     *
+     * Attempt to insert the a mapping between a player skill and a player
+     * @param player :
+     * @param skill :
+     * return the id of the row inserted or -1 if failed
      */
     fun InsertPlayerSkillToPlayer(player: Player, skill: PlayerSkill) : Int
     {
-        var result = 0
 
-        return result
+        var values = ContentValues()
+        values.put(DatabaseHandler.PlayerSkillMappingPlayerID, player.ID)
+        values.put(DatabaseHandler.PlayerSkillMappingSkillID, skill.id)
+
+
+        val db = _DB.GetWritableDataBaseObject()
+
+        return try {
+            db!!.insert(DatabaseHandler.PlayerSkillMappingTable, "", values).toInt()
+        }
+        catch (e: SQLiteException)
+        {
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            -1
+        }
     }
 }
