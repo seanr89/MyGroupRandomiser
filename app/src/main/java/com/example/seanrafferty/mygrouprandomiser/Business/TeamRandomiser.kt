@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
+import com.example.seanrafferty.mygrouprandomiser.Models.ShuffleComparisonObject
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect.*
@@ -172,6 +173,7 @@ class TeamRandomiser(val context: Context?)
  */
 class TeamComparer
 {
+    private val TAG = "TeamComparer"
     var skills : ArrayList<PlayerSkill> = arrayListOf()
 
     /**
@@ -184,11 +186,16 @@ class TeamComparer
     }
 
     /**
-     *
+     * Process the current player and team structures to identify what team the player should be added too!
+     * @param player :
+     * @param teamOne :
+     * @param teamTwo :
+     * @param lastSelection :
+     * @return the team selected for the player to be inserted into
      */
     fun runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
     {
-        Log.d("TeamComparer", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         //1. Check if the current player has any assigned skills - if not handle return selection
         if(player.skills.isEmpty())
@@ -199,6 +206,7 @@ class TeamComparer
 
         var selection = UNKNOWN
 
+        //if the player only has one skill
         if(player.skills.count() == 1)
         {
             selection = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo, lastSelection)
@@ -207,20 +215,62 @@ class TeamComparer
         else
         {
             //2. Loop through each player skill
-            for(item : PlayerSkill in player.skills)
-            {
+            //2.a generate a skill comparison
+            var skillComparisons = CreateListOfShuffleComparisonsForPlayerSkills(player, teamOne, teamOne)
 
-            }
+            //2.b identify where to add and return selection!!
+            selection = processShuffleComparisonAndDecideTeamSelection(skillComparisons, lastSelection)
         }
-
-
-
         return selection
     }
 
-    private fun decideTeamForPlayerToBeAddedForSingleSkill(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
+    /**
+     *
+     */
+    private fun CreateListOfShuffleComparisonsForPlayerSkills(player: Player, teamOne: Team,teamTwo: Team) : ArrayList<ShuffleComparisonObject>
     {
-        var selection = UNKNOWN
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        var resultList = arrayListOf<ShuffleComparisonObject>()
+
+        for(item : PlayerSkill in player.skills)
+        {
+            var skillShuffle = ShuffleComparisonObject(item)
+            skillShuffle.teamOneCount = teamOne.GetCountOfPlayersWithSkill(item)
+            skillShuffle.teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(item)
+            skillShuffle.teamSelect = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo)
+            if(skillShuffle.teamSelect == TEAM_ONE)
+            {
+                skillShuffle.updatedAverageRating = this.calculateAverageTeamRatingIfPlayerAddedToTeam(player, teamOne)
+            }
+            else
+            {
+                skillShuffle.updatedAverageRating = this.calculateAverageTeamRatingIfPlayerAddedToTeam(player, teamTwo)
+            }
+        }
+        return resultList
+    }
+
+    /**
+     *
+     */
+    private fun processShuffleComparisonAndDecideTeamSelection(shuffleComparisons : ArrayList<ShuffleComparisonObject>, lastSelection: TeamSelect) : TeamSelect
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        return null!!
+    }
+
+    /**
+     * process and decide what team the player should be added two when the player has a single skill
+     * @param player :
+     * @param teamOne :
+     * @param teamTwo :
+     * @param lastSelection :
+     * @return an updated TeamSelect which identifies what team the player is to be added too!
+     */
+    private fun decideTeamForPlayerToBeAddedForSingleSkill(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect = UNKNOWN) : TeamSelect
+    {
+        var selection : TeamSelect
 
         var teamOneCount = teamOne.GetCountOfPlayersWithSkill(player.skills[0])
         var teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(player.skills[0])
@@ -254,6 +304,7 @@ class TeamComparer
      * calculate which team has the lowest average value and return the selection
      * @param teamOne :
      * @param teamTwo :
+     * @return the TeamSelect
      */
     private fun findOutWhichTeamHasTheLowestAverage(teamOne: Team, teamTwo: Team) : TeamSelect
     {
@@ -273,9 +324,23 @@ class TeamComparer
         }
     }
 
+    /**
+     * Attempt to re-calculate the team average with the provided player, but without adding the player!
+     * @param player : the player to be used to re-calculate the team average
+     * @param team : the team to query the current team average
+     * @return a re-calculated team average rating if the player was to be added to the team
+     */
     private fun calculateAverageTeamRatingIfPlayerAddedToTeam(player: Player, team: Team) : Double
     {
+        var currentTotal = 0.0
+        if(team.Players.isEmpty())return currentTotal
 
-        return 0.0
+        for (item : Player in team.Players)
+        {
+            currentTotal += item.skillModifiedRating()
+        }
+        currentTotal += player.skillModifiedRating()
+
+        return currentTotal / (team.Players.count() + 1)
     }
 }

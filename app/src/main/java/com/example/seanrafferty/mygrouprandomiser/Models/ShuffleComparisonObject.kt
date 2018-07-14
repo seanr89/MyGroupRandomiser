@@ -11,9 +11,10 @@ import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
  * @param teamSelect : the team identified to be added too
  */
 class ShuffleComparisonObject(val skill: PlayerSkill,
-                              val teamOneCount : Int,
-                              val teamTwoCount : Int,
-                              val updatedAverageRating : Double,
-                              val teamSelect: TeamSelect)
+                              var teamOneCount : Int,
+                              var teamTwoCount : Int,
+                              var updatedAverageRating : Double,
+                              var teamSelect: TeamSelect)
 {
+    constructor(singleSkill : PlayerSkill) : this(singleSkill, 0,0,0.0, TeamSelect.UNKNOWN)
 }
