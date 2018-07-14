@@ -5,6 +5,8 @@ import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
+import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
+import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect.*
 
 /**
  * Provides business logic for randomisation of players into teams
@@ -119,14 +121,24 @@ class TeamRandomiser(val context: Context?)
     private fun ShufflePlayersIntoTeamsByRatingAndSkills(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
     {
         //init param to id if the last player was added to the first team!!
-        var teamOneAdd = false
+        var currentSelect = TeamSelect.UNKNOWN
+
         //Initialise the team comparer object
         var comparer = TeamComparer(context)
         for(item : Player in players)
         {
-
+            var currentSelect = comparer.runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(item, teams[0], teams[1], currentSelect)
+            when(currentSelect)
+            {
+                TEAM_ONE -> {
+                    teams[0].Players.add(item)
+                }
+                TEAM_TWO -> {
+                    teams[1].Players.add(item)
+                }
+            }
         }
-        return null!!
+        return teams
     }
 
     /**
@@ -174,10 +186,77 @@ class TeamComparer
     /**
      *
      */
-    fun compareTeamsForUnBalancedSkills(teamOne : Team, teamTwo : Team) : Boolean
+    fun runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
     {
-        var result = false
+        Log.d("TeamComparer", object{}.javaClass.enclosingMethod.name)
 
-        return result
+        //1. Check if the current player has any assigned skills - if not handle return selection
+        if(player.skills.isEmpty())
+        {
+            return if(lastSelection == TEAM_ONE) TEAM_TWO
+            else TEAM_ONE
+        }
+
+        var selection = UNKNOWN
+
+        //2. Loop through each player skill
+        for(item : PlayerSkill in player.skills)
+        {
+            var teamOneCount = teamOne.GetCountOfPlayersWithSkill(item)
+            var teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(item)
+
+            //if neither team has that selection - then assign a default
+            if(teamOneCount == 0 && teamTwoCount == 0)
+            {
+                selection = if(lastSelection == TEAM_ONE) TEAM_TWO
+                else TEAM_ONE
+            }
+            else if(teamOneCount > teamTwoCount)
+            {
+                //add to team two!!
+                selection = TEAM_TWO
+            }
+            else if(teamOneCount < teamTwoCount)
+            {
+                //add to team one
+                selection = TEAM_ONE
+            }
+            else //if the two are not 0 but are equal
+            {
+                selection = findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
+            }
+
+        }
+        return selection
+    }
+
+
+    /**
+     * calculate which team has the lowest average value and return the selection
+     * @param teamOne :
+     * @param teamTwo :
+     */
+    private fun findOutWhichTeamHasTheLowestAverage(teamOne: Team, teamTwo: Team) : TeamSelect
+    {
+        Log.d("TeamComparer", object{}.javaClass.enclosingMethod.name)
+
+        return when {
+            teamOne.CalculateTeamPlayerAverage() < teamTwo.CalculateTeamPlayerAverage() -> {
+                TEAM_ONE
+            }
+            teamOne.CalculateTeamPlayerAverage() > teamTwo.CalculateTeamPlayerAverage() -> {
+                TEAM_TWO
+            }
+            else -> {
+                if(teamOne.Players.count() > teamTwo.Players.count()) TEAM_TWO
+                else TEAM_ONE
+            }
+        }
+    }
+
+    private fun calculateAverageTeamRatingIfPlayerAddedToTeam(player: Player, team: Team) : Double
+    {
+
+        return 0.0
     }
 }
