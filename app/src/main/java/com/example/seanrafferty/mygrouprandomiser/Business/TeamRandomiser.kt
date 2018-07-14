@@ -252,19 +252,27 @@ class TeamComparer
     }
 
     /**
-     *
+     * handle the processing of all the player skill shuffle options and pick the best one!
+     * @param shuffleComparisons :
+     * @param lastSelection :
+     * @return a team selection to detail what team a player is to be added to!!
      */
     private fun processShuffleComparisonAndDecideTeamSelection(shuffleComparisons : ArrayList<ShuffleComparisonObject>, lastSelection: TeamSelect) : TeamSelect
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        //1. Step 1
+
+
+
         return null!!
     }
 
     /**
      * process and decide what team the player should be added two when the player has a single skill
-     * @param player :
-     * @param teamOne :
-     * @param teamTwo :
+     * @param player : the player to review and match to a team
+     * @param teamOne : team one and its content
+     * @param teamTwo : team two and its content
      * @param lastSelection :
      * @return an updated TeamSelect which identifies what team the player is to be added too!
      */

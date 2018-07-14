@@ -12,7 +12,8 @@ import java.util.*
 @Entity(tableName = "GroupData")
 data class MyGroup constructor(var ID: Int
                                , var Name: String
-                               , var CreationDate : Date = Calendar.getInstance().getTime())
+                               , var CreationDate : Date = Calendar.getInstance().getTime()
+                               , var IsPrivate : Boolean = true)
 {
     /**
      * A null/default object constructor

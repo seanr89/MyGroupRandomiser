@@ -55,11 +55,3 @@ data class Team constructor(var ID:Int, var Name:String, var Score:Int = 0, var 
         return result
     }
 }
-
-enum class TeamStatus
-{
-    WIN,
-    LOSS,
-    DRAW,
-    UNKNOWN
-}

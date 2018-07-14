@@ -49,13 +49,14 @@ data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
      */
     fun skillModifiedRating() : Double
     {
-        var result = 1.0
-
-        result = Rating * playerSkillModifierCombined()
-
-        return result;
+        return Rating * playerSkillModifierCombined()
     }
 
+    /**
+     * Operation to query if the player has a specific skill assigned
+     * @param skill : the skill to query (based on name)
+     * @return Boolean paramater - true if the player has the assigned skill
+     */
     fun doesPlayerHaveSkill(skill: PlayerSkill) : Boolean
     {
         var result = false
