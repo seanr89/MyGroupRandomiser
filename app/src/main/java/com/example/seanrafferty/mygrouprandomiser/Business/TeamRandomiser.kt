@@ -199,34 +199,53 @@ class TeamComparer
 
         var selection = UNKNOWN
 
-        //2. Loop through each player skill
-        for(item : PlayerSkill in player.skills)
+        if(player.skills.count() == 1)
         {
-            var teamOneCount = teamOne.GetCountOfPlayersWithSkill(item)
-            var teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(item)
-
-            //if neither team has that selection - then assign a default
-            if(teamOneCount == 0 && teamTwoCount == 0)
-            {
-                selection = if(lastSelection == TEAM_ONE) TEAM_TWO
-                else TEAM_ONE
-            }
-            else if(teamOneCount > teamTwoCount)
-            {
-                //add to team two!!
-                selection = TEAM_TWO
-            }
-            else if(teamOneCount < teamTwoCount)
-            {
-                //add to team one
-                selection = TEAM_ONE
-            }
-            else //if the two are not 0 but are equal
-            {
-                selection = findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
-            }
-
+            selection = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo, lastSelection)
+            return selection
         }
+        else
+        {
+            //2. Loop through each player skill
+            for(item : PlayerSkill in player.skills)
+            {
+
+            }
+        }
+
+
+
+        return selection
+    }
+
+    private fun decideTeamForPlayerToBeAddedForSingleSkill(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
+    {
+        var selection = UNKNOWN
+
+        var teamOneCount = teamOne.GetCountOfPlayersWithSkill(player.skills[0])
+        var teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(player.skills[0])
+
+        //if neither team has that selection - then assign a default
+        if(teamOneCount == 0 && teamTwoCount == 0)
+        {
+            selection = if(lastSelection == TEAM_ONE) TEAM_TWO
+            else TEAM_ONE
+        }
+        else if(teamOneCount > teamTwoCount)
+        {
+            //add to team two!!
+            selection = TEAM_TWO
+        }
+        else if(teamOneCount < teamTwoCount)
+        {
+            //add to team one
+            selection = TEAM_ONE
+        }
+        else //if the two are not 0 but are equal
+        {
+            selection = findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
+        }
+
         return selection
     }
 
