@@ -31,7 +31,6 @@ class TeamRandomiser(val context: Context?)
 
         //initialise the array and two teams
         var teams = CreateTeams()
-
         teams = ShuffleTeamsBasic(shuffledList, teams)
 
         var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
@@ -58,7 +57,6 @@ class TeamRandomiser(val context: Context?)
 
         //initialise the array and two teams
         var teams = CreateTeams()
-
         teams = ShuffleTeamsBasic(players, teams)
 
         var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
@@ -69,8 +67,8 @@ class TeamRandomiser(val context: Context?)
 
     /**
      * Handle the basic shuffling and sorting of teams (i.e. read through loop provided)
-     * @param players
-     * @param teams
+     * @param players :  arraylist of players to shuffle
+     * @param teams : the arraylist of two teams expected to append players too!
      * @return array of teams with players added into each team
      */
     private fun ShuffleTeamsBasic(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
@@ -93,8 +91,8 @@ class TeamRandomiser(val context: Context?)
     }
 
     /**
-     *
-     * @param players :
+     * Updated randomization/shuffling process that will use a combination of player ratings and skills
+     * @param players : the list of players to sort and append into teams
      * @return collection of teams with full sorting!
      */
     fun RandomizePlayersAndSortTeamsByRatingAndSkills(players: ArrayList<Player>) : ArrayList<Team>
@@ -118,6 +116,9 @@ class TeamRandomiser(val context: Context?)
 
     /**
      * Handle shuffling of players based on rating and ensure skills are not one sided
+     * @param players : An arraylist of players to sort based on rating and skills
+     * @param teams : And arraylist of teams that players are to be assigned too!
+     * @return and arraylist of teams with players assigned
      */
     private fun ShufflePlayersIntoTeamsByRatingAndSkills(players : ArrayList<Player>, teams : ArrayList<Team>) : ArrayList<Team>
     {
@@ -187,7 +188,7 @@ class TeamComparer
 
     /**
      * Process the current player and team structures to identify what team the player should be added too!
-     * @param player :
+     * @param player : the player object to process
      * @param teamOne :
      * @param teamTwo :
      * @param lastSelection :
@@ -257,16 +258,29 @@ class TeamComparer
      * @param lastSelection :
      * @return a team selection to detail what team a player is to be added to!!
      */
-    private fun processShuffleComparisonAndDecideTeamSelection(shuffleComparisons : ArrayList<ShuffleComparisonObject>, lastSelection: TeamSelect) : TeamSelect
+    private fun processShuffleComparisonAndDecideTeamSelection(
+            shuffleComparisons : ArrayList<ShuffleComparisonObject>,
+            lastSelection: TeamSelect
+    ) : TeamSelect
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
-        //1. Step 1
+        //2. Find the item with the largest difference between team skills and average rating
+        var sortedList = shuffleComparisons.sortedWith(compareBy({it.calculateDifferenceOfSkillCount()}, {it.updatedAverageRating}))
 
-
-
-        return null!!
+        return if(sortedList.isNotEmpty())
+        //3. Find the top item and return it
+            sortedList[0].teamSelect
+        else
+            if(lastSelection == TEAM_ONE) TEAM_TWO
+            else TEAM_ONE
     }
+
+    /*
+     * select player rating content
+     * @return the provided player rating (modified by skills) (used for sorting)
+     */
+    //private fun comparisonSelector(p: ShuffleComparisonObject): Int = p.calculateDifferenceOfSkillCount()
 
     /**
      * process and decide what team the player should be added two when the player has a single skill

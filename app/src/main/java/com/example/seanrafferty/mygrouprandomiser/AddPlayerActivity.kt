@@ -73,7 +73,7 @@ class AddPlayerActivity : AppCompatActivity() {
         if(name.isNotEmpty())
         {
             var playerManager = PlayerManager(this)
-            return playerManager.SavePlayer(Player(0, name, rating.toString().toInt()))
+            return playerManager.SavePlayer(Player(0, name, rating.toString().toDouble()))
         }
         Toast.makeText(this, "No Name Provided", Toast.LENGTH_LONG).show()
         return 0

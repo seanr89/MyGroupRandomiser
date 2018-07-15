@@ -35,6 +35,12 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         eventFragment.CreateTeamsByRatingAndTriggerEvent()
     }
 
+    override fun shufflePlayersByRatingAndSkill()
+    {
+        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        eventFragment.CreateTeamsByRatingSkillsAndTriggerEvent()
+    }
+
     private var _GroupID : Int = 0
     private lateinit var Teams : ArrayList<Team>
     private val TAG = "GroupEventGeneratorAct"

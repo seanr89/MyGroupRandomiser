@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Models
 
 import android.arch.persistence.room.Entity
+import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamStatus
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.*

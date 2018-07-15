@@ -3,6 +3,7 @@ package com.example.seanrafferty.mygrouprandomiser.Business
 import android.content.Context
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.*
+import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamStatus
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.EventDBHandler
 import com.example.seanrafferty.mygrouprandomiser.SQLite.TeamDBHandler

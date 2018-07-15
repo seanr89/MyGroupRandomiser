@@ -74,6 +74,7 @@ class ShuffleUpDialog : DialogFragment()
         {
             "Randomize" -> onRandomShuffleSelected()
             "Rating" -> onRatingShuffleSelected()
+            "Rating/Skills" -> onRatingAndSkillsShuffleSelected()
             else ->
             {
                 Toast.makeText(context, "Unable to process", Toast.LENGTH_LONG).show()
@@ -100,12 +101,21 @@ class ShuffleUpDialog : DialogFragment()
     }
 
     /**
+     *
+     */
+    private fun onRatingAndSkillsShuffleSelected()
+    {
+
+    }
+
+    /**
      * Defines the listener interface controls to communicate back to the
      */
     interface RandomisationSelectedListener {
         //void onFinishEditDialog(String inputText);
         fun shufflePlayersRandomly()
         fun shufflePlayersByRating()
+        fun shufflePlayersByRatingAndSkill()
     }
 
     /////////////////////////////////////////////////////////////////////////////

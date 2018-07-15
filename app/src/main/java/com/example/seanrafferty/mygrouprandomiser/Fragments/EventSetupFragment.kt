@@ -227,6 +227,29 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     }
 
     /**
+     *
+     */
+    fun CreateTeamsByRatingSkillsAndTriggerEvent()
+    {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
+        var players = GetSelectedPlayers()
+        if(players.isNotEmpty())
+        {
+            var randomiser = TeamRandomiser(context)
+            var teamArray = randomiser.RandomizePlayersAndSortTeamsByRatingAndSkills(players)
+
+            //then return back to where it needs to go - ie the fragment activity
+            mCallback!!.onTeamsRandomized(teamArray)
+            return
+        }
+        else
+        {
+            Toast.makeText(context, "No Players Selected!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    /**
      * method to trigger the save event method for the accompanying activity listener
      */
     fun CreateEventAndAlertListener()
@@ -270,6 +293,12 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     override fun shufflePlayersByRating() {
         //CreateTeamsByRatingAndTriggerEvent()
+    }
+
+    /**
+     * Just maintained
+     */
+    override fun shufflePlayersByRatingAndSkill() {
     }
 
     /**

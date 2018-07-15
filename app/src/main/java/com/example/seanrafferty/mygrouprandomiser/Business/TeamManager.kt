@@ -97,7 +97,7 @@ class TeamManager(val context: Context?)
         var team = teamsDB.ReadTeam(teamID)
         for(item : Int in playerIDs)
         {
-            team.Players.add(Player(item,"", 0))
+            team.Players.add(Player(item,"", 0.0))
         }
         return null!!
     }

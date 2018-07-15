@@ -3,5 +3,6 @@
     <array name="shuffleoptions">
         <item>Randomize</item>
         <item>Rating</item>
+        <item>Rating/Skills</item>
     </array>
 </resources>

@@ -17,4 +17,23 @@ class ShuffleComparisonObject(val skill: PlayerSkill,
                               var teamSelect: TeamSelect)
 {
     constructor(singleSkill : PlayerSkill) : this(singleSkill, 0,0,0.0, TeamSelect.UNKNOWN)
+
+    fun calculateDifferenceOfSkillCount() : Int
+    {
+        return when(this.teamSelect)
+        {
+            TeamSelect.TEAM_ONE ->
+            {
+                teamTwoCount - teamOneCount
+            }
+            TeamSelect.TEAM_TWO ->
+            {
+                teamOneCount - teamTwoCount
+            }
+            else ->
+            {
+                0
+            }
+        }
+    }
 }
