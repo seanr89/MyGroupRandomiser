@@ -296,7 +296,8 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
     }
 
     /**
-     * Just maintained
+     * Just maintained to access the dialog
+     * handled by the parent activity!!
      */
     override fun shufflePlayersByRatingAndSkill() {
     }

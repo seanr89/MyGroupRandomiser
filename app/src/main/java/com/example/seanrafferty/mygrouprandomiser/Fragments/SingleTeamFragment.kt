@@ -10,10 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
-
 import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
@@ -36,7 +34,6 @@ class SingleTeamFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         arguments?.let {
             team = it.getSerializable(ARG_TEAM) as Team
             idTag = it.getString(ARG_TAG)
@@ -82,12 +79,11 @@ class SingleTeamFragment : Fragment() {
     }
 
     /**
-     *
+     * Operation to access the team rating textview and append the rating!
+     * @param rating : the average rating of the team
      */
     fun setTeamRatingView(rating : Double)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         if(teamRatingTxtView != null)
             teamRatingTxtView.text = "Rating : ${String.format("%.2f",rating)}"
     }
@@ -95,6 +91,7 @@ class SingleTeamFragment : Fragment() {
     /**
      * Handle request to update player content
      * NEEDS TO BE PROPERLY DOCUMENTED AND TESTED
+     * @param singleTeam : the team to trigger the parameter update!!
      */
     fun UpdateTeamPlayers(singleTeam : Team)
     {

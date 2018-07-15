@@ -16,7 +16,6 @@ class AddGroup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_group)
 
-
         //initialise the button and setup the click event
         val btn_save_group = findViewById<Button>(R.id.btn_save_group)
         btn_save_group.setOnClickListener()

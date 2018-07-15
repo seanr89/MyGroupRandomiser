@@ -26,18 +26,18 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         ShuffleUpDialog.RandomisationSelectedListener
 {
     override fun shufflePlayersRandomly() {
-        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         eventFragment.CreateRandomTeams()
     }
 
     override fun shufflePlayersByRating() {
-        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         eventFragment.CreateTeamsByRatingAndTriggerEvent()
     }
 
     override fun shufflePlayersByRatingAndSkill()
     {
-        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         eventFragment.CreateTeamsByRatingSkillsAndTriggerEvent()
     }
 
@@ -131,23 +131,17 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
         override fun getItem(position: Int): Fragment
         {
-            Log.d(object{}.javaClass.enclosingMethod.name, " fragment position : $position")
+            //Log.d(object{}.javaClass.enclosingMethod.name, " fragment position : $position")
+
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-
             var fragment = Fragment()
 
             when(position)
             {
                 0 -> fragment = EventSetupFragment.newInstance(_GroupID)
-                1 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
-                else {
-                    SingleTeamFragment.newInstance(Teams[0], "Team1")
-                }
-                2 -> fragment = if(Teams == null || Teams.isEmpty()) SingleTeamFragment.newInstance(Team(0, "Team 2", 0), "Team2")
-                else {
-                    SingleTeamFragment.newInstance(Teams[1], "Team2")
-                }
+                1 -> fragment = SingleTeamFragment.newInstance(Team(0, "Team 1", 0), "Team1")
+                2 -> fragment = SingleTeamFragment.newInstance(Team(0, "Team 2", 0), "Team2")
                 else -> { // Note the block
                     print("x is neither 0, or 1")
                 }
@@ -167,15 +161,15 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         Teams = teams
 
         //same here
-        var teamOneFragment = supportFragmentManager.fragments[1] as SingleTeamFragment
+        val teamOneFragment = supportFragmentManager.fragments[1] as SingleTeamFragment
         teamOneFragment.UpdateTeamPlayers(Teams[0])
 
         //may want to add in a try catch around this!!
-        var teamTwoFragment = supportFragmentManager.fragments[2] as SingleTeamFragment
+        val teamTwoFragment = supportFragmentManager.fragments[2] as SingleTeamFragment
         teamTwoFragment.UpdateTeamPlayers(Teams[1])
 
         NavigateToFirstTeam()
@@ -191,8 +185,8 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         //get the setupFragment and request the current selected date and time of the event
-        var eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
-        var dateTime = eventFragment.GetSelectedDateAndTime()
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        val dateTime = eventFragment.GetSelectedDateAndTime()
         return GroupEvent(0, dateTime, _GroupID, false, false, Teams)
     }
 

@@ -190,7 +190,6 @@ class EventInfoFragment : Fragment()  {
          * @param event the event parameter
          * @return A new instance of fragment EventInfoFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(event : GroupEvent) =
                 EventInfoFragment().apply {

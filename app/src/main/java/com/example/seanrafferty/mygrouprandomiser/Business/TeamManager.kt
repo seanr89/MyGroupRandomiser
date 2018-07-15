@@ -34,6 +34,8 @@ class TeamManager(val context: Context?)
 
     /**
      *
+     * @param team :
+     * @return int
      */
     fun DeletePlayerTeamMappings(team: Team) : Int
     {
@@ -87,7 +89,9 @@ class TeamManager(val context: Context?)
         return teams
     }
 
-
+    /**
+     *
+     */
     fun ReadTeamWithPlayerIDs(teamID : Int) : Team
     {
         var dbHandler = DatabaseHandler(context)
@@ -104,6 +108,8 @@ class TeamManager(val context: Context?)
 
     /**
      * Operation to read a single team
+     * @param teamID :
+     * @return the team with the provided unique ID
      */
     fun ReadTeamByID(teamID : Int) : Team
     {

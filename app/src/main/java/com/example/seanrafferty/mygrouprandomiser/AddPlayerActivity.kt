@@ -48,7 +48,7 @@ class AddPlayerActivity : AppCompatActivity() {
         val linearManager = LinearLayoutManager(this)
         var playerManager = PlayerManager(this)
         var PlayerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(playerManager.ReadAllAvailablePlayerSkills(), SelectionOption.MULTI_SELECT)
-        var playerSkillsRecycler = findViewById<RecyclerView>(R.id.recyclerPlayerSkills).apply{
+        findViewById<RecyclerView>(R.id.recyclerPlayerSkills).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)

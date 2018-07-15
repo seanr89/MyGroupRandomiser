@@ -60,12 +60,15 @@ data class GroupEvent constructor(var ID:Int
 
     /**
      * generic method to process team status
+     * @param teamToCheck :
+     * @param otherTeam :
+     * @return the team status
      */
     private fun checkTeamStatus(teamToCheck: Team, otherTeam: Team) :TeamStatus
     {
-        return if(EventTeams[0].Score == EventTeams[1].Score) {
+        return if(teamToCheck.Score == otherTeam.Score) {
             TeamStatus.DRAW
-        } else if(EventTeams[1].Score > EventTeams[0].Score) {
+        } else if(teamToCheck.Score > otherTeam.Score) {
             TeamStatus.WIN
         } else {
             TeamStatus.LOSS
