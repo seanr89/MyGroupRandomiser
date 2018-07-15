@@ -68,7 +68,7 @@ class PlayerSkillDBHandler
         values.put(DatabaseHandler.PlayerSkillName, skill.name)
         values.put(DatabaseHandler.PlayerSkillModifier, skill.modifier)
 
-        var result = 0
+        var result : Int
         val db = _DB.GetWritableDataBaseObject()
         result = try
         {

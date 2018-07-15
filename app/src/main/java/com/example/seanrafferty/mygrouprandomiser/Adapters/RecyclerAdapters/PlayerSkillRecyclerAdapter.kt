@@ -72,8 +72,8 @@ class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
 
     /**
      * Set the selected recycler view item as selected
-     * @param position :
-     * @param view :
+     * @param position : the position of the item in the view and the provided array list
+     * @param view : the individual view within the recycler
      */
     private fun SetItemSelected(position: Int, view:View)
     {

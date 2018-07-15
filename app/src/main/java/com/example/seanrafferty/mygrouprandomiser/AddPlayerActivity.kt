@@ -20,6 +20,7 @@ class AddPlayerActivity : AppCompatActivity() {
 
     lateinit var _RatingSpinner : Spinner
     lateinit var _SavePlayerBtn : Button
+    lateinit var _playerSkillRecyclerAdapter : PlayerSkillRecyclerAdapter<PlayerSkill>
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -30,24 +31,28 @@ class AddPlayerActivity : AppCompatActivity() {
         val ratings = Array(100) { i -> (i + 1) }
         _RatingSpinner = findViewById(R.id.spinnerRating)
 
-        val spinnerAdapter = ArrayAdapter(
+        var spinnerAdapter = ArrayAdapter(
                 this, android.R.layout.simple_spinner_dropdown_item, ratings)
         _RatingSpinner.adapter = spinnerAdapter
 
         _SavePlayerBtn = findViewById(R.id.btn_save_player)
         _SavePlayerBtn.setOnClickListener()
         {
+            var id = SaveNewPlayer()
             //Run save player and check that the return is a unique ID
-            if(SaveNewPlayer() >= 1)
+            if(id >= 1)
             {
+                SavePlayerSkillsToPlayer()
                 NavigationControls.NavigateToPlayerActivity(this)
             }
         }
 
         //Initialise the recycler view for the player skills data
         val linearManager = LinearLayoutManager(this)
-        var playerManager = PlayerManager(this)
-        var PlayerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(playerManager.ReadAllAvailablePlayerSkills(), SelectionOption.MULTI_SELECT)
+        val playerManager = PlayerManager(this)
+        _playerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(playerManager.ReadAllAvailablePlayerSkills(),
+                SelectionOption.MULTI_SELECT)
+
         findViewById<RecyclerView>(R.id.recyclerPlayerSkills).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -55,7 +60,7 @@ class AddPlayerActivity : AppCompatActivity() {
             // use a linear layout manager
             layoutManager = linearManager
             // specify an viewAdapter (see also next example)
-            adapter = PlayerSkillRecyclerAdapter
+            adapter = _playerSkillRecyclerAdapter
         }
     }
 
@@ -72,10 +77,24 @@ class AddPlayerActivity : AppCompatActivity() {
 
         if(name.isNotEmpty())
         {
-            var playerManager = PlayerManager(this)
+            val playerManager = PlayerManager(this)
             return playerManager.SavePlayer(Player(0, name, rating.toString().toDouble()))
         }
         Toast.makeText(this, "No Name Provided", Toast.LENGTH_LONG).show()
         return 0
+    }
+
+    /**
+     * read the selected player skills and save to the player as a mapping
+     */
+    private fun SavePlayerSkillsToPlayer()
+    {
+        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+
+        var selectedSkills = _playerSkillRecyclerAdapter.SelectedItems
+        if(selectedSkills.isNotEmpty())
+        {
+            val playerManager = PlayerManager(this)
+        }
     }
 }

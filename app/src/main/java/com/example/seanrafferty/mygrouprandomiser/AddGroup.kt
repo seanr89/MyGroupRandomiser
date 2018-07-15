@@ -35,7 +35,7 @@ class AddGroup : AppCompatActivity() {
 
     /**
      * Create and Save a group to the DB
-     * @returns : integer to denote the status of the insert event
+     * @returns An integer to denote the status of the insert event
      */
     fun CreateAndSaveGroup() : Int
     {

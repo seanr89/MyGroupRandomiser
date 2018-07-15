@@ -136,7 +136,6 @@ class PlayerDBHandler
      * @param player - Player object to be inserted
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
-    //@Throws(SQLiteException::class)
     fun InsertPlayer(player: Player) : Int
     {
         Log.d("PlayerDBHandler", object{}.javaClass.enclosingMethod.name)
@@ -179,11 +178,15 @@ class PlayerDBHandler
         }
     }
 
+
+    ///////// PLAYER SKILL MAPPINGS /////////
+    ///////// PLAYER SKILL MAPPINGS /////////
+
     /**
      * Attempt to insert the a mapping between a player skill and a player
      * @param player : the player with the id to insert
      * @param skill : the skill with a unique id to insert
-     * return the id of the row inserted or -1 if failed
+     * r@eturn the id of the row inserted or -1 if failed
      */
     fun InsertPlayerSkillToPlayer(player: Player, skill: PlayerSkill) : Int
     {
@@ -200,5 +203,26 @@ class PlayerDBHandler
             Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
             -1
         }
+    }
+
+    /**
+     * Attempt to handle the insertion of multiple skills for an individual player
+     * @param player : the player to handle skill mapping
+     * @return the id of the row inserted or -1 if failed
+     */
+    fun InsertPlayerSkillMappingsForPlayer(player: Player) : Int
+    {
+
+        return null!!
+    }
+
+    /**
+     * Handle the deletion of all skills mappings for a player
+     * @param player : the player with the respective id to remove the skills
+     * @return the id of the row deleted or -1 if failed
+     */
+    fun DeletePlayerSkillMappingsForPlayer(player: Player) : Int
+    {
+        return null!!
     }
 }

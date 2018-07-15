@@ -44,13 +44,13 @@ class EventStatsActivity : AppCompatActivity()
         //Set the minimum value of NumberPicker
         nbrPickerTeamOne.minValue = 0
         //Specify the maximum value/number of NumberPicker
-        nbrPickerTeamOne.maxValue = 10
+        nbrPickerTeamOne.maxValue = 20
 
         var nbrPickerTeamTwo = findViewById<NumberPicker>(R.id.pickerTeamTwo)
         //Set the minimum value of NumberPicker
         nbrPickerTeamTwo.minValue = 0
         //Specify the maximum value/number of NumberPicker
-        nbrPickerTeamTwo.maxValue = 10
+        nbrPickerTeamTwo.maxValue = 20
     }
 
 
