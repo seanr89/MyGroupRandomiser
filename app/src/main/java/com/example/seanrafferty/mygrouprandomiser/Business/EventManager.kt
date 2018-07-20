@@ -154,7 +154,9 @@ class EventManager(val context: Context?)
         var playerManager = PlayerManager(context)
         for(item : Player in team.Players)
         {
+            Log.d(object{}.javaClass.enclosingMethod.name, "Updating player ${item.Name} from ${item.Rating}")
             item.Rating = updatePlayerRatingByBalanceAndStatus(item.Rating, teamStatus, unBalanced)
+            Log.d(object{}.javaClass.enclosingMethod.name, "Updating player ${item.Name} to ${item.Rating}")
             playerManager.UpdatePlayerRating(item)
         }
     }
@@ -198,7 +200,7 @@ class EventManager(val context: Context?)
 
     /**
      * update the number of goals each team scored, the player ratings and if the teams where unbalanced on event completion
-     * @param event :
+     * @param event : the event to update in the database when completed
      */
     fun UpdateEventOnCompletion(event: GroupEvent)
     {

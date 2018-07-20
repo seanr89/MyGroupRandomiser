@@ -161,6 +161,8 @@ class EventInfoFragment : Fragment()  {
         val balancedSwitch = fragmentView.findViewById<Switch>(R.id.switchEventBalanced)
         event.Balanced = balancedSwitch.isChecked
 
+        Log.d(object{}.javaClass.enclosingMethod.name, "event balanced = ${event.Balanced}")
+
         eventManager.UpdateEventOnCompletion(event)
     }
 

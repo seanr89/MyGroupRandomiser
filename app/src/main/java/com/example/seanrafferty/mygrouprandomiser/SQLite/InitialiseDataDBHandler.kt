@@ -162,6 +162,10 @@ class InitialiseDataDBHandler
         db.InsertPlayerSkillToPlayer(Player(8, ""), PlayerSkill(5))
         //Chris McShane
         db.InsertPlayerSkillToPlayer(Player(7, ""), PlayerSkill(3))
+        //Conor
+        db.InsertPlayerSkillToPlayer(Player(6, ""), PlayerSkill(1))
+        //Emmet
+        db.InsertPlayerSkillToPlayer(Player(18, ""), PlayerSkill(1))
 
     }
 }

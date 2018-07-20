@@ -153,11 +153,11 @@ class TeamRandomiser(val context: Context?)
         var teamOne = Team(0, "Team One", 0)
         var teamTwo = Team(0, "Team Two", 0)
 
-        var Teams = ArrayList<Team>()
-        Teams.add(teamOne)
-        Teams.add(teamTwo)
+        var teams = ArrayList<Team>()
+        teams.add(teamOne)
+        teams.add(teamTwo)
 
-        return Teams!!
+        return teams!!
     }
 
     /**
@@ -190,9 +190,9 @@ class TeamComparer
     /**
      * Process the current player and team structures to identify what team the player should be added too!
      * @param player : the player object to process
-     * @param teamOne :
-     * @param teamTwo :
-     * @param lastSelection :
+     * @param teamOne : the first team of the event/game
+     * @param teamTwo : the second team of the event/game
+     * @param lastSelection : the last team that a player was selected for!
      * @return the team selected for the player to be inserted into
      */
     fun runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
@@ -202,6 +202,8 @@ class TeamComparer
         //1. Check if the current player has any assigned skills - if not handle return selection
         if(player.skills.isEmpty())
         {
+            if(lastSelection !=UNKNOWN) return findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
+
             //Log.d(object{}.javaClass.enclosingMethod.name, "player has no skills!!")
             return if(lastSelection == TEAM_ONE) TEAM_TWO
             else TEAM_ONE
@@ -229,7 +231,11 @@ class TeamComparer
     }
 
     /**
-     *
+     * Operation to create a list of custom shuffle comparison operations used when a player has multiple available skills
+     * @param player :
+     * @param teamOne :
+     * @param teamTwo :
+     * @return a collection of shuffle comparison objects
      */
     private fun CreateListOfShuffleComparisonsForPlayerSkills(player: Player, teamOne: Team,teamTwo: Team) : ArrayList<ShuffleComparisonObject>
     {
@@ -295,11 +301,13 @@ class TeamComparer
      */
     private fun decideTeamForPlayerToBeAddedForSingleSkill(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect = UNKNOWN) : TeamSelect
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name + " With lastSelection $lastSelection for player ${player.Name}")
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name + " With lastSelection $lastSelection for player ${player.Name}")
         var selection : TeamSelect
 
         var teamOneCount = teamOne.GetCountOfPlayersWithSkill(player.skills[0])
         var teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(player.skills[0])
+
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name + "team 1 count = $teamOneCount and team 2 count = $teamTwoCount for skill ${player.skills[0].name}")
 
         //if neither team has that selection - then assign a default
         if(teamOneCount == 0 && teamTwoCount == 0)
