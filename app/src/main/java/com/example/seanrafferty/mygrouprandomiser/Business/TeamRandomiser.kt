@@ -103,7 +103,7 @@ class TeamRandomiser(val context: Context?)
             return null!!
 
         //first sort the player list by rating (now by the skill modified rating)
-        players.sortByDescending({this.selector(it)})
+        players.sortByDescending {this.selector(it)}
 
         //initialise the array and two teams to store the data
         var teams = ShufflePlayersIntoTeamsByRatingAndSkills(players, CreateTeams())
@@ -129,7 +129,8 @@ class TeamRandomiser(val context: Context?)
         var comparer = TeamComparer(context)
         for(item : Player in players)
         {
-            var currentSelect = comparer.runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(item, teams[0], teams[1], currentSelect)
+            currentSelect = comparer.runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(item, teams[0], teams[1], currentSelect)
+            Log.d("Select", "Select team $currentSelect for player ${item.Name}")
             when(currentSelect)
             {
                 TEAM_ONE -> {
@@ -196,20 +197,22 @@ class TeamComparer
      */
     fun runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name + " with lastSelection $lastSelection")
 
         //1. Check if the current player has any assigned skills - if not handle return selection
         if(player.skills.isEmpty())
         {
+            //Log.d(object{}.javaClass.enclosingMethod.name, "player has no skills!!")
             return if(lastSelection == TEAM_ONE) TEAM_TWO
             else TEAM_ONE
         }
 
-        var selection = UNKNOWN
+        var selection: TeamSelect
 
         //if the player only has one skill
         if(player.skills.count() == 1)
         {
+            //Log.d(object{}.javaClass.enclosingMethod.name, "player has 1 skill")
             selection = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo, lastSelection)
             return selection
         }
@@ -292,6 +295,7 @@ class TeamComparer
      */
     private fun decideTeamForPlayerToBeAddedForSingleSkill(player: Player, teamOne: Team,teamTwo: Team, lastSelection : TeamSelect = UNKNOWN) : TeamSelect
     {
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name + " With lastSelection $lastSelection for player ${player.Name}")
         var selection : TeamSelect
 
         var teamOneCount = teamOne.GetCountOfPlayersWithSkill(player.skills[0])
@@ -330,7 +334,7 @@ class TeamComparer
      */
     private fun findOutWhichTeamHasTheLowestAverage(teamOne: Team, teamTwo: Team) : TeamSelect
     {
-        Log.d("TeamComparer", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         return when {
             teamOne.CalculateTeamPlayerAverage() < teamTwo.CalculateTeamPlayerAverage() -> {
@@ -354,6 +358,8 @@ class TeamComparer
      */
     private fun calculateAverageTeamRatingIfPlayerAddedToTeam(player: Player, team: Team) : Double
     {
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+
         var currentTotal = 0.0
         if(team.Players.isEmpty())return currentTotal
 

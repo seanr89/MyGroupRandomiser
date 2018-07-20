@@ -134,7 +134,9 @@ class InitialiseDataDBHandler
         db.InsertPlayerSkill(PlayerSkill(0, "Goal Scorer", 1.8))
         db.InsertPlayerSkill(PlayerSkill(0, "Defensive", 1.3))
         db.InsertPlayerSkill(PlayerSkill(0, "Keeper", 1.1))
-        db.InsertPlayerSkill(PlayerSkill(0, "Player Maker", 1.5))
+        db.InsertPlayerSkill(PlayerSkill(0, "Play Maker", 1.5))
+        db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.4))
+        //db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.4))
     }
 
     /**
