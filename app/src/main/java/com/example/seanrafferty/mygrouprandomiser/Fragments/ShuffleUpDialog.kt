@@ -101,11 +101,11 @@ class ShuffleUpDialog : DialogFragment()
     }
 
     /**
-     *
+     * operation to trigger parent fragment to request players are shuffle by rating and skills!!
      */
     private fun onRatingAndSkillsShuffleSelected()
     {
-
+        mCallback!!.shufflePlayersByRatingAndSkill()
     }
 
     /**

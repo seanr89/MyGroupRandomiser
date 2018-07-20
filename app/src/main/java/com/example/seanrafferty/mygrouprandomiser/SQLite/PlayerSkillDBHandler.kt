@@ -72,7 +72,7 @@ class PlayerSkillDBHandler
         val db = _DB.GetWritableDataBaseObject()
         result = try
         {
-            db!!.insertOrThrow(DatabaseHandler.groupTableName, "", values).toInt()
+            db!!.insertOrThrow(DatabaseHandler.PlayerSkillTable, "", values).toInt()
         }
         catch (e: SQLiteException)
         {
