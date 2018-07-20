@@ -42,17 +42,16 @@ class AddPlayerActivity : AppCompatActivity() {
             //Run save player and check that the return is a unique ID
             if(id >= 1)
             {
-                SavePlayerSkillsToPlayer()
+                SavePlayerSkillsToPlayer(id)
                 NavigationControls.NavigateToPlayerActivity(this)
             }
         }
 
-        //Initialise the recycler view for the player skills data
+        //Initialise the recycler view for the player skills data to be displayed
         val linearManager = LinearLayoutManager(this)
         val playerManager = PlayerManager(this)
         _playerSkillRecyclerAdapter = PlayerSkillRecyclerAdapter<PlayerSkill>(playerManager.ReadAllAvailablePlayerSkills(),
                 SelectionOption.MULTI_SELECT)
-
         findViewById<RecyclerView>(R.id.recyclerPlayerSkills).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -66,7 +65,7 @@ class AddPlayerActivity : AppCompatActivity() {
 
     /**
      * Read player details and save content to the internal DB
-     * @return the row ID of the newly inserted row, or -1 if an error occurred
+     * @return the ID of the newly inserted player, or -1 if an error occurred
      */
     private fun SaveNewPlayer() : Int
     {
@@ -87,7 +86,7 @@ class AddPlayerActivity : AppCompatActivity() {
     /**
      * read the selected player skills and save to the player as a mapping
      */
-    private fun SavePlayerSkillsToPlayer()
+    private fun SavePlayerSkillsToPlayer(playerID :Int)
     {
         Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
@@ -95,6 +94,7 @@ class AddPlayerActivity : AppCompatActivity() {
         if(selectedSkills.isNotEmpty())
         {
             val playerManager = PlayerManager(this)
+            playerManager.SavePlayerSkillsToPlayer(selectedSkills, Player(playerID, ""))
         }
     }
 }

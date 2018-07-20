@@ -57,10 +57,32 @@ class PlayerManager(val context: Context?)
     ///////////////////// PLAYER SKILLS ////////////////////////
     ////////////////////////////////////////////////////////////
 
+    /**
+     * Operation to query and return all available player skills
+     * @return a list/collection of PlayerSkill objects
+     */
     fun ReadAllAvailablePlayerSkills() : ArrayList<PlayerSkill>
     {
         var db = PlayerSkillDBHandler(DatabaseHandler(context))
         return db.GetAllPlayerSkills()
     }
 
+    /**
+     * Operation to save/map player skills to an individual player
+     * @param skills : collection of playerskills
+     * @param player : the player to insert into
+     */
+    fun SavePlayerSkillsToPlayer(skills : ArrayList<PlayerSkill>, player: Player)
+    {
+        var db = PlayerDBHandler(DatabaseHandler(context))
+        if(skills.isNotEmpty())
+        {
+            db.DeletePlayerSkillMappingsForPlayer(player)
+
+            for(item : PlayerSkill in skills)
+            {
+                db.InsertPlayerSkillToPlayer(player, item)
+            }
+        }
+    }
 }
