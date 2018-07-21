@@ -142,9 +142,9 @@ class EventManager(val context: Context?)
      * @param event : the team to process
      * @param teamStatus : if the team won, drew, lost or unknown
      *          - draw or unknown will just return atm
-     * @param unBalanced : if the teams where rated as being unbalanced
+     * @param unBalanced : if the teams where rated as being balanced
      */
-    fun UpdatePlayerRatingFromEventTeam(team: Team, teamStatus: TeamStatus = TeamStatus.UNKNOWN, unBalanced : Boolean = false)
+    fun UpdatePlayerRatingFromEventTeam(team: Team, teamStatus: TeamStatus = TeamStatus.UNKNOWN, balanced : Boolean = false)
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
@@ -154,9 +154,9 @@ class EventManager(val context: Context?)
         var playerManager = PlayerManager(context)
         for(item : Player in team.Players)
         {
-            Log.d(object{}.javaClass.enclosingMethod.name, "Updating player ${item.Name} from ${item.Rating}")
-            item.Rating = updatePlayerRatingByBalanceAndStatus(item.Rating, teamStatus, unBalanced)
-            Log.d(object{}.javaClass.enclosingMethod.name, "Updating player ${item.Name} to ${item.Rating}")
+            //Log.d(object{}.javaClass.enclosingMethod.name, "Updating player ${item.Name} from ${item.Rating}")
+            item.Rating = updatePlayerRatingByBalanceAndStatus(item.Rating, teamStatus, balanced)
+            //Log.d(object{}.javaClass.enclosingMethod.name, "Updating player ${item.Name} to ${item.Rating}")
             playerManager.UpdatePlayerRating(item)
         }
     }
@@ -165,10 +165,10 @@ class EventManager(val context: Context?)
      * Handle the updating of a players rating based on if they where in teh winning team and balanced status
      * @param rating : the rating value to update
      * @param teamStatus : the status of the team that the player is apart of
-     * @param unBalanced : if the team was rated as un-balanced
+     * @param balanced : if the team was rated as balanced
      * @return the updated/re-calculated rating value
      */
-    private fun updatePlayerRatingByBalanceAndStatus(rating : Double, teamStatus: TeamStatus, unBalanced: Boolean) : Double
+    private fun updatePlayerRatingByBalanceAndStatus(rating : Double, teamStatus: TeamStatus, balanced: Boolean) : Double
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
@@ -177,7 +177,7 @@ class EventManager(val context: Context?)
         {
             TeamStatus.WIN ->
             {
-                newRating = if(unBalanced) {
+                newRating = if(!balanced) {
                     rating + 1.0
                 } else {
                     rating + 2.0
@@ -185,7 +185,7 @@ class EventManager(val context: Context?)
             }
             TeamStatus.LOSS ->
             {
-                if(!unBalanced)
+                if(!balanced)
                 {
                     newRating = rating - 1.0
                 }

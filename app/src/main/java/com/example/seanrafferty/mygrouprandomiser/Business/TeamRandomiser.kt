@@ -202,7 +202,7 @@ class TeamComparer
         //1. Check if the current player has any assigned skills - if not handle return selection
         if(player.skills.isEmpty())
         {
-            if(lastSelection !=UNKNOWN) return findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
+            //if(lastSelection !=UNKNOWN) return findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
 
             //Log.d(object{}.javaClass.enclosingMethod.name, "player has no skills!!")
             return if(lastSelection == TEAM_ONE) TEAM_TWO
@@ -276,6 +276,7 @@ class TeamComparer
 
         //2. Find the item with the largest difference between team skills and average rating
         var sortedList = shuffleComparisons.sortedWith(compareBy({it.calculateDifferenceOfSkillCount()}, {it.updatedAverageRating}))
+        Log.d(object{}.javaClass.enclosingMethod.name, "item selected for skill ${sortedList[0].skill.name}")
 
         return if(sortedList.isNotEmpty())
         //3. Find the top item and return it
