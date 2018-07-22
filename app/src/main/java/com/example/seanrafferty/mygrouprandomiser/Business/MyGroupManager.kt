@@ -17,7 +17,8 @@ class MyGroupManager(val context: Context?)
 
     /**
      * Handle the creation of a new MyGroup and save to the database
-     * @param group the row ID of the newly inserted row, or -1 if an error occurred
+     * @param group : the group to save
+     * @return the ID of the newly inserted row, or -1 if an error occurred
      */
     fun CreateGroup(group : MyGroup) : Int
     {
@@ -35,6 +36,11 @@ class MyGroupManager(val context: Context?)
         return MyGroupDB.ReadAllGroups()
     }
 
+    /**
+     * Operation to read and return an individual group by an ID
+     * @param id :
+     * @return the group or null
+     */
     fun ReadGroupByID(id : Int) : MyGroup
     {
         var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
@@ -48,7 +54,7 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         var groupDB = MyGroupDBHandler(DatabaseHandler(context))
         var playerManager = PlayerManager(context)
 
@@ -85,7 +91,7 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllPlayersNotAssignedToGroup(group : MyGroup) : List<Player>
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
+        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
 
         //Create and initialise a list
         var resultList : MutableList<Player> = arrayListOf()

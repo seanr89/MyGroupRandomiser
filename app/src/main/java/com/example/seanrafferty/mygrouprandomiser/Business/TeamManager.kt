@@ -12,7 +12,7 @@ class TeamManager(val context: Context?)
 
     /**
      * Operation to save a new team as a part of an event
-     * @param team :
+     * @param team : operation to save/insert a new team
      * @param eventID :
      */
     fun SaveNewTeamForEvent(team:Team, eventID : Int) : Int
@@ -92,23 +92,23 @@ class TeamManager(val context: Context?)
     /**
      *
      */
-    fun ReadTeamWithPlayerIDs(teamID : Int) : Team
-    {
-        var dbHandler = DatabaseHandler(context)
-        var teamsDB = TeamDBHandler(dbHandler)
-
-        var playerIDs = teamsDB.ReadPlayerIDsForTeamID(teamID)
-        var team = teamsDB.ReadTeam(teamID)
-        for(item : Int in playerIDs)
-        {
-            team.Players.add(Player(item,"", 0.0))
-        }
-        return null!!
-    }
+//    fun ReadTeamWithPlayerIDs(teamID : Int) : Team
+//    {
+//        var dbHandler = DatabaseHandler(context)
+//        var teamsDB = TeamDBHandler(dbHandler)
+//
+//        var playerIDs = teamsDB.ReadPlayerIDsForTeamID(teamID)
+//        var team = teamsDB.ReadTeam(teamID)
+//        for(item : Int in playerIDs)
+//        {
+//            team.Players.add(Player(item,"", 0.0))
+//        }
+//        return null!!
+//    }
 
     /**
-     * Operation to read a single team
-     * @param teamID :
+     * Operation to read a single team based on its unique ID
+     * @param teamID : the id of the team
      * @return the team with the provided unique ID
      */
     fun ReadTeamByID(teamID : Int) : Team

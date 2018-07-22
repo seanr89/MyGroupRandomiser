@@ -32,7 +32,7 @@ class EventDBHandler
      */
     fun GetAllEvents() : ArrayList<GroupEvent>
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var arrayList = ArrayList<GroupEvent>()
 
@@ -108,7 +108,7 @@ class EventDBHandler
      */
     fun GetAllGroupEventsForGroup(group:MyGroup) : ArrayList<GroupEvent>
     {
-        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
+        //Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
 
         var allGroupEvents = GetAllEvents()
         var resultList = ArrayList<GroupEvent>()
@@ -150,7 +150,7 @@ class EventDBHandler
      */
     fun CreateGroupEvent(event:GroupEvent) :Int
     {
-        Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
+        //Log.d("EventDBHandler", object{}.javaClass.enclosingMethod.name)
 
         var db = _DB.GetWritableDataBaseObject()
 
@@ -187,9 +187,8 @@ class EventDBHandler
         }
         catch(e : SQLiteException)
         {
-            0
+            -1
         }
-
         return null!!
     }
 

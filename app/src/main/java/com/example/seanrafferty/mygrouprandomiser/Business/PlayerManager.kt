@@ -68,6 +68,11 @@ class PlayerManager(val context: Context?)
         return db.InsertPlayer(player)
     }
 
+    /**
+     * Insert mappings between a collection of players and an individual group
+     * @param players :
+     * @param group :
+     */
     fun AssignPlayersToGroup(players : ArrayList<Player>, group : MyGroup)
     {
         var db = PlayerDBHandler(DatabaseHandler(context))

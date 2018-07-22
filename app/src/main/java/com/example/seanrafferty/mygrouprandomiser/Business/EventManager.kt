@@ -89,14 +89,14 @@ class EventManager(val context: Context?)
      * @param myGroup : the group to query
      * @return a filter array list of group events
      */
-    fun GetAllUnBalancedEventsForGroup(myGroup: MyGroup) : ArrayList<GroupEvent>
-    {
-        var events = GetAllEventsForAGroup(myGroup) as List<GroupEvent>
-
-        events = events.filter { it.Balanced == false }
-
-        return events as ArrayList<GroupEvent>
-    }
+//    fun GetAllUnBalancedEventsForGroup(myGroup: MyGroup) : ArrayList<GroupEvent>
+//    {
+//        var events = GetAllEventsForAGroup(myGroup) as List<GroupEvent>
+//
+//        events = events.filter { it.Balanced == false }
+//
+//        return events as ArrayList<GroupEvent>
+//    }
 
     /**
      * Update the balanced rating of a single event
