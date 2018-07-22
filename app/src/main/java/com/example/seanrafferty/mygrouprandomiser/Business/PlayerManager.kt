@@ -40,10 +40,12 @@ class PlayerManager(val context: Context?)
         var skills = skillDB.GetAllPlayerSkills()
         var playerSkillIDMappings = db.ReadAllPlayerSkillPlayerMappings()
 
-        //now to loop
+        //now to loop through each player
         for(item : Player in players)
         {
+            //filter the mappings firstly by the current player ID
             var filteredMappings = playerSkillIDMappings.filter{id -> id.playerID == item.ID}
+            //Then filter from all skills from the filtered mappings
             var filteredSkills = skills.filter { it -> filteredMappings.any {a -> a.skillID == it.id}}
 
             if(filteredSkills.isNotEmpty())
@@ -52,7 +54,7 @@ class PlayerManager(val context: Context?)
             }
         }
 
-        return null!!
+        return players
     }
 
     /**

@@ -124,18 +124,6 @@ class EventManager(val context: Context?)
     }
 
     /**
-     * Update an event status to be incomplete
-     * @param groupEvent : the event to be updated to be incomplete
-     */
-    fun EventInComplete(groupEvent: GroupEvent)
-    {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
-        var eventDB = EventDBHandler(DatabaseHandler(context))
-        eventDB.UpdateEventCompleted(groupEvent, 0)
-    }
-
-    /**
      * Operation to handle the editing of player ratings using team scores!
      * @param event : the team to process
      * @param teamStatus : if the team won, drew, lost or unknown
