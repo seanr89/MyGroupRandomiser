@@ -380,4 +380,13 @@ class TeamComparer
 
         return currentTotal / (team.Players.count() + 1)
     }
+
+    /**
+     * Test method to review if the team numbers or in balanced
+     * @return true if the difference is out by more than 1
+     */
+    private fun areTeamNumbersUnEven(teamOne: Team, teamTwo: Team) : Boolean
+    {
+        return false
+    }
 }

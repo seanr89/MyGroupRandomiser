@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import android.util.Log
+import com.example.seanrafferty.mygrouprandomiser.Models.Mappings.PlayerSkillPlayerMapping
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
@@ -26,7 +27,7 @@ class PlayerDBHandler
     }
 
     /**
-     * Read all stored players
+     * Read all stored players on the system
      * @return ArrayList of players
      */
     fun ReadAllPlayers() : ArrayList<Player>
@@ -181,6 +182,41 @@ class PlayerDBHandler
 
     ///////// PLAYER SKILL MAPPINGS /////////
     ///////// PLAYER SKILL MAPPINGS /////////
+
+    fun ReadAllPlayerSkillPlayerMappings() : ArrayList<PlayerSkillPlayerMapping>
+    {
+        var arrayList = ArrayList<PlayerSkillPlayerMapping>()
+
+        // Select All Query
+        var selectQuery = "SELECT * FROM ${DatabaseHandler.PlayerSkillMappingTable}"
+        val db = _DB.readableDatabase
+
+        var cursor: Cursor? = null
+        cursor = try
+        {
+            db!!.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e("EXCEPTION", " ${object{}.javaClass.enclosingMethod.name} query failed with message : ${e.message}")
+            cursor!!.close()
+            return null!!
+        }
+
+        if (cursor != null)
+        {
+            if (cursor.moveToFirst()) {
+                do
+                {
+                    val playerID = cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerSkillMappingPlayerID))
+                    val skillID =cursor.getInt(cursor.getColumnIndex(DatabaseHandler.PlayerSkillMappingSkillID))
+                    arrayList.add(PlayerSkillPlayerMapping(playerID, skillID))
+                }
+                while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        return arrayList
+        return null!!
+    }
 
     /**
      * Attempt to insert the a mapping between a player skill and a player

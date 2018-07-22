@@ -21,8 +21,38 @@ class PlayerManager(val context: Context?)
      */
     fun ReadAllPlayers() : ArrayList<Player>
     {
+//        var db = PlayerDBHandler(DatabaseHandler(context))
+//        return db.ReadAllPlayers()
+        return ReadAllPlayersAndSkills()
+    }
+
+    /**
+     * Operation to request all players and assign the skills from mappings
+     * @return An ArrayList of players
+     */
+    private fun ReadAllPlayersAndSkills() : ArrayList<Player>
+    {
         var db = PlayerDBHandler(DatabaseHandler(context))
-        return db.ReadAllPlayers()
+        var skillDB = PlayerSkillDBHandler(DatabaseHandler(context))
+
+        //N.B. these could be async and awaited
+        var players = db.ReadAllPlayers()
+        var skills = skillDB.GetAllPlayerSkills()
+        var playerSkillIDMappings = db.ReadAllPlayerSkillPlayerMappings()
+
+        //now to loop
+        for(item : Player in players)
+        {
+            var filteredMappings = playerSkillIDMappings.filter{id -> id.playerID == item.ID}
+            var filteredSkills = skills.filter { it -> filteredMappings.any {a -> a.skillID == it.id}}
+
+            if(filteredSkills.isNotEmpty())
+            {
+                item.skills = filteredSkills as ArrayList<PlayerSkill>
+            }
+        }
+
+        return null!!
     }
 
     /**

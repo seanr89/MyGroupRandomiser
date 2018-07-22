@@ -78,12 +78,10 @@ class EventManager(val context: Context?)
      */
     fun GetAllEventsForAGroup(myGroup: MyGroup) : ArrayList<GroupEvent>
     {
-        Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
+        //Log.d("EventManager", object{}.javaClass.enclosingMethod.name)
 
         var db = EventDBHandler(DatabaseHandler(context))
-        var events = db.GetAllGroupEventsForGroup(myGroup)
-
-        return events
+        return db.GetAllGroupEventsForGroup(myGroup)
     }
 
     /**
@@ -119,7 +117,7 @@ class EventManager(val context: Context?)
      */
     fun EventComplete(groupEvent: GroupEvent)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
         eventDB.UpdateEventCompleted(groupEvent, 1)
@@ -131,7 +129,7 @@ class EventManager(val context: Context?)
      */
     fun EventInComplete(groupEvent: GroupEvent)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var eventDB = EventDBHandler(DatabaseHandler(context))
         eventDB.UpdateEventCompleted(groupEvent, 0)
@@ -142,7 +140,7 @@ class EventManager(val context: Context?)
      * @param event : the team to process
      * @param teamStatus : if the team won, drew, lost or unknown
      *          - draw or unknown will just return atm
-     * @param unBalanced : if the teams where rated as being balanced
+     * @param balanced : if the teams where rated as being balanced
      */
     fun UpdatePlayerRatingFromEventTeam(team: Team, teamStatus: TeamStatus = TeamStatus.UNKNOWN, balanced : Boolean = false)
     {
