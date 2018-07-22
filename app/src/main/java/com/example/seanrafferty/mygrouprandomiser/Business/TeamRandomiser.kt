@@ -103,7 +103,7 @@ class TeamRandomiser(val context: Context?)
             return null!!
 
         //first sort the player list by rating (now by the skill modified rating)
-        players.sortByDescending {this.selector(it)}
+        players.sortBy {this.selector(it)}
 
         //initialise the array and two teams to store the data
         var teams = ShufflePlayersIntoTeamsByRatingAndSkills(players, CreateTeams())
@@ -249,6 +249,7 @@ class TeamComparer
             skillShuffle.teamOneCount = teamOne.GetCountOfPlayersWithSkill(item)
             skillShuffle.teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(item)
             skillShuffle.teamSelect = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo)
+            Log.d("ShuffleComp", "team selected ${skillShuffle.teamSelect}")
             if(skillShuffle.teamSelect == TEAM_ONE)
             {
                 skillShuffle.updatedAverageRating = this.calculateAverageTeamRatingIfPlayerAddedToTeam(player, teamOne)
@@ -257,6 +258,7 @@ class TeamComparer
             {
                 skillShuffle.updatedAverageRating = this.calculateAverageTeamRatingIfPlayerAddedToTeam(player, teamTwo)
             }
+            resultList.add(skillShuffle)
         }
         return resultList
     }
@@ -272,11 +274,12 @@ class TeamComparer
             lastSelection: TeamSelect
     ) : TeamSelect
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name + "with shuffle count : ${shuffleComparisons.count()}")
 
         //2. Find the item with the largest difference between team skills and average rating
         var sortedList = shuffleComparisons.sortedWith(compareBy({it.calculateDifferenceOfSkillCount()}, {it.updatedAverageRating}))
-        Log.d(object{}.javaClass.enclosingMethod.name, "item selected for skill ${sortedList[0].skill.name}")
+
+        //Log.d(object{}.javaClass.enclosingMethod.name, "item selected for skill ${sortedList[0].skill.name}")
 
         return if(sortedList.isNotEmpty())
         //3. Find the top item and return it

@@ -1,6 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Business
 
 import android.content.Context
+import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
@@ -40,18 +41,34 @@ class PlayerManager(val context: Context?)
         var skills = skillDB.GetAllPlayerSkills()
         var playerSkillIDMappings = db.ReadAllPlayerSkillPlayerMappings()
 
-        //now to loop through each player
-        for(item : Player in players)
+        try
         {
-            //filter the mappings firstly by the current player ID
-            var filteredMappings = playerSkillIDMappings.filter{id -> id.playerID == item.ID}
-            //Then filter from all skills from the filtered mappings
-            var filteredSkills = skills.filter { it -> filteredMappings.any {a -> a.skillID == it.id}}
-
-            if(filteredSkills.isNotEmpty())
+            //now to loop through each player
+            for(item : Player in players)
             {
-                item.skills = filteredSkills as ArrayList<PlayerSkill>
+                Log.d("Search", "current player is ${item.Name}")
+
+                //filter the mappings firstly by the current player ID
+                var filteredMappings = playerSkillIDMappings.filter{id -> id.playerID == item.ID}
+                if(filteredMappings == null)
+                {
+                    Log.d("Search", "filter is null")
+                }
+                if(filteredMappings.isNotEmpty())
+                {
+                    //Then filter from all skills from the filtered mappings
+                    var filteredSkills = skills.filter { it -> filteredMappings.any {a -> a.skillID == it.id}}
+
+                    if(filteredSkills.isNotEmpty())
+                    {
+                        item.skills = filteredSkills as ArrayList<PlayerSkill>
+                    }
+                }
             }
+        }
+        catch(e : KotlinNullPointerException)
+        {
+            Log.e("Exception", "exception caught : ${e.message}")
         }
 
         return players
