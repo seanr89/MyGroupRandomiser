@@ -105,8 +105,6 @@ class EventManager(val context: Context?)
      */
     fun UpdateEventBalancedStatus(event: GroupEvent) : Int
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var db = EventDBHandler(DatabaseHandler(context))
         return db.UpdateEventBalanced(event)
     }
@@ -117,8 +115,6 @@ class EventManager(val context: Context?)
      */
     fun EventComplete(groupEvent: GroupEvent)
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var eventDB = EventDBHandler(DatabaseHandler(context))
         eventDB.UpdateEventCompleted(groupEvent, 1)
     }

@@ -87,8 +87,8 @@ class PlayerManager(val context: Context?)
 
     /**
      * Insert mappings between a collection of players and an individual group
-     * @param players :
-     * @param group :
+     * @param players : the players to be assigned/mapped
+     * @param group : the group to assign the players too
      */
     fun AssignPlayersToGroup(players : ArrayList<Player>, group : MyGroup)
     {

@@ -42,9 +42,8 @@ class EventInfoFragment : Fragment()  {
                               savedInstanceState: Bundle?): View? {
         val fragment = inflater.inflate(R.layout.fragment_event_info, null);
 
-        val date = UtilityMethods.ConvertDateTimeToString(event.Date)
         var txtViewDate = fragment.findViewById<TextView>(R.id.txtViewEventDateContent)
-        txtViewDate.text = date
+        txtViewDate.text = UtilityMethods.ConvertDateTimeToString(event.Date)
 
         InitialiseNumberPickers(event, fragment)
 
@@ -63,6 +62,7 @@ class EventInfoFragment : Fragment()  {
         switch.setOnClickListener()
         {
             UpdateEvent(event, fragment)
+            Toast.makeText(context, "Event Saved!", Toast.LENGTH_LONG).show()
         }
 
         return fragment
@@ -92,8 +92,6 @@ class EventInfoFragment : Fragment()  {
      */
     private fun InitialiseNumberPickers(event: GroupEvent, fragmentView : View)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var nbrPickerTeamOne = fragmentView.findViewById<NumberPicker>(R.id.pickerTeamOne)
         //Set the minimum value of NumberPicker
         nbrPickerTeamOne.minValue = 0

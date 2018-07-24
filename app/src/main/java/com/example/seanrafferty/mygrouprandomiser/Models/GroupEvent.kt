@@ -1,10 +1,10 @@
 package com.example.seanrafferty.mygrouprandomiser.Models
 
 import android.arch.persistence.room.Entity
+import com.example.seanrafferty.mygrouprandomiser.Models.enums.ShuffleOption
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamStatus
 import java.io.Serializable
 import java.time.LocalDateTime
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -12,10 +12,11 @@ import kotlin.collections.ArrayList
  */
 @Entity(tableName = "Event")
 data class GroupEvent constructor(var ID:Int
-                                  , var Date: LocalDateTime
-                                  , var GroupID: Int
-                                  , var Completed: Boolean = false
-                                  , var Balanced : Boolean = false) : Serializable
+                                    , var Date: LocalDateTime
+                                    , var GroupID: Int
+                                    , var Completed: Boolean = false
+                                    , var Balanced : Boolean = false
+                                    , var Shuffled : ShuffleOption = ShuffleOption.UNKNOWN) : Serializable
 {
     var EventTeams : ArrayList<Team> = arrayListOf()
 
@@ -60,8 +61,8 @@ data class GroupEvent constructor(var ID:Int
 
     /**
      * generic method to process team status
-     * @param teamToCheck :
-     * @param otherTeam :
+     * @param teamToCheck : the team to run comparison to return the status
+     * @param otherTeam : the team to compare against
      * @return the team status
      */
     private fun checkTeamStatus(teamToCheck: Team, otherTeam: Team) :TeamStatus

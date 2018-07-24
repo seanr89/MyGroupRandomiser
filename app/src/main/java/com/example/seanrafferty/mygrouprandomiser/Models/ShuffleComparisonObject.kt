@@ -19,7 +19,8 @@ class ShuffleComparisonObject(val skill: PlayerSkill,
     constructor(singleSkill : PlayerSkill) : this(singleSkill, 0,0,0.0, TeamSelect.UNKNOWN)
 
     /**
-     *
+     * Method to compare and calculate the difference in number of players who have a skill compared to the other team@
+     * @return difference count or 0
      */
     fun calculateDifferenceOfSkillCount() : Int
     {
