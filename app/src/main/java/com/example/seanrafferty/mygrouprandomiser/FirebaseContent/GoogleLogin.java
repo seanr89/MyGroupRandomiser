@@ -99,7 +99,7 @@ public class GoogleLogin extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             }
             else{
-                Toast.makeText(GoogleLogin.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GoogleLogin.this, "Authentication failed (Google Services)", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -116,7 +116,7 @@ public class GoogleLogin extends AppCompatActivity {
                             //updateUI(user);
                         } else{
                             Log.w("TAG", "SignInWithCredential:failure", task.getException());
-                            Toast.makeText(GoogleLogin.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GoogleLogin.this, "Authentication Failed (Firebase Services)", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }
