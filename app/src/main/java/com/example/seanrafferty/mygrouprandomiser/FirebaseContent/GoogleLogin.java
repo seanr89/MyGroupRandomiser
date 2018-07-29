@@ -82,8 +82,6 @@ public class GoogleLogin extends AppCompatActivity {
 
     }
 
-
-
     private void signIn(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -113,11 +111,9 @@ public class GoogleLogin extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Log.d("TAG", "signInWithCredential: success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
                         } else{
                             Log.w("TAG", "SignInWithCredential:failure", task.getException());
                             Toast.makeText(GoogleLogin.this, "Authentication Failed (Firebase Services)", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
                     }
                 });
