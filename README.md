@@ -3,53 +3,45 @@ A new repo to create a randomisation app for creating 5 a side teams
 
 Initial Development is focused on Android using Kotlin
 
-Features to be designed for phase 1 include:
-1. Use Local SQLiteDatabase
-2. Create a new sport/football group
-3. Create and assign players to groups
-4. Create events and generate teams
+Phase 1 : Complete
+Features include:
+1. Login
+2. Group Creation
+3. Player Creation
+    - Ratings available
+    - Skill selection available
+4. Player to Group Mapping
+5. Event Creation
+    - Random
+    - Ratings based
+    - Ratings and Skills based
+6. Event completion and player ratings updates
+    - Based on who wins and if teams are balanced!
 
-Application will be broken into a number of phases:
-Phase 1
-- Basic Android App written in Kotlin
-- SQLite implementation working
-- Creation of groups
-- Creation of players
-- Creation of events
-- Creation of teams
-- Include firebase
-- Login
+Known Issues
+- Back navigation is all over the place
+    - pages seem to be duplicated and continuously get displayed!!
+- Shuffling by ratings and skills can make skew selection by more than 1 player!
 
-Phase 2
-- Handle data rating
-    - use in shuffling
-- app notification
-- manual team generation
-- Handle storing of team results
-- First time login onboarding
-    - includes GDPR
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Phase 2 : In Progress
+To be designed using a new app environment so that mistakes don't get duplicated easily
+from last app
+
+- Game Notifications to user
+- Manual team generation
+- Cloud FireStore data storage
+- First time login on-boarding
+    - includes GDPR/Privacy settings
     - User Private and Public status
 - Removal of Data Initialisation Content
-- Authentication and Authorisation
-- Geo-location
+- Geo-location and geo-fencing
+    - Group and User location
 
 Phase 3
 - Publish to App Store
     - Group optimizations
-    - admob
+    - advertising monetisation
 
-
-Process Flow (Phase 1)
-1. Create a Group to allow players to join/be assigned too
-  a. A group is a collection of players who play together at scheduled group events
-2. Allow players to be created
-3. Assign a player to a group
-4. Create an event for a group
-5. Select Date, Time and Players too Attend
-6. Randomize teams
-  a. Step 1 is standard random shuffle
-  b. step 2 is to shuffle with ratings to also Assist
-7. Save Teams to Events
-8. View event and update statistics
-  a. event complete
-  b. goals scored
