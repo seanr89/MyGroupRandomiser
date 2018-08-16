@@ -15,9 +15,11 @@ import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect.*
 class TeamRandomiser(val context: Context?)
 {
     private val TAG = "TeamRandomiser"
+
     /**
      * Shuffle the players provided and append to two teams (one and two) and return the teams as a collection
      * @param players : a collection of players
+     * @return An arraylist of two teams with players mapped/assigned
      */
     fun RandomizePlayerListIntoTeams(players:ArrayList<Player>) : ArrayList<Team>
     {
@@ -32,9 +34,6 @@ class TeamRandomiser(val context: Context?)
         //initialise the array and two teams
         var teams = CreateTeams()
         teams = ShuffleTeamsBasic(shuffledList, teams)
-
-        var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
-        Log.d(TAG, "Player Average Difference is : $averageDifference")
 
         return teams
     }
@@ -58,9 +57,6 @@ class TeamRandomiser(val context: Context?)
         //initialise the array and two teams
         var teams = CreateTeams()
         teams = ShuffleTeamsBasic(players, teams)
-
-        var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
-        Log.d(TAG, "Player Average Difference is : $averageDifference")
 
         return teams
     }
@@ -108,9 +104,6 @@ class TeamRandomiser(val context: Context?)
         //initialise the array and two teams to store the data
         var teams = ShufflePlayersIntoTeamsByRatingAndSkills(players, CreateTeams())
 
-        var averageDifference = teams[0].CalculateTeamPlayerAverage() - teams[1].CalculateTeamPlayerAverage()
-        //Log.d(TAG, "Player Average Difference is : $averageDifference")
-
         return teams
     }
 
@@ -130,7 +123,7 @@ class TeamRandomiser(val context: Context?)
         for(item : Player in players)
         {
             currentSelect = comparer.runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(item, teams[0], teams[1], currentSelect)
-            Log.d("Select", "Select team $currentSelect for player ${item.Name}")
+            //Log.d("Select", "Select team $currentSelect for player ${item.Name}")
             when(currentSelect)
             {
                 TEAM_ONE -> {

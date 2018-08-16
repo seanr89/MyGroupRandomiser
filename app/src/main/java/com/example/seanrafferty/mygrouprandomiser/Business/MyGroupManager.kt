@@ -54,7 +54,6 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllPlayersForGroup(group: MyGroup) : ArrayList<Player>
     {
-        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
         var groupDB = MyGroupDBHandler(DatabaseHandler(context))
         var playerManager = PlayerManager(context)
 
@@ -91,8 +90,6 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllPlayersNotAssignedToGroup(group : MyGroup) : List<Player>
     {
-        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-
         //Create and initialise a list
         var resultList : MutableList<Player> = arrayListOf()
 

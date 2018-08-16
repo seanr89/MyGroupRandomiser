@@ -10,7 +10,7 @@ import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
 
 
 /**
- * Custom class to compare teams and attempt to re-shuffle teams if necessary
+ * Compare teams and attempt to re-shuffle teams if necessary
  * This class will start to take into account player skill values
  * and can provide the updating of player skill values
  */
@@ -36,15 +36,15 @@ class TeamComparer
      * @param lastSelection : the last team that a player was selected for!
      * @return the team selected for the player to be inserted into
      */
-    fun runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(player: Player, teamOne: Team, teamTwo: Team, lastSelection : TeamSelect) : TeamSelect
+    fun runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(player: Player,
+                                                         teamOne: Team,
+                                                         teamTwo: Team,
+                                                         lastSelection : TeamSelect) : TeamSelect
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name + " with lastSelection $lastSelection")
 
         //1. Check if the current player has any assigned skills - if not handle return selection
         if(player.skills.isEmpty())
         {
-            //if(lastSelection !=UNKNOWN) return findOutWhichTeamHasTheLowestAverage(teamOne, teamTwo)
-
             //Log.d(object{}.javaClass.enclosingMethod.name, "player has no skills!!")
             return if(lastSelection == TeamSelect.TEAM_ONE) TeamSelect.TEAM_TWO
             else TeamSelect.TEAM_ONE
@@ -55,17 +55,18 @@ class TeamComparer
         //if the player only has one skill
         if(player.skills.count() == 1)
         {
-            //Log.d(object{}.javaClass.enclosingMethod.name, "player has 1 skill")
-            selection = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo, lastSelection)
+            selection = decideTeamForPlayerToBeAddedForSingleSkill(player,
+                    teamOne,
+                    teamTwo,
+                    lastSelection)
             return selection
         }
         else
         {
-            //2. Loop through each player skill
-            //2.a generate a skill comparison
+            //2 generate a skill comparison
             var skillComparisons = CreateListOfShuffleComparisonsForPlayerSkills(player, teamOne, teamOne)
 
-            //2.b identify where to add and return selection!!
+            //3 identify where to add and return selection!!
             selection = processShuffleComparisonAndDecideTeamSelection(skillComparisons, lastSelection)
         }
         return selection
@@ -78,7 +79,10 @@ class TeamComparer
      * @param teamTwo :
      * @return a collection of shuffle comparison objects
      */
-    private fun CreateListOfShuffleComparisonsForPlayerSkills(player: Player, teamOne: Team, teamTwo: Team) : ArrayList<ShuffleComparisonObject>
+    private fun CreateListOfShuffleComparisonsForPlayerSkills(player: Player,
+                                                              teamOne: Team,
+                                                              teamTwo: Team)
+            : ArrayList<ShuffleComparisonObject>
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
@@ -90,7 +94,8 @@ class TeamComparer
             skillShuffle.teamOneCount = teamOne.GetCountOfPlayersWithSkill(item)
             skillShuffle.teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(item)
             skillShuffle.teamSelect = decideTeamForPlayerToBeAddedForSingleSkill(player, teamOne, teamTwo)
-            Log.d("ShuffleComp", "team selected ${skillShuffle.teamSelect}")
+
+
             if(skillShuffle.teamSelect == TeamSelect.TEAM_ONE)
             {
                 skillShuffle.updatedAverageRating = this.calculateAverageTeamRatingIfPlayerAddedToTeam(player, teamOne)
@@ -117,17 +122,16 @@ class TeamComparer
     {
         Log.d(TAG, object{}.javaClass.enclosingMethod.name + "with shuffle count : ${shuffleComparisons.count()}")
 
-        //2. Find the item with the largest difference between team skills and average rating
+        //1. Find the item with the largest difference between team skills and average rating
         var sortedList = shuffleComparisons.sortedWith(compareBy({it.calculateDifferenceOfSkillCount()}, {it.updatedAverageRating}))
 
-        //Log.d(object{}.javaClass.enclosingMethod.name, "item selected for skill ${sortedList[0].skill.name}")
-
-        return if(sortedList.isNotEmpty())
-        //3. Find the top item and return it
-            sortedList[0].teamSelect
-        else
-            if(lastSelection == TeamSelect.TEAM_ONE) TeamSelect.TEAM_TWO
-            else TeamSelect.TEAM_ONE
+        return when {
+            sortedList.isNotEmpty()
+                //2. Find the top item and return it
+            -> sortedList[0].teamSelect
+            lastSelection == TeamSelect.TEAM_ONE -> TeamSelect.TEAM_TWO
+            else -> TeamSelect.TEAM_ONE
+        }
     }
 
     /*

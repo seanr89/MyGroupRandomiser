@@ -18,12 +18,10 @@ class PlayerManager(val context: Context?)
 
     /**
      * Request all players
-     * @return an ArrayList of players
+     * @return an ArrayList of players with there respective skills
      */
     fun ReadAllPlayers() : ArrayList<Player>
     {
-//        var db = PlayerDBHandler(DatabaseHandler(context))
-//        return db.ReadAllPlayers()
         return ReadAllPlayersAndSkills()
     }
 
@@ -75,7 +73,7 @@ class PlayerManager(val context: Context?)
     }
 
     /**
-     * Insert a new player into the database
+     * Insert a new player into the database (N.B. will not save skills as well)
      * @param player : the player to be inserted
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */

@@ -19,7 +19,7 @@ class InitialiseDataDBHandler
 
     fun RunDataInitialisation()
     {
-        Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         InitialiseDemoGroups()
         InitialiseDemoPlayers()
         InitialiseGroupPlayerAssignment()
@@ -32,14 +32,12 @@ class InitialiseDataDBHandler
      */
     private fun InitialiseDemoGroups()
     {
-        Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         val myGroupDB = MyGroupDBHandler(_DB)
 
         myGroupDB.CreateGroup(MyGroup(-1, "Sci Park"))
         myGroupDB.CreateGroup(MyGroup(-1, "Group 1"))
-        myGroupDB.CreateGroup(MyGroup(-1, "Group 3"))
-        myGroupDB.CreateGroup(MyGroup(-1, "Group 4"))
     }
 
     /**
@@ -47,7 +45,7 @@ class InitialiseDataDBHandler
      */
     private fun InitialiseDemoPlayers()
     {
-        Log.d("InitialiseDataDBHandler", object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var playerDB = PlayerDBHandler(_DB)
 
@@ -78,6 +76,7 @@ class InitialiseDataDBHandler
         playerDB.InsertPlayer(Player(0, "Marcine Buczma", 50.0))//25
         playerDB.InsertPlayer(Player(0, "Anoop Andrews", 52.0))
         playerDB.InsertPlayer(Player(0, "Chris McGarry", 55.0))
+        playerDB.InsertPlayer(Player(0, "Andrew Fuller", 55.0))
     }
 
     /**
@@ -116,6 +115,7 @@ class InitialiseDataDBHandler
         players.add(Player(25, "", 0.0))
         players.add(Player(26, "", 0.0))
         players.add(Player(27, "", 0.0))
+        players.add(Player(28, "", 0.0))
         var group = MyGroup(1, "")
 
         playerDBHandler.AssignPlayersToGroup(players, group)
@@ -130,12 +130,13 @@ class InitialiseDataDBHandler
 
         var db = PlayerSkillDBHandler(_DB)
 
-        db.InsertPlayerSkill(PlayerSkill(0, "Runner", 1.6))
-        db.InsertPlayerSkill(PlayerSkill(0, "Goal Scorer", 1.8))
+        db.InsertPlayerSkill(PlayerSkill(0, "Runner", 1.8))
+        db.InsertPlayerSkill(PlayerSkill(0, "Goal Scorer", 1.9))
         db.InsertPlayerSkill(PlayerSkill(0, "Defensive", 1.3))
-        db.InsertPlayerSkill(PlayerSkill(0, "Keeper", 1.1))
+        db.InsertPlayerSkill(PlayerSkill(0, "Keeper", 1.2))
         db.InsertPlayerSkill(PlayerSkill(0, "Play Maker", 1.5))
-        db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.4))
+        db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.3))
+        db.InsertPlayerSkill(PlayerSkill(0, "Aggressive", 1.1))
         //db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.4))
     }
 
@@ -159,6 +160,7 @@ class InitialiseDataDBHandler
         //Sergei
         db.InsertPlayerSkillToPlayer(Player(11, ""), PlayerSkill(2))
         //Michael Hayes
+        db.InsertPlayerSkillToPlayer(Player(8, ""), PlayerSkill(2))
         db.InsertPlayerSkillToPlayer(Player(8, ""), PlayerSkill(5))
         //Chris McShane
         db.InsertPlayerSkillToPlayer(Player(7, ""), PlayerSkill(3))
@@ -166,6 +168,9 @@ class InitialiseDataDBHandler
         db.InsertPlayerSkillToPlayer(Player(6, ""), PlayerSkill(1))
         //Emmet
         db.InsertPlayerSkillToPlayer(Player(18, ""), PlayerSkill(1))
-
+        //Stephen Quinn
+        db.InsertPlayerSkillToPlayer(Player(2, ""), PlayerSkill(3))
+        //Ryan Bevin
+        db.InsertPlayerSkillToPlayer(Player(13, ""), PlayerSkill(3))
     }
 }
