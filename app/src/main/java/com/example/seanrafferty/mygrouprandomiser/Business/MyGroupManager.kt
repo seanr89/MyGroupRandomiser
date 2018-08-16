@@ -32,8 +32,8 @@ class MyGroupManager(val context: Context?)
      */
     fun ReadAllGroups() : ArrayList<MyGroup>
     {
-        var MyGroupDB = MyGroupDBHandler(DatabaseHandler(context))
-        return MyGroupDB.ReadAllGroups()
+        var myGroupDB = MyGroupDBHandler(DatabaseHandler(context))
+        return myGroupDB.ReadAllGroups()
     }
 
     /**

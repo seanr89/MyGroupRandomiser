@@ -30,7 +30,7 @@ class PlayerActivity : AppCompatActivity() {
          * initialise the player ListView, request all players, append into an adapter and add to listview
          */
         val playerListView = this.findViewById<ListView>(R.id.PlayerListView)
-        val playerList = RequestAllPlayers()
+        val playerList = requestAllPlayers()
         val playerAdapter = PlayerAdapter(this, playerList)
         playerListView.adapter = playerAdapter
     }
@@ -39,10 +39,8 @@ class PlayerActivity : AppCompatActivity() {
      * Request all the current players from the interal data source
      * @return an array of players
      */
-    fun RequestAllPlayers() : ArrayList<Player>
+    fun requestAllPlayers() : ArrayList<Player>
     {
-        Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-
         //Initialise the player manager and request all players
         var playerManager = PlayerManager(this)
         return playerManager.ReadAllPlayers()

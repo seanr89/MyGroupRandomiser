@@ -27,7 +27,7 @@ class SingleTeamFragment : Fragment() {
     //initialise the team and player recycler object
     private lateinit var team : Team
     private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
-    lateinit var idTag : String
+    private lateinit var idTag : String
     private lateinit var playerRecycler : RecyclerView
     private lateinit var teamRatingTxtView : TextView
     private val TAG = "SingleTeamFragment"

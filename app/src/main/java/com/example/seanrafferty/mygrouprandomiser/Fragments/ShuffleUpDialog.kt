@@ -1,9 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Fragments
 
 import android.os.Bundle
-import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.R
-import android.content.DialogInterface
 import android.app.*
 import android.content.Context
 import android.support.v4.app.FragmentActivity
@@ -45,13 +43,13 @@ class ShuffleUpDialog : DialogFragment()
         dialog.setTitle(R.string.shuffle_dialog_title)
 
         // Add the buttons for selecting cancel
-        dialog.setNegativeButton(R.string.shuffle_cancel) { dialog, id ->
+        dialog.setNegativeButton(R.string.shuffle_cancel) { dialog, _ ->
             // User clicked Cancel button
             dialog?.cancel()
         }
 
         //Initialise the list view dialog array
-        dialog.setItems(R.array.shuffleoptions) { dialog, id ->
+        dialog.setItems(R.array.shuffleoptions) { _, id ->
             // User clicked Cancel button
             var items = this.resources.getStringArray(R.array.shuffleoptions);
             var selectedItem = items[id]
@@ -67,8 +65,6 @@ class ShuffleUpDialog : DialogFragment()
      */
     private fun handleActionSelectedFromItems(itemName : String)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name + "itemName of $itemName")
-
         //really not sure on this as it limits the effectiveness of adding new selection options
         when(itemName)
         {
@@ -87,7 +83,6 @@ class ShuffleUpDialog : DialogFragment()
      */
     private fun onRandomShuffleSelected()
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         mCallback!!.shufflePlayersRandomly()
     }
 
@@ -96,7 +91,6 @@ class ShuffleUpDialog : DialogFragment()
      */
     private fun onRatingShuffleSelected()
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         mCallback!!.shufflePlayersByRating()
     }
 

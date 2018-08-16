@@ -284,7 +284,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      * event listener call used to trigger the creation of team player lists randomly
      */
     override fun shufflePlayersRandomly() {
-        //CreateRandomTeams()
+        //DO NOTHING
     }
 
     /**
@@ -292,7 +292,7 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      * event listener call used to trigger the creation of team player lists based on rating
      */
     override fun shufflePlayersByRating() {
-        //CreateTeamsByRatingAndTriggerEvent()
+        //DO NOTHING
     }
 
     /**
@@ -300,7 +300,12 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      * handled by the parent activity!!
      */
     override fun shufflePlayersByRatingAndSkill() {
+        //DO NOTHING
     }
+
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
     /**
      * Request and return all selected players
@@ -317,11 +322,10 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
      */
     fun GetSelectedDateAndTime() : LocalDateTime
     {
-        //Log.d("TAG", object{}.javaClass.enclosingMethod.name)
-        var Date = viewDate.text
-        var Time = viewTime.text
+        var date = viewDate.text
+        var time = viewTime.text
 
-        var dateTimeString = "$Date $Time"
+        var dateTimeString = "$date $time"
 
         var dateTime : LocalDateTime
 

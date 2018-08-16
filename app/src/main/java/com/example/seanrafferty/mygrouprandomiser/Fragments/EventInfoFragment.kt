@@ -40,7 +40,7 @@ class EventInfoFragment : Fragment()  {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val fragment = inflater.inflate(R.layout.fragment_event_info, null);
+        val fragment = inflater.inflate(R.layout.fragment_event_info, null)
 
         var txtViewDate = fragment.findViewById<TextView>(R.id.txtViewEventDateContent)
         txtViewDate.text = UtilityMethods.ConvertDateTimeToString(event.Date)
