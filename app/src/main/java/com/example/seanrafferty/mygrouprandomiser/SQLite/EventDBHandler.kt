@@ -1,6 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
-import android.arch.persistence.room.Database
+import androidx.room.Database
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException

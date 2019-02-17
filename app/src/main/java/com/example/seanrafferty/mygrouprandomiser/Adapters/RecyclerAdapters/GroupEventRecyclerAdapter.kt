@@ -1,8 +1,8 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +27,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.UtilityMethods
 class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
                                 var activity: AppCompatActivity,
                                 var selectionOption: SelectionOption = SelectionOption.NO_SELECT) :
-        RecyclerView.Adapter<GroupEventRecyclerAdapter.EventViewHolder>()
+        androidx.recyclerview.widget.RecyclerView.Adapter<GroupEventRecyclerAdapter.EventViewHolder>()
 {
 
     var SelectedItems : ArrayList<GroupEvent> = arrayListOf()
@@ -170,7 +170,7 @@ class GroupEventRecyclerAdapter(var eventList: ArrayList<GroupEvent>,
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class EventViewHolder : RecyclerView.ViewHolder
+    class EventViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder
     {
         var txtDate: TextView
         var checkBoxCompleted : CheckBox

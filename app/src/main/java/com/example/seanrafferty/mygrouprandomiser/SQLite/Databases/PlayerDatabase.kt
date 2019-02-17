@@ -1,10 +1,10 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite.Databases
 
-import android.arch.persistence.db.SupportSQLiteOpenHelper
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.DatabaseConfiguration
-import android.arch.persistence.room.InvalidationTracker
-import android.arch.persistence.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.room.Database
+import androidx.room.DatabaseConfiguration
+import androidx.room.InvalidationTracker
+import androidx.room.RoomDatabase
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DataAccessorObjects.PlayerDao
 

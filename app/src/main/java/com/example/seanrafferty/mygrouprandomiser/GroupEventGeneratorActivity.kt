@@ -1,11 +1,11 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.support.v7.app.AppCompatActivity
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import com.google.android.material.tabs.TabLayout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -127,15 +127,15 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      * may be best to switch to a
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
-    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    inner class SectionsPagerAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment
+        override fun getItem(position: Int): androidx.fragment.app.Fragment
         {
             //Log.d(object{}.javaClass.enclosingMethod.name, " fragment position : $position")
 
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            var fragment = Fragment()
+            var fragment = androidx.fragment.app.Fragment()
 
             when(position)
             {

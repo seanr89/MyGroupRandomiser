@@ -1,11 +1,10 @@
 package com.example.seanrafferty.mygrouprandomiser.Fragments
 
 import android.os.Bundle
-import com.example.seanrafferty.mygrouprandomiser.R
 import android.app.*
 import android.content.Context
-import android.support.v4.app.FragmentActivity
 import android.widget.Toast
+import com.example.seanrafferty.mygrouprandomiser.R
 
 
 /*
@@ -29,7 +28,7 @@ class ShuffleUpDialog : DialogFragment()
         if (context is ShuffleUpDialog.RandomisationSelectedListener) {
             mCallback = context
         } else {
-            throw RuntimeException(context.toString() + " must implement RandomisationSelectedListener")
+            throw RuntimeException("$context must implement RandomisationSelectedListener")
         }
     }
 
@@ -121,7 +120,7 @@ class ShuffleUpDialog : DialogFragment()
      */
     companion object {
         val TAG = ShuffleUpDialog::class.qualifiedName
-        fun show(fragment: FragmentActivity?)
+        fun show(fragment: androidx.fragment.app.FragmentActivity?)
         {
             //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
             ShuffleUpDialog().apply {

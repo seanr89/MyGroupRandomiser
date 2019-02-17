@@ -1,9 +1,9 @@
 package com.example.seanrafferty.mygrouprandomiser
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -22,8 +22,8 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
  */
 class GroupInfoActivity : AppCompatActivity() {
 
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     lateinit var SelectedGroup : MyGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +57,8 @@ class GroupInfoActivity : AppCompatActivity() {
         //SEAN - Remove all completed events
 
         var recyclerAdapter = GroupEventRecyclerAdapter(groupEvents, this, SelectionOption.SINGLE_SELECT)
-        viewManager = LinearLayoutManager(this)
-        recyclerView = findViewById<RecyclerView>(R.id.GroupInfoRecycler).apply{
+        viewManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.GroupInfoRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)

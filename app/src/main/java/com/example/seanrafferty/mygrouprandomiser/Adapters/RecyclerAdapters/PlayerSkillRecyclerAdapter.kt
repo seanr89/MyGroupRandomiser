@@ -1,7 +1,7 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
  * Recycler Adapter to handle display controls for player skill objects
  */
 class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
-                                 var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<PlayerSkillRecyclerAdapter.ViewHolder>()
+                                 var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : androidx.recyclerview.widget.RecyclerView.Adapter<PlayerSkillRecyclerAdapter.ViewHolder>()
 {
     var SelectedItems : ArrayList<PlayerSkill> = arrayListOf()
 
@@ -118,7 +118,7 @@ class PlayerSkillRecyclerAdapter<T>(var itemList: ArrayList<PlayerSkill>,
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class ViewHolder : RecyclerView.ViewHolder
+    class ViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder
     {
         var itemSelectable : Boolean = false
         var txtName : TextView

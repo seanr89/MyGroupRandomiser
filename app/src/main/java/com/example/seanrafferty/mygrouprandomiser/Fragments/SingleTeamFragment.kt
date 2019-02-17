@@ -2,9 +2,9 @@ package com.example.seanrafferty.mygrouprandomiser.Fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,13 +22,13 @@ import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
  * create an instance of this fragment.
  *
  */
-class SingleTeamFragment : Fragment() {
+class SingleTeamFragment : androidx.fragment.app.Fragment() {
 
     //initialise the team and player recycler object
     private lateinit var team : Team
     private lateinit var playerRecyclerAdapter: PlayerRecyclerAdapter
     private lateinit var idTag : String
-    private lateinit var playerRecycler : RecyclerView
+    private lateinit var playerRecycler : androidx.recyclerview.widget.RecyclerView
     private lateinit var teamRatingTxtView : TextView
     private val TAG = "SingleTeamFragment"
 
@@ -58,8 +58,8 @@ class SingleTeamFragment : Fragment() {
             playerRecyclerAdapter.playerList = arrayListOf()
         }
 
-        val teamviewManager = LinearLayoutManager(activity)
-        playerRecycler = view.findViewById<RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
+        val teamviewManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        playerRecycler = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerViewTeamPlayers).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)

@@ -1,7 +1,6 @@
 package com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters
 
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.Utilities.SelectionOption
 
 class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : Boolean = false,
-                            var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
+                            var selectionOption: SelectionOption = SelectionOption.NO_SELECT) : androidx.recyclerview.widget.RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder>()
 {
     var SelectedItems : ArrayList<Player> = arrayListOf()
 
@@ -114,7 +113,7 @@ class PlayerRecyclerAdapter(var playerList: ArrayList<Player>, val selectable : 
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class ViewHolder : RecyclerView.ViewHolder
+    class ViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder
     {
         var txtName : TextView
         var txtRating : TextView

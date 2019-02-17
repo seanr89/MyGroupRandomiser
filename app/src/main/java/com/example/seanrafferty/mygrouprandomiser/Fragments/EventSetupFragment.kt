@@ -5,9 +5,9 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -46,14 +46,14 @@ import kotlin.collections.ArrayList
  * create an instance of this fragment.
  *
  */
-class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedListener
+class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.RandomisationSelectedListener
 {
     private var mCallback: OnRandomTeamsGenerated? = null
     private var mCallbackSave : OnSaveEvent? = null
 
     //Recycler manager details
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var _PlayerRecycler : RecyclerView
+    private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var _PlayerRecycler : androidx.recyclerview.widget.RecyclerView
     private lateinit var _PlayerAdapter : PlayerRecyclerAdapter
 
     private lateinit var viewDate : TextView
@@ -79,8 +79,8 @@ class EventSetupFragment : Fragment(), ShuffleUpDialog.RandomisationSelectedList
 
         var playerList = MyGroupManager(context).ReadAllPlayersForGroup(MyGroup(arguments!!.getInt(ARG_GROUP_NUMBER), ""))
         _PlayerAdapter = PlayerRecyclerAdapter(playerList, true)
-        viewManager = LinearLayoutManager(activity)
-        _PlayerRecycler = view.findViewById<RecyclerView>(R.id.PlayerEventRecycler).apply{
+        viewManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        _PlayerRecycler = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.PlayerEventRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)

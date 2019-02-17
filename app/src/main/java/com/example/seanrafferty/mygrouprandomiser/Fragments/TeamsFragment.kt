@@ -2,9 +2,9 @@ package com.example.seanrafferty.mygrouprandomiser.Fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,18 +24,18 @@ import com.example.seanrafferty.mygrouprandomiser.R
  * create an instance of this fragment.
  *
  */
-class TeamsFragment : Fragment()
+class TeamsFragment : androidx.fragment.app.Fragment()
 {
     private var listener: OnFragmentInteractionListener? = null
     var _Teams : ArrayList<Team> = arrayListOf()
 
     //Recycler manager details
-    private lateinit var teamOneviewManager: RecyclerView.LayoutManager
-    private lateinit var teamOnePlayerRecycler : RecyclerView
+    private lateinit var teamOneviewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var teamOnePlayerRecycler : androidx.recyclerview.widget.RecyclerView
     private lateinit var teamOnePlayerAdapter : PlayerRecyclerAdapter
 
-    private lateinit var teamTwoviewManager: RecyclerView.LayoutManager
-    private lateinit var teamTwoPlayerRecycler : RecyclerView
+    private lateinit var teamTwoviewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var teamTwoPlayerRecycler : androidx.recyclerview.widget.RecyclerView
     private lateinit var teamTwoPlayerAdapter : PlayerRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,9 +77,9 @@ class TeamsFragment : Fragment()
     private fun InitialiseTeamOneRecycler(team: Team, view:View)
     {
         Log.d("TeamsFragment", object{}.javaClass.enclosingMethod.name)
-        teamOneviewManager = LinearLayoutManager(activity)
+        teamOneviewManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         teamOnePlayerAdapter = PlayerRecyclerAdapter(team.Players, false)
-        teamOnePlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamOnePlayerRecycler).apply{
+        teamOnePlayerRecycler = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.TeamOnePlayerRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
@@ -95,9 +95,9 @@ class TeamsFragment : Fragment()
     private fun InitialiseTeamTwoRecycler(team: Team, view:View)
     {
         Log.d("TeamsFragment", object{}.javaClass.enclosingMethod.name)
-        teamTwoviewManager = LinearLayoutManager(activity)
+        teamTwoviewManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         teamTwoPlayerAdapter = PlayerRecyclerAdapter(team.Players, false)
-        teamTwoPlayerRecycler = view.findViewById<RecyclerView>(R.id.TeamTwoPlayerRecycler).apply{
+        teamTwoPlayerRecycler = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.TeamTwoPlayerRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
