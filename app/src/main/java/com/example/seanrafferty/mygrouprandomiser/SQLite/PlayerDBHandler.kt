@@ -242,17 +242,6 @@ class PlayerDBHandler
     }
 
     /**
-     * Attempt to handle the insertion of multiple skills for an individual player
-     * @param player : the player to handle skill mapping
-     * @return the id of the row inserted or -1 if failed
-     */
-    fun InsertPlayerSkillMappingsForPlayer(player: Player) : Int
-    {
-
-        return null!!
-    }
-
-    /**
      * Handle the deletion of all skills mappings for a player
      * @param player : the player with the respective id to remove the skills
      * @return the id of the row deleted or -1 if failed

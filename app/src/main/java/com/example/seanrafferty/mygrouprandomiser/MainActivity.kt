@@ -97,10 +97,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /**
      * Handle updating navigation drawer user content
+     * @param acct : the sign in credential information
      */
     private fun UpdateNavigationBarDetails(acct : GoogleSignInAccount)
     {
-        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
         if (acct != null)
         {
             val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
@@ -117,9 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun RequestGroups() : ArrayList<MyGroup>
     {
-        Log.d("TAG ", object{}.javaClass.enclosingMethod.name)
         val groupManager = MyGroupManager(this)
-
         //Request all groups from the database and return the data
         return groupManager.ReadAllGroups()
     }

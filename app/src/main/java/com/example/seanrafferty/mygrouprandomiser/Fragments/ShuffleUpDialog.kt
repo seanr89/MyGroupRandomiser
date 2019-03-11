@@ -18,7 +18,6 @@ https://guides.codepath.com/android/using-dialogfragment
 class ShuffleUpDialog : DialogFragment()
 {
     private var mCallback: RandomisationSelectedListener? = null
-    private val TAG = "ShuffleUpDialog"
 
     /**
      * triggered before the view is created and displayed
@@ -102,10 +101,9 @@ class ShuffleUpDialog : DialogFragment()
     }
 
     /**
-     * Defines the listener interface controls to communicate back to the
+     * Defines the listener interface controls to communicate back to from the dialog
      */
     interface RandomisationSelectedListener {
-        //void onFinishEditDialog(String inputText);
         fun shufflePlayersRandomly()
         fun shufflePlayersByRating()
         fun shufflePlayersByRatingAndSkill()

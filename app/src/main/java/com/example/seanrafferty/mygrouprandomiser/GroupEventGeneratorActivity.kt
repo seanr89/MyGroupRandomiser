@@ -25,24 +25,10 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
         EventSetupFragment.OnSaveEvent,
         ShuffleUpDialog.RandomisationSelectedListener
 {
-    override fun shufflePlayersRandomly() {
-        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
-        eventFragment.CreateRandomTeams()
-    }
-
-    override fun shufflePlayersByRating() {
-        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
-        eventFragment.CreateTeamsByRatingAndTriggerEvent()
-    }
-
-    override fun shufflePlayersByRatingAndSkill()
-    {
-        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
-        eventFragment.CreateTeamsByRatingSkillsAndTriggerEvent()
-    }
-
+    // These need to be handled/reworded
     private var _GroupID : Int = 0
     private lateinit var Teams : ArrayList<Team>
+
     private val TAG = "GroupEventGeneratorAct"
 
     /**
@@ -58,7 +44,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_event_generator)
-        //setSupportActionBar(toolbar)
 
         Teams = arrayListOf()
         _GroupID = intent.getStringExtra("GroupID").toInt()
@@ -83,7 +68,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     private fun configureTabLayoutTitles(layout : TabLayout)
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         layout.getTabAt(0)!!.text = "Setup"
         layout.getTabAt(1)!!.text = "Team 1"
         layout.getTabAt(2)!!.text = "Team 2"
@@ -110,11 +94,9 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
     /**
      * Test method to handle fragment navigation on click event
-     * TODO - Handle exceptions if the fragment does not exist!
      */
     fun NavigateToFirstTeam()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         container.setCurrentItem(1, true)
     }
 
@@ -131,8 +113,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
 
         override fun getItem(position: Int): androidx.fragment.app.Fragment
         {
-            //Log.d(object{}.javaClass.enclosingMethod.name, " fragment position : $position")
-
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             var fragment = androidx.fragment.app.Fragment()
@@ -161,7 +141,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     fun UpdateTeamsFragmentsWithRandomizedPlayers(teams:ArrayList<Team>)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         Teams = teams
 
         //same here
@@ -182,8 +161,6 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     private fun CreateEventGroupFromContent() : GroupEvent
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         //get the setupFragment and request the current selected date and time of the event
         val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
         val dateTime = eventFragment.GetSelectedDateAndTime()
@@ -200,17 +177,14 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
      */
     override fun onTeamsRandomized(teams: ArrayList<Team>)
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         UpdateTeamsFragmentsWithRandomizedPlayers(teams)
     }
 
     /**
-     * Handle the saving of an event to the database!!
+     * Handle save request for the entire event (teams included)
      */
     override fun saveEvent()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         //initialise the group event and request event data from the setup fragment
         var groupEvent = CreateEventGroupFromContent()
         if(groupEvent != null)
@@ -227,4 +201,21 @@ class GroupEventGeneratorActivity : AppCompatActivity(),
     ///////***************************************************************////////
     ///////***************************************************************////////
     ///////***************************************************************////////
+
+
+    override fun shufflePlayersRandomly() {
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        eventFragment.CreateRandomTeams()
+    }
+
+    override fun shufflePlayersByRating() {
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        eventFragment.CreateTeamsByRatingAndTriggerEvent()
+    }
+
+    override fun shufflePlayersByRatingAndSkill()
+    {
+        val eventFragment = supportFragmentManager.fragments[0] as EventSetupFragment
+        eventFragment.CreateTeamsByRatingSkillsAndTriggerEvent()
+    }
 }

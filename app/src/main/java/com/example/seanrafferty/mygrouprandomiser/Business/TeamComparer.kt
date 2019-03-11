@@ -15,16 +15,14 @@ import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
  * and can provide the updating of player skill values
  */
 class TeamComparer
-{
+/**
+ * constructor with initialisation request for a all player skills
+ */(context: Context?) {
     private val TAG = "TeamComparer"
     var skills : ArrayList<PlayerSkill> = arrayListOf()
 
-    /**
-     * constructor with initialisation request for a all player skills
-     */
-    constructor(context: Context?)
-    {
-        var playerManager = PlayerManager(context)
+    init {
+        val playerManager = PlayerManager(context)
         skills = playerManager.ReadAllAvailablePlayerSkills()
     }
 
@@ -45,14 +43,13 @@ class TeamComparer
         //1. Check if the current player has any assigned skills - if not handle return selection
         if(player.skills.isEmpty())
         {
-            //Log.d(object{}.javaClass.enclosingMethod.name, "player has no skills!!")
             return if(lastSelection == TeamSelect.TEAM_ONE) TeamSelect.TEAM_TWO
             else TeamSelect.TEAM_ONE
         }
-
+        //the selected item
         var selection: TeamSelect
 
-        //if the player only has one skill
+        //if the player only has one skill assigned
         if(player.skills.count() == 1)
         {
             selection = decideTeamForPlayerToBeAddedForSingleSkill(player,
@@ -84,7 +81,7 @@ class TeamComparer
                                                               teamTwo: Team)
             : ArrayList<ShuffleComparisonObject>
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var resultList = arrayListOf<ShuffleComparisonObject>()
 
@@ -150,13 +147,13 @@ class TeamComparer
      */
     private fun decideTeamForPlayerToBeAddedForSingleSkill(player: Player, teamOne: Team, teamTwo: Team, lastSelection : TeamSelect = TeamSelect.UNKNOWN) : TeamSelect
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name + " With lastSelection $lastSelection for player ${player.Name}")
         var selection : TeamSelect
 
+        //matching skills count for each team
         var teamOneCount = teamOne.GetCountOfPlayersWithSkill(player.skills[0])
         var teamTwoCount = teamTwo.GetCountOfPlayersWithSkill(player.skills[0])
 
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name + "team 1 count = $teamOneCount and team 2 count = $teamTwoCount for skill ${player.skills[0].name}")
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name + "team 1 count = $teamOneCount and team 2 count = $teamTwoCount for skill ${player.skills[0].name}")
 
         //if neither team has that selection - then assign a default
         if(teamOneCount == 0 && teamTwoCount == 0)
@@ -167,12 +164,18 @@ class TeamComparer
         else if(teamOneCount > teamTwoCount)
         {
             //add to team two!!
-            selection = TeamSelect.TEAM_TWO
+            selection = if(areTeamNumbersInBalance(teamTwo, teamOne)){
+                TeamSelect.TEAM_TWO
+            } else TeamSelect.TEAM_ONE
         }
         else if(teamOneCount < teamTwoCount)
         {
             //add to team one
-            selection = TeamSelect.TEAM_ONE
+            selection = if(areTeamNumbersInBalance(teamOne, teamTwo)) {
+                TeamSelect.TEAM_ONE
+            } else{
+                TeamSelect.TEAM_TWO
+            }
         }
         else //if the two are not 0 but are equal
         {
@@ -191,7 +194,7 @@ class TeamComparer
      */
     private fun findOutWhichTeamHasTheLowestAverage(teamOne: Team, teamTwo: Team) : TeamSelect
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         return when {
             teamOne.CalculateTeamPlayerAverage() < teamTwo.CalculateTeamPlayerAverage() -> {
@@ -215,7 +218,7 @@ class TeamComparer
      */
     private fun calculateAverageTeamRatingIfPlayerAddedToTeam(player: Player, team: Team) : Double
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
 
         var currentTotal = 0.0
         if(team.Players.isEmpty())return currentTotal
@@ -231,10 +234,17 @@ class TeamComparer
 
     /**
      * Test method to review if the team numbers or in balanced
+     * @param teamToAdd :
+     * @param otherTeam :
      * @return true if the difference is out by more than 1
      */
-    private fun areTeamNumbersUnEven(teamOne: Team, teamTwo: Team) : Boolean
+    private fun areTeamNumbersInBalance(teamToAdd: Team, otherTeam: Team) : Boolean
     {
-        return false
+        if(teamToAdd.Players.isEmpty()) return true
+
+        if(teamToAdd.Players.size.minus(otherTeam.Players.size) > 1){
+            return false
+        }
+        return true
     }
 }

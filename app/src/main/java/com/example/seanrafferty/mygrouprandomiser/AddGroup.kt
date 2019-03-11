@@ -42,15 +42,15 @@ class AddGroup : AppCompatActivity() {
         val nameTextView = findViewById<TextView>(R.id.nameText)
         val name : String = nameTextView.text.toString()
 
-        if(!name.isNullOrBlank())
+        return if(!name.isNullOrBlank())
         {
             var groupManager = MyGroupManager(this)
-            return groupManager.CreateGroup(MyGroup(0, name))
+            groupManager.CreateGroup(MyGroup(0, name))
         }
         else
         {
             Toast.makeText(this, "No Name Provided", Toast.LENGTH_SHORT).show()
-            return -1
+            -1
         }
     }
 }

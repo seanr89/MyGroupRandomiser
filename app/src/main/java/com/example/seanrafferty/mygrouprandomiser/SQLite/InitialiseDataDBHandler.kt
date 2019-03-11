@@ -1,6 +1,5 @@
 package com.example.seanrafferty.mygrouprandomiser.SQLite
 
-import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
@@ -8,18 +7,15 @@ import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 class InitialiseDataDBHandler
 {
     var _DB : DatabaseHandler
-    private val TAG = "InitialiseDataDBHandler"
     /**
      * constructor for player DB handler
      */
-    constructor(db:DatabaseHandler)
-    {
+    constructor(db:DatabaseHandler) {
         _DB = db
     }
 
     fun RunDataInitialisation()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         InitialiseDemoGroups()
         InitialiseDemoPlayers()
         InitialiseGroupPlayerAssignment()
@@ -32,8 +28,6 @@ class InitialiseDataDBHandler
      */
     private fun InitialiseDemoGroups()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         val myGroupDB = MyGroupDBHandler(_DB)
 
         myGroupDB.CreateGroup(MyGroup(-1, "Sci Park"))
@@ -43,40 +37,35 @@ class InitialiseDataDBHandler
     /**
      * Initialise test player data set
      */
-    private fun InitialiseDemoPlayers()
-    {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
+    private fun InitialiseDemoPlayers() {
         var playerDB = PlayerDBHandler(_DB)
 
         playerDB.InsertPlayer(Player(0, "Sean Rafferty", 49.0)) //1
-        playerDB.InsertPlayer(Player(0, "Stephen Quinn", 63.0))
         playerDB.InsertPlayer(Player(0, "Steven Kennedy", 72.0))
         playerDB.InsertPlayer(Player(0, "Francy Donald", 96.0))
-        playerDB.InsertPlayer(Player(0, "Stephen Kelso", 78.0)) //5
-        playerDB.InsertPlayer(Player(0, "Conor J Murphy", 80.0))
-        playerDB.InsertPlayer(Player(0, "Chris McShane", 61.0))
-        playerDB.InsertPlayer(Player(0, "Michael Hayes", 82.0))
+        playerDB.InsertPlayer(Player(0, "Stephen Kelso", 78.0))
+        playerDB.InsertPlayer(Player(0, "Michael Hayes", 82.0))//5
         playerDB.InsertPlayer(Player(0, "David McCrory", 60.0))
-        playerDB.InsertPlayer(Player(0, "William Lawrence", 73.0))//10
-        playerDB.InsertPlayer(Player(0, "Sergei", 96.0))
+        playerDB.InsertPlayer(Player(0, "William Lawrence", 73.0))
+        playerDB.InsertPlayer(Player(0, "Sergei Garcia", 96.0))
         playerDB.InsertPlayer(Player(0, "James Davidson", 58.0))
-        playerDB.InsertPlayer(Player(0, "Ryan Bevin", 73.0))
+        playerDB.InsertPlayer(Player(0, "Ryan Bevin", 73.0)) //10
         playerDB.InsertPlayer(Player(0, "Mark Latten", 67.0))
-        playerDB.InsertPlayer(Player(0, "Mark Lutton", 66.0))//15
+        playerDB.InsertPlayer(Player(0, "Mark Lutton", 66.0))
         playerDB.InsertPlayer(Player(0, "Tommy Owens", 62.0))
         playerDB.InsertPlayer(Player(0, "Cormac Byrne", 60.0))
-        playerDB.InsertPlayer(Player(0, "Emmet Mulholland", 67.0))
-        playerDB.InsertPlayer(Player(0, "Sean Mills", 33.0))
-        playerDB.InsertPlayer(Player(0, "Andrew Williamson", 74.0)) //20
-        playerDB.InsertPlayer(Player(0, "Ross Meikle", 52.0))
+        playerDB.InsertPlayer(Player(0, "Emmet Mulholland", 67.0))//15
+        playerDB.InsertPlayer(Player(0, "Andrew Williamson", 74.0))
         playerDB.InsertPlayer(Player(0, "John James Fallon", 61.0))
         playerDB.InsertPlayer(Player(0, "Christopher Devine", 71.0))
         playerDB.InsertPlayer(Player(0, "Gareth Ritchie", 76.0))
-        playerDB.InsertPlayer(Player(0, "Marcine Buczma", 50.0))//25
-        playerDB.InsertPlayer(Player(0, "Anoop Andrews", 52.0))
         playerDB.InsertPlayer(Player(0, "Chris McGarry", 55.0))
-        playerDB.InsertPlayer(Player(0, "Andrew Fuller", 55.0))
+        playerDB.InsertPlayer(Player(0, "Andrew Fuller", 55.0))//20
+        playerDB.InsertPlayer(Player(0, "Ivan McCaughey", 55.0))
+        playerDB.InsertPlayer(Player(0, "Stuart Gray", 55.0))
+        playerDB.InsertPlayer(Player(0, "Thomas Smith-Zaitlik", 55.0))
+        playerDB.InsertPlayer(Player(0, "Ross Bratton", 55.0))//24
+        playerDB.InsertPlayer(Player(0, "Pierse", 55.0))//25
     }
 
     /**
@@ -84,7 +73,6 @@ class InitialiseDataDBHandler
      */
     private fun InitialiseGroupPlayerAssignment()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         var playerDBHandler = PlayerDBHandler(_DB)
 
         var players = ArrayList<Player>()
@@ -113,9 +101,6 @@ class InitialiseDataDBHandler
         players.add(Player(23, "", 0.0))
         players.add(Player(24, "", 0.0))
         players.add(Player(25, "", 0.0))
-        players.add(Player(26, "", 0.0))
-        players.add(Player(27, "", 0.0))
-        players.add(Player(28, "", 0.0))
         var group = MyGroup(1, "")
 
         playerDBHandler.AssignPlayersToGroup(players, group)
@@ -126,8 +111,6 @@ class InitialiseDataDBHandler
      */
     private fun InitialiasePlayerSkills()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var db = PlayerSkillDBHandler(_DB)
 
         db.InsertPlayerSkill(PlayerSkill(0, "Runner", 1.8))
@@ -137,7 +120,6 @@ class InitialiseDataDBHandler
         db.InsertPlayerSkill(PlayerSkill(0, "Play Maker", 1.5))
         db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.3))
         db.InsertPlayerSkill(PlayerSkill(0, "Aggressive", 1.1))
-        //db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.4))
     }
 
     /**
@@ -145,7 +127,6 @@ class InitialiseDataDBHandler
      */
     private fun InitialisePlayerMappingsToSkills()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
         var db = PlayerDBHandler(_DB)
 
         //Sean
@@ -160,17 +141,13 @@ class InitialiseDataDBHandler
         //Sergei
         db.InsertPlayerSkillToPlayer(Player(11, ""), PlayerSkill(2))
         //Michael Hayes
-        db.InsertPlayerSkillToPlayer(Player(8, ""), PlayerSkill(2))
-        db.InsertPlayerSkillToPlayer(Player(8, ""), PlayerSkill(5))
-        //Chris McShane
-        db.InsertPlayerSkillToPlayer(Player(7, ""), PlayerSkill(3))
-        //Conor
-        db.InsertPlayerSkillToPlayer(Player(6, ""), PlayerSkill(1))
+        db.InsertPlayerSkillToPlayer(Player(5, ""), PlayerSkill(2))
+        db.InsertPlayerSkillToPlayer(Player(5, ""), PlayerSkill(5))
         //Emmet
         db.InsertPlayerSkillToPlayer(Player(18, ""), PlayerSkill(1))
-        //Stephen Quinn
-        db.InsertPlayerSkillToPlayer(Player(2, ""), PlayerSkill(3))
         //Ryan Bevin
         db.InsertPlayerSkillToPlayer(Player(13, ""), PlayerSkill(3))
+        //Ivan
+        db.InsertPlayerSkillToPlayer(Player(21, ""), PlayerSkill(5))
     }
 }

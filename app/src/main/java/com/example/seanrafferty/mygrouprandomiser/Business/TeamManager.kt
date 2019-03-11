@@ -53,9 +53,8 @@ class TeamManager(val context: Context?)
      */
     fun UpdateTeamScore(score:Int, team: Team)
     {
-        var dbHandler = DatabaseHandler(context)
-        var teamsDB = TeamDBHandler(dbHandler)
-
+        val dbHandler = DatabaseHandler(context)
+        val teamsDB = TeamDBHandler(dbHandler)
         teamsDB.UpdateTeamScore(team.ID, score)
     }
 
@@ -87,34 +86,5 @@ class TeamManager(val context: Context?)
         }
 
         return teams
-    }
-
-    /**
-     *
-     */
-//    fun ReadTeamWithPlayerIDs(teamID : Int) : Team
-//    {
-//        var dbHandler = DatabaseHandler(context)
-//        var teamsDB = TeamDBHandler(dbHandler)
-//
-//        var playerIDs = teamsDB.ReadPlayerIDsForTeamID(teamID)
-//        var team = teamsDB.ReadTeam(teamID)
-//        for(item : Int in playerIDs)
-//        {
-//            team.Players.add(Player(item,"", 0.0))
-//        }
-//        return null!!
-//    }
-
-    /**
-     * Operation to read a single team based on its unique ID
-     * @param teamID : the id of the team
-     * @return the team with the provided unique ID
-     */
-    fun ReadTeamByID(teamID : Int) : Team
-    {
-        var dbHandler = DatabaseHandler(context)
-        var teamsDB = TeamDBHandler(dbHandler)
-        return teamsDB.ReadTeam(teamID)
     }
 }

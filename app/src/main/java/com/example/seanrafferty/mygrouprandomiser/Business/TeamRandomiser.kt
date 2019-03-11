@@ -3,8 +3,6 @@ package com.example.seanrafferty.mygrouprandomiser.Business
 import android.content.Context
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
-import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
-import com.example.seanrafferty.mygrouprandomiser.Models.ShuffleComparisonObject
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect.*
@@ -102,9 +100,7 @@ class TeamRandomiser(val context: Context?)
         players.sortBy {this.selector(it)}
 
         //initialise the array and two teams to store the data
-        var teams = ShufflePlayersIntoTeamsByRatingAndSkills(players, CreateTeams())
-
-        return teams
+        return this.ShufflePlayersIntoTeamsByRatingAndSkills(players, CreateTeams())
     }
 
     /**
@@ -118,8 +114,7 @@ class TeamRandomiser(val context: Context?)
         //init param to id if the last player was added to the first team!!
         var currentSelect = TeamSelect.UNKNOWN
 
-        //Initialise the team comparer object
-        var comparer = TeamComparer(context)
+        val comparer = TeamComparer(context)
         for(item : Player in players)
         {
             currentSelect = comparer.runCheckOnCurrentPlayerSkillsAndReturnTeamSelect(item, teams[0], teams[1], currentSelect)
@@ -143,18 +138,18 @@ class TeamRandomiser(val context: Context?)
      */
     private fun CreateTeams() : ArrayList<Team>
     {
-        var teamOne = Team(0, "Team One", 0)
-        var teamTwo = Team(0, "Team Two", 0)
+        val teamOne = Team(0, "Team One", 0)
+        val teamTwo = Team(0, "Team Two", 0)
 
         var teams = ArrayList<Team>()
         teams.add(teamOne)
         teams.add(teamTwo)
-
-        return teams!!
+        return teams
     }
 
     /**
      * select player rating content
+     * @param p : an individual player object
      * @return the provided player rating (modified by skills) (used for sorting)
      */
     private fun selector(p: Player): Double = p.skillModifiedRating()

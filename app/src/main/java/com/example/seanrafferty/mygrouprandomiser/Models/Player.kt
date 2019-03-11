@@ -15,7 +15,8 @@ https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b7
  * @param ID : unique player identifier used in data store
  * @param Name : The name of the player
  * @param Rating : how skillful is the player (rated 1 too 100 with 100 being highest rating)
- * @param isPrivate : defaulted to false
+ * @param isPrivate : defaulted to true
+ * @param isActive : defaulted to true
  * @param skills : Array list of potential skills for each player
  */
 @Entity(tableName = "PlayerData")
@@ -23,9 +24,10 @@ data class Player constructor(@PrimaryKey(autoGenerate = true)var ID: Int
                                 , @ColumnInfo(name = "name") var Name: String
                                 , @ColumnInfo(name = "rating")var Rating: Double
                                 , @ColumnInfo(name = "isPrivate")var isPrivate : Boolean = true
+                                , @ColumnInfo(name = "isActive")var isActive : Boolean = true
                                 , var skills : ArrayList<PlayerSkill>) : Serializable
 {
-    constructor (id : Int, name : String, rating : Double = 0.0) : this(id,name,rating, true, arrayListOf())
+    constructor (id : Int, name : String, rating : Double = 0.0) : this(id,name,rating, true, true, arrayListOf())
 
     /**
      * new method to combine and return the total playerSkill modifier values

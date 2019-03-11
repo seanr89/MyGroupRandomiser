@@ -47,7 +47,7 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
-        container.offscreenPageLimit = 2 //initialise off page limit to 2
+        container.offscreenPageLimit = 2 //initialise off page limit to 2 to allow both teams be maintained in memory
         container.adapter = mSectionsPagerAdapter
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
@@ -70,7 +70,6 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
         if (id == R.id.action_settings) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -78,12 +77,13 @@ class EventInfoActivity : AppCompatActivity(), EventInfoFragment.OnFragmentInter
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
+     * tab1: EventInfo
+     * tab2: Team1 SingleTeamFragment
+     * tab3: Team2 SingleTeamFragment
      */
     inner class SectionsPagerAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): androidx.fragment.app.Fragment {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             when(position)
             {
                 0 -> return EventInfoFragment.newInstance(Event)
