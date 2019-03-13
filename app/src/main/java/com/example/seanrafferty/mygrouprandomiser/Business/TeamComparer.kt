@@ -120,7 +120,8 @@ class TeamComparer
         Log.d(TAG, object{}.javaClass.enclosingMethod.name + "with shuffle count : ${shuffleComparisons.count()}")
 
         //1. Find the item with the largest difference between team skills and average rating
-        var sortedList = shuffleComparisons.sortedWith(compareBy({it.calculateDifferenceOfSkillCount()}, {it.updatedAverageRating}))
+        var sortedList = shuffleComparisons.sortedWith(
+                compareBy({it.calculateDifferenceOfSkillCount()}, {it.updatedAverageRating}))
 
         return when {
             sortedList.isNotEmpty()
