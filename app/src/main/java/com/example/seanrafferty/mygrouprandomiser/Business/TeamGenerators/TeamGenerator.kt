@@ -11,20 +11,23 @@ open class TeamGenerator : ITeamGenerator {
 
     override fun generateTeams(players: ArrayList<Player>): ArrayList<Team> {
 
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
+        Log.d(TAG, object{}.javaClass.enclosingMethod!!.name)
         //Check if the players list is empty first
         if(players.isEmpty()) {
             return null!!
         }
         //initialise the array and two teams
         var teams = this.CreateTeams()
-        //first sort the player list by rating (now by the skill modified rating)
-        players.sortByDescending {this.selector(it)}
-        this.ShuffleTeam(players, teams)
+        //Shuffle the player list
+        var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
+        this.shufflePlayersToTeams(shuffledList, teams)
         return teams
     }
 
-    override fun ShuffleTeam(players: ArrayList<Player>, teams: ArrayList<Team>){
+    /**
+     * handle the shuffling of players into teams
+     */
+    override fun shufflePlayersToTeams(players: ArrayList<Player>, teams: ArrayList<Team>){
         var teamOneAdd = false
         for(item : Player in players)
         {
@@ -63,7 +66,7 @@ open class TeamGenerator : ITeamGenerator {
      * Simple internal method to create an array list with two team objects provided
      * @return A list that contains two teams
      */
-    private fun CreateTeams() : ArrayList<Team>
+    protected fun CreateTeams() : ArrayList<Team>
     {
         val teamOne = Team(0, "Team One", 0)
         val teamTwo = Team(0, "Team Two", 0)
@@ -79,5 +82,5 @@ open class TeamGenerator : ITeamGenerator {
      * @param p : an individual player object
      * @return the provided player rating (modified by skills) (used for sorting)
      */
-    private fun selector(p: Player): Double = p.skillModifiedRating()
+    protected fun selector(p: Player): Double = p.skillModifiedRating()
 }
