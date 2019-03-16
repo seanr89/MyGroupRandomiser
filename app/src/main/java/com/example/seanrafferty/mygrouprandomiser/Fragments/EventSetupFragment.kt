@@ -18,11 +18,13 @@ import android.widget.TimePicker
 import android.widget.Toast
 import com.example.seanrafferty.mygrouprandomiser.Adapters.RecyclerAdapters.PlayerRecyclerAdapter
 import com.example.seanrafferty.mygrouprandomiser.Business.MyGroupManager
+import com.example.seanrafferty.mygrouprandomiser.Business.TeamGenerators.TeamGeneratorFactory
 import com.example.seanrafferty.mygrouprandomiser.Business.TeamRandomiser
 import com.example.seanrafferty.mygrouprandomiser.Models.GroupEvent
 import com.example.seanrafferty.mygrouprandomiser.Models.MyGroup
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
+import com.example.seanrafferty.mygrouprandomiser.Models.enums.ShuffleOption
 
 import com.example.seanrafferty.mygrouprandomiser.R
 import com.example.seanrafferty.mygrouprandomiser.SQLite.DatabaseHandler
@@ -59,7 +61,7 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
     private lateinit var viewDate : TextView
     private lateinit var viewTime : TextView
 
-    private val TAG = "EventSetupFragment"
+    //private val TAG = "EventSetupFragment"
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -184,16 +186,13 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
      */
     fun CreateRandomTeams()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var players = GetSelectedPlayers()
         if(players.isNotEmpty())
         {
-            var randomiser = TeamRandomiser(context)
-            var teamArray = randomiser.RandomizePlayerListIntoTeams(players)
-
+            var generator = TeamGeneratorFactory.getGenerator(ShuffleOption.RANDOM, context)
+            var teams = generator.generateTeams(players)
             //then return back to where it needs to go - ie the fragment activity
-            mCallback!!.onTeamsRandomized(teamArray)
+            mCallback!!.onTeamsRandomized(teams)
             return
         }
         else
@@ -207,16 +206,13 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
      */
     fun CreateTeamsByRatingAndTriggerEvent()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var players = GetSelectedPlayers()
         if(players.isNotEmpty())
         {
-            var randomiser = TeamRandomiser(context)
-            var teamArray = randomiser.RandomizePlayerListBySortedRating(players)
-
+            var generator = TeamGeneratorFactory.getGenerator(ShuffleOption.RATING, context)
+            var teams = generator.generateTeams(players)
             //then return back to where it needs to go - ie the fragment activity
-            mCallback!!.onTeamsRandomized(teamArray)
+            mCallback!!.onTeamsRandomized(teams)
             return
         }
         else
@@ -230,8 +226,6 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
      */
     fun CreateTeamsByRatingSkillsAndTriggerEvent()
     {
-        Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var players = GetSelectedPlayers()
         if(players.isNotEmpty())
         {

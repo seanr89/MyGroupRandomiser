@@ -41,31 +41,32 @@ class InitialiseDataDBHandler
         var playerDB = PlayerDBHandler(_DB)
 
         playerDB.InsertPlayer(Player(0, "Sean Rafferty", 49.0)) //1
-        playerDB.InsertPlayer(Player(0, "Steven Kennedy", 72.0))
+        playerDB.InsertPlayer(Player(0, "Steven Kennedy", 76.0))
         playerDB.InsertPlayer(Player(0, "Francy Donald", 96.0))
         playerDB.InsertPlayer(Player(0, "Stephen Kelso", 78.0))
         playerDB.InsertPlayer(Player(0, "Michael Hayes", 82.0))//5
         playerDB.InsertPlayer(Player(0, "David McCrory", 60.0))
         playerDB.InsertPlayer(Player(0, "William Lawrence", 73.0))
         playerDB.InsertPlayer(Player(0, "Sergei Garcia", 96.0))
-        playerDB.InsertPlayer(Player(0, "James Davidson", 58.0))
+        playerDB.InsertPlayer(Player(0, "James Davidson", 62.0))
         playerDB.InsertPlayer(Player(0, "Ryan Bevin", 73.0)) //10
         playerDB.InsertPlayer(Player(0, "Mark Latten", 67.0))
         playerDB.InsertPlayer(Player(0, "Mark Lutton", 66.0))
         playerDB.InsertPlayer(Player(0, "Tommy Owens", 62.0))
-        playerDB.InsertPlayer(Player(0, "Cormac Byrne", 60.0))
+        playerDB.InsertPlayer(Player(0, "Cormac Byrne", 65.0))
         playerDB.InsertPlayer(Player(0, "Emmet Mulholland", 67.0))//15
         playerDB.InsertPlayer(Player(0, "Andrew Williamson", 74.0))
         playerDB.InsertPlayer(Player(0, "John James Fallon", 61.0))
         playerDB.InsertPlayer(Player(0, "Christopher Devine", 71.0))
         playerDB.InsertPlayer(Player(0, "Gareth Ritchie", 76.0))
-        playerDB.InsertPlayer(Player(0, "Chris McGarry", 55.0))
-        playerDB.InsertPlayer(Player(0, "Andrew Fuller", 55.0))//20
-        playerDB.InsertPlayer(Player(0, "Ivan McCaughey", 55.0))
-        playerDB.InsertPlayer(Player(0, "Stuart Gray", 55.0))
+        playerDB.InsertPlayer(Player(0, "Chris McGarry", 58.0))
+        playerDB.InsertPlayer(Player(0, "Andrew Fuller", 62.0))//20
+        playerDB.InsertPlayer(Player(0, "Ivan McCaughey", 85.0))
+        playerDB.InsertPlayer(Player(0, "Stuart Gray", 89.0))
         playerDB.InsertPlayer(Player(0, "Thomas Smith-Zaitlik", 55.0))
         playerDB.InsertPlayer(Player(0, "Ross Bratton", 55.0))//24
-        playerDB.InsertPlayer(Player(0, "Pierse", 55.0))//25
+        playerDB.InsertPlayer(Player(0, "Pierse", 70.0))//25
+        playerDB.InsertPlayer(Player(0, "Inaki", 75.0))//25
     }
 
     /**
@@ -101,6 +102,7 @@ class InitialiseDataDBHandler
         players.add(Player(23, "", 0.0))
         players.add(Player(24, "", 0.0))
         players.add(Player(25, "", 0.0))
+        players.add(Player(26, "", 0.0))
         var group = MyGroup(1, "")
 
         playerDBHandler.AssignPlayersToGroup(players, group)
@@ -120,6 +122,7 @@ class InitialiseDataDBHandler
         db.InsertPlayerSkill(PlayerSkill(0, "Play Maker", 1.5))
         db.InsertPlayerSkill(PlayerSkill(0, "Poacher", 1.3))
         db.InsertPlayerSkill(PlayerSkill(0, "Aggressive", 1.1))
+        db.InsertPlayerSkill(PlayerSkill(0, "Lazy", -1.4))
     }
 
     /**

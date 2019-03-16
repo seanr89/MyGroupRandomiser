@@ -5,7 +5,7 @@ import com.example.seanrafferty.mygrouprandomiser.Business.Interfaces.ITeamGener
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.ShuffleOption
 import com.example.seanrafferty.mygrouprandomiser.Models.enums.TeamSelect
 
-class TeamGeneratorFactory {
+object TeamGeneratorFactory {
 
     fun getGenerator(option : ShuffleOption, context: Context?) : ITeamGenerator{
 
