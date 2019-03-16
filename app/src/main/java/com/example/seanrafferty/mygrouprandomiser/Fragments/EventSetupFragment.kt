@@ -79,15 +79,14 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
 
         var playerList = MyGroupManager(context).ReadAllPlayersForGroup(MyGroup(arguments!!.getInt(ARG_GROUP_NUMBER), ""))
         _PlayerAdapter = PlayerRecyclerAdapter(playerList, true)
+
         viewManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         _PlayerRecycler = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.PlayerEventRecycler).apply{
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
-
             // use a linear layout manager
             layoutManager = viewManager
-
             // specify an viewAdapter (see also next example)
             adapter = _PlayerAdapter
         }
@@ -286,7 +285,6 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
     override fun shufflePlayersRandomly() {
         //DO NOTHING
     }
-
     /**
      * N.B. no longer required as taken over by the parent activity
      * event listener call used to trigger the creation of team player lists based on rating
@@ -294,7 +292,6 @@ class EventSetupFragment : androidx.fragment.app.Fragment(), ShuffleUpDialog.Ran
     override fun shufflePlayersByRating() {
         //DO NOTHING
     }
-
     /**
      * Just maintained to access the dialog
      * handled by the parent activity!!

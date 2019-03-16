@@ -5,7 +5,6 @@ import com.example.seanrafferty.mygrouprandomiser.Business.PlayerManager
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.PlayerSkill
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
-import io.fabric.sdk.android.services.concurrency.AsyncTask.init
 
 /**
  * new base sorter for player content
