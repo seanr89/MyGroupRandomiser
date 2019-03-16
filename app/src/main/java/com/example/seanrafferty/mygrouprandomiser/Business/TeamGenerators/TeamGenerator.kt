@@ -1,13 +1,19 @@
 package com.example.seanrafferty.mygrouprandomiser.Business.TeamGenerators
 
+import android.content.Context
 import android.util.Log
 import com.example.seanrafferty.mygrouprandomiser.Business.Interfaces.ITeamGenerator
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
-open class TeamGenerator : ITeamGenerator {
+open class TeamGenerator: ITeamGenerator {
 
     private val TAG = "TeamGenerator"
+    protected var cont : Context?
+
+    constructor(context: Context?){
+        cont = context
+    }
 
     override fun generateTeams(players: ArrayList<Player>): ArrayList<Team> {
 
@@ -16,18 +22,21 @@ open class TeamGenerator : ITeamGenerator {
         if(players.isEmpty()) {
             return null!!
         }
-        //initialise the array and two teams
-        var teams = this.CreateTeams()
         //Shuffle the player list
-        var shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
-        this.shufflePlayersToTeams(shuffledList, teams)
+        val  shuffledList = players.toMutableList().shuffled() as ArrayList<Player>
+
+        val teams = this.shufflePlayersToTeams(shuffledList)
         return teams
     }
 
     /**
      * handle the shuffling of players into teams
      */
-    override fun shufflePlayersToTeams(players: ArrayList<Player>, teams: ArrayList<Team>){
+    override fun shufflePlayersToTeams(players: ArrayList<Player>) : ArrayList<Team> {
+
+        //initialise the array and two teams
+        var teams = this.CreateTeams()
+
         var teamOneAdd = false
         for(item : Player in players)
         {
@@ -42,6 +51,7 @@ open class TeamGenerator : ITeamGenerator {
                 teams[1].Players.add(item)
             }
         }
+        return teams
     }
 
     /**
@@ -75,6 +85,26 @@ open class TeamGenerator : ITeamGenerator {
         teams.add(teamOne)
         teams.add(teamTwo)
         return teams
+    }
+
+    /**
+     * handle the sorting of players based on the base rating with skill modifier
+     * @param players :
+     * @returns sorted list of players
+     */
+    protected fun sortPlayersByRatingWithBalancing(players: ArrayList<Player>) : ArrayList<Player>
+    {
+        //if the player count is not balanced
+        if(!this.isPlayerCountBalanced(players))
+        {
+            players.sortBy { this.selector(it) }
+        }
+        else
+        {
+            //first sort the player list by rating
+            players.sortByDescending {this.selector(it)}
+        }
+        return players
     }
 
     /**

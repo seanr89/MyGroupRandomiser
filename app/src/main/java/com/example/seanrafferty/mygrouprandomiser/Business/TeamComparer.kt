@@ -81,8 +81,6 @@ class TeamComparer
                                                               teamTwo: Team)
             : ArrayList<ShuffleComparisonObject>
     {
-        //Log.d(TAG, object{}.javaClass.enclosingMethod.name)
-
         var resultList = arrayListOf<ShuffleComparisonObject>()
 
         for(item : PlayerSkill in player.skills)

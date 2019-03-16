@@ -1,9 +1,10 @@
 package com.example.seanrafferty.mygrouprandomiser.Business.TeamGenerators
 
+import android.content.Context
 import com.example.seanrafferty.mygrouprandomiser.Models.Player
 import com.example.seanrafferty.mygrouprandomiser.Models.Team
 
-class RatingsTeamGenerator : TeamGenerator() {
+class RatingsTeamGenerator(context: Context?) : TeamGenerator(context) {
 
     private val TAG = "RatingsTeamGenerator"
 
@@ -16,9 +17,7 @@ class RatingsTeamGenerator : TeamGenerator() {
 
         if(players.isEmpty()) return null!!
 
-        val teams = super.CreateTeams()
-        this.shufflePlayersToTeams(players, teams)
-        return teams
+        return this.shufflePlayersToTeams(players)
     }
 
     /**
@@ -26,9 +25,10 @@ class RatingsTeamGenerator : TeamGenerator() {
      * @param players : the players to be sorted and moved to teams
      * @param teams : the teams for the players to be appended too
      */
-    override fun shufflePlayersToTeams(players: ArrayList<Player>, teams: ArrayList<Team>) {
+    override fun shufflePlayersToTeams(players: ArrayList<Player>) : ArrayList<Team> {
 
-        val sortedPlayers = this.sortPlayersWithBalancing(players)
+        val teams = super.CreateTeams()
+        val sortedPlayers = super.sortPlayersByRatingWithBalancing(players)
 
         var teamOneAdd = false
         for(item : Player in sortedPlayers)
@@ -44,25 +44,6 @@ class RatingsTeamGenerator : TeamGenerator() {
                 teams[1].Players.add(item)
             }
         }
-    }
-
-    /**
-     * handle the sorting of players based on the base rating with skill modifier
-     * @param players :
-     * @returns sorted list of players
-     */
-    private fun sortPlayersWithBalancing(players: ArrayList<Player>) : ArrayList<Player>
-    {
-        //if the player count is not balanced
-        if(!super.isPlayerCountBalanced(players))
-        {
-            players.sortBy { super.selector(it) }
-        }
-        else
-        {
-            //first sort the player list by rating
-            players.sortByDescending {super.selector(it)}
-        }
-        return players
+        return teams
     }
 }

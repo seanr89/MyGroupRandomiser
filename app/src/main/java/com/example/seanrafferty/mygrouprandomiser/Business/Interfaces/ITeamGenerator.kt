@@ -21,5 +21,5 @@ interface ITeamGenerator {
     /**
      * defined method to handle the shuffling of teams
      */
-    fun shufflePlayersToTeams(players : ArrayList<Player>, teams : ArrayList<Team>)
+    fun shufflePlayersToTeams(players : ArrayList<Player>) : ArrayList<Team>
 }
